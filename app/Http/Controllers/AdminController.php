@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Account;
+use App\Models\Bill;
+use App\Models\BillDetail;
+use App\Models\Comment;
+use App\Models\Payment;
+use App\Models\PaymentType;
+use App\Models\Product;
+use App\Models\ProductType;
+use App\Models\Supplier;
+use App\Models\UserDB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    //TRANG ĐĂNG NHẬP
-    public function getLogin()
-    {
-        return view("admin.auth.login");
-    }
 
+    public function __construct(){
+        $this->middleware('CheckAuth');
+    }
     //TRANG CHỦ ADMIN
     public function  index()
     {
@@ -45,7 +55,7 @@ class AdminController extends Controller
     {
         return view("admin.src.staff");
     }
-    //trang add nhân viên 
+    //trang add nhân viên
     public function add_staff()
     {
         return view('admin.src.add_staff');
@@ -67,7 +77,7 @@ class AdminController extends Controller
     {
         return view('admin.src.provided');
     }
-    //trang add nhà cung cấp 
+    //trang add nhà cung cấp
     public function add_provided()
     {
         return view('admin.src.add_provided');

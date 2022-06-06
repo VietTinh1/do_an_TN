@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +25,9 @@ Route::group(['prefix' => '/'], function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/login', [AdminController::class, 'getLogin']);
-    Route::get('/index', [AdminController::class, 'index'])->name('index');                   
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
+    Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::get('/product', [AdminController::class, 'product'])->name('product');
     Route::get('/invoice', [AdminController::class, 'invoice'])->name('invoice');
     Route::get('/staff', [AdminController::class, 'staff'])->name('staff');

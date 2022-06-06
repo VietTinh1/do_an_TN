@@ -32,8 +32,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="header-left-bottom agileinfo">
 
-                        <form action="#" method="post">
-                            <input type="text" name="name" placeholder="User name" id="username" required />
+                        <form action="{{ route('postLogin') }}" method="post">
+                            @csrf
+                            <input type="text" name="username" placeholder="Username" id="username" required />
                             <input type="password" name="password" id="password" placeholder="Password" required />
                             <span class="show-btn"><i class="fa fa-eye" aria-hidden="true" id="eye" onclick="toggle()"></i>
                             </span>
@@ -42,11 +43,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <label class="checkbox"><input type="checkbox" name="" checked=""><i> </i>Remember
                                         me</label>
                                 </span>
-
                             </div>
-                            <input type="submit" value="Login">
-
-
+                            <input type="submit" value="Login" >
                         </form>
 
                     </div>
