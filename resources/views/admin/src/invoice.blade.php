@@ -36,7 +36,6 @@
       </li>
     </ul>
   </header>
- 
 
   <main class="app-content">
     <div class="app-title">
