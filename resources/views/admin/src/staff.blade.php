@@ -31,32 +31,13 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li>
+        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
   </header>
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px" alt="User Image">
-      <div>
-        <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
-        <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-      </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item" href="{{route('index')}}"><i class='app-menu__icon bx bx-home'></i><span class="app-menu__label">Trang Chủ</span></a></li>
-      <li><a class="app-menu__item" href="{{route('invoice')}}"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label"> Đơn Hàng</span></a></li>
-      <li><a class="app-menu__item" href="{{route('product')}}"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Sản Phẩm</span></a></li>
-      <li><a class="app-menu__item" href="{{route('staff')}}"><i class='app-menu__icon bx bx bx-run'></i><span class="app-menu__label">Quản lí nội bộ </span></a></li>
-      <li><a class="app-menu__item" href="{{route('money')}}"><i class='app-menu__icon bx bx-dollar'></i><span class="app-menu__label">Bảng Kê Lương</span></a></li>
-      <li><a class="app-menu__item" href="{{route('provided')}}"><i class='app-menu__icon bx bx-cart-alt'></i><span class="app-menu__label">Nhà cung cấp</span></a></li>
-      <li><a class="app-menu__item" href="{{route('report')}}"><i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a></li>
-      <li><a class="app-menu__item" href="{{asset('')}}"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Về Trang Khách Hàng</span></a></li>
-    </ul>
-  </aside>
+  @include('admin.menu_header')
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
@@ -101,14 +82,14 @@
               <thead>
                 <tr>
                   <th width="10"><input type="checkbox" id="all"></th>
-                  <th>ID nhân viên</th>
-                  <th width="150">Họ và tên</th>
+                  <th>Mã nhân viên</th>
+                  <th width="150">Họ tên</th>
                   <th width="20">Ảnh thẻ</th>
                   <th width="150">Địa chỉ</th>
                   <th>Ngày sinh</th>
-                  <th>Giới tính</th>
+                  <th>Email</th>
                   <th>SĐT</th>
-                  <th>Chức vụ</th>
+                  <th>Quyền</th>
                   <th width="100">Chức năng</th>
                 </tr>
               </thead>
@@ -121,9 +102,9 @@
                   <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
                   <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                   <td>09/12/2000</td>
-                  <td>Nữ </td>
+                  <td>mai@gmail.com</td>
                   <td>0836333037</td>
-                  <td>Tư vấn</td>
+                  <td>Admin</td>
                   <td>
                     <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                     <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
@@ -136,9 +117,9 @@
                   <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
                   <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                   <td>09/12/2000</td>
-                  <td>Nữ </td>
+                  <td>mai@gmail.com</td>
                   <td>0836333037</td>
-                  <td>Tư vấn</td>
+                  <td>Admin</td>
                   <td>
                     <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                     <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>

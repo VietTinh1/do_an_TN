@@ -31,11 +31,13 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li>
+        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
   </header>
+<<<<<<< HEAD
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
@@ -58,6 +60,9 @@
       <li><a class="app-menu__item" href="{{asset('')}}"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Về Trang Khách Hàng</span></a></li>
     </ul>
   </aside>
+=======
+  @include('admin.menu_header')
+>>>>>>> ee5e5c480415848456a4be519bedd577db275444
   <main class="app-content">
     <div class="row">
       <div class="col-md-12">
