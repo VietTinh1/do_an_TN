@@ -71,7 +71,7 @@
             <div class="row element-button">
               <div class="col-sm-2">
 
-                <a class="btn btn-add btn-sm" href="{{route('add_invoice')}}" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới đơn hàng</a>
               </div>
               <div class="col-sm-2">

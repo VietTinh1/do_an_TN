@@ -25,7 +25,7 @@
 <body onload="time()" class="app sidebar-mini rtl">
   <!-- Navbar-->
   <header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
 
@@ -45,11 +45,11 @@
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
-    <hr>                      
+    <hr>
     <ul class="app-menu">
 
       <li><a class="app-menu__item" href="{{route('index')}}"><i class='app-menu__icon bx bx-home'></i><span class="app-menu__label">Trang Chủ</span></a></li>
-      <li><a class="app-menu__item" href="{{route('invoice')}}"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label"> Đơn Hàng</span></a></li>
+      <li><a class="app-menu__item" href="{{route('invoice')}}"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Hóa Đơn</span></a></li>
       <li><a class="app-menu__item" href="{{route('product')}}"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Sản Phẩm</span></a></li>
       <li><a class="app-menu__item" href="{{route('staff')}}"><i class='app-menu__icon bx bx bx-run'></i><span class="app-menu__label">Quản lí nội bộ </span></a></li>
       <li><a class="app-menu__item" href="{{route('money')}}"><i class='app-menu__icon bx bx-dollar'></i><span class="app-menu__label">Bảng Kê Lương</span></a></li>

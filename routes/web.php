@@ -24,7 +24,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('single_product', [CustomerController::class, 'single_product'])->name('single_product');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => '/admin'], function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
     Route::get('/index', [AdminController::class, 'index'])->name('index');
@@ -34,9 +34,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/money', [AdminController::class, 'money'])->name('money');
     Route::get('/report', [AdminController::class, 'report'])->name('report');
     Route::get('/provided', [AdminController::class, 'provided'])->name('provided');
-    Route::get('/add_provided', [AdminController::class, 'add_provided'])->name('add_provided');
-    Route::get('/add_invoice', [AdminController::class, 'add_invoice'])->name('add_invoice');
-    Route::get('/add_product', [AdminController::class, 'add_product'])->name('add_product');
-    Route::get('/add_staff', [AdminController::class, 'add_staff'])->name('add_staff');
-    Route::get('/add_money', [AdminController::class, 'add_money'])->name('add_money');
+    Route::get('/add_provided', [AdminController::class, 'addProvided'])->name('addProvided');
+    Route::get('/add_invoice', [AdminController::class, 'addInvoice'])->name('addInvoice');
+    Route::post('/add_invoice', [AdminController::class, 'postAddInvoice'])->name('postAddInvoice');
+
+    Route::get('/add_product', [AdminController::class, 'addProduct'])->name('addProduct');
+    Route::get('/add_staff', [AdminController::class, 'addStaff'])->name('addStaff');
+    Route::get('/add_money', [AdminController::class, 'addMoney'])->name('addMoney');
 });

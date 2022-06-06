@@ -23,18 +23,18 @@ class AdminController extends Controller
         $this->middleware('CheckAuth');
     }
     //TRANG CHỦ ADMIN
-    public function  index()
+    public function index()
     {
-        return view("admin.src.index");
+        return view('admin.src.index');
     }
 
     //TRANG SẢN PHẨM ADMIN
     public function product()
     {
-        return view("admin.src.product");
+        return view('admin.src.product');
     }
     //add sản phẩm
-    public function add_product()
+    public function addProduct()
     {
         return view('admin.src.add_product');
     }
@@ -42,21 +42,20 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        return view("admin.src.invoice");
+        return view('admin.src.invoice');
     }
     //add hóa đơn
-    public function add_invoice()
+    public function addInvoice()
     {
         return view('admin.src.add_invoice');
     }
-
      //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
     {
-        return view("admin.src.staff");
+        return view('admin.src.staff');
     }
     //trang add nhân viên
-    public function add_staff()
+    public function addStaff()
     {
         return view('admin.src.add_staff');
     }
@@ -64,12 +63,12 @@ class AdminController extends Controller
      //TRANG LƯƠNG ADMIN
     public function money()
     {
-        return view("admin.src.money");
+        return view('admin.src.money');
     }
     //trang add lương
-    public function add_money()
+    public function addMoney()
     {
-        return view("admin.src.add_money");
+        return view('admin.src.add_money');
     }
 
     //TRANG NHÀ CUNG CẤP
@@ -78,7 +77,7 @@ class AdminController extends Controller
         return view('admin.src.provided');
     }
     //trang add nhà cung cấp
-    public function add_provided()
+    public function addProvided()
     {
         return view('admin.src.add_provided');
     }

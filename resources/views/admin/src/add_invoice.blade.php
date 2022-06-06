@@ -67,66 +67,68 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Tạo mới đơn hàng</h3>
+                    <h3 class="tile-title">Tạo mới hóa đơn</h3>
                     <div class="tile-body">
-                        <form class="row">
+                        <form class="row" method="POST" action="{{ route('postAddInvoice') }}">
+                            @csrf
                             <div class="form-group  col-md-4">
-                                <label class="control-label">ID đơn hàng ( Nếu không nhập sẽ tự động phát sinh )</label>
-                                <input class="form-control" type="text">
+                                <label class="control-label" >Tên khách hàng</label>
+                                <input class="form-control" type="text" name="name" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Tên khách hàng</label>
-                                <input class="form-control" type="text">
+                                <label class="control-label" >Email</label>
+                                <input class="form-control" type="email" name="email" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Số điện thoại khách hàng</label>
-                                <input class="form-control" type="number">
+                                <label class="control-label">Số điện thoại</label>
+                                <input class="form-control" type="number" name="phone" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Địa chỉ khách hàng</label>
-                                <input class="form-control" type="text">
+                                <label class="control-label">Địa chỉ</label>
+                                <input class="form-control" type="text" name="address" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Tên người bán</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Số hiệu người bán</label>
-                                <input class="form-control" type="text">
+                                <label class="control-label">Mã nhân viên</label>
+                                <input class="form-control" type="text" placeholder="{{ Auth::id() }}">
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ngày làm đơn hàng</label>
-                                <input class="form-control" type="date">
+                                <input class="form-control" type="date" required>
                             </div>
+                            {{-- dropdown --}}
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Tên sản phẩm cần bán</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Mã sản phẩm</label>
-                                <input class="form-control" type="text">
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" name="nameProduct" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" name="soluong" required>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tổng tiền</label>
                                 <input class="form-control" type="number">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1">
                                     <option>-- Chọn tình trạng --</option>
-                                    <option>Đã xử lý</option>
                                     <option>Đang chờ</option>
-                                    <option>Đã hủy</option>
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ghi chú đơn hàng</label>
                                 <textarea class="form-control" rows="4"></textarea>
                             </div>
+                            <div class="form-group  col-md-4">
 
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                            </div>
+                        </form>
+                        <a class="btn btn-cancel" href="{{ route('invoice') }}">Hủy bỏ</a>
                     </div>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" href="{{route('invoice')}}">Hủy bỏ</a>
+
                 </div>
     </main>
     <!-- Essential javascripts for application to work-->
