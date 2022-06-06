@@ -35,4 +35,10 @@ class CustomerController extends Controller
     {
         return view('customer.src.single_product');
     }
+
+    //TRANG LIÊN HỆ
+    public function contact()
+    {
+        return view('customer.src.contact');
+    }
 }

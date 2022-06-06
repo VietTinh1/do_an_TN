@@ -37,7 +37,7 @@
       </li>
     </ul>
   </header>
-
+@include('admin.menu_header')
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">

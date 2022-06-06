@@ -69,9 +69,9 @@
                         <li><a href="{{asset('single_product')}}">Single product</a></li>
                         <li><a href="{{asset('cart')}}">Cart</a></li>
                         <li><a href="{{asset('checkout')}}">Checkout</a></li>
+                        <li><a href="{{asset('contact')}}">Contact</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
             </div>

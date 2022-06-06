@@ -87,4 +87,6 @@ class AdminController extends Controller
     {
         return view('admin.src.report');
     }
+
+    
 }

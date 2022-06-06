@@ -54,7 +54,7 @@
             <div class="row element-button">
               <div class="col-sm-2">
 
-                <a class="btn btn-add btn-sm" href="{{route('add_staff')}}" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="{{route('addStaff')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới nhân viên</a>
               </div>
               <div class="col-sm-2">
