@@ -31,12 +31,13 @@
 
 
             <!-- User Menu-->
-            <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+            <li>
+                <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
             </li>
         </ul>
     </header>
-   @include('admin.menu_header')
+    @include('admin.menu_header')
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
