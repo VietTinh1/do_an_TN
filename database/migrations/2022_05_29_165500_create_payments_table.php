@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('bill_id');
+            $table->integer('invoice_id');
             $table->integer('payment_type');
             $table->double('total_money')->nullable();
             $table->string('status')->default(1);

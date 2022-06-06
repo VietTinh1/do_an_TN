@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
-class Suppliers extends Seeder
+class Provideds extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class Suppliers extends Seeder
                 'created_at'=>Carbon::now(),
             ],
             [
-                
+
                 'tax_code'=>"234567891",
                 'name'=>'Cong ty TNHH Mot Thanh Vien',
                 'phone'=>'03020501322',
