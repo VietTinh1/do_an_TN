@@ -38,7 +38,6 @@
     </ul>
   </header>
   @include('admin.menu_header')
-
   <main class="app-content">
     <div class="row">
       <div class="col-md-12">
