@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+
 class PaymentTypes extends Seeder
 {
     /**
@@ -15,26 +16,26 @@ class PaymentTypes extends Seeder
      */
     public function run()
     {
-        $pay=[
+        $pay = [
             [
-                'card_type'=>'ATM Noi Dia',
-                'card_code'=>Str::random(10),
-                'created_at'=>Carbon::now(),
+                'card_code' => Str::random(10),
+                'card_type' => 'ATM Noi Dia',
+                'created_at' => Carbon::now(),
             ],
             [
-                'card_type'=>'ATM Quoc Te',
-                'card_code'=>Str::random(10),
-                'created_at'=>Carbon::now(),
+                'card_code' => Str::random(10),
+                'card_type' => 'ATM Quoc Te',
+                'created_at' => Carbon::now(),
             ],
             [
-                'card_type'=>'MoMo',
-                'card_code'=>Str::random(10),
-                'created_at'=>Carbon::now(),
+                'card_code' => Str::random(10),
+                'card_type' => 'MoMo',
+                'created_at' => Carbon::now(),
             ],
             [
-                'card_type'=>'Tien Mat',
-                'card_code'=>Str::random(10),
-                'created_at'=>Carbon::now(),
+                'card_code' => Str::random(10),
+                'card_type' => 'Tien Mat',
+                'created_at' => Carbon::now(),
             ],
         ];
         DB::table('payment_types')->insert($pay);

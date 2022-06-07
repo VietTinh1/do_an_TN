@@ -16,23 +16,23 @@ class Provideds extends Seeder
      */
     public function run()
     {
-        $sup=[
+        $sup = [
             [
-                'tax_code'=>"123456789",
-                'name'=>'SamSung',
-                'phone'=>'03020501321',
-                'address'=>'HoChiMinhCity',
-                'created_at'=>Carbon::now(),
+                'tax_code' => "123456789",
+                'name' => 'SamSung',
+                'phone' => '03020501321',
+                'address' => 'HoChiMinhCity',
+                'created_at' => Carbon::now(),
             ],
             [
 
-                'tax_code'=>"234567891",
-                'name'=>'Apple',
-                'phone'=>'03020501322',
-                'address'=>'HoChiMinhCity',
-                'created_at'=>Carbon::now(),
+                'tax_code' => "234567891",
+                'name' => 'Apple',
+                'phone' => '03020501322',
+                'address' => 'HoChiMinhCity',
+                'created_at' => Carbon::now(),
             ],
         ];
-        DB::table('suppliers')->insert($sup);
+        DB::table('provideds')->insert($sup);
     }
 }
