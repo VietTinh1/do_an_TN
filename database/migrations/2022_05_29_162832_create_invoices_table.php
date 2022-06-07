@@ -19,7 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('name_customer');
             $table->string('email_customer');
             $table->integer('phone');
-            $table->string('address');
+            $table->string('address_customer');
             $table->string('message')->nullable();
             $table->string('status')->default(1);
             $table->timestamps();
