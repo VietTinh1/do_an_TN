@@ -38,7 +38,7 @@
     </ul>
   </header>
 @include('admin.menu_header')
-  <main class="app-content">
+<main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
@@ -51,7 +51,6 @@
           <div class="tile-body">
             <div class="row element-button">
               <div class="col-sm-2">
-
                 <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới đơn hàng</a>
               </div>
@@ -76,46 +75,53 @@
                 <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
               </div>
             </div>
+
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
                   <th width="10"><input type="checkbox" id="all"></th>
                   <th>ID đơn hàng</th>
+                  <th>Người thêm</th>
                   <th>Khách hàng</th>
-                  <th>Đơn hàng</th>
-                  <th>Số lượng</th>
-                  <th>Tổng tiền</th>
+                  <th>Email</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Ngày thêm</th>
+                  <th>Tin nhắn</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>QY8723</td>
-                  <td>Ngô Thái An</td>
-                  <td>Giường ngủ Kara 1.6x2m</td>
-                  <td>1 </td>
-                  <td>14.500.000 đ</td>
-                  <td><span class="badge bg-danger">Đã hủy</span></td>
-                  <td>
-                    <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                    <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>ZY8723</td>
-                  <td>Lê Thái An</td>
-                  <td>Giường ngủ Kara 1.6x2m</td>
-                  <td>1 </td>
-                  <td>14.500.000 đ</td>
-                  <td><span class="badge bg-danger">Đã hủy</span></td>
-                  <td>
-                    <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                    <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                  </td>
-                </tr>
+                  @foreach ($data as $data)
+                    <tr>
+                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->account_id }}</td>
+                        <td>{{ $data->name_customer }}</td>>
+                        <td>{{ $data->email_customer }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>{{ $data->address_customer }}</td>
+                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->address_customer }}</td>
+                        <td>
+                            <span class="badge bg-danger">
+                                @if($data->status ==1)
+                                    Chờ xử lí
+                                @elseif($data->status ==2)
+                                    Đang xử lí
+                                @elseif($data->status ==3)
+                                    Đã xử lí
+                                @else
+                                    Đã hủy
+                                @endif
+                            </span></td>
+                        <td>
+                        {{-- <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a> --}}
+                        </td>
+                    </tr>
+                  @endforeach
               </tbody>
             </table>
           </div>

@@ -68,37 +68,35 @@
                                 <label class="control-label">Địa chỉ</label>
                                 <input class="form-control" type="text" name="address" required>
                             </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Mã nhân viên</label>
-                                <input class="form-control" type="text" placeholder="{{ Auth::id() }}">
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Ngày làm đơn hàng</label>
-                                <input class="form-control" type="date" required>
-                            </div>
                             {{-- dropdown --}}
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text" name="nameProduct" required>
+                                {{-- <input class="form-control" type="text" name="nameProduct" required> --}}
+                                <select class="form-control" id="exampleSelect1" name="nameProduct" required>
+                                    <option>-- Chọn sản phẩm --</option>
+                                    @foreach ($product as $product)
+                                        <option>{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="soluong" required>
+                                <input class="form-control" type="number" name="amount" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tổng tiền</label>
-                                <input class="form-control" type="number">
+                                <input class="form-control" type="number" disabled>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1">
+                                <select class="form-control" id="exampleSelect1" required>
                                     <option>-- Chọn tình trạng --</option>
                                     <option>Đang chờ</option>
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4"></textarea>
+                                <textarea class="form-control" rows="4" name="note" ></textarea>
                             </div>
                             <div class="form-group  col-md-4">
 

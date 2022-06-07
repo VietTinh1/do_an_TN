@@ -15,7 +15,7 @@ use App\Models\Supplier;
 use App\Models\UserDB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class AdminController extends Controller
 {
 
@@ -42,12 +42,47 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        return view('admin.src.invoice');
+        $data=DB::table('invoices')->where('status','=',1)->orderByDesc('created_at')->get();
+        return view('admin.src.invoice',compact('data'));
     }
     //add hóa đơn
     public function addInvoice()
     {
-        return view('admin.src.add_invoice');
+        $product=Product::all()->where('status','=',1);
+        return view('admin.src.add_invoice',compact('product'));
+    }
+    public function postAddInvoice(Request $request){
+        if(empty($request->note)){
+            $note='';
+        }
+        else{
+            $note=$request->note;
+        }
+        $data=DB::table('invoices')->insertGetId([
+            'account_id'=>Auth::id(),
+            'name_customer'=>$request->name,
+            'email_customer'=>$request->email,
+            'phone'=>$request->phone,
+            'address_customer'=>$request->address,
+            'message'=>$request->note,
+            'created_at'=>Carbon::now(),
+        ]);
+        if($data){
+            $addInvoiceDetail=DB::table('invoice_details')->insert([
+                'invoice_id'=> $data,
+                'product_id'=>'1',
+                'amount'=>$request->amount,
+                'discount'=>'0',
+            ]);
+            if($addInvoiceDetail){
+                Session()->flash('success','Thêm hóa đơn thành công');
+                return redirect()->route('invoice');
+            }else{
+                echo"Thêm thất bại";
+            }
+        }else{
+            echo"Thêm thất bại";
+        }
     }
      //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
@@ -88,5 +123,5 @@ class AdminController extends Controller
         return view('admin.src.report');
     }
 
-    
+
 }
