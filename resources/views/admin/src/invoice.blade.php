@@ -117,8 +117,8 @@
                                 @endif
                             </span></td>
                         <td>
-                        {{-- <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a> --}}
+                        <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a> 
                         </td>
                     </tr>
                   @endforeach
