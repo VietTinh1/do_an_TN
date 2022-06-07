@@ -42,4 +42,10 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/add_product', [AdminController::class, 'addProduct'])->name('addProduct');
     Route::get('/add_staff', [AdminController::class, 'addStaff'])->name('addStaff');
     Route::get('/add_money', [AdminController::class, 'addMoney'])->name('addMoney');
+
+    Route::get('/edit_money', [AdminController::class, 'editMoney'])->name('editMoney');
+    Route::get('/edit_staff', [AdminController::class, 'editStaff'])->name('editStaff');
+    Route::get('/edit_provided', [AdminController::class, 'editProvided'])->name('editProvided');
+    Route::get('/edit_product', [AdminController::class, 'editProduct'])->name('editProduct');
+    Route::get('/edit_invoice', [AdminController::class, 'editInvoice'])->name('editInvoice');
 });
