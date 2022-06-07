@@ -17,7 +17,7 @@ class ProductTypes extends Seeder
     {
         $arr=[
             [
-                'name'=>'Dien Thoai',
+                'name'=>'Điện Thoại',
                 'created_at'=>Carbon::now(),
             ],
             [
@@ -28,15 +28,7 @@ class ProductTypes extends Seeder
                 'name'=>'Laptop',
                 'created_at'=>Carbon::now(),
             ],
-            [
-                'name'=>'Dien Thoai cu',
-                'created_at'=>Carbon::now(),
-            ],
-            [
-                'name'=>'Phu Kien',
-                'created_at'=>Carbon::now(),
-            ],
         ];
-        DB::table('payment_types')->insert($arr);
+        DB::table('product_types')->insert($arr);
     }
 }

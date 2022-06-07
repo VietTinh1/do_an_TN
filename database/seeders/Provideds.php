@@ -19,7 +19,7 @@ class Provideds extends Seeder
         $sup=[
             [
                 'tax_code'=>"123456789",
-                'name'=>'Cong ty TNHH Mot Thanh Vien',
+                'name'=>'SamSung',
                 'phone'=>'03020501321',
                 'address'=>'HoChiMinhCity',
                 'created_at'=>Carbon::now(),
@@ -27,7 +27,7 @@ class Provideds extends Seeder
             [
 
                 'tax_code'=>"234567891",
-                'name'=>'Cong ty TNHH Mot Thanh Vien',
+                'name'=>'Apple',
                 'phone'=>'03020501322',
                 'address'=>'HoChiMinhCity',
                 'created_at'=>Carbon::now(),

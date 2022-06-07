@@ -19,6 +19,7 @@ class Users extends Seeder
         $user=[
            [
             'account_id'=>'1',
+            'image_url'=>'',
             'fullname'=>'Nguyen Thanh Trieu',
             'birthday'=>'2001/11/25',
             'address'=>'Ho Chi Minh',
@@ -29,6 +30,7 @@ class Users extends Seeder
            ],
            [
             'account_id'=>'2',
+            'image_url'=>'',
             'fullname'=>'Le Viet Tinh',
             'birthday'=>'2001/11/25',
             'address'=>'Ho Chi Minh',
