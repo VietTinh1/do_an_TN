@@ -19,7 +19,6 @@ class CreateInvoiceDetailsTable extends Migration
             $table->integer('product_id');
             $table->integer('amount');
             $table->float('discount')->default(0);
-            $table->string('name');
             $table->string('status')->default(1);
             $table->timestamps();
         });
