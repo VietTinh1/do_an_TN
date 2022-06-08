@@ -24,6 +24,21 @@ class AdminController extends Controller
     {
         $this->middleware('CheckAuth');
     }
+    public function testStatusInt($index){
+        switch($index){
+            case 0: return "Đã hủy";
+            case 1: return "Chờ xử lí";
+            case 2: return "Đang xử lí";
+            case 3: return "Đã xử lí";}
+    }
+    public function testStatusString($index){
+        switch($index){
+            case "Đã hủy": return "0";
+            case "Chờ xử lí": return "1";
+            case "Đang xử lí": return "2";
+            case "Đã xử lí": return "3";
+        }
+    }
     //TRANG CHỦ ADMIN
     public function index()
     {
@@ -95,11 +110,34 @@ class AdminController extends Controller
     public function editInvoice($id)
     {
         $invoice = Invoice::find($id);
-
         return view('admin.src.edit_invoice',compact('invoice'));
     }
-    public function postEditInvoice(){
-
+    public function postEditInvoice(Request $request,$id){
+        $status ='';
+        $name_customer ='';
+        $email_customer ='';
+        $phone ='';
+        $address_customer ='';
+        $created_at ='';
+        if(!Empty($request->name_customer)){
+            $name_customer = $request->name_customer;
+        }
+        if(!Empty($request->email_customer)){
+            $email_customer = $request->email_customer;
+        }
+        if(!Empty($request->phone)){
+            $phone = $request->phone;
+        }
+        if(!Empty($request->address_customer)){
+            $address_customer = $request->address_customer;
+        }
+        if(!Empty($request->created_at)){
+            $created_at = $request->created_at;
+        }
+        if(isset($request->status)){
+            $status =$request->status;
+        }
+        dd($status);
     }
     public function deleteInvoice($id){
         $delete =DB::table('invoices')->where('id','=',$id)->update(['status' =>'0']);
@@ -159,11 +197,5 @@ class AdminController extends Controller
     {
         return view('admin.src.report');
     }
-    public function testStatusInvoice($index){
-        switch($index){
-            case 0: return "Đã xóa";break;
-            case 1: return "Đang chờ";break;
-            case 2: return "Đã thanh toán";break;
-        }
-    }
+
 }

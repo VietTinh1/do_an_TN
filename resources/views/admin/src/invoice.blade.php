@@ -101,12 +101,12 @@
                         <td width="10"><input type="checkbox" name="check1" value="1"></td>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->account_id }}</td>
-                        <td>{{ $data->name_customer }}</td>>
+                        <td>{{ $data->name_customer }}</td>
                         <td>{{ $data->email_customer }}</td>
                         <td>{{ $data->phone }}</td>
                         <td>{{ $data->address_customer }}</td>
                         <td>{{ $data->created_at }}</td>
-                        <td>{{ $data->address_customer }}</td>
+                        <td>{{ $data->message }}</td>
                         <td>
                             <span class="badge bg-danger">
                                 @if($data->status ==1)

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('phone');
             $table->string('email');
             $table->string('permission');
-            $table->string('status')->default(1);
+            $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });
     }

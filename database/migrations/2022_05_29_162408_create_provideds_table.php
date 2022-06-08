@@ -19,7 +19,7 @@ class CreateProvidedsTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('address');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default("Đang hoạt động");
             $table->timestamps();
         });
     }

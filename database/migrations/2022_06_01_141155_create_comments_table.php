@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('name_customer');
             $table->string('email_customer');
             $table->integer('phone_customer');
+            $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });
     }

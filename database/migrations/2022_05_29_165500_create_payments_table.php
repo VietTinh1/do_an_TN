@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('invoice_id');
             $table->integer('payment_type');
             $table->double('total_money')->nullable();
-            $table->string('status')->default(1);
+            $table->string('status')->default("Chờ xử lí");
             $table->timestamps();
         });
     }

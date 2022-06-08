@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->float('tax')->default(0);//thuế
             $table->integer('sold')->default(0);//đã bán
             $table->integer('so_sao')->unsigned();
-            $table->string('status')->default(1);
+            $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });
     }

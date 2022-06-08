@@ -17,6 +17,7 @@ class CreatePaymentTypesTable extends Migration
             $table->increments('id');
             $table->string('card_type');
             $table->string('card_code');
+            $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });
     }
