@@ -84,44 +84,34 @@
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
                                     <th>Mã nhà cung cấp</th>
+                                    <th>Mã số thuế</th>
                                     <th>Tên nhà cung cấp</th>
                                     <th>Email</th>
                                     <th>SĐT</th>
-                                    <th>Tình trạng</th>
                                     <th>Địa chỉ</th>
                                     <th>Ngày tạo</th>
+                                    <th>Tình trạng</th>
                                     <th width="100">Tính năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>83216006</td>
-                                    <td>Phong vũ</td>
-                                    <td>phongvu@gmail.com</td>
-                                    <td>0378010102</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>221 trần hưng đạo</td>
-                                    <td>16/07/2007</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>73216006</td>
-                                    <td>FPT</td>
-                                    <td>fpt@gmail.com</td>
-                                    <td>0123456789</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>221 trần hưng đạo</td>
-                                    <td>16/07/2007</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
+                               @foreach($provided as $provided)
+                                    <tr>
+                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                        <td>{{ $provided->id }}</td>
+                                        <td>{{ $provided->tax_code }}</td>
+                                        <td>{{ $provided->name }}</td>
+                                        <td>{{ $provided->email }}</td>
+                                        <td>{{ $provided->phone }}</td>
+                                        <td>{{ $provided->address }}</td>
+                                        <td>{{ $provided->created_at }}</td>
+                                        <td><span class="badge bg-success">@if($provided->status=="Đang hoạt động") Đang hoạt động @else  Dừng hoạt động @endif</span></td>
+                                        <td>
+                                            <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                               @endforeach
                             </tbody>
                         </table>
                     </div>

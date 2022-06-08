@@ -42,67 +42,69 @@
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
     @endif
-        <div class="modal-body">
-            <div class="row">
-                <div class="form-group  col-md-12">
-                    <span class="thong-tin-thanh-toan">
-                        <h5 style="text-align:center;">Chỉnh sửa thông tin sản phảm cơ bản</h5>
-                    </span>
+        <form action="{{ route('postEditProduct',['id'=>$product->id]) }}" method="post">
+            @csrf
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group  col-md-12">
+                        <span class="thong-tin-thanh-toan">
+                            <h5 style="text-align:center;">Chỉnh sửa thông tin sản phẩm cơ bản</h5>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Mã sản phẩm</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Tên sản phẩm</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlFile1">Hình ảnh</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Số lượng</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Giá tiền</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group  col-md-6">
-                    <label class="control-label">Thuế</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Đã bán</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleSelect1" class="control-label">Danh mục</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Bàn ăn</option>
-                        <option>Bàn thông minh</option>
-                        <option>Tủ</option>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Mã sản phẩm</label>
+                        <input class="form-control" type="text" value="{{ $product->product_code }}" name="product_code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Tên sản phẩm</label>
+                        <input class="form-control" type="text" value="{{ $product->name }}" name="name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleFormControlFile1">Hình ảnh</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Số lượng</label>
+                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount"  required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Giá tiền</label>
+                        <input class="form-control" type="text" value="{{ $product->price }}" name="price" required>
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Thuế</label>
+                        <input class="form-control" type="text" value="{{ $product->tax }}" name="tax" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Đã bán</label>
+                        <input class="form-control" type="text" value="{{ $product->sold }}" name="sold" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
+                        <select class="form-control" id="exampleSelect1" name="product_type">
+                            <option value="1">Điện Thoại</option>
+                            <option value="2">Tablet</option>
+                            <option value="3">Laptop</option>
 
-                    </select>
-                </div>
-                <div class="form-group col-md-6 ">
-                    <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Còn hàng</option>
-                        <option>Hết hàng</option>
-                        <option>Đang nhập hàng</option>
-                    </select>
-                </div>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label for="exampleSelect1" class="control-label">Tình trạng</label>
+                        <select class="form-control" id="exampleSelect1" name="status">
+                            <option value="Đang hoạt động">Đang hoạt động</option>
+                            <option value="Dừng hoạt động">Dừng hoạt động</option>
+                        </select>
+                    </div>
 
-            </div>
-            <BR>
-            <BR>
-            <BR>
-            <button class="btn btn-save" type="button">Lưu lại</button>
-            <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                </div>
+                <BR>
+                <BR>
+                <BR>
+                <button class="btn btn-save" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        </form>
             <BR>
         </div>
     </main>

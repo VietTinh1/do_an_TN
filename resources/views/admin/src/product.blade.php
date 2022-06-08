@@ -55,7 +55,7 @@
                         <div class="row element-button">
                             <div class="col-sm-2">
 
-                                <a class="btn btn-add btn-sm" href="{{route('addProduct')}}" title="Thêm"><i class="fas fa-plus"></i>
+                                <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="Thêm"><i class="fas fa-plus"></i>
                                     Tạo mới sản phẩm</a>
                             </div>
                             <div class="col-sm-2">
@@ -107,7 +107,8 @@
                                         <td>{{ $product->product_type_id}}</td>
                                         <td>{{ $product->provided_id}}</td>
                                         <td>{{ $product->name}}</td>
-                                        <td><img src="/img-sanpham/kara.jpg" alt="" width="100px;"></td>
+                                        <td><img src="../img-sanpham/kara.jpg" alt="" width="100px;"></td>
+                                        {{-- image --}}
                                         <td>{{ $product->amount }}</td>
                                         <td>{{ $product->price }}đ</td>
                                         <td>{{ $product->tax }}%</td>
@@ -115,8 +116,8 @@
                                         <td>{{ $product->so_sao }}</td>
                                         <td><span class="badge bg-success">{{ $product->status   }}</span></td>>
                                         <td>
-                                            <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                            <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

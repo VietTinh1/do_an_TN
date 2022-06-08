@@ -20,13 +20,14 @@ class CreateProductsTable extends Migration
             $table->integer('provided_id');
             $table->string('images');
             $table->string('name');
+            $table->string('describe')->default("Không");//mô tả
             $table->string('product_code');
             $table->integer('amount')->default(0)->unsigned();
-            $table->decimal('price',10,2)->unsigned();
+            $table->decimal('price',10,3)->unsigned();
             $table->float('tax')->default(0);//thuế
             $table->integer('sold')->default(0);//đã bán
-            $table->integer('so_sao')->unsigned();
-            $table->string('status')->default("Đang hoạt động");
+            $table->integer('so_sao')->default(0);
+            $table->string('status')->default("Đang hoạt động");// Dừng hoạt động
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class Provideds extends Seeder
             [
                 'tax_code' => "123456789",
                 'name' => 'SamSung',
+                'email'=>'samsung@gmail.com',
                 'phone' => '03020501321',
                 'address' => 'HoChiMinhCity',
                 'created_at' => Carbon::now(),
@@ -28,6 +29,7 @@ class Provideds extends Seeder
 
                 'tax_code' => "234567891",
                 'name' => 'Apple',
+                'email' =>'apple@gmail.com',
                 'phone' => '03020501322',
                 'address' => 'HoChiMinhCity',
                 'created_at' => Carbon::now(),

@@ -17,9 +17,10 @@ class CreateProvidedsTable extends Migration
             $table->increments('id');
             $table->integer('tax_code');
             $table->string('name');
+            $table->string('email');
             $table->string('phone');
             $table->string('address');
-            $table->string('status')->default("Đang hoạt động");
+            $table->string('status')->default("Đang hoạt động");// Dừng hoạt động
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateProvidedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier');
+        Schema::dropIfExists('provideds');
     }
 }

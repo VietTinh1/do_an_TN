@@ -46,64 +46,48 @@
             <div class="row">
                 <div class="form-group  col-md-12">
                     <span class="thong-tin-thanh-toan">
-                        <h5 style="text-align:center;">Chỉnh sửa thông tin nhà cung cấp cơ bản</h5>
+                        <h5 style="text-align:center;">Chỉnh sửa thông tin nhà cung cấp</h5>
                     </span>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Mã nhà cung cấp</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Tên nhà cung cấp</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Email</label>
-                    <input class="form-control" type="email" required>
-                </div>
-                <div class="form-group  col-md-6">
-                    <label class="control-label">SĐT</label>
-                    <input class="form-control" type="number" required>
-                </div>
-                <div class="form-group col-md-6 ">
-                    <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Còn hàng</option>
-                        <option>Hết hàng</option>
-                        <option>Đang nhập hàng</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Địa chỉ</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Ngày tạo</label>
-                    <input class="form-control" type="date">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleSelect1" class="control-label">Danh mục</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Bàn ăn</option>
-                        <option>Bàn thông minh</option>
-                        <option>Tủ</option>
-                        <option>Ghế gỗ</option>
-                        <option>Ghế sắt</option>
-                        <option>Giường người lớn</option>
-                        <option>Giường trẻ em</option>
-                        <option>Bàn trang điểm</option>
-                        <option>Giá đỡ</option>
-                    </select>
-                </div>
-            </div>
-            <BR>
-            <BR>
-            <BR>
-            <button class="btn btn-save" type="button">Lưu lại</button>
-            <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-            <BR>
+            <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post">
+                @csrf
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Mã số thuế</label>
+                        <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Tên nhà cung cấp</label>
+                        <input class="form-control" type="text" value="{{ $provided->name }}" name="name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" type="email" value="{{ $provided->email }}" name="email" required>
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">SĐT</label>
+                        <input class="form-control" type="number" value="{{ $provided->phone }}" name="phone" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Địa chỉ</label>
+                        <input class="form-control" type="text" value="{{ $provided->address }}" name="address" required>
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label for="exampleSelect1" class="control-label">Tình trạng</label>
+                        <select class="form-control" id="exampleSelect1" name="status">
+                            <option value="Đang hoạt động">Đang hoạt động</option>
+                            <option value="Đang hoạt động">Dừng hoạt động</option>
+                        </select>
+                    </div>
+                </div> <BR>
+                    <BR>
+                    <BR>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('provided',compact('provided')) }}">Hủy bỏ</a>
+
+            </form>
+           <BR>
         </div>
     </main>
 

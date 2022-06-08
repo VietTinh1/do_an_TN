@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Account;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Comment;
@@ -17,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Session;
+use Illuminate\Support\Str;
+use Prophecy\Call\Call;
+
 class AdminController extends Controller
 {
 
@@ -49,22 +51,74 @@ class AdminController extends Controller
     // Đang hoạt động/Hết hàng/Đã hủy
     public function product()
     {
-        $product = Product::all()->where('status','=',"Đang hoạt động");
-        $provided=Provided::all()->where('status','=',"Đang hoạt động");
-        $productType=ProductType::all()->where('status','=',"Đang hoạt động");
-        return view('admin.src.product',compact('product','provided','productType'));
+        $product = Product::all();
+        // $provided=Provided::all()->where('status','=',"Đang hoạt động");
+        //$productType=ProductType::all()->where('status','=',"Đang hoạt động");
+        return view('admin.src.product',compact('product'));
     }
     //add sản phẩm
     public function addProduct()
     {
         return view('admin.src.add_product');
     }
-    //edit sản phẩm
-    public function editProduct()
+    public function postAddProduct(Request $request)
     {
-        return view('admin.src.edit_product');
+        $describe=' ';
+        if(!Empty($request->describe)){
+            $describe = $request->describe;
+        }
+        //them image sau
+        $db=DB::table('products')->insert([
+            'account_id'=>Auth::id(),
+            'name'=>$request->name,
+            'product_type_id'=>$request->product_type_id,
+            'provided_id'=>$request->provided_id,
+            'amount'=>$request->amount,
+            'price'=>$request->price,
+            'tax'=>$request->tax,
+            'images' =>'',
+            'describe' =>$describe,
+            'product_code'=>Str::random(10),
+        ]);
+        Session()->flash('success', 'Thêm sản phẩm thành công');
+        return redirect()->route('product');
     }
-
+    //edit sản phẩm
+    public function editProduct($id)
+    {
+        $product =Product::find($id);
+        $productType=ProductType::all();
+        return view('admin.src.edit_product',compact('product','productType'));
+    }
+    public function postEditProduct(Request $request,$id)
+    {
+        //số lượng = sp+ số lượng
+        $name=$request->name;
+        //$image=$request->image;
+        $amount=$request->amount;
+        $price=$request->price;
+        $tax=$request->tax;
+        $sold=$request->sold;
+        $productType=$request->product_type;
+        $status=$request->status;
+        $db=DB::table('products')->where('id',$id)->update([
+            'name' =>$name,
+            'amount' =>$amount,
+            'price' =>$price,
+            'tax' =>$tax,
+            'sold' =>$sold,
+            'product_type_id'=>$productType,
+            'status'=>$status,
+            'updated_at' =>Carbon::now(),
+        ]);
+        Session()->flash('success','Thay đổi dữ liệu thành công');
+        return redirect()->route('product');
+    }
+    public function deleteProduct($id){
+        $delete =DB::table('products')->where('id','=',$id)->update(['status' =>'Dừng hoạt động']);
+        Session()->flash('success', 'Xóa sản phẩm thành công');
+        return redirect()->route('product');
+    }
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
@@ -193,19 +247,55 @@ class AdminController extends Controller
     //TRANG NHÀ CUNG CẤP
     public function provided()
     {
-        return view('admin.src.provided');
+        $provided=Provided::all();
+        return view('admin.src.provided',compact('provided'));
     }
-    //trang add nhà cung cấp
     public function addProvided()
     {
         return view('admin.src.add_provided');
     }
-    //edit nhà cung cấp
-    public function editProvided()
+    public function postAddProvided(Request $request)
     {
-        return view('admin.src.edit_provided');
+        $db=DB::table('provideds')->insert([
+            'name'=>$request->name,
+            'tax_code'=>$request->tax_code,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'status'=>$request->status,
+            'created_at'=>Carbon::now(),
+        ]);
+        Session()->flash('success', 'Thêm nhà cung cấp thành công');
+        return redirect()->route('provided');
     }
-
+    public function editProvided($id)
+    {
+        $provided=Provided::find($id);
+        return view('admin.src.edit_provided',compact('provided'));
+    }
+    public function postEditProvided(Request $request,$id)
+    {
+        $db=DB::table('provideds')->where('id',$id)->update([
+            'tax_code' =>$request->tax_code,
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'status'=>$request->status,
+            'updated_at'=>Carbon::now(),
+        ]);
+        Session()->flash('success', 'Sửa dữ liệu thành công');
+        return redirect()->route('provided');
+    }
+    public function deleteProvided($id)
+    {
+        $db=DB::table('provideds')->where('id','=',$id)->update([
+            'status'=>' Dừng hoạt động',
+            'updated_at'=>Carbon::now(),
+        ]);
+        Session()->flash('success', 'Xóa dữ liệu thành công');
+        return redirect()->route('provided');
+    }
     //TRANG BÁO CÁO
     public function report()
     {
