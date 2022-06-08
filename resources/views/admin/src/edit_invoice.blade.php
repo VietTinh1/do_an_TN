@@ -52,24 +52,20 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="control-label">Mã hóa đơn</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Người thêm</label>
-                    <input class="form-control" type="text" required>
-                </div>
-                <div class="form-group col-md-6">
                     <label class="control-label">Khách hàng</label>
-                    <input class="form-control" type="text" required>
+                    <input class="form-control" type="text" value="{{ $invoice->name_customer }}" name="name_customer" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">Email</label>
-                    <input class="form-control" type="email" required>
+                    <input class="form-control" type="email" value="{{ $invoice->email_customer }}" name="email_customer" required>
                 </div>
                 <div class="form-group  col-md-6">
                     <label class="control-label">SĐT</label>
-                    <input class="form-control" type="number" required>
+                    <input class="form-control" type="number" value="{{ $invoice->phone }}" name="phone" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Địa chỉ</label>
+                    <input class="form-control" type="text" value="{{ $invoice->address_customer }}" name="address_customer" required>
                 </div>
                 <div class="form-group col-md-6 ">
                     <label for="exampleSelect1" class="control-label">Tình trạng</label>
@@ -80,20 +76,24 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="control-label">Địa chỉ</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group col-md-6">
                     <label class="control-label">Ngày tạo</label>
-                    <input class="form-control" type="date">
+                    <input class="form-control" type="date" value="{{ $invoice->created_at }}">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="exampleSelect1" class="control-label">Danh mục</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Bàn ăn</option>
-                        <option>Bàn thông minh</option>
-                        <option>Tủ</option>
+                    <label for="exampleSelect1" class="control-label">Tình trạng</label>
+                    <select class="form-control" id="exampleSelect1" name="ststatus" required>
 
+                        <option>-- Chọn tình trạng --</option>
+                        @foreach($invoice as $invoice)
+                            <option value="{{ $invoice->status }}">
+                                @if($invoice->status==1)
+                                    Đang chờ
+                                @elseif ($invoice->status==2)
+                                    Đã Thanh Toán
+                                @else
+                                    Đã hủy
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>

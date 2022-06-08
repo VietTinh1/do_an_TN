@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
-use App\Models\Bill;
-use App\Models\BillDetail;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Comment;
 use App\Models\Payment;
 use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\ProductType;
-use App\Models\Supplier;
+use App\Models\Provided;
 use App\Models\UserDB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use Session;
 class AdminController extends Controller
 {
 
@@ -77,7 +77,7 @@ class AdminController extends Controller
         if ($data) {
             $addInvoiceDetail = DB::table('invoice_details')->insert([
                 'invoice_id' => $data,
-                'product_id' => '1',
+                'product_id' => $request->nameProduct,
                 'amount' => $request->amount,
                 'discount' => '0',
             ]);
@@ -92,11 +92,20 @@ class AdminController extends Controller
         }
     }
     //edit hóa đơn
-    public function editInvoice()
+    public function editInvoice($id)
     {
-        return view('admin.src.edit_invoice');
-    }
+        $invoice = Invoice::find($id);
 
+        return view('admin.src.edit_invoice',compact('invoice'));
+    }
+    public function postEditInvoice(){
+
+    }
+    public function deleteInvoice($id){
+        $delete =DB::table('invoices')->where('id','=',$id)->update(['status' =>'0']);
+        Session()->flash('success', 'Xóa hóa đơn thành công');
+        return redirect()->back();
+    }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
     {
@@ -112,7 +121,7 @@ class AdminController extends Controller
     {
         return view('admin.src.edit_staff');
     }
-    
+
     //TRANG LƯƠNG ADMIN
     public function money()
     {
@@ -149,5 +158,12 @@ class AdminController extends Controller
     public function report()
     {
         return view('admin.src.report');
+    }
+    public function testStatusInvoice($index){
+        switch($index){
+            case 0: return "Đã xóa";break;
+            case 1: return "Đang chờ";break;
+            case 2: return "Đã thanh toán";break;
+        }
     }
 }

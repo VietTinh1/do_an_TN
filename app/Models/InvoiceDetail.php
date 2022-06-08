@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bill extends Model
+class InvoiceDetail extends Model
 {
     use HasFactory;
-    protected $table="bills";
+    protected $table="invoice_details";
     public $timestamps = true;
 }

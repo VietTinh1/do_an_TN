@@ -84,7 +84,7 @@
                 <tr>
                   <th width="10"><input type="checkbox" id="all"></th>
                   <th>ID đơn hàng</th>
-                  <th>Người thêm</th>
+                  <th>Nhân viên thêm</th>
                   <th>Khách hàng</th>
                   <th>Email</th>
                   <th>Số điện thoại</th>
@@ -121,7 +121,7 @@
                             </span></td>
                         <td>
                         <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                   @endforeach

@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" name="phone" required>
+                                <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Địa chỉ</label>
@@ -74,21 +74,16 @@
                             {{-- dropdown --}}
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên sản phẩm</label>
-                                {{-- <input class="form-control" type="text" name="nameProduct" required> --}}
                                 <select class="form-control" id="exampleSelect1" name="nameProduct" required>
                                     <option>-- Chọn sản phẩm --</option>
                                     @foreach ($product as $product)
-                                        <option>{{ $product->name }}</option>
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" required>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Tổng tiền</label>
-                                <input class="form-control" type="number" disabled>
+                                <input class="form-control" type="number" name="amount" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
