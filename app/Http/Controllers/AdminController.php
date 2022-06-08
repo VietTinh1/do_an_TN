@@ -64,7 +64,7 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        $data = DB::table('invoices')->where('status', '=', 1)->orderByDesc('created_at')->get();
+        $data = DB::table('invoices')->where('status', '!=', "Đã hủy")->orderByDesc('created_at')->get();
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -113,12 +113,12 @@ class AdminController extends Controller
         return view('admin.src.edit_invoice',compact('invoice'));
     }
     public function postEditInvoice(Request $request,$id){
-        $status ='';
+        $status =$request->status1;
         $name_customer ='';
         $email_customer ='';
         $phone ='';
         $address_customer ='';
-        $created_at ='';
+        $message='';
         if(!Empty($request->name_customer)){
             $name_customer = $request->name_customer;
         }
@@ -131,13 +131,24 @@ class AdminController extends Controller
         if(!Empty($request->address_customer)){
             $address_customer = $request->address_customer;
         }
+        if(!Empty($request->message)){
+            $message = $request->message;
+        }
         if(!Empty($request->created_at)){
             $created_at = $request->created_at;
         }
         if(isset($request->status)){
             $status =$request->status;
         }
-        dd($status);
+        $update=DB::table('invoices')->where('id',$id)->update([
+            'name_customer'=>$name_customer,
+            'email_customer'=>$email_customer,
+            'phone'=>$phone,
+            'address_customer' =>$address_customer,
+            'message'=>$message,
+            'status' =>$status,
+            'updated_at'=>Carbon::now(),
+        ]);
     }
     public function deleteInvoice($id){
         $delete =DB::table('invoices')->where('id','=',$id)->update(['status' =>'0']);

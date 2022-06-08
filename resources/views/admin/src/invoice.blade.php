@@ -126,38 +126,6 @@
                         </td>
                     </tr>
                   @endforeach
-=======
-                @foreach ($data as $data)
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>{{ $data->id }}</td>
-                  <td>{{ $data->account_id }}</td>
-                  <td>{{ $data->name_customer }}</td>>
-                  <td>{{ $data->email_customer }}</td>
-                  <td>{{ $data->phone }}</td>
-                  <td>{{ $data->address_customer }}</td>
-                  <td>{{ $data->created_at }}</td>
-                  <td>{{ $data->message }}</td>
-                  <td>
-                    <span class="badge bg-danger">
-                      @if($data->status ==1)
-                      Chờ xử lí
-                      @elseif($data->status ==2)
-                      Đang xử lí
-                      @elseif($data->status ==3)
-                      Đã xử lí
-                      @else
-                      Đã hủy
-                      @endif
-                    </span>
-                  </td>
-                  <td>
-                    <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning " style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class=" fas fa-trash"></i></a>
-                  </td>
-                </tr>
-                @endforeach
->>>>>>> cf6997d61386784ec83a557113019f73e6726b27
               </tbody>
             </table>
           </div>
