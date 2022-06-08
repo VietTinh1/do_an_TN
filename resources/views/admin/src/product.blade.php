@@ -39,6 +39,9 @@
     </header>
     @include('admin.menu_header')
     <main class="app-content">
+        @if(Session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
@@ -83,7 +86,7 @@
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Ảnh</th>
-                                    <th>Số lượng</th>                
+                                    <th>Số lượng</th>
                                     <th>Giá tiền</th>
                                     <th>Thuế</th>
                                     <th>Đã bán</th>
@@ -103,7 +106,7 @@
                                     <td>10%</td>
                                     <td>20</td>
                                     <td>Giường người lớn</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>                                         
+                                    <td><span class="badge bg-success">Còn hàng</span></td>
                                     <td>
                                         <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
@@ -119,7 +122,7 @@
                                     <td>10%</td>
                                     <td>20</td>
                                     <td>Giường người lớn</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>                                         
+                                    <td><span class="badge bg-success">Còn hàng</span></td>
                                     <td>
                                         <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
@@ -134,7 +137,7 @@
         </div>
     </main>
 
-    
+
 
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>

@@ -38,6 +38,9 @@
     </header>
     @include('admin.menu_header')
     <main class="app-content">
+        @if(Session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="app-title">
@@ -346,7 +349,7 @@
             <p><b>Hệ thống quản lý V2.0 | Code by Trường</b></p>
         </div>
     </main>
-    
+
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>

@@ -39,6 +39,9 @@
     </header>
     @include('admin.menu_header')
     <main class="app-content">
+        @if(Session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách đơn hàng</li>

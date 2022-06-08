@@ -21,7 +21,8 @@ class LoginController extends Controller
             return redirect()->route('index');
         }
         else{
-            echo"that bai";
+           Session()->flash('success', 'Login failed');
+            return redirect()->back();
         }
     }
     public function logout(){

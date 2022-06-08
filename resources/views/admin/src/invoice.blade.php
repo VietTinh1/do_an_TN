@@ -39,6 +39,9 @@
   </header>
 @include('admin.menu_header')
 <main class="app-content">
+    @if(Session()->has('success'))
+    <div class="alert alert-success">{{session()->get('success')}}</div>
+@endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
@@ -118,7 +121,7 @@
                             </span></td>
                         <td>
                         <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a> 
+                        <a href="{{ route('deleteInvoice') }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                   @endforeach

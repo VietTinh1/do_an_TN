@@ -147,6 +147,9 @@
     </header>
     @include('admin.menu_header')
     <main class="app-content">
+        @if(Session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách sản phẩm</li>
@@ -256,7 +259,7 @@
 
 
     <!--
-  MODAL CHỨC VỤ 
+  MODAL CHỨC VỤ
 -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered" role="document">

@@ -39,6 +39,9 @@
   </header>
   @include('admin.menu_header')
   <main class="app-content">
+    @if(Session()->has('success'))
+    <div class="alert alert-success">{{session()->get('success')}}</div>
+@endif
     <div class="row">
       <div class="col-md-12">
         <div class="app-title">

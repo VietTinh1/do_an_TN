@@ -39,6 +39,9 @@
     </header>
     @extends('admin.menu_header')
     <main class="app-content">
+        @if(Session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
         <div class="modal-body">
             <div class="row">
                 <div class="form-group  col-md-12">
@@ -90,7 +93,7 @@
                         <option>Bàn ăn</option>
                         <option>Bàn thông minh</option>
                         <option>Tủ</option>
-                        
+
                     </select>
                 </div>
             </div>
