@@ -83,52 +83,43 @@
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
+                                    <th>Người tạo</th>
                                     <th>Mã sản phẩm</th>
+                                    <th>Loại</th>
+                                    <th>Nhà cung cấp</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Ảnh</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
                                     <th>Thuế</th>
                                     <th>Đã bán</th>
-                                    <th>Danh mục</th>
+                                    <th>Đánh giá</th>
                                     <th>Tình trạng</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>83216006</td>
-                                    <td>Giường ngủ Kara 1.6x2m</td>
-                                    <td><img src="/img-sanpham/kara.jpg" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                    <td>14.500.000 đ</td>
-                                    <td>10%</td>
-                                    <td>20</td>
-                                    <td>Giường người lớn</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>73216006</td>
-                                    <td>Niệm ngủ Kara 1.6x2m</td>
-                                    <td><img src="/img-sanpham/kara.jpg" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                    <td>14.500.000 đ</td>
-                                    <td>10%</td>
-                                    <td>20</td>
-                                    <td>Giường người lớn</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                </tr>
+                                    @foreach ($product as $product)
+                                    <tr>
+                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $product->product_code }}</td>
+                                        <td>{{ $product->product_type_id}}</td>
+                                        <td>{{ $product->provided_id}}</td>
+                                        <td>{{ $product->name}}</td>
+                                        <td><img src="/img-sanpham/kara.jpg" alt="" width="100px;"></td>
+                                        <td>{{ $product->amount }}</td>
+                                        <td>{{ $product->price }}đ</td>
+                                        <td>{{ $product->tax }}%</td>
+                                        <td>{{ $product->sold }}</td>
+                                        <td>{{ $product->so_sao }}</td>
+                                        <td><span class="badge bg-success">{{ $product->status   }}</span></td>>
+                                        <td>
+                                            <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                            <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>

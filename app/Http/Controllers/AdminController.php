@@ -46,9 +46,13 @@ class AdminController extends Controller
     }
 
     //TRANG SẢN PHẨM ADMIN
+    // Đang hoạt động/Hết hàng/Đã hủy
     public function product()
     {
-        return view('admin.src.product');
+        $product = Product::all()->where('status','=',"Đang hoạt động");
+        $provided=Provided::all()->where('status','=',"Đang hoạt động");
+        $productType=ProductType::all()->where('status','=',"Đang hoạt động");
+        return view('admin.src.product',compact('product','provided','productType'));
     }
     //add sản phẩm
     public function addProduct()
@@ -133,9 +137,6 @@ class AdminController extends Controller
         }
         if(!Empty($request->message)){
             $message = $request->message;
-        }
-        if(!Empty($request->created_at)){
-            $created_at = $request->created_at;
         }
         if(isset($request->status)){
             $status =$request->status;
