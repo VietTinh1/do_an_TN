@@ -96,7 +96,6 @@
                 </tr>
               </thead>
               <tbody>
-<<<<<<< HEAD
                   @foreach ($data as $data)
                     <tr>
                         <td width="10"><input type="checkbox" name="check1" value="1"></td>

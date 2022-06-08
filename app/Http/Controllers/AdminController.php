@@ -70,7 +70,7 @@ class AdminController extends Controller
     //add hóa đơn
     public function addInvoice()
     {
-        $product = Product::all()->where('status', '=', 1);
+        $product = Product::all()->where('status', '=', "Đang hoạt động");
         return view('admin.src.add_invoice', compact('product'));
     }
     public function postAddInvoice(Request $request)
@@ -149,9 +149,11 @@ class AdminController extends Controller
             'status' =>$status,
             'updated_at'=>Carbon::now(),
         ]);
+        Session()->flash('success','Xoá đơn hàng thành công');
+        return redirect()->route('invoice');
     }
     public function deleteInvoice($id){
-        $delete =DB::table('invoices')->where('id','=',$id)->update(['status' =>'0']);
+        $delete =DB::table('invoices')->where('id','=',$id)->update(['status' =>'Đã hủy']);
         Session()->flash('success', 'Xóa hóa đơn thành công');
         return redirect()->back();
     }
