@@ -78,7 +78,8 @@
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết nhân viên
+                </button>
               </div>
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
@@ -115,6 +116,48 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhân viên</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="form-group col-md-12">
+                <label class="control-label">Khách hàng</label>
+                <input class="form-control" type="text" required>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" required>
+              </div>
+              <div class="form-group  col-md-12">
+                <label class="control-label">Số điện thoại</label>
+                <input class="form-control" type="number" required>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Địa chỉ </label>
+                <input class="form-control" type="text" required>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label class="control-label">Tình Trạng</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="modal-footer" style="margin-right:30%;">
+              <button type="button" class="btn btn-primary">Lưu lại</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+            </div>
           </div>
         </div>
       </div>
@@ -256,6 +299,10 @@
       })
     });
   </script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
