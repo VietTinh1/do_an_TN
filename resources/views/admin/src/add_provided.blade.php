@@ -140,16 +140,16 @@
 
             <!-- User Menu-->
             <li>
-        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
-      </li>
+            </li>
         </ul>
     </header>
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách nhà cung cấp</li>
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Mã số thuế</label>
-                                    <input class="form-control" type="number" name="tax_code" required>
+                                    <input class="form-control" type="number" name="tax_code" required onkeypress="return event.charCode >= 48" min="1">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Email</label>
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="form-group  col-md-3">
                                     <label class="control-label">SĐT</label>
-                                    <input class="form-control" type="number" name="phone" required>
+                                    <input class="form-control" type="number" name="phone" required onkeypress="return event.charCode >= 48" min="1">
                                 </div>
                                 <div class="form-group  col-md-3">
                                     <label class="control-label">Địa chỉ</label>
@@ -203,8 +203,8 @@
                                     </select>
                                 </div>
                             </div><br><br><br>
-                            <button class="btn btn-save" type="submit">Lưu lại</button>
-                            <a class="btn btn-cancel" href="{{route('provided')}}">Hủy bỏ</a>
+                            <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>
+                            <a class="btn btn-cancel" href="{{route('provided')}}" style="height: 40px;padding-left: 10px;padding-right: 10px;margin-left: 10px;">Hủy bỏ</a>
                         </form>
 
                     </div>

@@ -140,16 +140,16 @@
 
             <!-- User Menu-->
             <li>
-        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
-      </li>
+            </li>
         </ul>
     </header>
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách sản phẩm</li>
@@ -195,20 +195,20 @@
                             </div>
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" required>
+                                <input class="form-control" type="number" name="amount" required onkeypress="return event.charCode >= 48" min="1">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="number" name="price" required>
+                                <input class="form-control" type="number" name="price" required onkeypress="return event.charCode >= 48" min="1">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thuế</label>
-                                <input class="form-control" type="number" name="tax" required>
+                                <input class="form-control" type="number" name="tax" required onkeypress="return event.charCode >= 48" min="0">
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Ảnh sản phẩm</label>
                                 <div id="myfileupload">
-                                    <input type="file" id="uploadfile" name="image" onchange="readURL(this);"  />
+                                    <input type="file" id="uploadfile" name="image" onchange="readURL(this);" />
                                 </div>
                                 <div id="thumbbox">
                                     <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />

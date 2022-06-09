@@ -41,7 +41,7 @@
   <main class="app-content">
     @if(Session()->has('success'))
     <div class="alert alert-success">{{session()->get('success')}}</div>
-@endif
+    @endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Bảng kê lương</b></a></li>

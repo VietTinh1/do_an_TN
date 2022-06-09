@@ -41,7 +41,7 @@
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="modal-body">
             <div class="row">
                 <div class="form-group  col-md-12">
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label">Mã nhân viên</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" required readonly onkeypress="return event.charCode >= 48" min="1">
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">Họ tên</label>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">SĐT</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" onkeypress="return event.charCode >= 48" min="1">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleSelect1" class="control-label">Quyền</label>

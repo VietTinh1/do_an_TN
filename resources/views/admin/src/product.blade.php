@@ -32,16 +32,16 @@
 
             <!-- User Menu-->
             <li>
-        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
-      </li>
+            </li>
         </ul>
     </header>
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
@@ -99,28 +99,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    @foreach ($product as $product)
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->product_code }}</td>
-                                        <td>{{ $product->product_type_id}}</td>
-                                        <td>{{ $product->provided_id}}</td>
-                                        <td>{{ $product->name}}</td>
-                                        <td><img src="../img-sanpham/kara.jpg" alt="" width="100px;"></td>
-                                        {{-- image --}}
-                                        <td>{{ $product->amount }}</td>
-                                        <td>{{ $product->price }}đ</td>
-                                        <td>{{ $product->tax }}%</td>
-                                        <td>{{ $product->sold }}</td>
-                                        <td>{{ $product->so_sao }}</td>
-                                        <td><span class="badge bg-success">{{ $product->status   }}</span></td>>
-                                        <td>
-                                            <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                            <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                @foreach ($product as $product)
+                                <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->product_code }}</td>
+                                    <td>{{ $product->product_type_id}}</td>
+                                    <td>{{ $product->provided_id}}</td>
+                                    <td>{{ $product->name}}</td>
+                                    <td><img src="../img-sanpham/kara.jpg" alt="" width="100px;"></td>
+                                    {{-- image --}}
+                                    <td>{{ $product->amount }}</td>
+                                    <td>{{ $product->price }}đ</td>
+                                    <td>{{ $product->tax }}%</td>
+                                    <td>{{ $product->sold }}</td>
+                                    <td>{{ $product->so_sao }}</td>
+                                    <td><span class="badge bg-success">{{ $product->status   }}</span></td>
+                                    <td>
+                                        <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:5px;"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

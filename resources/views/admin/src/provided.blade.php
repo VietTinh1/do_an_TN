@@ -32,16 +32,16 @@
 
             <!-- User Menu-->
             <li>
-        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
-      </li>
+            </li>
         </ul>
     </header>
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhà cung cấp</b></a></li>
@@ -95,23 +95,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach($provided as $provided)
-                                    <tr>
-                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                        <td>{{ $provided->id }}</td>
-                                        <td>{{ $provided->tax_code }}</td>
-                                        <td>{{ $provided->name }}</td>
-                                        <td>{{ $provided->email }}</td>
-                                        <td>{{ $provided->phone }}</td>
-                                        <td>{{ $provided->address }}</td>
-                                        <td>{{ $provided->created_at }}</td>
-                                        <td><span class="badge bg-success">@if($provided->status=="Đang hoạt động") Đang hoạt động @else  Dừng hoạt động @endif</span></td>
-                                        <td>
-                                            <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                                            <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                        </td>
-                                    </tr>
-                               @endforeach
+                                @foreach($provided as $provided)
+                                <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>{{ $provided->id }}</td>
+                                    <td>{{ $provided->tax_code }}</td>
+                                    <td>{{ $provided->name }}</td>
+                                    <td>{{ $provided->email }}</td>
+                                    <td>{{ $provided->phone }}</td>
+                                    <td>{{ $provided->address }}</td>
+                                    <td>{{ $provided->created_at }}</td>
+                                    <td><span class="badge bg-success">@if($provided->status=="Đang hoạt động") Đang hoạt động @else Dừng hoạt động @endif</span></td>
+                                    <td>
+                                        <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -120,77 +120,7 @@
         </div>
     </main>
 
-    <!--
-  MODAL
--->
-    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
 
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group  col-md-12">
-                            <span class="thong-tin-thanh-toan">
-                                <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Mã sản phẩm </label>
-                            <input class="form-control" type="number" value="71309005">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Tên sản phẩm</label>
-                            <input class="form-control" type="text" required value="Bàn ăn gỗ Theresa">
-                        </div>
-                        <div class="form-group  col-md-6">
-                            <label class="control-label">Số lượng</label>
-                            <input class="form-control" type="number" required value="20">
-                        </div>
-                        <div class="form-group col-md-6 ">
-                            <label for="exampleSelect1" class="control-label">Tình trạng sản phẩm</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>Còn hàng</option>
-                                <option>Hết hàng</option>
-                                <option>Đang nhập hàng</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Giá bán</label>
-                            <input class="form-control" type="text" value="5.600.000">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleSelect1" class="control-label">Danh mục</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>Bàn ăn</option>
-                                <option>Bàn thông minh</option>
-                                <option>Tủ</option>
-                                <option>Ghế gỗ</option>
-                                <option>Ghế sắt</option>
-                                <option>Giường người lớn</option>
-                                <option>Giường trẻ em</option>
-                                <option>Bàn trang điểm</option>
-                                <option>Giá đỡ</option>
-                            </select>
-                        </div>
-                    </div>
-                    <BR>
-                    <a href="#" style="float: right;font-weight: 600; color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>
-                    <BR>
-                    <BR>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                    <BR>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--
-MODAL
--->
 
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>

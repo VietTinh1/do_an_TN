@@ -44,7 +44,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         me</label>
                                 </span>
                             </div>
-                            <input type="submit" value="Login" >
+                            <input type="submit" value="Login">
                         </form>
 
                     </div>

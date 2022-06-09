@@ -41,7 +41,7 @@
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <form action="{{ route('postEditProduct',['id'=>$product->id]) }}" method="post">
             @csrf
             <div class="modal-body">
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label">Mã sản phẩm</label>
-                        <input class="form-control" type="text" value="{{ $product->product_code }}" name="product_code">
+                        <input class="form-control" type="text" value="{{ $product->product_code }}" name="product_code" readonly/>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tên sản phẩm</label>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Số lượng</label>
-                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount"  required>
+                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Giá tiền</label>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Đã bán</label>
-                        <input class="form-control" type="text" value="{{ $product->sold }}" name="sold" required>
+                        <input class="form-control" type="text" value="{{ $product->sold }}" name="sold" required readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
@@ -105,7 +105,7 @@
                 <button class="btn btn-save" type="submit">Lưu lại</button>
                 <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
         </form>
-            <BR>
+        <BR>
         </div>
     </main>
 

@@ -41,7 +41,7 @@
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="modal-body">
             <div class="row">
                 <div class="form-group  col-md-12">
@@ -50,9 +50,10 @@
                     </span>
                 </div>
             </div>
-    <form action="{{ route('postEditInvoice',['id'=>$invoice->id]) }}" method="post">
-        @csrf
-        <div class="row">
+            <form action="{{ route('postEditInvoice',['id'=>$invoice->id]) }}" method="post">
+                @csrf
+                <div class="row">
+                
                     <div class="form-group col-md-6">
                         <label class="control-label">Khách hàng</label>
                         <input class="form-control" type="text" value="{{ $invoice->name_customer }}" name="name_customer" required>
@@ -77,33 +78,32 @@
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
                         <select class="form-control" id="exampleSelect1" name="status" required>
                             <option value="">-- Chọn tình trạng --</option>
-                            @for($i = 0; $i <=3; $i++)
-                                <option value="{{ $i }}">
-                                    @if($i==1)
-                                        Chờ xử lí
-                                    @elseif($i==2)
-                                        Đang xử lí
-                                    @elseif($i==3)
-                                        Đã xử lí
-                                    @else
-                                        Đã hủy
-                                    @endif
+                            @for($i = 0; $i <=3; $i++) <option value="{{ $i }}">
+                                @if($i==1)
+                                Chờ xử lí
+                                @elseif($i==2)
+                                Đang xử lí
+                                @elseif($i==3)
+                                Đã xử lí
+                                @else
+                                Đã hủy
+                                @endif
                                 </option>
-                            @endfor
+                                @endfor
                         </select>
                     </div>
                     <div class="form-group  col-md-4">
                         <label class="control-label">Thay đổi ghi chú đơn hàng</label>
-                        <textarea class="form-control" rows="4" name="message"  ></textarea>
+                        <textarea class="form-control" rows="4" name="message"></textarea>
                     </div>
                 </div>
                 <BR>
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('invoice')}}">Hủy bỏ</a>
                 <BR>
-            </div>
+        </div>
         </form>
     </main>
 

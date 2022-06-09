@@ -25,7 +25,7 @@
 <body onload="time()" class="app sidebar-mini rtl">
   <!-- Navbar-->
   <header class="app-header">
-      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
 
@@ -41,7 +41,7 @@
   <main class="app-content">
     @if(Session()->has('success'))
     <div class="alert alert-success">{{session()->get('success')}}</div>
-@endif
+    @endif
     <div class="row">
       <div class="col-md-12">
         <div class="app-title">

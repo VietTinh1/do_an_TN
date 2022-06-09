@@ -71,7 +71,7 @@
                         <li><a href="{{asset('contact')}}">Contact</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                    
+
                     </ul>
                 </div>
             </div>

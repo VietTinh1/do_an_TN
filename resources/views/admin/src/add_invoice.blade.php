@@ -41,7 +41,7 @@
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách đơn hàng</li>
@@ -56,11 +56,11 @@
                         <form class="row" method="POST" action="{{ route('postAddInvoice') }}">
                             @csrf
                             <div class="form-group  col-md-4">
-                                <label class="control-label" >Tên khách hàng</label>
+                                <label class="control-label">Tên khách hàng</label>
                                 <input class="form-control" type="text" name="name" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label" >Email</label>
+                                <label class="control-label">Email</label>
                                 <input class="form-control" type="email" name="email" required>
                             </div>
                             <div class="form-group  col-md-4">
@@ -77,7 +77,7 @@
                                 <select class="form-control" id="exampleSelect1" name="nameProduct" required>
                                     <option>-- Chọn sản phẩm --</option>
                                     @foreach ($product as $product)
-                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4" name="note" ></textarea>
+                                <textarea class="form-control" rows="4" name="note"></textarea>
                             </div>
                             <div class="form-group  col-md-4">
 
@@ -103,7 +103,7 @@
                                 <button class="btn btn-save" type="submit">Lưu lại</button>
                             </div>
                         </form>
-                        <a class="btn btn-cancel" href="{{ route('invoice') }}">Hủy bỏ</a>
+                        <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoice') }}">Hủy bỏ</a>
                     </div>
 
                 </div>

@@ -50,8 +50,8 @@
 
 <body>
 
-   @include('customer.header')
-   <div class="mainmenu-area">
+    @include('customer.header')
+    <div class="mainmenu-area">
         <div class="container">
             <div class="row">
                 <div class="navbar-header">

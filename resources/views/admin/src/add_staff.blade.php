@@ -148,7 +148,7 @@
   <main class="app-content">
     @if(Session()->has('success'))
     <div class="alert alert-success">{{session()->get('success')}}</div>
-@endif
+    @endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh sách nhân viên</li>
@@ -170,8 +170,8 @@
             </div>
             <form class="row">
               <div class="form-group col-md-4">
-                <label class="control-label">ID nhân viên</label>
-                <input class="form-control" type="text">
+                <label class="control-label">Mã nhân viên</label>
+                <input class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
@@ -181,8 +181,10 @@
                 <label class="control-label">Địa chỉ email</label>
                 <input class="form-control" type="text" required>
               </div>
+
+
               <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ thường trú</label>
+                <label class="control-label">Địa chỉ </label>
                 <input class="form-control" type="text" required>
               </div>
               <div class="form-group  col-md-4">
@@ -193,68 +195,19 @@
                 <label class="control-label">Ngày sinh</label>
                 <input class="form-control" type="date">
               </div>
-              <div class="form-group  col-md-3">
-                <label class="control-label">Nơi sinh</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Số CMND</label>
-                <input class="form-control" type="number" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Ngày cấp</label>
-                <input class="form-control" type="date" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Nơi cấp</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Giới tính</label>
-                <select class="form-control" id="exampleSelect2" required>
-                  <option>-- Chọn giới tính --</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
-                </select>
-              </div>
+
+
+
 
               <div class="form-group  col-md-3">
                 <label for="exampleSelect1" class="control-label">Chức vụ</label>
                 <select class="form-control" id="exampleSelect1">
                   <option>-- Chọn chức vụ --</option>
-                  <option>Bán hàng</option>
-                  <option>Tư vấn</option>
-                  <option>Dịch vụ</option>
-                  <option>Thu Ngân</option>
-                  <option>Quản kho</option>
-                  <option>Bảo trì</option>
-                  <option>Kiểm hàng</option>
-                  <option>Bảo vệ</option>
-                  <option>Tạp vụ</option>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Bằng cấp</label>
-                <select class="form-control" id="exampleSelect3">
-                  <option>-- Chọn bằng cấp --</option>
-                  <option>Tốt nghiệp Đại Học</option>
-                  <option>Tốt nghiệp Cao Đẳng</option>
-                  <option>Tốt nghiệp Phổ Thông</option>
-                  <option>Chưa tốt nghiệp</option>
-                  <option>Không bằng cấp</option>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Tình trạng hôn nhân</label>
-                <select class="form-control" id="exampleSelect2">
-                  <option>-- Chọn tình trạng hôn nhân --</option>
-                  <option>Độc thân</option>
-                  <option>Đã kết hôn</option>
-                  <option>Góa</option>
-                  <option>Khác</option>
-                </select>
-              </div>
+                  <option>ADM</option>
+                  <option>Khách Hàng</option>
 
+                </select>
+              </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh 3x4 nhân viên</label>
                 <div id="myfileupload">
@@ -268,11 +221,7 @@
                   <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
                   <p style="clear:both"></p>
                 </div>
-
               </div>
-
-
-
           </div>
           <button class="btn btn-save" type="button">Lưu lại</button>
           <a class="btn btn-cancel" href="{{route('staff')}}">Hủy bỏ</a>
