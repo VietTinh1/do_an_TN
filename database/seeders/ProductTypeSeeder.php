@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
-class ProductTypes extends Seeder
+class ProductTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

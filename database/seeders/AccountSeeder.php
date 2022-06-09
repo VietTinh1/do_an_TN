@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-
-class Accounts extends Seeder
+class AccountSeeder extends Seeder
 {
     /**
      * Run the database seeds.

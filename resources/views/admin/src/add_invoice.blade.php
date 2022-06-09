@@ -75,7 +75,6 @@
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên sản phẩm</label>
                                 <select class="form-control" id="exampleSelect1" name="nameProduct" required>
-                                    <option>-- Chọn sản phẩm --</option>
                                     @foreach ($product as $product)
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
@@ -88,7 +87,6 @@
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" required>
-                                    <option>-- Chọn tình trạng --</option>
                                     <option>Đang chờ</option>
                                 </select>
                             </div>

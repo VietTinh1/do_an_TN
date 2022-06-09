@@ -31,6 +31,6 @@ class CreateInvoiceDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bill_details');
+        Schema::dropIfExists('invoice_details');
     }
 }

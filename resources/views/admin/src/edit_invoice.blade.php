@@ -53,7 +53,7 @@
             <form action="{{ route('postEditInvoice',['id'=>$invoice->id]) }}" method="post">
                 @csrf
                 <div class="row">
-                
+
                     <div class="form-group col-md-6">
                         <label class="control-label">Khách hàng</label>
                         <input class="form-control" type="text" value="{{ $invoice->name_customer }}" name="name_customer" required>
@@ -77,7 +77,6 @@
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
                         <select class="form-control" id="exampleSelect1" name="status" required>
-                            <option value="">-- Chọn tình trạng --</option>
                             @for($i = 0; $i <=3; $i++) <option value="{{ $i }}">
                                 @if($i==1)
                                 Chờ xử lí
