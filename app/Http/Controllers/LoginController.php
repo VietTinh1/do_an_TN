@@ -28,7 +28,7 @@ class LoginController extends Controller
     public function logout(){
         Auth::logout();
         Session()->flash('success','Đăng xuất thành công');
-        return redirect()->route('getLogin');
+        return redirect()->route('login');
     }
     public function edit(){
 

@@ -22,25 +22,11 @@
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
-    <!-- Navbar-->
-    <header class="app-header">
-        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-        <!-- Navbar Right Menu-->
-        <ul class="app-nav">
-
-
-            <!-- User Menu-->
-            <li>
-        <a class="app-nav__item" href="{{asset('')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-      </li>
-        </ul>
-    </header>
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
-    @endif
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="app-title">
