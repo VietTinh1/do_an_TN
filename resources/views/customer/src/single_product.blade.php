@@ -38,6 +38,7 @@
     <link href="{{asset('css/customer/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('css/customer/owl.carousel.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('css/customer/reponsive.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
