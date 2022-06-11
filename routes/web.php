@@ -47,10 +47,12 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/add_product', [AdminController::class, 'addProduct'])->name('addProduct');
     Route::post('/add_product', [AdminController::class, 'postAddProduct'])->name('postAddProduct');
     Route::get('/add_staff', [AdminController::class, 'addStaff'])->name('addStaff');
+    Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
     Route::get('/add_money', [AdminController::class, 'addMoney'])->name('addMoney');
 
     Route::get('/edit_money', [AdminController::class, 'editMoney'])->name('editMoney');
-    Route::get('/edit_staff', [AdminController::class, 'editStaff'])->name('editStaff');
+    Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
+    Route::post('/edit_staff/{id}', [AdminController::class, 'postEditStaff'])->name('postEditStaff');
     Route::get('/edit_provided/{id}', [AdminController::class, 'editProvided'])->name('editProvided');
     Route::post('/edit_provided/{id}', [AdminController::class, 'postEditProvided'])->name('postEditProvided');
     Route::get('/edit_invoice/{id}', [AdminController::class, 'editInvoice'])->name('editInvoice');
@@ -61,4 +63,5 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_invoice/{id}', [AdminController::class, 'deleteInvoice'])->name('deleteInvoice');
     Route::get('/delete_product/{id}', [AdminController::class, 'deleteProduct'])->name('deleteProduct');
     Route::get('/delete_provided/{id}', [AdminController::class, 'deleteProvided'])->name('deleteProvided');
+    Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
 });

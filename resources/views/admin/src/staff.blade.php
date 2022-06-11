@@ -73,7 +73,7 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
+                  <th width="10"></th>
                   <th>Mã nhân viên</th>
                   <th width="150">Họ tên</th>
                   <th width="20">Ảnh thẻ</th>
@@ -82,26 +82,37 @@
                   <th>Email</th>
                   <th>SĐT</th>
                   <th>Quyền</th>
+                  <th>Tình trạng</th>
                   <th width="100">Chức năng</th>
                 </tr>
               </thead>
               <tbody>
-
-                <tr>
-                  <td width="10"><input type="checkbox"></td>
-                  <td>#YUI21376</td>
-                  <td>Nguyễn Thị Mai</td>
-                  <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                  <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
-                  <td>09/12/2000</td>
-                  <td>mai@gmail.com</td>
-                  <td>0836333037</td>
-                  <td>Admin</td>
-                  <td>
-                    <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                  </td>
-                </tr>
+                  @foreach($user as $user)
+                    <tr>
+                    <td width="10"><input type="checkbox"></td>
+                    <td>{{ $user->id }}</td>>
+                    <td>{{ $user->fullname }}</td>>
+                    <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
+                    <td>{{ $user->address }}</td>>
+                    <td>{{ $user->birthday }}</td>
+                    <td>{{ $user->email }}</td>>
+                    <td>{{ $user->phone }}</td>>
+                    <td>{{ $user->permission }}</td>
+                    <td>
+                        @if($user->status=="Đang hoạt động")
+                        <span class="badge bg-success">Đang hoạt động</span>
+                        @else
+                        <span class="badge bg-danger">Dừng hoạt động</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                        @if($user->status=="Đang hoạt động")
+                        <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                        @endif
+                    </td>
+                    </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

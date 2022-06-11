@@ -54,7 +54,11 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Số lượng</label>
-                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount" required>
+                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Thêm số lượng</label>
+                        <input class="form-control" type="text" name="addamount" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Giá tiền</label>

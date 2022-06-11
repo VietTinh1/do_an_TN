@@ -37,59 +37,52 @@
                     </span>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Mã nhân viên</label>
-                    <input class="form-control" type="text" required readonly onkeypress="return event.charCode >= 48" min="1">
-                </div>
+            <form class="row" method="post" action="{{ route('postEditStaff',['id'=>$staff->id]) }}">
+                @csrf
                 <div class="form-group col-md-6">
                     <label class="control-label">Họ tên</label>
-                    <input class="form-control" type="text" required>
+                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleFormControlFile1">Hình ảnh</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">Địa chỉ</label>
-                    <input class="form-control" type="text" required>
+                    <input class="form-control" type="text" name="address" value="{{ $staff->address }}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">Ngày sinh</label>
-                    <input class="form-control" type="date" required>
+                    <input class="form-control" type="date" name="birthday" value="{{ $staff->birthday }}" required>
                 </div>
                 <div class="form-group  col-md-6">
                     <label class="control-label">Email</label>
-                    <input class="form-control" type="email" required>
+                    <input class="form-control" type="email" name="email" value="{{ $staff->email }}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">SĐT</label>
-                    <input class="form-control" type="text" onkeypress="return event.charCode >= 48" min="1">
+                    <input class="form-control" type="text" onkeypress="return event.charCode >= 48" min="1" name="phone" value="{{ $staff->phone }}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleSelect1" class="control-label">Quyền</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Admin</option>
-                        <option>Nhân viên</option>
-
-
+                    <select class="form-control" id="exampleSelect1" name="permission">
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
-                <div class="form-group col-md-6 ">
-                    <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Còn hàng</option>
-                        <option>Hết hàng</option>
-                        <option>Đang nhập hàng</option>
+                <div class="form-group col-md-6">
+                    <label for="exampleSelect1" class="control-label">Quyền</label>
+                    <select class="form-control" id="exampleSelect1" name="status">
+                        <option value="Đang hoạt động">Đang hoạt động</option>
+                        <option value="Dừng hoạt động">Dừng hoạt động</option>
                     </select>
                 </div>
+                <BR>
+                    <BR>
+                    <BR>
+                    <button class="btn btn-save" type="submit" >Lưu lại</button>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}">Hủy bỏ</a>
+            </form>
 
-            </div>
-            <BR>
-            <BR>
-            <BR>
-            <button class="btn btn-save" type="button">Lưu lại</button>
-            <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
             <BR>
         </div>
     </main>

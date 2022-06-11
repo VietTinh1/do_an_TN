@@ -147,7 +147,6 @@
       <div class="col-md-12">
 
         <div class="tile">
-
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
             <div class="row element-button">
@@ -156,44 +155,40 @@
               </div>
 
             </div>
-            <form class="row">
-              <div class="form-group col-md-4">
-                <label class="control-label">Mã nhân viên</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Họ và tên</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ email</label>
-                <input class="form-control" type="text" required>
-              </div>
-
-
-              <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" required>
+            <form class="row" method="post" action="{{ route('postAddStaff') }}">
+              @csrf
+              <div class="form-group  col-md-4">
+                <label class="control-label">Tài khoản</label>
+                <input class="form-control" type="text" name="username" required>
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <label class="control-label">Mật khẩu</label>
+                <input class="form-control" type="text" name="password" required>
+              </div>
+                <div class="form-group col-md-4">
+                <label class="control-label">Họ và tên</label>
+                <input class="form-control" type="text" name="fullname" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Ngày sinh</label>
-                <input class="form-control" type="date">
+                <input class="form-control" type="date" name="birthday" required>
               </div>
-
-
-
-
+              <div class="form-group col-md-4">
+                <label class="control-label">Địa chỉ </label>
+                <input class="form-control" type="text" name="address" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="email" name="email" required>
+              </div>
+              <div class="form-group  col-md-4">
+                <label class="control-label">Số điện thoại</label>
+                <input class="form-control" type="number" name="phone" required>
+              </div>
               <div class="form-group  col-md-3">
-                <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn chức vụ --</option>
-                  <option>ADM</option>
-                  <option>Khách Hàng</option>
-
+                <label for="exampleSelect1" class="control-label">Quyền</label>
+                <select class="form-control" id="exampleSelect1" name="permission" required>
+                  <option value="Admin">Admin</option>
                 </select>
               </div>
               <div class="form-group col-md-12">
@@ -210,9 +205,10 @@
                   <p style="clear:both"></p>
                 </div>
               </div>
-          </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="{{route('staff')}}">Hủy bỏ</a>
+              <button class="btn btn-save" type="submit">Lưu lại</button>
+              <a class="btn btn-cancel" href="{{route('staff')}}">Hủy bỏ</a>
+            </form>
+
         </div>
 
   </main>

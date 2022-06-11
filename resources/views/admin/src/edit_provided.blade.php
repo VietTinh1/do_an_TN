@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Mã số thuế</label>
-                            <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required readonly>
+                            <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required >
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Tên nhà cung cấp</label>
@@ -64,7 +64,7 @@
                             <label for="exampleSelect1" class="control-label">Tình trạng</label>
                             <select class="form-control" id="exampleSelect1" name="status">
                                 <option value="Đang hoạt động">Đang hoạt động</option>
-                                <option value="Đang hoạt động">Dừng hoạt động</option>
+                                <option value="Dừng hoạt động">Dừng hoạt động</option>
                             </select>
                         </div>
                     </div> <BR>

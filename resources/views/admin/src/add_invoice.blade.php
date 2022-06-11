@@ -44,19 +44,19 @@
                             @csrf
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên khách hàng</label>
-                                <input class="form-control" type="text" name="name" required>
+                                <input class="form-control" type="text" name="name" placeholder="Nhập tên khách hàng" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Email</label>
-                                <input class="form-control" type="email" name="email" required>
+                                <input class="form-control" type="email" name="email" placeholder="Nhập email" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" required>
+                                <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" placeholder="Nhập số điện thoại" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Địa chỉ</label>
-                                <input class="form-control" type="text" name="address" required>
+                                <input class="form-control" type="text" name="address" placeholder="Nhập địa chỉ" required>
                             </div>
                             {{-- dropdown --}}
                             <div class="form-group  col-md-4">
@@ -69,17 +69,18 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" onkeypress="return event.charCode >= 48" min="1" required>
+                                <input class="form-control" type="number" name="amount" onkeypress="return event.charCode >= 48" min="1" placeholder="Nhập số lượng" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1" required>
-                                    <option>Đang chờ</option>
+                                <select class="form-control" id="exampleSelect1" name="status" required>
+                                    <option value="Chờ xử lí">Chờ xử lí</option>
+                                    <option value=" Đã xử lí"> Đã xử lí</option>
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4" name="note"></textarea>
+                                <textarea class="form-control" rows="4" name="note" placeholder="Nhập ghi chú đơn hàng"></textarea>
                             </div>
                             <div class="form-group  col-md-4">
 

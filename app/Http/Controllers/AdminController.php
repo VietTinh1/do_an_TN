@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
-use App\Models\Comment;
+use App\Modelss\Comment;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Hash;
 use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\ProductType;
@@ -26,32 +27,6 @@ class AdminController extends Controller
     {
         $this->middleware('CheckAuth');
     }
-    public function testStatusInt($index)
-    {
-        switch ($index) {
-            case 0:
-                return "Đã hủy";
-            case 1:
-                return "Chờ xử lí";
-            case 2:
-                return "Đang xử lí";
-            case 3:
-                return "Đã xử lí";
-        }
-    }
-    public function testStatusString($index)
-    {
-        switch ($index) {
-            case "Đã hủy":
-                return "0";
-            case "Chờ xử lí":
-                return "1";
-            case "Đang xử lí":
-                return "2";
-            case "Đã xử lí":
-                return "3";
-        }
-    }
     //TRANG CHỦ ADMIN
     public function index()
     {
@@ -62,7 +37,7 @@ class AdminController extends Controller
     // Đang hoạt động/Hết hàng/Đã hủy
     public function product()
     {
-        $product = Product::all();
+        $product = Product::all()->sortByDesc('status');
         // $provided=Provided::all()->where('status','=',"Đang hoạt động");
         //$productType=ProductType::all()->where('status','=',"Đang hoạt động");
         return view('admin.src.product', compact('product'));
@@ -106,7 +81,7 @@ class AdminController extends Controller
         //số lượng = sp+ số lượng
         $name = $request->name;
         //$image=$request->image;
-        $amount = $request->amount;
+        $amount = $request->amount+$request->addamount;
         $price = $request->price;
         $tax = $request->tax;
         $sold = $request->sold;
@@ -134,7 +109,7 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        $data = DB::table('invoices')->where('status', '!=', "Đã hủy")->orderByDesc('created_at')->get();
+        $data =Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -170,10 +145,12 @@ class AdminController extends Controller
                 Session()->flash('success', 'Thêm hóa đơn thành công');
                 return redirect()->route('invoice');
             } else {
-                echo "Thêm thất bại";
+                Session()->flash('success', 'Thêm chi tiết hóa đơn thất bại');
+                return redirect()->route('invoice');
             }
         } else {
-            echo "Thêm thất bại";
+            Session()->flash('success', 'Thêm hóa đơn thất bại');
+            return redirect()->route('invoice');
         }
     }
     //edit hóa đơn
@@ -224,24 +201,81 @@ class AdminController extends Controller
     {
         $delete = DB::table('invoices')->where('id', '=', $id)->update(['status' => 'Đã hủy']);
         Session()->flash('success', 'Xóa hóa đơn thành công');
-        return redirect()->back();
+        return redirect()->route('invoice');
     }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
     {
-        return view('admin.src.staff');
+       $user = UserDB::all()->sortByDesc('status');
+        return view('admin.src.staff',compact('user'));
     }
     //add nhân viên
     public function addStaff()
     {
         return view('admin.src.add_staff');
     }
-    //edit nhân viên
-    public function editStaff()
-    {
-        return view('admin.src.edit_staff');
+    public function postAddStaff(Request $request){
+        $acc=DB::table('accounts')->insertGetId([
+            'username' =>$request->username,
+            'password' =>Hash::make($request->password),
+            'token' =>Str::random(64),
+            'status' =>"Đang hoạt động",
+            'created_at' =>Carbon::now(),
+        ]);
+        $user =DB::table('users')->insert([
+            // add_image
+            'account_id' =>$acc,
+            'fullname' => $request->fullname,
+            'image_url'=>'',
+            'birthday' => $request->birthday,
+            'address' => $request->address,
+            'phone'=>$request->phone,
+            'email' => $request->email,
+            'permission' =>$request->permission,
+            'status'=>"Đang hoạt động",
+            'created_at' =>Carbon::now(),
+        ]);
+        if(!empty($user)&&!empty($acc)){
+            Session()->flash('success', 'Thêm nhân viên thành công');
+            return redirect()->route('staff');
+        }
+        else{
+            Session()->flash('success', 'Thêm nhân viên thất bại');
+            return redirect()->route('staff');
+        }
     }
-
+    //edit nhân viên
+    public function editStaff($id)
+    {
+        $staff = UserDB::find($id);
+        return view('admin.src.edit_staff',compact('staff'));
+    }
+    public function postEditStaff(Request $request,$id){
+        $user = DB::table('users')->where('id','=',$id)->update([
+            'fullname' =>$request->fullname,
+            //image
+            'address'=>$request->address,
+            'birthday'=>$request->birthday,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'permission'=> $request->permission,
+            'status'=>$request->status,
+            'updated_at'=>Carbon::now(),
+        ]);
+        if(!empty($user)){
+            Session()->flash('success', 'Thay đổi thông tin nhân viên thành công');
+            return redirect()->route('staff');
+        }
+        else{
+            Session()->flash('success', 'Thay đổi thông tin nhân viên thất bại');
+            return redirect()->route('staff');
+        }
+    }
+    public function deleteStaff($id){
+        $staff = DB::table('users')->where('id','=',$id)->update(['status'=>"Dừng hoạt động"]);
+        Session()->flash('success', 'Xóa nhân viên thành công');
+        return redirect()->route('staff');
+    }
     //TRANG LƯƠNG ADMIN
     public function money()
     {

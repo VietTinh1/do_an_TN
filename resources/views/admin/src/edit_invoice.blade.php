@@ -40,7 +40,6 @@
             <form action="{{ route('postEditInvoice',['id'=>$invoice->id]) }}" method="post">
                 @csrf
                 <div class="row">
-
                     <div class="form-group col-md-6">
                         <label class="control-label">Khách hàng</label>
                         <input class="form-control" type="text" value="{{ $invoice->name_customer }}" name="name_customer" required>
@@ -87,7 +86,8 @@
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('invoice')}}">Hủy bỏ</a>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('deleteInvoice',['id'=>$invoice->id])}}">Hủy đơn hàng</a>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('invoice')}}">Trở về</a>
                 <BR>
         </div>
         </form>

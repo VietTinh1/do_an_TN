@@ -18,10 +18,10 @@ class CreateInvoicesTable extends Migration
             $table->integer('account_id');
             $table->string('name_customer');
             $table->string('email_customer');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('address_customer');
             $table->string('message')->nullable();
-            $table->string('status')->default("Chờ xử lí");
+            $table->string('status')->default("Chờ xử lí");//Đang xử lí // Đã xử lí // Đã hủy
             $table->timestamps();
         });
     }

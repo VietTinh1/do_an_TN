@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('describe')->default("Không");//mô tả
             $table->string('product_code');
             $table->integer('amount')->default(0)->unsigned();
-            $table->decimal('price',10,3)->unsigned();
+            $table->decimal('price')->unsigned();
             $table->float('tax')->default(0);//thuế
             $table->integer('sold')->default(0);//đã bán
             $table->integer('so_sao')->default(0);

@@ -152,12 +152,12 @@
                             <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
                             </div>
-                            <div class="col-sm-2">
+                            {{-- <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i class="fas fa-folder-plus"></i> Thêm danh mục</a>
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-                            </div>
+                            </div> --}}
                         </div>
                         <form class="row" method="post" action="{{ route('postAddProduct') }}">
                             @csrf

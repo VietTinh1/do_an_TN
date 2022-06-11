@@ -64,17 +64,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-- Chạy lại các lệnh migrate-seed account,provider,product
-Rồi làm tiếp phần ghi dưới đây:))
+Chờ xử lí 0
+Đang xử lí 1
+Đã xử lí 2
+Đã hủy 3
 
-Thêm view+controller hình ảnh ->product
-Tính làm->>>>>>
-- Mã sp,Đã bán trong edit product, không được phép nhập vào ô input
-- Các view có liên quan đến id, ???_code thì KHÔNG cho nhập ô input
-- Dòng input nhập số thì điều chỉnh về số nguyên dương, không cho nhập số âm
-- fix images tổng ngay user tên
-- Xem code ngay phần tình trạng, ghi điều kiện:
-    + Hoạt động: background:xanh lá
-    + không Hoạt động,hủy: background:đỏ
-    + đang xử lí: background:vàng
-- Chỉnh sửa các icon edit, delete
+
+TÍnh làm---->>>>>
+- đảm bảo các view liên quan theo đúng db(ô input)
+- fix phần popup các view index, khi chưa có data trong bảng thì sẽ báo lỗi

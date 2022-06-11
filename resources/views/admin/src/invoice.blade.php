@@ -70,15 +70,14 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
+                  <th width="10"></th>
                   <th>ID đơn hàng</th>
-                  <th>Nhân viên thêm</th>
+                  <th>Mã nhân viên</th>
                   <th>Khách hàng</th>
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
                   <th>Ngày thêm</th>
-                  <th>Tin nhắn</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
                 </tr>
@@ -86,7 +85,7 @@
               <tbody>
                 @foreach ($data as $data)
                 <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10"><input type="checkbox" name="{{ $data->id }}" value="1"></td>
                   <td>{{ $data->id }}</td>
                   <td>{{ $data->account_id }}</td>
                   <td>{{ $data->name_customer }}</td>
@@ -94,23 +93,23 @@
                   <td>{{ $data->phone }}</td>
                   <td>{{ $data->address_customer }}</td>
                   <td>{{ $data->created_at }}</td>
-                  <td>{{ $data->message }}</td>
                   <td>
-                    <span class="badge bg-danger">
-                      @if($data->status ==1)
-                      Chờ xử lí
-                      @elseif($data->status ==2)
-                      Đang xử lí
-                      @elseif($data->status ==3)
-                      Đã xử lí
+                      @if($data->status =="Chờ xử lí")
+                        <span class="badge bg-success">Chờ xử lí</span>
+                      @elseif($data->status =="Đang xử lí")
+                      <span class="badge bg-success"> Đang xử lí</span>
+                      @elseif($data->status =="Đã xử lí")
+                      <span class="badge bg-success">Đã xử lí</span>
                       @else
-                      Đã hủy
+                      <span class="badge bg-danger">Đã hủy</span>
                       @endif
-                    </span>
                   </td>
                   <td>
                     <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
+                    @if($data->status !="Đã hủy")
                     <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                    @else
+                    @endif
                   </td>
                 </tr>
                 @endforeach
@@ -121,7 +120,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal POPUP -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -134,25 +133,28 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="form-group col-md-12">
-                <label class="control-label">Khách hàng</label>
-                <input class="form-control" type="text" required>
+                <label class="control-label">Tên khách hàng</label>
+                <input class="form-control" type="text" value="{{ $data->account_id }}" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Email</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" value="{{ $data->email_customer }}" readonly>
               </div>
               <div class="form-group  col-md-12">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <input class="form-control" type="number" value="{{ $data->phone }}" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" value="{{ $data->address_customer }}" readonly>
               </div>
-
               <div class="form-group col-md-12">
-                <label class="control-label">Tình Trạng</label>
-                <input class="form-control" type="text">
+                <label class="control-label">Địa chỉ </label>
+                <input class="form-control" type="text" value="{{ $data->address_customer }}" readonly>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Tin nhắn</label>
+                <input class="form-control" type="text" value="{{ $data->message }}" readonly>
               </div>
             </div>
             <div class="modal-footer" style="margin-right:30%;">

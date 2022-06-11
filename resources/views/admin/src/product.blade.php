@@ -70,8 +70,8 @@
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
-                                    <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>Người tạo</th>
+                                    <th width="10"></th>
+                                    <th>NV Thêm</th></th>
                                     <th>Mã sản phẩm</th>
                                     <th>Loại</th>
                                     <th>Nhà cung cấp</th>
@@ -102,7 +102,13 @@
                                     <td>{{ $product->tax }}%</td>
                                     <td>{{ $product->sold }}</td>
                                     <td>{{ $product->so_sao }}</td>
-                                    <td><span class="badge bg-success">{{ $product->status   }}</span></td>
+                                    <td>
+                                        @if($product->status=="Đang hoạt động")
+                                            <span class="badge bg-success">{{ $product->status }}</span>
+                                        @else
+                                            <span class="badge bg-danger">{{ $product->status }}</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:5px;"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
@@ -128,25 +134,52 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
-                                <label class="control-label">Khách hàng</label>
-                                <input class="form-control" type="text" required>
+                                <label class="control-label">Nhân viên thêm</label>
+                                <input class="form-control" type="text" value="{{ $product->account_id }}" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label">Email</label>
-                                <input class="form-control" type="text" required>
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" value="{{ $product->name }}" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Loại sản phẩm</label>
+                                <input class="form-control" type="text" value="{{ $product->product_type_id }}" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Mã sản phẩm</label>
+                                <input class="form-control" type="text" value="{{ $product->product_code }}" readonly>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Nhà cung cấp</label>
+                                <input class="form-control" type="text" value="{{ $product->provided_id }}" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Mô tả</label>
+                                <input class="form-control" type="text" value="{{ $product->describe }}" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="text" value="{{ $product->amount }}" readonly>
                             </div>
                             <div class="form-group  col-md-12">
-                                <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" required>
+                                <label class="control-label">Giá</label>
+                                <input class="form-control" type="number" value="{{ $product->price }}" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label">Địa chỉ </label>
-                                <input class="form-control" type="text" required>
+                                <label class="control-label">Thuế</label>
+                                <input class="form-control" type="text" value="{{ $product->tax }}"" required>
                             </div>
-
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Đã bán</label>
+                                <input class="form-control" type="text" value="{{ $product->sold }}" readonly>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Đánh giá</label>
+                                <input class="form-control" type="text" value="{{ $product->so_sao }}" readonly>
+                            </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tình Trạng</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" value="{{ $product->status }}" readonly>
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">

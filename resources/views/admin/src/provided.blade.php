@@ -93,10 +93,18 @@
                                     <td>{{ $provided->phone }}</td>
                                     <td>{{ $provided->address }}</td>
                                     <td>{{ $provided->created_at }}</td>
-                                    <td><span class="badge bg-success">@if($provided->status=="Đang hoạt động") Đang hoạt động @else Dừng hoạt động @endif</span></td>
+                                    <td>
+                                        @if($provided->status=="Đang hoạt động")
+                                        <span class="badge bg-success">Đang hoạt động</span>
+                                        @else
+                                        <span class="badge bg-danger">Dừng hoạt động </span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        @if($provided->status=="Đang hoạt động")
                                         <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
