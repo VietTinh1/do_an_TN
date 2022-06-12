@@ -33,41 +33,38 @@
                     <img src="/images/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form class="login100-form validate-form">
+                <div class="login100-form validate-form">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP HỆ THỐNG</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <form action="{{route('postLogin')}}" method="POST">
+                    <form action="{{ route('postLogin') }}" method="post">
                         @csrf
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản" name="username" id="username">
+                            <input class="input100" type="text" placeholder="Tài khoản" name="username" >
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu" name="current-password" id="password-field">
-                            <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
+                            <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu" name="password" id="password">
+                            <span toggle="#password" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-key'></i>
                             </span>
                         </div>
-
-                        <!--=====ĐĂNG NHẬP======-->
                         <div class="container-login100-form-btn">
-                            <input type="submit" value="Đăng nhập" id="submit" onclick="validate()" />
+                            <input type="submit" class="btn btn-primary" value="Đăng nhập" />
                         </div>
-
                     </form>
                     <!--=====FOOTER======-->
                     <div class="text-center p-t-70 txt2">
                         Website <i class="far fa-copyright" aria-hidden="true"></i>
                         2022 <a class="txt2" href="https://www.facebook.com"> Code bởi TT-TT </a>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -78,7 +75,7 @@
     <!-- show button-->
     <script type="text/javascript">
         function myFunction() {
-            var x = document.getElementById("myInput");
+            var x = document.getElementById("password");
             if (x.type === "password") {
                 x.type = "text"
             } else {
