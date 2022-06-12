@@ -59,7 +59,7 @@
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
                 <h4>Tổng sản phẩm</h4>
-                <p><b>1850 sản phẩm</b></p>
+                <p><b>{{ $product }} sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
               </div>
             </div>
@@ -69,7 +69,7 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>247 đơn hàng</b></p>
+                <p><b>{{ $countInvoiceOnMonth }} đơn hàng</b></p>
                 <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
               </div>
             </div>
@@ -79,7 +79,7 @@
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>4 sản phẩm</b></p>
+                <p><b>{{ $outOfProduct }} sản phẩm</b></p>
                 <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
@@ -99,38 +99,24 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($invoice as $invoice)
                     <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
+                      <td>{{ $invoice->id }}</td>
+                      <td>{{ $invoice->name_customer }}</td>
+                      <td></td>
                       <td>
-                        19.770.000 đ
-                      </td>
-                      <td><span class="badge bg-info">Chờ xử lý</span></td>
+                        @if ($invoice->status =="Đang xử lí")
+                        <span class="badge bg-success">{{ $invoice->status }}</span>
+                        @elseif ($invoice->status =="Đã xử lí")
+                        <span class="badge bg-success">{{ $invoice->status }}</span>
+                        @elseif ($invoice->status =="Chờ xử lí")
+                        <span class="badge bg-success">{{ $invoice->status }}</span>
+                        @else
+                        <span class="badge bg-danger">{{ $invoice->status }}</span>
+                        @endif
+                    </td>>
                     </tr>
-                    <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
-                      <td>
-                        16.770.000 đ
-                      </td>
-                      <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                    </tr>
-                    <tr>
-                      <td>MD0837</td>
-                      <td>Triệu Thanh Phú</td>
-                      <td>
-                        9.400.000 đ
-                      </td>
-                      <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    </tr>
-                    <tr>
-                      <td>MT9835</td>
-                      <td>Đặng Hoàng Phúc </td>
-                      <td>
-                        40.650.000 đ
-                      </td>
-                      <td><span class="badge bg-danger">Đã hủy </span></td>
-                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

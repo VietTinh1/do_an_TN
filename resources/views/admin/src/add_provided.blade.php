@@ -180,13 +180,6 @@
                                     <label class="control-label">Địa chỉ</label>
                                     <input class="form-control" type="text" name="address" required>
                                 </div>
-                                <div class="form-group col-md-6 ">
-                                    <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                    <select class="form-control" id="exampleSelect1" name="status">
-                                        <option value="Đang hoạt động">Đang hoạt động</option>
-                                        <option value="Đang hoạt động">Dừng hoạt động</option>
-                                    </select>
-                                </div>
                             </div><br><br><br>
                             <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>
                             <a class="btn btn-cancel" href="{{route('provided')}}" style="height: 40px;padding-left: 10px;padding-right: 10px;margin-left: 10px;">Trở lại</a>

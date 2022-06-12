@@ -135,51 +135,51 @@
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
                                 <label class="control-label">Nhân viên thêm</label>
-                                <input class="form-control" type="text" value="{{ $product->account_id }}" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->account_id)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text" value="{{ $product->name }}" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->name)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Loại sản phẩm</label>
-                                <input class="form-control" type="text" value="{{ $product->product_type_id }}" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->product_type_id)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Mã sản phẩm</label>
-                                <input class="form-control" type="text" value="{{ $product->product_code }}" readonly>
+                                <input class="form-control" type="text" value="@if(!empty( $data->product_code)) @endif" readonly>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Nhà cung cấp</label>
-                                <input class="form-control" type="text" value="{{ $product->provided_id }}" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->provided_id)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Mô tả</label>
-                                <input class="form-control" type="text" value="{{ $product->describe }}" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->describe)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="text" value="{{ $product->amount }}" readonly>
+                                <input class="form-control" type="text" value="@if(!empty( $data->amount)) @endif" readonly>
                             </div>
                             <div class="form-group  col-md-12">
                                 <label class="control-label">Giá</label>
-                                <input class="form-control" type="number" value="{{ $product->price }}" required>
+                                <input class="form-control" type="number" value="@if(!empty( $data->price)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Thuế</label>
-                                <input class="form-control" type="text" value="{{ $product->tax }}"" required>
+                                <input class="form-control" type="text" value="@if(!empty( $data->tax)) @endif" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Đã bán</label>
-                                <input class="form-control" type="text" value="{{ $product->sold }}" readonly>
+                                <input class="form-control" type="text" value="@if(!empty( $data->sold)) @endif" readonly>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Đánh giá</label>
-                                <input class="form-control" type="text" value="{{ $product->so_sao }}" readonly>
+                                <input class="form-control" type="text" value="@if(!empty( $data->so_sao)) @endif" readonly>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tình Trạng</label>
-                                <input class="form-control" type="text" value="{{ $product->status }}" readonly>
+                                <input class="form-control" type="text" value="@if(!empty( $data->status)) @endif" readonly>
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">

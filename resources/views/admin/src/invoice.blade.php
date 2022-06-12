@@ -87,7 +87,7 @@
                 <tr>
                   <td width="10"><input type="checkbox" name="{{ $data->id }}" value="1"></td>
                   <td>{{ $data->id }}</td>
-                  <td>{{ $data->account_id }}</td>
+                  <td>{{ $data->id }}</td>
                   <td>{{ $data->name_customer }}</td>
                   <td>{{ $data->email_customer }}</td>
                   <td>{{ $data->phone }}</td>
@@ -105,10 +105,11 @@
                       @endif
                   </td>
                   <td>
-                    <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
+
                     @if($data->status !="Đã hủy")
                     <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                     @else
+                    <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
                     @endif
                   </td>
                 </tr>
@@ -134,27 +135,27 @@
             <div class="container-fluid">
               <div class="form-group col-md-12">
                 <label class="control-label">Tên khách hàng</label>
-                <input class="form-control" type="text" value="{{ $data->account_id }}" readonly>
+                <input class="form-control" type="text" value="@if(!empty($data->account_id)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Email</label>
-                <input class="form-control" type="text" value="{{ $data->email_customer }}" readonly>
+                <input class="form-control" type="text" value=" @if(!empty($data->email_customer)) @endif" readonly>
               </div>
               <div class="form-group  col-md-12">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" value="{{ $data->phone }}" readonly>
+                <input class="form-control" type="number" value="@if(!empty( $data->phone)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="{{ $data->address_customer }}" readonly>
+                <input class="form-control" type="text" value="@if(!empty(  $data->address_customer)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="{{ $data->address_customer }}" readonly>
+                <input class="form-control" type="text" value="@if(!empty( $data->address_customer)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Tin nhắn</label>
-                <input class="form-control" type="text" value="{{ $data->message }}" readonly>
+                <input class="form-control" type="text" value="@if(!empty( $data->message)) @endif" readonly>
               </div>
             </div>
             <div class="modal-footer" style="margin-right:30%;">

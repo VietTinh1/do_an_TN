@@ -30,7 +30,17 @@ class AdminController extends Controller
     //TRANG CHỦ ADMIN
     public function index()
     {
-        return view('admin.src.index');
+        $product= Product::count();
+        $countInvoiceOnMonth = DB::table('invoices')->where([
+            ['status','=','Đã xử lí'],
+            ['created_at','=',Carbon::now()->month],
+        ])->count();
+        $outOfProduct= DB::table('products')->where([
+            ['status','=','Đang hoạt động'],
+            ['amount','<','10'],
+        ])->count();
+        $invoice= Invoice::orderByDesc('status')->get()->take(4);
+        return view('admin.src.index',compact('product','countInvoiceOnMonth','outOfProduct','invoice'));
     }
 
     //TRANG SẢN PHẨM ADMIN
@@ -109,7 +119,15 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        $data =Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
+        // $data=DB::table('invoices')
+        //     ->join('users','users.id','=','invoices.account_id')
+        //     ->join('invoice_details','invoices.id','=','invoice_details.invoice_id')
+        //     ->join('products','products.id','=','invoice_details.product_id')
+        //     ->orderBy('invoices.status','DESC')
+        //     ->orderBy('invoices.created_at','DESC')
+        //     ->get();
+        // dd($data);
+        $data=Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -295,7 +313,7 @@ class AdminController extends Controller
     //TRANG NHÀ CUNG CẤP
     public function provided()
     {
-        $provided = Provided::all();
+        $provided = Provided::orderByDesc('status')->get();
         return view('admin.src.provided', compact('provided'));
     }
     public function addProvided()
@@ -310,7 +328,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'status' => $request->status,
             'created_at' => Carbon::now(),
         ]);
         Session()->flash('success', 'Thêm nhà cung cấp thành công');
