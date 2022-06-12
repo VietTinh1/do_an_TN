@@ -24,8 +24,8 @@
          <li><a class="app-menu__item" href="{{route('invoice')}}"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label"> Đơn Hàng</span></a></li>
          <li><a class="app-menu__item" href="{{route('product')}}"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Sản Phẩm</span></a></li>
          <li><a class="app-menu__item" href="{{route('staff')}}"><i class='app-menu__icon bx bx bx-run'></i><span class="app-menu__label">Quản lí nội bộ </span></a></li>
-         <li><a class="app-menu__item" href="{{route('money')}}"><i class='app-menu__icon bx bx-dollar'></i><span class="app-menu__label">Bảng Kê Lương</span></a></li>
          <li><a class="app-menu__item" href="{{route('provided')}}"><i class='app-menu__icon bx bx-cart-alt'></i><span class="app-menu__label">Nhà cung cấp</span></a></li>
+         <li><a class="app-menu__item" href="{{route('money')}}"><i class='app-menu__icon bx bx-dollar'></i><span class="app-menu__label">Bảng Kê Lương</span></a></li>
          <li><a class="app-menu__item" href="{{route('report')}}"><i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a></li>
      </ul>
  </aside>

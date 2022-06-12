@@ -90,13 +90,13 @@
                   @foreach($user as $user)
                     <tr>
                     <td width="10"><input type="checkbox"></td>
-                    <td>{{ $user->id }}</td>>
-                    <td>{{ $user->fullname }}</td>>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->fullname }}</td>
                     <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                    <td>{{ $user->address }}</td>>
+                    <td>{{ $user->address }}</td>
                     <td>{{ $user->birthday }}</td>
-                    <td>{{ $user->email }}</td>>
-                    <td>{{ $user->phone }}</td>>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone }}</td>
                     <td>{{ $user->permission }}</td>
                     <td>
                         @if($user->status=="Đang hoạt động")
