@@ -150,6 +150,7 @@ class AdminController extends Controller
             'phone' => $request->phone,
             'address_customer' => $request->address,
             'message' => $request->note,
+            'status' =>$request->status,
             'created_at' => Carbon::now(),
         ]);
         if ($data) {
@@ -179,7 +180,6 @@ class AdminController extends Controller
     }
     public function postEditInvoice(Request $request, $id)
     {
-        $status = $request->status1;
         $name_customer = '';
         $email_customer = '';
         $phone = '';

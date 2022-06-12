@@ -58,23 +58,14 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tình trạng</label>
-                        <input class="form-control" type="text" name="status" value="@if($invoice->status ==1)Chờ xử lí@elseif($invoice->status ==2) Đang xử lí @elseif($invoice->status ==3)Đã xử lí @else Đã hủy @endif" name="status1" readonly="readonly">
+                        <input class="form-control" type="text" value="@if($invoice->status =="Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
                         <select class="form-control" id="exampleSelect1" name="status" required>
-                            @for($i = 0; $i <=3; $i++) <option value="{{ $i }}">
-                                @if($i==1)
-                                Chờ xử lí
-                                @elseif($i==2)
-                                Đang xử lí
-                                @elseif($i==3)
-                                Đã xử lí
-                                @else
-                                Đã hủy
-                                @endif
-                                </option>
-                                @endfor
+                            <option value="Chờ xử lí">Chờ xử lí</option>
+                            <option value="Đang xử lí"> Đang xử lí</option>
+                            <option value="Đã xử lí">Đã xử lí</option>
                         </select>
                     </div>
                     <div class="form-group  col-md-4">
