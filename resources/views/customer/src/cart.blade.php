@@ -72,12 +72,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{asset('')}}">Home</a></li>
-                        <li><a href="{{asset('shop')}}">Shop page</a></li>
-                        <li><a href="{{asset('single_product')}}">Single product</a></li>
-                        <li class="active"><a href="{{asset('cart')}}">Cart</a></li>
-                        <li><a href="{{asset('checkout')}}">Checkout</a></li>
-                        <li><a href="{{asset('contact')}}">Contact</a></li>
+                        <li><a href="{{asset('')}}">Trang chủ</a></li>
+                        <li><a href="{{asset('shop')}}">Cửa hàng</a></li>
+                        <li><a href="{{asset('single_product')}}">Chi tiết sản phẩm</a></li>
+                        <li class="active"><a href="{{asset('cart')}}">Giỏ hàng</a></li>
+                        <li><a href="{{asset('checkout')}}">Thanh toán</a></li>
+                        <li><a href="{{asset('contact')}}">Liên hệ</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
 
@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shopping Cart</h2>
+                        <h2>Giỏ hàng</h2>
                     </div>
                 </div>
             </div>

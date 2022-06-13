@@ -64,12 +64,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{asset('')}}">Home</a></li>
-                        <li><a href="{{asset('shop')}}">Shop page</a></li>
-                        <li><a href="{{asset('single_product')}}">Single product</a></li>
-                        <li><a href="{{asset('cart')}}">Cart</a></li>
-                        <li><a href="{{asset('checkout')}}">Checkout</a></li>
-                        <li><a href="{{asset('contact')}}">Contact</a></li>
+                        <li class="active"><a href="{{asset('')}}">Trang chủ</a></li>
+                        <li><a href="{{asset('shop')}}">Cửa hàng</a></li>
+                        <li><a href="{{asset('single_product')}}">Chi tiết sản phẩm</a></li>
+                        <li><a href="{{asset('cart')}}">Giỏ hàng</a></li>
+                        <li><a href="{{asset('checkout')}}">Thanh Toán</a></li>
+                        <li><a href="{{asset('contact')}}">Liên hệ</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
 
@@ -131,25 +131,25 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo1">
                         <i class="fa fa-refresh"></i>
-                        <p>30 Days return</p>
+                        <p>30 ngày hoàn trả</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo2">
                         <i class="fa fa-truck"></i>
-                        <p>Free shipping</p>
+                        <p>Miễn phí vận chuyển</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo3">
                         <i class="fa fa-lock"></i>
-                        <p>Secure payments</p>
+                        <p>Thanh toán an toàn</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo4">
                         <i class="fa fa-gift"></i>
-                        <p>New products</p>
+                        <p>Sản phảm mới</p>
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="latest-product">
-                        <h2 class="section-title">Latest Products</h2>
+                        <h2 class="section-title">Sản phẩm mới nhất</h2>
                         <div class="product-carousel">
                             <div class="single-product">
                                 <div class="product-f-image">
@@ -288,8 +288,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top Sellers</h2>
-                        <a href="" class="wid-view-more">View All</a>
+                        <h2 class="product-wid-title" style="font-size: 22px;">Sản phẩm bán chạy</h2>
+                        <a href="" class="wid-view-more">Xem tất cả</a>
                         <div class="single-wid-product">
                             <a href="single-product.html"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
@@ -336,8 +336,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="single-product-widget">
-                        <h2 class="product-wid-title">Recently Viewed</h2>
-                        <a href="#" class="wid-view-more">View All</a>
+                        <h2 class="product-wid-title" style="font-size: 22px;">Sản phẩm xem gần đây</h2>
+                        <a href="#" class="wid-view-more">Xem tất cả</a>
                         <div class="single-wid-product">
                             <a href="single-product.html"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
@@ -384,8 +384,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top New</h2>
-                        <a href="#" class="wid-view-more">View All</a>
+                        <h2 class="product-wid-title" style="font-size: 22px;">Sản phảm đứng đầu</h2>
+                        <a href="#" class="wid-view-more">Xem tất cả</a>
                         <div class="single-wid-product">
                             <a href="single-product.html"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
                             <h2><a href="single-product.html">Apple new i phone 6</a></h2>

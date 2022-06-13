@@ -114,7 +114,7 @@
                         @else
                         <span class="badge bg-danger">{{ $invoice->status }}</span>
                         @endif
-                    </td>>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -200,10 +200,7 @@
 
 
     <div class="text-center" style="font-size: 13px">
-      <p><b>Copyright
-          <script type="text/javascript">
-            document.write(new Date().getFullYear());
-          </script> Website Bán hàng | Dev By TT-TT
+      <p><b>Bản quyển &copy; 2022 Website Bán hàng | Bởi TT-TT
         </b></p>
     </div>
   </main>
