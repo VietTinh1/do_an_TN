@@ -15,12 +15,12 @@ class CreateProvidedsTable extends Migration
     {
         Schema::create('provideds', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tax_code');
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('status')->default("Đang hoạt động");// Dừng hoạt động
+            $table->integer('tax_code');
+            $table->string('name',100);
+            $table->string('email',100);
+            $table->string('phone',10);
+            $table->string('address',200);
+            $table->string('status',25)->default("Đang hoạt động");// Dừng hoạt động
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoicesTable extends Migration
+class CreateInvoiceProvidedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('invoice_provides', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('invoice_id');
             $table->integer('account_id');
-            $table->string('name_customer',100);
-            $table->string('email_customer',100);
-            $table->integer('phone');
-            $table->string('address_customer',100);
-            $table->string('message')->nullable();
             $table->double('total');
-            $table->string('status',25)->default("Chờ xử lí");//Đang xử lí // Đã xử lí // Đã hủy
+            $table->string('status')->default("Đang xử lí");// Đã xử lí // Đã hủy
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('invoice_provides');
     }
 }

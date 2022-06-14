@@ -15,8 +15,8 @@ class CreateProductTypesTable extends Migration
     {
         Schema::create('product_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('status')->default("Đang hoạt động");
+            $table->string('name',100);
+            $table->string('status',25)->default("Đang hoạt động");// Dừng hoạt động
             $table->timestamps();
         });
     }

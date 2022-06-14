@@ -15,10 +15,10 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
+            $table->string('username',50);
             $table->string('password');
             $table->string('token', 64);
-            $table->string('status')->default("Đang hoạt động");
+            $table->string('status',25)->default("Đang hoạt động");
             $table->timestamps();
         });
     }

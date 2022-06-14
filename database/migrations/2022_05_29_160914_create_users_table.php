@@ -16,14 +16,16 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id');
-            $table->string('image_url');
-            $table->string('fullname');
+            $table->string('image_url',100);
+            $table->string('fullname',100);
+            $table->string('sex',3);
             $table->date('birthday');
-            $table->string('address');
-            $table->integer('phone');
-            $table->string('email');
-            $table->string('permission');
-            $table->string('status')->default("Đang hoạt động");
+            $table->integer('citizen_ID')->unsigned();//Căn cước công dân
+            $table->string('address',100);
+            $table->integer('phone')->unsigned();
+            $table->string('email',100);
+            $table->string('permission',10);
+            $table->string('status',25)->default("Đang hoạt động");// Dừng hoạt động
             $table->timestamps();
         });
     }
