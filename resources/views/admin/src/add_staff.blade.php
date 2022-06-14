@@ -7,13 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <script src="{{asset('js/jquery.min.js')}}"></script>
-  <!-- Custom Theme files -->
   <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
+
+
+  <!-- Custom Theme files -->
+  <script src="{{asset('js/jquery.min.js')}}"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <!-- or -->
+
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <!-- Font-icon css-->
+
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
@@ -165,7 +167,7 @@
                 <label class="control-label">Mật khẩu</label>
                 <input class="form-control" type="text" name="password" required>
               </div>
-                <div class="form-group col-md-4">
+              <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
                 <input class="form-control" type="text" name="fullname" required>
               </div>
@@ -209,7 +211,7 @@
               <a class="btn btn-cancel" href="{{route('staff')}}">Hủy bỏ</a>
             </form>
 
-        </div>
+          </div>
 
   </main>
 
@@ -243,19 +245,6 @@
       </div>
     </div>
   </div>
-  <!--
-  MODAL
--->
-
-
-  <!-- Essential javascripts for application to work-->
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="js/plugins/pace.min.js"></script>
-
 </body>
 
 </html>
