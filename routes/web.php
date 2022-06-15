@@ -64,4 +64,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_product/{id}', [AdminController::class, 'deleteProduct'])->name('deleteProduct');
     Route::get('/delete_provided/{id}', [AdminController::class, 'deleteProvided'])->name('deleteProvided');
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
+
+    Route::get('/provided/{id}', [AdminController::class, 'findProvided'])->name('findProvided');
 });

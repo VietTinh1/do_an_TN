@@ -57,6 +57,10 @@
                             <label class="control-label">Địa chỉ</label>
                             <input class="form-control" type="text" value="{{ $provided->address }}" name="address" required>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Ghi chú</label>
+                            <textarea class="form-control" type="text" name="notes" >{{ $provided->notes }}</textarea>
+                        </div>
                         <div class="form-group col-md-6 ">
                             <label for="exampleSelect1" class="control-label">Tình trạng</label>
                             <select class="form-control" id="exampleSelect1" name="status">

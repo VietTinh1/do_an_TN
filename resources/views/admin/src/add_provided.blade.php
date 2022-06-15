@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Mã số thuế</label>
-                                    <input class="form-control" type="number" name="tax_code" required onkeypress="return event.charCode >= 48" min="1">
+                                    <input class="form-control" type="number" name="tax_code" onkeypress="return event.charCode >= 48" min="1" required>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Email</label>
@@ -180,6 +180,10 @@
                                 <div class="form-group  col-md-3">
                                     <label class="control-label">Địa chỉ</label>
                                     <input class="form-control" type="text" name="address" required>
+                                </div>
+                                <div class="form-group  col-md-3">
+                                    <label class="control-label">Ghi chú</label>
+                                    <textarea class="form-control" type="text" name="notes" ></textarea>
                                 </div>
                             </div><br><br><br>
                             <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>

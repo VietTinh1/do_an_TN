@@ -328,6 +328,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'notes' => $request->notes,
             'created_at' => Carbon::now(),
         ]);
         Session()->flash('success', 'Thêm nhà cung cấp thành công');
@@ -346,6 +347,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'notes' => $request->notes,
             'status' => $request->status,
             'updated_at' => Carbon::now(),
         ]);
@@ -365,5 +367,11 @@ class AdminController extends Controller
     public function report()
     {
         return view('admin.src.report');
+    }
+    public function findProvided($id){
+        $provided=Provided::find($id);
+        return redirect()->json([
+            'data' => $provided
+        ]);
     }
 }

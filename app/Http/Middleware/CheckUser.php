@@ -20,6 +20,6 @@ class CheckUser
         if(Auth::guest()){
             return $next($request);
         }
-        return redirect()->route('index');
+        return redirect()->route('login');
     }
 }

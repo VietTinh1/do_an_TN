@@ -59,22 +59,16 @@
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
                             </div>
-                            <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết nhà cung cấp
-                                </button>
-                            </div>
                         </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
-                                    <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>Mã nhà cung cấp</th>
                                     <th>Mã số thuế</th>
                                     <th>Tên nhà cung cấp</th>
                                     <th>Email</th>
                                     <th>SĐT</th>
-                                    <th>Địa chỉ</th>
                                     <th>Ngày tạo</th>
+                                    <th>Chi tiết</th>
                                     <th>Tình trạng</th>
                                     <th width="100">Tính năng</th>
                                 </tr>
@@ -82,14 +76,14 @@
                             <tbody>
                                 @foreach($provided as $provided)
                                 <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>{{ $provided->id }}</td>
                                     <td>{{ $provided->tax_code }}</td>
                                     <td>{{ $provided->name }}</td>
                                     <td>{{ $provided->email }}</td>
                                     <td>{{ $provided->phone }}</td>
-                                    <td>{{ $provided->address }}</td>
                                     <td>{{ $provided->created_at }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" id="edit" data-toggle="modal" data-target="#exampleModal" data-taxcode="{{ $provided->tax_code }}" data-name="{{ $provided->name }}" data-email="{{ $provided->email }}" data-phone="{{ $provided->phone }}" data-address="{{ $provided->address }}" data-notes="{{ $provided->notes }}" data-status="{{ $provided->tax_code }}" data-taxcode="{{ $provided->status }}" data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                                    </td>
                                     <td>
                                         @if($provided->status=="Đang hoạt động")
                                         <span class="badge bg-success">Đang hoạt động</span>
@@ -121,35 +115,43 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <form class="modal-body" method="post" action="{{ route('postEditProvided',['id'=>$provided->id]) }}" id="editProvided">
+                        @csrf
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
-                                <label class="control-label">Khách hàng</label>
-                                <input class="form-control" type="text" required>
+                                <label class="control-label">Mã nhà cung cấp</label>
+                                <input class="form-control" type="text" id="tax_code" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Tên nhà cung cấp</label>
+                                <input class="form-control" type="text"  id="name" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Email</label>
-                                <input class="form-control" type="text" required>
+                                <input class="form-control" type="text" id="email" required>
                             </div>
                             <div class="form-group  col-md-12">
                                 <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" required>
+                                <input class="form-control" type="number" id="phone" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Địa chỉ </label>
-                                <input class="form-control" type="text" required>
+                                <input class="form-control" type="text" id="address" required>
                             </div>
-
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tình Trạng</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" id="status" readonly>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Ngày tạo</label>
+                                <input class="form-control" type="text" id="created_at" readonly>
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">
-                            <button type="button" class="btn btn-primary">Lưu lại</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                            <button type="submit" class="btn btn-primary">Lưu lại</button>
+                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -159,8 +161,30 @@
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">
-        $('#sampleTable').DataTable();
-        //Thời Gian
+        $(document).ready(function () {
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button =$(event.relatedTarget)
+                var tax_code=button.data('taxcode')
+                var name=button.data('name')
+                var email=button.data('email')
+                var phone=button.data('phone')
+                var address=button.data('address')
+                var notes=button.data('notes')
+                var status=button.data('status')
+                var createdat=button.data('createdat')
+                var modal = $(this)
+                modal.find('.modal-body #tax_code').val(tax_code);
+                modal.find('.modal-body #name').val(name);
+                modal.find('.modal-body #email').val(email);
+                modal.find('.modal-body #phone').val(phone);
+                modal.find('.modal-body #address').val(address);
+                modal.find('.modal-body #notes').val(notes);
+                modal.find('.modal-body #status').val(status);
+                modal.find('.modal-body #created_at').val(createdat);
+            });
+        });
+    </script>
+     <script type="text/javascript">
         function time() {
             var today = new Date();
             var weekday = new Array(7);
