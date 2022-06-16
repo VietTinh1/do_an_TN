@@ -30,17 +30,17 @@ class AdminController extends Controller
     //TRANG CHỦ ADMIN
     public function index()
     {
-        $product= Product::count();
+        $product = Product::count();
         $countInvoiceOnMonth = DB::table('invoices')->where([
-            ['status','=','Đã xử lí'],
-            ['created_at','=',Carbon::now()->month],
+            ['status', '=', 'Đã xử lí'],
+            ['created_at', '=', Carbon::now()->month],
         ])->count();
-        $outOfProduct= DB::table('products')->where([
-            ['status','=','Đang hoạt động'],
-            ['amount','<','10'],
+        $outOfProduct = DB::table('products')->where([
+            ['status', '=', 'Đang hoạt động'],
+            ['amount', '<', '10'],
         ])->count();
-        $invoice= Invoice::orderByDesc('status')->get()->take(4);
-        return view('admin.src.index',compact('product','countInvoiceOnMonth','outOfProduct','invoice'));
+        $invoice = Invoice::orderByDesc('status')->get()->take(4);
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'outOfProduct', 'invoice'));
     }
 
     //TRANG SẢN PHẨM ADMIN
@@ -91,7 +91,7 @@ class AdminController extends Controller
         //số lượng = sp+ số lượng
         $name = $request->name;
         //$image=$request->image;
-        $amount = $request->amount+$request->addamount;
+        $amount = $request->amount + $request->addamount;
         $price = $request->price;
         $tax = $request->tax;
         $sold = $request->sold;
@@ -116,6 +116,11 @@ class AdminController extends Controller
         Session()->flash('success', 'Xóa sản phẩm thành công');
         return redirect()->route('product');
     }
+    //TRANG NHẬP SẢN PHẨM
+    public function importProduct()
+    {
+        return view('admin.src.import_product');
+    }
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
@@ -127,7 +132,7 @@ class AdminController extends Controller
         //     ->orderBy('invoices.created_at','DESC')
         //     ->get();
         // dd($data);
-        $data=Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
+        $data = Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -150,7 +155,7 @@ class AdminController extends Controller
             'phone' => $request->phone,
             'address_customer' => $request->address,
             'message' => $request->note,
-            'status' =>$request->status,
+            'status' => $request->status,
             'created_at' => Carbon::now(),
         ]);
         if ($data) {
@@ -221,43 +226,48 @@ class AdminController extends Controller
         Session()->flash('success', 'Xóa hóa đơn thành công');
         return redirect()->route('invoice');
     }
+    //TRANG NHẬP HÓA ĐƠN
+    public function importInvoice()
+    {
+        return view('admin.src.import_invoice');
+    }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
     {
-       $user = UserDB::all()->sortByDesc('status');
-        return view('admin.src.staff',compact('user'));
+        $user = UserDB::all()->sortByDesc('status');
+        return view('admin.src.staff', compact('user'));
     }
     //add nhân viên
     public function addStaff()
     {
         return view('admin.src.add_staff');
     }
-    public function postAddStaff(Request $request){
-        $acc=DB::table('accounts')->insertGetId([
-            'username' =>$request->username,
-            'password' =>Hash::make($request->password),
-            'token' =>Str::random(64),
-            'status' =>"Đang hoạt động",
-            'created_at' =>Carbon::now(),
+    public function postAddStaff(Request $request)
+    {
+        $acc = DB::table('accounts')->insertGetId([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'token' => Str::random(64),
+            'status' => "Đang hoạt động",
+            'created_at' => Carbon::now(),
         ]);
-        $user =DB::table('users')->insert([
+        $user = DB::table('users')->insert([
             // add_image
-            'account_id' =>$acc,
+            'account_id' => $acc,
             'fullname' => $request->fullname,
-            'image_url'=>'',
+            'image_url' => '',
             'birthday' => $request->birthday,
             'address' => $request->address,
-            'phone'=>$request->phone,
+            'phone' => $request->phone,
             'email' => $request->email,
-            'permission' =>$request->permission,
-            'status'=>"Đang hoạt động",
-            'created_at' =>Carbon::now(),
+            'permission' => $request->permission,
+            'status' => "Đang hoạt động",
+            'created_at' => Carbon::now(),
         ]);
-        if(!empty($user)&&!empty($acc)){
+        if (!empty($user) && !empty($acc)) {
             Session()->flash('success', 'Thêm nhân viên thành công');
             return redirect()->route('staff');
-        }
-        else{
+        } else {
             Session()->flash('success', 'Thêm nhân viên thất bại');
             return redirect()->route('staff');
         }
@@ -266,31 +276,32 @@ class AdminController extends Controller
     public function editStaff($id)
     {
         $staff = UserDB::find($id);
-        return view('admin.src.edit_staff',compact('staff'));
+        return view('admin.src.edit_staff', compact('staff'));
     }
-    public function postEditStaff(Request $request,$id){
-        $user = DB::table('users')->where('id','=',$id)->update([
-            'fullname' =>$request->fullname,
+    public function postEditStaff(Request $request, $id)
+    {
+        $user = DB::table('users')->where('id', '=', $id)->update([
+            'fullname' => $request->fullname,
             //image
-            'address'=>$request->address,
-            'birthday'=>$request->birthday,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'permission'=> $request->permission,
-            'status'=>$request->status,
-            'updated_at'=>Carbon::now(),
+            'address' => $request->address,
+            'birthday' => $request->birthday,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'permission' => $request->permission,
+            'status' => $request->status,
+            'updated_at' => Carbon::now(),
         ]);
-        if(!empty($user)){
+        if (!empty($user)) {
             Session()->flash('success', 'Thay đổi thông tin nhân viên thành công');
             return redirect()->route('staff');
-        }
-        else{
+        } else {
             Session()->flash('success', 'Thay đổi thông tin nhân viên thất bại');
             return redirect()->route('staff');
         }
     }
-    public function deleteStaff($id){
-        $staff = DB::table('users')->where('id','=',$id)->update(['status'=>"Dừng hoạt động"]);
+    public function deleteStaff($id)
+    {
+        $staff = DB::table('users')->where('id', '=', $id)->update(['status' => "Dừng hoạt động"]);
         Session()->flash('success', 'Xóa nhân viên thành công');
         return redirect()->route('staff');
     }
@@ -368,8 +379,9 @@ class AdminController extends Controller
     {
         return view('admin.src.report');
     }
-    public function findProvided($id){
-        $provided=Provided::find($id);
+    public function findProvided($id)
+    {
+        $provided = Provided::find($id);
         return redirect()->json([
             'data' => $provided
         ]);

@@ -124,7 +124,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tên nhà cung cấp</label>
-                                <input class="form-control" type="text"  id="name" required>
+                                <input class="form-control" type="text" id="name" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Email</label>
@@ -161,17 +161,17 @@
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                var button =$(event.relatedTarget)
-                var tax_code=button.data('taxcode')
-                var name=button.data('name')
-                var email=button.data('email')
-                var phone=button.data('phone')
-                var address=button.data('address')
-                var notes=button.data('notes')
-                var status=button.data('status')
-                var createdat=button.data('createdat')
+        $(document).ready(function() {
+            $('#exampleModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var tax_code = button.data('taxcode')
+                var name = button.data('name')
+                var email = button.data('email')
+                var phone = button.data('phone')
+                var address = button.data('address')
+                var notes = button.data('notes')
+                var status = button.data('status')
+                var createdat = button.data('createdat')
                 var modal = $(this)
                 modal.find('.modal-body #tax_code').val(tax_code);
                 modal.find('.modal-body #name').val(name);
@@ -184,7 +184,8 @@
             });
         });
     </script>
-     <script type="text/javascript">
+    <!-- thời gian -->
+    <script type="text/javascript">
         function time() {
             var today = new Date();
             var weekday = new Array(7);
@@ -225,43 +226,7 @@
             }
         }
     </script>
-    <script>
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("myTable").deleteRow(i);
-        }
-        jQuery(function() {
-            jQuery(".trash").click(function() {
-                swal({
-                        title: "Cảnh báo",
-                        text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Đã xóa thành công.!", {
 
-                            });
-                        }
-                    });
-            });
-        });
-        oTable = $('#sampleTable').dataTable();
-        $('#all').click(function(e) {
-            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-            e.stopImmediatePropagation();
-        });
-        //In dữ liệu
-        var myApp = new function() {
-            this.printTable = function() {
-                var tab = document.getElementById('sampleTable');
-                var win = window.open('', '', 'height=700,width=700');
-                win.document.write(tab.outerHTML);
-                win.document.close();
-                win.print();
-            }
-        }
-    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

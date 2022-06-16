@@ -33,12 +33,15 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/index', [AdminController::class, 'index'])->name('index');
+
     Route::get('/product', [AdminController::class, 'product'])->name('product');
     Route::get('/invoice', [AdminController::class, 'invoice'])->name('invoice');
     Route::get('/staff', [AdminController::class, 'staff'])->name('staff');
-    Route::get('/money', [AdminController::class, 'money'])->name('money');
     Route::get('/report', [AdminController::class, 'report'])->name('report');
     Route::get('/provided', [AdminController::class, 'provided'])->name('provided');
+    Route::get('/import_product', [AdminController::class, 'importProduct'])->name('importProduct');
+    Route::get('/import_invoice', [AdminController::class, 'importInvoice'])->name('importInvoice');
+
 
     Route::get('/add_provided', [AdminController::class, 'addProvided'])->name('addProvided');
     Route::post('/add_provided', [AdminController::class, 'postAddProvided'])->name('postAddProvided');
@@ -48,9 +51,9 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/add_product', [AdminController::class, 'postAddProduct'])->name('postAddProduct');
     Route::get('/add_staff', [AdminController::class, 'addStaff'])->name('addStaff');
     Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
-    Route::get('/add_money', [AdminController::class, 'addMoney'])->name('addMoney');
+    
 
-    Route::get('/edit_money', [AdminController::class, 'editMoney'])->name('editMoney');
+
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
     Route::post('/edit_staff/{id}', [AdminController::class, 'postEditStaff'])->name('postEditStaff');
     Route::get('/edit_provided/{id}', [AdminController::class, 'editProvided'])->name('editProvided');

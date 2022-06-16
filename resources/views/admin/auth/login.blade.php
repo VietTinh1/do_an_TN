@@ -58,9 +58,10 @@
                     </form>
                     <!--=====FOOTER======-->
                     <div class="text-center p-t-70 txt2">
-                        Website <i class="far fa-copyright" aria-hidden="true"></i>
-                        2022 <a class="txt2" href="https://www.facebook.com"> Code bởi TT-TT </a>
+                        Bản quyển <i class="far fa-copyright" aria-hidden="true"></i>
+                        2022 <a class="txt2" href="https://www.facebook.com"> Website Bán hàng | Bởi TT-TT </a>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Danh sách nhân viên | Quản trị Admin</title>
+  <title>Danh sách đơn hàng | Quản trị Admin</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,6 @@
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
-
   @include('admin.menu_header')
   <main class="app-content">
     @if(Session()->has('success'))
@@ -29,21 +28,18 @@
     @endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
       </ul>
       <div id="clock"></div>
     </div>
-
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
           <div class="tile-body">
-
             <div class="row element-button">
               <div class="col-sm-2">
-
-                <a class="btn btn-add btn-sm" href="{{route('addStaff')}}" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới nhân viên</a>
+                <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
+                  Tạo mới đơn hàng</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
@@ -63,65 +59,47 @@
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
               <div class="col-sm-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết nhân viên
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết hóa đơn
                 </button>
               </div>
             </div>
+
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
                   <th width="10"></th>
+                  <th>ID đơn hàng</th>
                   <th>Mã nhân viên</th>
-                  <th width="150">Họ tên</th>
-                  <th width="20">Ảnh thẻ</th>
-                  <th width="150">Địa chỉ</th>
-                  <th>Ngày sinh</th>
+                  <th>Khách hàng</th>
                   <th>Email</th>
-                  <th>SĐT</th>
-                  <th>Quyền</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Ngày thêm</th>
                   <th>Tình trạng</th>
-                  <th width="100">Chức năng</th>
+                  <th>Chức năng</th>
                 </tr>
               </thead>
-              <tbody>
-                @foreach($user as $user)
-                <tr>
-                  <td width="10"><input type="checkbox"></td>
-                  <td>{{ $user->id }}</td>
-                  <td>{{ $user->fullname }}</td>
-                  <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                  <td>{{ $user->address }}</td>
-                  <td>{{ $user->birthday }}</td>
-                  <td>{{ $user->email }}</td>
-                  <td>{{ $user->phone }}</td>
-                  <td>{{ $user->permission }}</td>
-                  <td>
-                    @if($user->status=="Đang hoạt động")
-                    <span class="badge bg-success">Đang hoạt động</span>
-                    @else
-                    <span class="badge bg-danger">Dừng hoạt động</span>
-                    @endif
-                  </td>
-                  <td>
-                    <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                    @if($user->status=="Đang hoạt động")
-                    <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                    @endif
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
+             <tbody>
+                <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+
+             </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal -->
+
+    <!-- Modal POPUP -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhân viên</h5>
+            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết hóa đơn</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -129,25 +107,28 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="form-group col-md-12">
-                <label class="control-label">Khách hàng</label>
-                <input class="form-control" type="text" required>
+                <label class="control-label">Tên khách hàng</label>
+                <input class="form-control" type="text" value="@if(!empty($data->account_id)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Email</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" value=" @if(!empty($data->email_customer)) @endif" readonly>
               </div>
               <div class="form-group  col-md-12">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <input class="form-control" type="number" value="@if(!empty( $data->phone)) @endif" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" value="@if(!empty(  $data->address_customer)) @endif" readonly>
               </div>
-
               <div class="form-group col-md-12">
-                <label class="control-label">Tình Trạng</label>
-                <input class="form-control" type="text">
+                <label class="control-label">Địa chỉ </label>
+                <input class="form-control" type="text" value="@if(!empty( $data->address_customer)) @endif" readonly>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Tin nhắn</label>
+                <input class="form-control" type="text" value="@if(!empty( $data->message)) @endif" readonly>
               </div>
             </div>
             <div class="modal-footer" style="margin-right:30%;">
@@ -159,6 +140,8 @@
       </div>
     </div>
   </main>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
@@ -167,7 +150,6 @@
     $('#sampleTable').DataTable();
   </script>
   <script>
-
 
     //Thời Gian
     function time() {
@@ -218,7 +200,7 @@
         win.document.close();
         win.print();
       }
-    } 
+    }
     
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
