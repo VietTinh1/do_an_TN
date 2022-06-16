@@ -39,7 +39,7 @@
             <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" href="{{route('addImportProduct')}}" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới đơn hàng</a>
+                  Tạo mới sản phẩm nhập</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
