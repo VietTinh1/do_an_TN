@@ -68,13 +68,13 @@
               <thead>
                 <tr>
                   <th width="10"></th>
-                  <th>ID đơn hàng</th>
-                  <th>Mã nhân viên</th>
-                  <th>Khách hàng</th>
+                  <th>Mã đơn hàng</th>         
+                  <th>Tên khách hàng</th>
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
-                  <th>Ngày thêm</th>
+                  <th>Lời nhắn</th>
+                  <th>Tổng tiền</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
                 </tr>

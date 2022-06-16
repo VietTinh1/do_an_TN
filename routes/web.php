@@ -51,7 +51,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/add_product', [AdminController::class, 'postAddProduct'])->name('postAddProduct');
     Route::get('/add_staff', [AdminController::class, 'addStaff'])->name('addStaff');
     Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
-    
+    Route::get('/add_import_invoice', [AdminController::class, 'addImportInvoice'])->name('addImportInvoice');
+    Route::get('/add_import_product', [AdminController::class, 'addImportProduct'])->name('addImportProduct');
 
 
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');

@@ -38,7 +38,7 @@
           <div class="tile-body">
             <div class="row element-button">
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="{{route('addImportProduct')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới đơn hàng</a>
               </div>
               <div class="col-sm-2">
@@ -68,26 +68,29 @@
               <thead>
                 <tr>
                   <th width="10"></th>
-                  <th>ID đơn hàng</th>
-                  <th>Mã nhân viên</th>
-                  <th>Khách hàng</th>
-                  <th>Email</th>
-                  <th>Số điện thoại</th>
-                  <th>Địa chỉ</th>
-                  <th>Ngày thêm</th>
-                  <th>Tình trạng</th>
+                  <th>Mã sản phẩm nhập</th>
+                  <th>Hình ảnh</th>
+                  <th>Số lượng </th>
+                  <th>Giá nhập </th>
+                  <th>Mô tả </th>
                   <th>Chức năng</th>
                 </tr>
               </thead>
-             <tbody>
+              <tbody>
+
                 <td></td>
                 <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
+                <td>hình 1</td>
+                <td>20</td>
+                <td>20</td>
+                <td>hihi</td>
+                <td>
+                  <a href="" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
 
-             </tbody>
+                  <a href="" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+
+                </td>
+              </tbody>
             </table>
           </div>
         </div>
@@ -150,7 +153,6 @@
     $('#sampleTable').DataTable();
   </script>
   <script>
-
     //Thời Gian
     function time() {
       var today = new Date();
@@ -201,7 +203,6 @@
         win.print();
       }
     }
-    
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

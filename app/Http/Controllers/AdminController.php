@@ -121,6 +121,11 @@ class AdminController extends Controller
     {
         return view('admin.src.import_product');
     }
+    //add nhập sản phẩm
+    public function addImportProduct()
+    {
+        return view('admin.src.add_import_product');
+    }
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
@@ -230,6 +235,11 @@ class AdminController extends Controller
     public function importInvoice()
     {
         return view('admin.src.import_invoice');
+    }
+    //add nhập hóa đơn
+    public function addImportInvoice()
+    {
+        return view('admin.src.add_import_invoice');
     }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()

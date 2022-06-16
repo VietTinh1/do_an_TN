@@ -68,17 +68,17 @@
                             <thead>
                                 <tr>
                                     <th width="10"></th>
-                                    <th>NV Thêm</th>
-
                                     <th>Mã sản phẩm</th>
-                                    <th>Loại</th>
-                                    <th>Nhà cung cấp</th>
+                                    <th>NV Thêm</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Ảnh</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
+                                    <th>Đơn vị tính</th>
+                                    <th>Ảnh</th>
+                                    <th>Mô tả</th>
+                                    <th>Thời gian bảo hành</th>
+                                    <th>Khuyến mãi</th>
                                     <th>Thuế</th>
-                                    <th>Đã bán</th>
                                     <th>Đánh giá</th>
                                     <th>Tình trạng</th>
                                     <th>Chức năng</th>
