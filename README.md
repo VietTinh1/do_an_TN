@@ -76,13 +76,19 @@ Chờ xử lí 0
 - composer require maatwebsite/excel
 ->docs(https://docs.laravel-excel.com/3.1/getting-started/installation.html)
 - npm i bootstrap@5.2.0-beta1
+-load images:
++ php artisan storage:link
++ src=" {{ asset('/storage/'.$post->image) }}"
 
 
 -------->fix view
 ----Ưu tiên: Xem database giải quyết input giới hạn số lượng kí tự(tới giới hạn không nhập thêm được, chứ không phải vẫn nhập rồi mất chữ sau): 
 + ưu tiên: provided(index,add,edit)
-
-
++ Thêm link js: trieu_add.js dòng 167 vào all page
++ Bỏ phần "sao chép" kế "xuât excel" các view show
++ Đổi text từ "đổi từ file"->"import
++ Kiểm tra các view bỏ check
++ Kiểm tra view r sửa lại cho ok: nhà cung cấp, hóa đơn nhập
 
 
 

@@ -38,29 +38,52 @@
                 <div class="tile">
                     <h3 class="tile-title">Tạo mới hóa đơn nhập</h3>
                     <div class="tile-body">
-                        <form class="row" method="POST" action="#">
+                        <form class="row" method="POST" action="{{ route('postAddInvoiceProvided') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Mã hóa đơn</label>
-                                <input class="form-control" type="text" name="id" placeholder="Mã hóa đơn" required>
+                            <div class="form-group col-md-4">
+                                <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
+                                <select class="form-control" id="exampleSelect1" name="id_provided" required>
+                                    @foreach ($provided as $provided)
+                                    <option value="{{ $provided->id }}">{{ $provided->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="exampleSelect1" class="control-label">Sản phẩm</label>
+                                <select class="form-control" id="exampleSelect1" name="id_product" >
+                                    @foreach ($product as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Tổng tiền</label>
-                                <input class="form-control" type="number" name="total" placeholder="Tổng tiền" required onkeypress="return event.charCode >= 48" min="1">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image" required>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" name="amount" required>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Giá nhập</label>
+                                <input class="form-control" type="number" name="import_price" required onkeypress="return event.charCode >= 48" min="1">
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Mô tả</label>
+                                <textarea class="form-control" type="text" name="describe" onkeypress="return event.charCode >= 48" min="1"></textarea>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
-                                    <option value="Chờ xử lí">Chờ xử lí</option>
-                                    <option value=" Đã xử lí"> Đã xử lí</option>
+                                    <option value="Đang xử lí">Đang xử lí</option>
+                                    <option value="Đã xử lí">Đã xử lí</option>
                                 </select>
                             </div>
-                           
                             <div class="form-group  col-md-4">
-                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <button class="btn btn-save" type="submit">Lưu lại</button> <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoiceProvided') }}">Hủy bỏ</a>
                             </div>
                         </form>
-                        <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('importInvoice') }}">Hủy bỏ</a>
+
                     </div>
 
                 </div>

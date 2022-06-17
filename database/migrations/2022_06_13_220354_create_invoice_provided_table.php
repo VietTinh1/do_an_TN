@@ -15,7 +15,7 @@ class CreateInvoiceProvidedTable extends Migration
     {
         Schema::create('invoice_provides', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('invoice_id');
+            $table->integer('provided_id');
             $table->integer('account_id');
             $table->double('total');
             $table->string('status')->default("Đang xử lí");// Đã xử lí // Đã hủy

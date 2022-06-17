@@ -92,9 +92,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('editInvoiceProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                                         @if($provided->status=="Đang hoạt động")
-                                        <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ route('deleteInvoiceProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">
-                            <button type="submit" class="btn btn-primary save-edit">Lưu lại</button>
+                            {{-- <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> --}}
                             {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
                         </div>
                     </form>
@@ -164,47 +164,8 @@
     <!-- Data table plugin-->
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#exampleModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var tax_code = button.data('taxcode')
-                var name = button.data('name')
-                var email = button.data('email')
-                var phone = button.data('phone')
-                var address = button.data('address')
-                var notes = button.data('notes')
-                var status = button.data('status')
-                var createdat = button.data('createdat')
-                var modal = $(this)
-                modal.find('.modal-body #tax_code').val(tax_code);
-                modal.find('.modal-body #name').val(name);
-                modal.find('.modal-body #email').val(email);
-                modal.find('.modal-body #phone').val(phone);
-                modal.find('.modal-body #address').val(address);
-                modal.find('.modal-body #notes').val(notes);
-                modal.find('.modal-body #status').val(status);
-                modal.find('.modal-body #created_at').val(createdat);
-            });
-            $(document).on('click','.open-modal',function(){
-                var url="http://127.0.0.1:8000/admin/edit_provided";
-                var provided_id=$(this).val();
-                $.get(url+'/'+provided_id,function(data){
-                    console.log(data);
-                })
-            });
-            $(document).on('click','.save-edit',function(){
-                var url="http://127.0.0.1:8000/admin/edit_provided";
-                var provided_id=$(this).val();
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: data,
-                });
-            });
-        });
-        // https://stackoverflow.com/questions/68482194/how-to-get-url-id-for-posting-ajax-to-controller
-    </script>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
+
     <!-- thời gian -->
     <script type="text/javascript">
         function time() {

@@ -38,7 +38,7 @@
           <div class="tile-body">
             <div class="row element-button">
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{route('addImportInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvided')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới hóa đơn nhập</a>
               </div>
               <div class="col-sm-2">
@@ -58,35 +58,39 @@
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-              <div class="col-sm-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết hóa đơn
-                </button>
-              </div>
             </div>
 
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"></th>
-                  <th>Mã hóa đơn nhập</th>
-                  <th>Tổng tiền</th>
-                  <th>Tình trạng</th>
-                  <th>Chức năng</th>
+                    <th>Người thêm</th>
+                    <th>Mã nhà cung cấp</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày tạo</th>
+                    <th>Chi tiết</th>
+                    <th>Tình trạng</th>
+                    <th>Chức năng</th>
                 </tr>
               </thead>
-              <tbody>
-
-                <td></td>
-                <td>1</td>
-                <td>1.000.000</td>
-                <td>Hoạt động</td>
-                <td>
-                  <a href="" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                
-                  <a href="" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-      
-                </td>
-              </tbody>
+               @foreach ($invoiceProvides as $invoiceProvides)
+                <tbody>
+                        <td>{{ $invoiceProvides->account_id }}</td>
+                        <td>{{ $invoiceProvides->provided_id }}</td>
+                        <td>{{ $invoiceProvides->total }}</td>
+                        <td>{{ $invoiceProvides->created_at }}</td>
+                        {{-- <td>
+                            <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
+                        </td> --}}
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-image-url="{{ $invoiceProvides->image_url }}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" dara-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
+                        </td>
+                        <td>{{ $invoiceProvides->status }}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tbody>
+               @endforeach
             </table>
           </div>
         </div>
@@ -94,50 +98,59 @@
     </div>
 
     <!-- Modal POPUP -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết hóa đơn</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="form-group col-md-12">
-                <label class="control-label">Tên khách hàng</label>
-                <input class="form-control" type="text" value="@if(!empty($data->account_id)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Email</label>
-                <input class="form-control" type="text" value=" @if(!empty($data->email_customer)) @endif" readonly>
-              </div>
-              <div class="form-group  col-md-12">
-                <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" value="@if(!empty( $data->phone)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="@if(!empty(  $data->address_customer)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="@if(!empty( $data->address_customer)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Tin nhắn</label>
-                <input class="form-control" type="text" value="@if(!empty( $data->message)) @endif" readonly>
-              </div>
+    <div class="modal fade" id="modalInvoiceProvided" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhà cung cấp</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form class="modal-body" method="post" action="" id="editProvided" name="editProvided">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Mã nhà cung cấp</label>
+                                <input class="form-control" type="number" id="provided_id" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Nhân viên thêm</label>
+                                <input class="form-control" type="text" id="account_id" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Tổng tiền</label>
+                                <input class="form-control" type="number" id="total" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" id="amount" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Giá nhập</label>
+                                <textarea class="form-control" type="text" id="import_price" required></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Tình Trạng</label>
+                                <input class="form-control" type="text" id="status" readonly>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Mô tả</label>
+                                <textarea class="form-control" type="text" id="describe" readonly></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Ngày tạo</label>
+                                <input class="form-control" type="date" id="created_at" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="margin-right:30%;">
+                            {{-- <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> --}}
+                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="modal-footer" style="margin-right:30%;">
-              <button type="button" class="btn btn-primary">Lưu lại</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
   </main>
 
 
@@ -145,6 +158,7 @@
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script type="text/javascript">
     $('#sampleTable').DataTable();
   </script>

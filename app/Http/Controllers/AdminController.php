@@ -21,6 +21,8 @@ use Illuminate\Support\Str;
 use Prophecy\Call\Call;
 
 use App\Exports\exportExcelProvided;
+use App\Models\InvoiceProvided;
+use App\Models\InvoiceProvidedDetail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
@@ -235,14 +237,71 @@ class AdminController extends Controller
         return redirect()->route('invoice');
     }
     //TRANG NHẬP HÓA ĐƠN
-    public function importInvoice()
+    public function invoiceProvided()
     {
-        return view('admin.src.import_invoice');
+        $invoiceProvides=DB::table('invoice_provides')->join('invoice_provided_details','invoice_provides.id','=','invoice_provided_details.invoice_provided_id')->get();
+
+        return view('admin.src.invoice_provided',compact('invoiceProvides'));
     }
-    //add nhập hóa đơn
-    public function addImportInvoice()
-    {
-        return view('admin.src.add_import_invoice');
+    public function addInvoiceProvided(){
+        $provided=Provided::all();
+        $product=Product::all();
+        return view('admin.src.add_invoice_provided',compact('provided','product'));
+    }
+    public function postAddInvoiceProvided(Request $request){
+        $total=$request->amount*$request->import_price;
+        $product_id='1';
+        $describe='Không';
+        if(!empty($request->id_product)){
+            $product_id=$request->id_product;
+        }
+        if(!empty($request->describe)){
+            $describe=$request->describe;
+        }
+        if($request->hasFile('image')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+            $request->image->store('images','public');
+            $invoiceProvided=DB::table('invoice_provides')->insertGetId([
+                'provided_id'=>$request->id_provided,
+                'account_id'=>Auth::id(),
+                'total'=>$total,
+                'status' => $request->status,
+                'created_at'=>Carbon::now(),
+            ]);
+            if(!empty($invoiceProvided)){
+                $invoiceProvidedDetail=DB::table('invoice_provided_details')->insert([
+                    'invoice_provided_id'=>$invoiceProvided,
+                    'product_id' =>$product_id,
+                    'image_url' =>$request->image->hashName(),
+                    'amount'=>$request->amount,
+                    'import_price' =>$request->import_price,
+                    'describe'=>$describe,
+                    'created_at'=>Carbon::now(),
+                ]);
+                if(!empty($invoiceProvidedDetail)){
+                    Session()->flash('success', 'Thêm chi tiết sản phẩm thành công');
+                    return redirect()->route('invoiceProvided');
+                }
+                else{
+                    Session()->flash('success', 'Thêm chi tiết sản phẩm thất bại');
+                    return redirect()->route('invoiceProvided');
+                }
+            }else{
+                Session()->flash('success', 'Thêm sản phẩm thất bại');
+                return redirect()->route('invoiceProvided');
+            }
+        }
+    }
+    public function editInvoiceProvided($id){
+
+    }
+    public function postEditInvoiceProvided(Request $request,$id){
+
+    }
+    public function deleteInvoiceProvided($id){
+
     }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
@@ -349,13 +408,17 @@ class AdminController extends Controller
     }
     public function postAddProvided(Request $request)
     {
+        $note='';
+        if(!empty($request->notes)){
+            $note=$request->notes;
+        }
         $db = DB::table('provideds')->insert([
             'name' => $request->name,
             'tax_code' => $request->tax_code,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'notes' => $request->notes,
+            'notes' => $note,
             'created_at' => Carbon::now(),
         ]);
         Session()->flash('success', 'Thêm nhà cung cấp thành công');
