@@ -69,7 +69,23 @@ Chờ xử lí 0
 Đã xử lí 2
 Đã hủy 3
 
+- composer install
+- npm install 
+- composer require barryvdh/laravel-dompdf
+->docs(https://github.com/barryvdh/laravel-dompdf)
+- composer require maatwebsite/excel
+->docs(https://docs.laravel-excel.com/3.1/getting-started/installation.html)
+- npm i bootstrap@5.2.0-beta1
 
-TÍnh làm---->>>>>
-- đảm bảo các view liên quan theo đúng db(ô input)
-- fix phần popup các view index, khi chưa có data trong bảng thì sẽ báo lỗi
+
+-------->fix view
+----Ưu tiên: Xem database giải quyết input giới hạn số lượng kí tự(tới giới hạn không nhập thêm được, chứ không phải vẫn nhập rồi mất chữ sau): 
++ ưu tiên: provided(index,add,edit)
+
+
+
+
+
+
+
+

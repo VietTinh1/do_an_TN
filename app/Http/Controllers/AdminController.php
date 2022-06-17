@@ -20,6 +20,9 @@ use Session;
 use Illuminate\Support\Str;
 use Prophecy\Call\Call;
 
+use App\Exports\exportExcelProvided;
+use Maatwebsite\Excel\Facades\Excel;
+
 class AdminController extends Controller
 {
 
@@ -337,6 +340,9 @@ class AdminController extends Controller
         $provided = Provided::orderByDesc('status')->get();
         return view('admin.src.provided', compact('provided'));
     }
+    public function exportProvided(){
+        return Excel::download(new exportExcelProvided, 'provided.xlsx');
+    }
     public function addProvided()
     {
         return view('admin.src.add_provided');
@@ -368,8 +374,8 @@ class AdminController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'notes' => $request->notes,
             'status' => $request->status,
+            'notes' => $request->notes,
             'updated_at' => Carbon::now(),
         ]);
         Session()->flash('success', 'Thay đổi dữ liệu nhà cung cấp thành công');
@@ -389,11 +395,5 @@ class AdminController extends Controller
     {
         return view('admin.src.report');
     }
-    public function findProvided($id)
-    {
-        $provided = Provided::find($id);
-        return redirect()->json([
-            'data' => $provided
-        ]);
-    }
+
 }

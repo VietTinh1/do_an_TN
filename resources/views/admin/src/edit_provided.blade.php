@@ -61,9 +61,9 @@
                             <label class="control-label">Ghi chú</label>
                             <textarea class="form-control" type="text" name="notes" >{{ $provided->notes }}</textarea>
                         </div>
-                        <div class="form-group col-md-6 ">
-                            <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                            <select class="form-control" id="exampleSelect1" name="status">
+                        <div class="form-group col-md-6">
+                            <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
+                            <select class="form-control" id="exampleSelect1" name="status" required>
                                 <option value="Đang hoạt động">Đang hoạt động</option>
                                 <option value="Dừng hoạt động">Dừng hoạt động</option>
                             </select>
@@ -126,7 +126,7 @@
                 }
             }
         </script>
-        
+
     </body>
 
     </html>

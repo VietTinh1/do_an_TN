@@ -17,7 +17,7 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::group(['prefix' => '/'], function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('');
+    Route::get('/', [CustomerController::class, 'index'])->name('index');
     Route::get('cart', [CustomerController::class, 'cart'])->name('cart');
     Route::get('checkout', [CustomerController::class, 'checkout'])->name('checkout');
     Route::get('shop', [CustomerController::class, 'shop'])->name('shop');
@@ -32,8 +32,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('CheckUser');;
     Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/index', [AdminController::class, 'index'])->name('index');
 
+    Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::get('/product', [AdminController::class, 'product'])->name('product');
     Route::get('/invoice', [AdminController::class, 'invoice'])->name('invoice');
     Route::get('/staff', [AdminController::class, 'staff'])->name('staff');
@@ -69,5 +69,5 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_provided/{id}', [AdminController::class, 'deleteProvided'])->name('deleteProvided');
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
 
-    Route::get('/provided/{id}', [AdminController::class, 'findProvided'])->name('findProvided');
+    Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided');
 });

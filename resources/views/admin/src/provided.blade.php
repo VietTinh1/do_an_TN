@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="col-sm-2">
-                                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                                <a class="btn btn-excel btn-sm" href="{{ route('exportProvided') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
@@ -82,7 +82,7 @@
                                     <td>{{ $provided->phone }}</td>
                                     <td>{{ $provided->created_at }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" id="edit" data-toggle="modal" data-target="#exampleModal" data-taxcode="{{ $provided->tax_code }}" data-name="{{ $provided->name }}" data-email="{{ $provided->email }}" data-phone="{{ $provided->phone }}" data-address="{{ $provided->address }}" data-notes="{{ $provided->notes }}" data-status="{{ $provided->tax_code }}" data-taxcode="{{ $provided->status }}" data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $provided->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-taxcode="{{ $provided->tax_code }}" data-name="{{ $provided->name }}" data-email="{{ $provided->email }}" data-phone="{{ $provided->phone }}" data-address="{{ $provided->address }}" data-notes="{{ $provided->notes }}" data-status="{{ $provided->status }}" data-taxcode="{{ $provided->tax_code }}" data-createdat="{{ $provided->created_at }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($provided->status=="Đang hoạt động")
@@ -115,7 +115,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form class="modal-body" method="post" action="{{ route('postEditProvided',['id'=>$provided->id]) }}" id="editProvided">
+                    <form class="modal-body" method="post" action="" id="editProvided" name="editProvided">
                         @csrf
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
@@ -139,6 +139,10 @@
                                 <input class="form-control" type="text" id="address" required>
                             </div>
                             <div class="form-group col-md-12">
+                                <label class="control-label">Ghi chú </label>
+                                <textarea class="form-control" type="text" id="notes" required></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
                                 <label class="control-label">Tình Trạng</label>
                                 <input class="form-control" type="text" id="status" readonly>
                             </div>
@@ -148,7 +152,7 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">
-                            <button type="submit" class="btn btn-primary">Lưu lại</button>
+                            <button type="submit" class="btn btn-primary save-edit">Lưu lại</button>
                             {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
                         </div>
                     </form>
@@ -182,7 +186,24 @@
                 modal.find('.modal-body #status').val(status);
                 modal.find('.modal-body #created_at').val(createdat);
             });
+            $(document).on('click','.open-modal',function(){
+                var url="http://127.0.0.1:8000/admin/edit_provided";
+                var provided_id=$(this).val();
+                $.get(url+'/'+provided_id,function(data){
+                    console.log(data);
+                })
+            });
+            $(document).on('click','.save-edit',function(){
+                var url="http://127.0.0.1:8000/admin/edit_provided";
+                var provided_id=$(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                });
+            });
         });
+        // https://stackoverflow.com/questions/68482194/how-to-get-url-id-for-posting-ajax-to-controller
     </script>
     <!-- thời gian -->
     <script type="text/javascript">
