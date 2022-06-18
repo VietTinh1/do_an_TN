@@ -73,5 +73,5 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
     Route::get('/delete_invoice_provided/{id}', [AdminController::class, 'deleteInvoiceProvided'])->name('deleteInvoiceProvided');
 
-    Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided')->middleware('CheckUser');
+    Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided');
 });

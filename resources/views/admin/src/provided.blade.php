@@ -92,9 +92,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('editInvoiceProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                                         @if($provided->status=="Đang hoạt động")
-                                        <a href="{{ route('deleteInvoiceProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                        <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
