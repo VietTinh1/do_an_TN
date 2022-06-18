@@ -57,17 +57,17 @@
               </div>
 
               <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                <a class="btn btn-excel btn-sm" href="{{ route('exportStaff') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-            
+
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  
+
                   <th>Mã nhân viên</th>
                   <th width="150">Họ tên</th>
                   <th width="20">Ảnh thẻ</th>
@@ -84,7 +84,7 @@
               <tbody>
                 @foreach($user as $user)
                 <tr>
-                 
+
                   <td>{{ $user->id }}</td>
                   <td>{{ $user->fullname }}</td>
                   <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
@@ -217,8 +217,8 @@
         win.document.close();
         win.print();
       }
-    } 
-    
+    }
+
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

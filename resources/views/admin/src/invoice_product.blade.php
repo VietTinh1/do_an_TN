@@ -28,7 +28,7 @@
     @endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm nhập</b></a></li>
       </ul>
       <div id="clock"></div>
     </div>
@@ -37,14 +37,6 @@
         <div class="tile">
           <div class="tile-body">
             <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{route('addImportProduct')}}" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới sản phẩm nhập</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
-
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
@@ -81,7 +73,7 @@
                 <td>20</td>
                 <td>20</td>
                 <td>hihi</td>
-               
+
                 <td>
                   <button type="button" class="btn btn-primary open-modal">Chi tiét</button>
                 </td>

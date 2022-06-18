@@ -89,9 +89,10 @@ Chờ xử lí 0
 + Đổi text từ "đổi từ file"->"import
 + Kiểm tra các view bỏ check
 + Kiểm tra view r sửa lại cho ok: nhà cung cấp, hóa đơn nhập
+->update 19/6
++ Thêm màu vào tình trạng ở hóa đơn nhập
++ Bỏ "sao chép" các view show
++ Bỏ "import file" các view show trừ sản phẩm, nhà cung cấp
 
-
-
-
-
+- Thiếu: Check đồng bôj db
 

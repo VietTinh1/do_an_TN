@@ -10,4 +10,5 @@ class InvoiceProvided extends Model
     use HasFactory;
     protected $table="invoice_provides";
     public $timestamps = true;
+    protected $fillable =['provided_id','account_id','total','created_at'];
 }

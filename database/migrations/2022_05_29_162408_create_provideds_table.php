@@ -15,7 +15,7 @@ class CreateProvidedsTable extends Migration
     {
         Schema::create('provideds', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tax_code');
+            $table->bigInteger('tax_code');
             $table->string('name',100);
             $table->string('email',100);
             $table->string('phone',10);

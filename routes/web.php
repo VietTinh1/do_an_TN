@@ -39,7 +39,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/staff', [AdminController::class, 'staff'])->name('staff');
     Route::get('/report', [AdminController::class, 'report'])->name('report');
     Route::get('/provided', [AdminController::class, 'provided'])->name('provided');
-    Route::get('/import_product', [AdminController::class, 'importProduct'])->name('importProduct');
+    Route::get('/invoice_product', [AdminController::class, 'invoiceProduct'])->name('invoiceProduct');
     Route::get('/invoice_provided', [AdminController::class, 'invoiceProvided'])->name('invoiceProvided');
 
     Route::get('/add_provided', [AdminController::class, 'addProvided'])->name('addProvided');
@@ -52,7 +52,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
     Route::get('/add_invoice_provided', [AdminController::class, 'addInvoiceProvided'])->name('addInvoiceProvided');
     Route::post('/add_invoice_provided', [AdminController::class, 'postAddInvoiceProvided'])->name('postAddInvoiceProvided');
-    Route::get('/add_import_product', [AdminController::class, 'addImportProduct'])->name('addImportProduct');
+    Route::get('/add_invoice_provided_not_yet', [AdminController::class, 'addInvoiceProvidedNotYet'])->name('addInvoiceProvidedNotYet');
+    Route::post('/add_invoice_provided_not_yet', [AdminController::class, 'postAddInvoiceProvidedNotYet'])->name('postAddInvoiceProvidedNotYet');
 
 
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
@@ -65,7 +66,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/edit_product/{id}', [AdminController::class, 'postEditProduct'])->name('postEditProduct');
     Route::get('/edit_invoice_provided/{id}', [AdminController::class, 'editInvoiceProvided'])->name('editInvoiceProvided');
     Route::post('/edit_invoice_provided/{id}', [AdminController::class, 'postEditInvoiceProvided'])->name('postEditInvoiceProvided');
-    Route::get('/edit_import_product', [AdminController::class, 'editImportProduct'])->name('editImportProduct');
+    Route::get('/edit_invoice_product', [AdminController::class, 'editInvoiceProduct'])->name('editInvoiceProduct');
 
     Route::get('/delete_invoice/{id}', [AdminController::class, 'deleteInvoice'])->name('deleteInvoice');
     Route::get('/delete_product/{id}', [AdminController::class, 'deleteProduct'])->name('deleteProduct');
@@ -73,5 +74,14 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
     Route::get('/delete_invoice_provided/{id}', [AdminController::class, 'deleteInvoiceProvided'])->name('deleteInvoiceProvided');
 
+    //export excel
     Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided');
+    Route::get('/exportInvoice', [AdminController::class, 'exportInvoice'])->name('exportInvoice');
+    Route::get('/exportProduct', [AdminController::class, 'exportProduct'])->name('exportProduct');
+    Route::get('/exportStaff', [AdminController::class, 'exportStaff'])->name('exportStaff');
+
+    //import excel
+    Route::get('/importProvided', [AdminController::class, 'importProvided'])->name('importProvided');
+    Route::post('/importProvided', [AdminController::class, 'postImportProvided'])->name('postImportProvided');
+
 });

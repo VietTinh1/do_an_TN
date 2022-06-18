@@ -54,17 +54,17 @@
                             </div>
 
                             <div class="col-sm-2">
-                                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                                <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
                             </div>
-                           
+
                         </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
-                                   
+
                                     <th>Mã sản phẩm</th>
                                     <th>NV Thêm</th>
                                     <th>Tên sản phẩm</th>
@@ -85,7 +85,7 @@
                             <tbody>
                                 @foreach ($product as $product)
                                 <tr>
-                                  
+
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->product_code }}</td>
                                     <td>{{ $product->product_type_id}}</td>

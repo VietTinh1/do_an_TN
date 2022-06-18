@@ -19,10 +19,11 @@ class CreateProductsTable extends Migration
             $table->integer('product_type_id');
             $table->string('images',100);
             $table->string('name',100);
+            $table->string('trademark',100);//tên hãng
             $table->string('product_code');
             $table->integer('amount')->default(0)->unsigned();
             $table->decimal('price')->unsigned();
-            $table->string('unit',20);
+            $table->string('unit',20)->default("VNĐ");
             $table->string('describe')->default("Không");//mô tả
             $table->integer('time_warranty');//tg bao hanh
             $table->integer('sale')->default(0);//khuyen mai

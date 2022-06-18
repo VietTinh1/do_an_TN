@@ -39,7 +39,7 @@
                 <div class="tile">
                     <h3 class="tile-title">Tạo mới hóa đơn nhập</h3>
                     <div class="tile-body">
-                        <form class="row" method="POST" action="{{ route('postAddInvoiceProvided') }}" enctype="multipart/form-data">
+                        <form class="row" method="POST" action="{{ route('postAddInvoiceProvidedNotYet') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
@@ -49,17 +49,29 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" name="name" required>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tên hãng</label>
+                                <input class="form-control" type="text" name="trademark" required>
+                            </div>
                             <div class="form-group col-md-4">
-                                <label for="exampleSelect1" class="control-label">Sản phẩm</label>
-                                <select class="form-control" id="exampleSelect1" name="id_product" required>
-                                    @foreach ($product as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
+                                <select class="form-control" id="exampleSelect1" name="id_product_type" required>
+                                    @foreach ($productType as $productType)
+                                    <option value="{{ $productType->id }}">{{ $productType->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hình ảnh</label>
                                 <input class="form-control" type="file" name="image" required>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Mã sản phẩm</label>
+                                <input class="form-control" type="text" name="product_code" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>

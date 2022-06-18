@@ -10,4 +10,5 @@ class Provided extends Model
     use HasFactory;
     protected $table="provideds";
     public $timestamps = true;
+    protected $fillable = ['tax_code','name','email','phone','address','notes','created_at'];
 }

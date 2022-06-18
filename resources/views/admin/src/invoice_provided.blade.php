@@ -39,21 +39,17 @@
             <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvided')}}" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới hóa đơn nhập</a>
+                  Tạo mới sản phẩm có sẵn</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
-
+                <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvidedNotYet')}}" title="Thêm"><i class="fas fa-plus"></i>
+                  Tạo mới sản phẩm chưa có</a>
+                </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-              </div>
-
-              <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
@@ -82,7 +78,7 @@
                             <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
                         </td> --}}
                         <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-image-url="{{ $invoiceProvides->image_url }}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" dara-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
                         </td>
                         <td>{{ $invoiceProvides->status }}</td>
                         <td>
@@ -98,59 +94,7 @@
     </div>
 
     <!-- Modal POPUP -->
-    <div class="modal fade" id="modalInvoiceProvided" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhà cung cấp</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form class="modal-body" method="post" action="" id="editProvided" name="editProvided">
-                        @csrf
-                        <div class="container-fluid">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mã nhà cung cấp</label>
-                                <input class="form-control" type="number" id="provided_id" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Nhân viên thêm</label>
-                                <input class="form-control" type="text" id="account_id" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Tổng tiền</label>
-                                <input class="form-control" type="number" id="total" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" id="amount" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Giá nhập</label>
-                                <textarea class="form-control" type="text" id="import_price" required></textarea>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Tình Trạng</label>
-                                <input class="form-control" type="text" id="status" readonly>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả</label>
-                                <textarea class="form-control" type="text" id="describe" readonly></textarea>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Ngày tạo</label>
-                                <input class="form-control" type="date" id="created_at" readonly>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="margin-right:30%;">
-                            {{-- <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> --}}
-                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    @extends('admin.src.popup.invoice_provided')
   </main>
 
   <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
