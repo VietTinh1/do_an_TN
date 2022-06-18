@@ -187,6 +187,7 @@
                 </div>
             </div>
     </main>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript">
     //Thời Gian
     function time() {

@@ -62,15 +62,12 @@
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-              <div class="col-sm-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết nhân viên
-                </button>
-              </div>
+            
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"></th>
+                  
                   <th>Mã nhân viên</th>
                   <th width="150">Họ tên</th>
                   <th width="20">Ảnh thẻ</th>
@@ -79,6 +76,7 @@
                   <th>Email</th>
                   <th>SĐT</th>
                   <th>Quyền</th>
+                  <th>Chi tiết</th>
                   <th>Tình trạng</th>
                   <th width="100">Chức năng</th>
                 </tr>
@@ -86,7 +84,7 @@
               <tbody>
                 @foreach($user as $user)
                 <tr>
-                  <td width="10"><input type="checkbox"></td>
+                 
                   <td>{{ $user->id }}</td>
                   <td>{{ $user->fullname }}</td>
                   <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
@@ -159,6 +157,7 @@
       </div>
     </div>
   </main>
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>

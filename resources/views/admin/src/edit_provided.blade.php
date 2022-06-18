@@ -78,7 +78,7 @@
                 <BR>
             </div>
         </main>
-
+        <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
         <!-- Data table plugin-->
         <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>

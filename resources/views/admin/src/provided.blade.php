@@ -110,7 +110,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhà cung cấp</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:25%;color:red;font-size:25px;">Chi tiết nhà cung cấp</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -152,14 +152,15 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="margin-right:30%;">
-                            {{-- <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> --}}
-                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
+                             <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> 
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> 
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- Data table plugin-->
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
