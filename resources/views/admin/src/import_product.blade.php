@@ -58,32 +58,33 @@
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-              <div class="col-sm-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết hóa đơn
-                </button>
-              </div>
+
             </div>
 
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"></th>
                   <th>Mã sản phẩm nhập</th>
                   <th>Hình ảnh</th>
                   <th>Số lượng </th>
                   <th>Giá nhập </th>
                   <th>Mô tả </th>
+                  <th>Chi tiết</th>
                   <th>Chức năng</th>
                 </tr>
               </thead>
               <tbody>
 
-                <td></td>
+
                 <td>1</td>
                 <td>hình 1</td>
                 <td>20</td>
                 <td>20</td>
                 <td>hihi</td>
+               
+                <td>
+                  <button type="button" class="btn btn-primary open-modal">Chi tiét</button>
+                </td>
                 <td>
                   <a href="" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
 
@@ -144,7 +145,7 @@
     </div>
   </main>
 
-
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>

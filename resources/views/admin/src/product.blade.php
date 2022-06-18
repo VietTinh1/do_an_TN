@@ -59,15 +59,12 @@
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
                             </div>
-                            <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết sản phẩm
-                                </button>
-                            </div>
+                           
                         </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
-                                    <th width="10"></th>
+                                   
                                     <th>Mã sản phẩm</th>
                                     <th>NV Thêm</th>
                                     <th>Tên sản phẩm</th>
@@ -80,6 +77,7 @@
                                     <th>Khuyến mãi</th>
                                     <th>Thuế</th>
                                     <th>Đánh giá</th>
+                                    <th>Chi tiết</th>
                                     <th>Tình trạng</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -87,7 +85,7 @@
                             <tbody>
                                 @foreach ($product as $product)
                                 <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                  
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->product_code }}</td>
                                     <td>{{ $product->product_type_id}}</td>
@@ -96,10 +94,13 @@
                                     <td><img src="../img-sanpham/kara.jpg" alt="" width="100px;"></td>
                                     {{-- image --}}
                                     <td>{{ $product->amount }}</td>
-                                    <td>{{ $product->price }}đ</td>
-                                    <td>{{ $product->tax }}%</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->tax }}</td>
                                     <td>{{ $product->sold }}</td>
                                     <td>{{ $product->so_sao }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}"data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                                    </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")
                                         <span class="badge bg-success">{{ $product->status }}</span>
@@ -191,6 +192,7 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- Data table plugin-->
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>

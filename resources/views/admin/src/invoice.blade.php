@@ -58,23 +58,20 @@
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-              <div class="col-sm-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-bars"> </i> Chi tiết hóa đơn
-                </button>
-              </div>
+            
             </div>
 
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"></th>
-                  <th>Mã đơn hàng</th>         
+                  <th>Mã đơn hàng</th>
                   <th>Tên khách hàng</th>
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
                   <th>Lời nhắn</th>
                   <th>Tổng tiền</th>
+                  <th>Chi tiết</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
                 </tr>
@@ -82,14 +79,16 @@
               <tbody>
                 @foreach ($data as $data)
                 <tr>
-                  <td width="10"><input type="checkbox" name="{{ $data->id }}" value="1"></td>
-                  <td>{{ $data->id }}</td>
                   <td>{{ $data->id }}</td>
                   <td>{{ $data->name_customer }}</td>
                   <td>{{ $data->email_customer }}</td>
                   <td>{{ $data->phone }}</td>
                   <td>{{ $data->address_customer }}</td>
+                  <td>{{ $data->total }}</td>
                   <td>{{ $data->created_at }}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}"  data-status="{{ $data->status }}" data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                  </td>
                   <td>
                     @if($data->status =="Chờ xử lí")
                     <span class="badge bg-success">Chờ xử lí</span>
@@ -152,6 +151,10 @@
                 <label class="control-label">Tin nhắn</label>
                 <input class="form-control" type="text" value="@if(!empty( $data->message)) @endif" readonly>
               </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Tổng tiền</label>
+                <input class="form-control" type="number" value="@if(!empty( $data->total)) @endif" readonly>
+              </div>
             </div>
             <div class="modal-footer" style="margin-right:30%;">
               <button type="button" class="btn btn-primary">Lưu lại</button>
@@ -163,7 +166,7 @@
     </div>
   </main>
 
-
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
@@ -172,7 +175,6 @@
     $('#sampleTable').DataTable();
   </script>
   <script>
-
     //Thời Gian
     function time() {
       var today = new Date();
@@ -223,7 +225,6 @@
         win.print();
       }
     }
-    
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

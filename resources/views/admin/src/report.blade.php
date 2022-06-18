@@ -331,9 +331,10 @@
         </div>
 
         <div class="text-right" style="font-size: 12px">
-            <p><b>Hệ thống quản lý V2.0 | Code by Trường</b></p>
+            <p><b>Bản quyển &copy; 2022 Website Bán hàng | Bởi TT-TT</b></p>
         </div>
     </main>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/chart.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

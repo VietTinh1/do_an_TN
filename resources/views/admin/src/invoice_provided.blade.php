@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Danh sách đơn hàng | Quản trị Admin</title>
+  <title>Danh sách hóa đơn nhập | Quản trị Admin</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,7 @@
     @endif
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách hóa đơn nhập</b></a></li>
       </ul>
       <div id="clock"></div>
     </div>
@@ -153,7 +153,7 @@
         </div>
   </main>
 
-
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>

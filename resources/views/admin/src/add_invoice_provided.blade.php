@@ -21,6 +21,7 @@
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
+
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
@@ -80,7 +81,8 @@
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
-                                <button class="btn btn-save" type="submit">Lưu lại</button> <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoiceProvided') }}">Hủy bỏ</a>
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                 <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoiceProvided') }}">Hủy bỏ</a>
                             </div>
                         </form>
 
@@ -88,6 +90,7 @@
 
                 </div>
     </main>
+    <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript">
     //Thời Gian
     function time() {
