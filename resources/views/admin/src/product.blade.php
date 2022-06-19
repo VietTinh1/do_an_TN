@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Danh sách sản phẩm | Quản trị Admin</title>
+    <title>Danh sách sản phảm | Quản trị Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,11 +42,11 @@
                                 <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="Thêm"><i class="fas fa-plus"></i>
                                     Tạo mới sản phẩm</a>
                             </div>
-                           
+
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
                             </div>
-                        
+
 
                             <div class="col-sm-2">
                                 <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
@@ -59,7 +59,6 @@
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
-
                                     <th>Mã sản phẩm</th>
                                     <th>NV Thêm</th>
                                     <th>Tên sản phẩm</th>
@@ -78,7 +77,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($product as $product)
+                                <!-- @foreach ($product as $product)
                                 <tr>
 
                                     <td>{{ $product->id }}</td>
@@ -94,7 +93,7 @@
                                     <td>{{ $product->sold }}</td>
                                     <td>{{ $product->so_sao }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}"data-createdat="{{ $product->created_at }}">Chi tiết</button>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")
@@ -110,7 +109,7 @@
                                         @endif
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach -->
                             </tbody>
                         </table>
                     </div>
@@ -193,7 +192,9 @@
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">
-        $('#sampleTable').DataTable();
+    $('#sampleTable').DataTable();
+  </script>
+    <script>
         //Thời Gian
         function time() {
             var today = new Date();
@@ -234,8 +235,6 @@
                 return i;
             }
         }
-    </script>
-    <script>
         //In dữ liệu
         var myApp = new function() {
             this.printTable = function() {
