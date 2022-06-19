@@ -74,10 +74,10 @@
                     </select>
                 </div>
                 <BR>
-                    <BR>
-                    <BR>
-                    <button class="btn btn-save" type="submit" >Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}">Hủy bỏ</a>
+                <BR>
+                <BR>
+                <button class="btn btn-save" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}">Hủy bỏ</a>
             </form>
 
             <BR>
@@ -131,7 +131,7 @@
             }
         }
     </script>
-   
+
 </body>
 
 </html>

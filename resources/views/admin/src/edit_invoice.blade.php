@@ -9,10 +9,10 @@
     <!-- Main CSS-->
     <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
 
-    
+
     <!-- Custom Theme files -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tình trạng</label>
-                        <input class="form-control" type="text" value="@if($invoice->status =="Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
+                        <input class="form-control" type="text" value="@if($invoice->status ==" Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
@@ -130,7 +130,7 @@
             }
         }
     </script>
-   
+
 </body>
 
 </html>

@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Mã số thuế</label>
-                            <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required >
+                            <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Tên nhà cung cấp</label>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Ghi chú</label>
-                            <textarea class="form-control" type="text" name="notes" >{{ $provided->notes }}</textarea>
+                            <textarea class="form-control" type="text" name="notes">{{ $provided->notes }}</textarea>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>

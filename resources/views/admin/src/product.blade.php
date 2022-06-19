@@ -77,7 +77,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- @foreach ($product as $product)
+                                @foreach ($product as $product)
                                 <tr>
 
                                     <td>{{ $product->id }}</td>
@@ -90,8 +90,10 @@
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->tax }}</td>
+                                    <td>{{ $product->sale }}</td>
                                     <td>{{ $product->sold }}</td>
-                                    <td>{{ $product->so_sao }}</td>
+                                    <td>{{ $product->so_sao }}</td> 
+
                                     <td>
                                         <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}">Chi tiết</button>
                                     </td>
@@ -109,7 +111,7 @@
                                         @endif
                                     </td>
                                 </tr>
-                                @endforeach -->
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

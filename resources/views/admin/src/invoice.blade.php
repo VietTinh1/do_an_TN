@@ -41,12 +41,12 @@
                 <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới đơn hàng</a>
               </div>
-             
+
 
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
-              
+
               <div class="col-sm-2">
                 <a class="btn btn-excel btn-sm" href="{{ route('exportInvoice') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
               </div>
@@ -81,11 +81,11 @@
                   <td>{{ $data->phone }}</td>
                   <td>{{ $data->address_customer }}</td>
                   <td>{{ $data->total }}</td>
-                  
+
                   <td>{{ $data->created_at }}</td>
                   <td>{{ $data->message }}</td>
                   <td>
-                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}"  data-status="{{ $data->status }}" data-createdat="{{ $data->created_at }}">Chi tiết</button>
+                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}" data-status="{{ $data->status }}" data-createdat="{{ $data->created_at }}">Chi tiết</button>
                   </td>
                   <td>
                     @if($data->status =="Chờ xử lí")

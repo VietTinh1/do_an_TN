@@ -27,7 +27,7 @@
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
-    
+
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
