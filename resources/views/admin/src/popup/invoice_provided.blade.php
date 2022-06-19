@@ -44,8 +44,8 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="margin-right:30%;">
-                    {{-- <button type="submit" class="btn btn-primary save-edit">Lưu lại</button> --}}
-                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button> --}}
+                     <button type="submit" class="btn btn-primary save-edit">Lưu lại</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 </div>
             </form>
         </div>

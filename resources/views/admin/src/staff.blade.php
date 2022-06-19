@@ -45,16 +45,12 @@
                 <a class="btn btn-add btn-sm" href="{{route('addStaff')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới nhân viên</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
+
 
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-              </div>
+
 
               <div class="col-sm-2">
                 <a class="btn btn-excel btn-sm" href="{{ route('exportStaff') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
@@ -67,31 +63,34 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-
                   <th>Mã nhân viên</th>
-                  <th width="150">Họ tên</th>
-                  <th width="20">Ảnh thẻ</th>
-                  <th width="150">Địa chỉ</th>
+                  <th>Hình ảnh</th>
+                  <th>Họ tên</th>
+                  <th>Giới tính</th>
                   <th>Ngày sinh</th>
-                  <th>Email</th>
+                  <th>CCCD</th>
+                  <th>Địa chỉ</th>
                   <th>SĐT</th>
+                  <th>Email</th>
                   <th>Quyền</th>
                   <th>Chi tiết</th>
                   <th>Tình trạng</th>
-                  <th width="100">Chức năng</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($user as $user)
                 <tr>
-
-                  <td>{{ $user->id }}</td>
+                  <td>{{ $user->id}}</td>
+                  {{-- <td>
+                            <img src="{{ url('storage/'.$user->image_url) }}" alt="" title="" width="100px" />
+                  </td> --}}
                   <td>{{ $user->fullname }}</td>
-                  <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                  <td>{{ $user->address }}</td>
+                  <td>{{ $user->sex }}</td>
                   <td>{{ $user->birthday }}</td>
-                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->citizen_ID }}</td>
+                  <td>{{ $user->address }}</td>
                   <td>{{ $user->phone }}</td>
+                  <td>{{ $user->email }}</td>
                   <td>{{ $user->permission }}</td>
                   <td>
                     @if($user->status=="Đang hoạt động")
@@ -166,8 +165,6 @@
     $('#sampleTable').DataTable();
   </script>
   <script>
-
-
     //Thời Gian
     function time() {
       var today = new Date();
@@ -218,7 +215,6 @@
         win.print();
       }
     }
-
   </script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

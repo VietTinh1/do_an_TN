@@ -23,80 +23,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
-  
+
 </head>
 
 <body onload='time()' class="app sidebar-mini rtl">
-  <style>
-    .Choicefile {
-      display: block;
-      background: #14142B;
-      border: 1px solid #fff;
-      color: #fff;
-      width: 150px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      padding: 5px 0px;
-      border-radius: 5px;
-      font-weight: 500;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .Choicefile:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    #uploadfile,
-    .removeimg {
-      display: none;
-    }
-
-    #thumbbox {
-      position: relative;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .removeimg {
-      height: 25px;
-      position: absolute;
-      background-repeat: no-repeat;
-      top: 5px;
-      left: 5px;
-      background-size: 25px;
-      width: 25px;
-      /* border: 3px solid red; */
-      border-radius: 50%;
-
-    }
-
-    .removeimg::before {
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      content: '';
-      border: 1px solid red;
-      background: red;
-      text-align: center;
-      display: block;
-      margin-top: 11px;
-      transform: rotate(45deg);
-    }
-
-    .removeimg::after {
-      /* color: #FFF; */
-      /* background-color: #DC403B; */
-      content: '';
-      background: red;
-      border: 1px solid red;
-      text-align: center;
-      display: block;
-      transform: rotate(-45deg);
-      margin-top: -2px;
-    }
-  </style>
+ 
   @include('admin.menu_header')
   <main class="app-content">
     @if(Session()->has('success'))
@@ -115,12 +46,7 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
-              </div>
 
-            </div>
             <form class="row" method="post" action="{{ route('postAddStaff') }}">
               @csrf
               <div class="form-group  col-md-4">
@@ -132,8 +58,24 @@
                 <input class="form-control" type="text" name="password" required>
               </div>
               <div class="form-group col-md-4">
+                <label class="control-label">Mã nhân viên</label>
+                <input class="form-control" type="number" name="id" required>
+              </div>
+              <div class="form-group  col-md-4">
+                <label class="control-label">Hình ảnh</label>
+                <input class="form-control" type="file" name="image" required>
+              </div>
+              <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
                 <input class="form-control" type="text" name="fullname" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="exampleSelect1" class="control-label">Giới tính</label>
+                <select class="form-control" id="exampleSelect1" name="sex" required>
+                  <option value="1">Nam</option>
+                  <option value="2">Nữ</option>
+                  <option value="3">Khác</option>
+                </select>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Ngày sinh</label>
@@ -144,6 +86,10 @@
                 <input class="form-control" type="text" name="address" required>
               </div>
               <div class="form-group col-md-4">
+                <label class="control-label">CCCD </label>
+                <input class="form-control" type="number" name="citizen_ID" required>
+              </div>
+              <div class="form-group col-md-4">
                 <label class="control-label">Email</label>
                 <input class="form-control" type="email" name="email" required>
               </div>
@@ -151,28 +97,15 @@
                 <label class="control-label">Số điện thoại</label>
                 <input class="form-control" type="number" name="phone" required>
               </div>
-              <div class="form-group  col-md-3">
+              <div class="form-group  col-md-4">
                 <label for="exampleSelect1" class="control-label">Quyền</label>
                 <select class="form-control" id="exampleSelect1" name="permission" required>
                   <option value="Admin">Admin</option>
                 </select>
               </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Ảnh 3x4 nhân viên</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:"></a>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="{{route('staff')}}">Hủy bỏ</a>
+
+              <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
+              <a class="btn btn-cancel" href="{{route('staff')}}" style="margin-left: 10px;">Hủy bỏ</a>
             </form>
 
           </div>

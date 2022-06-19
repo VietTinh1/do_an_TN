@@ -150,6 +150,7 @@ class AdminController extends Controller
             'email_customer' => $request->email,
             'phone' => $request->phone,
             'address_customer' => $request->address,
+            'total' => $request->total,
             'message' => $request->note,
             'status' => $request->status,
             'created_at' => Carbon::now(),

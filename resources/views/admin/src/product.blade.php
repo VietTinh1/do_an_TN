@@ -42,16 +42,11 @@
                                 <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="Thêm"><i class="fas fa-plus"></i>
                                     Tạo mới sản phẩm</a>
                             </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-
+                           
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
                             </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-                            </div>
+                        
 
                             <div class="col-sm-2">
                                 <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
@@ -99,7 +94,7 @@
                                     <td>{{ $product->sold }}</td>
                                     <td>{{ $product->so_sao }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}"data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}"data-createdat="{{ $product->created_at }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")

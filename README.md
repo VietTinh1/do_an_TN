@@ -84,15 +84,7 @@ Chờ xử lí 0
 -------->fix view
 ----Ưu tiên: Xem database giải quyết input giới hạn số lượng kí tự(tới giới hạn không nhập thêm được, chứ không phải vẫn nhập rồi mất chữ sau): 
 + ưu tiên: provided(index,add,edit)
-+ Thêm link js: trieu_add.js dòng 167 vào all page
-+ Bỏ phần "sao chép" kế "xuât excel" các view show
-+ Đổi text từ "đổi từ file"->"import
-+ Kiểm tra các view bỏ check
 + Kiểm tra view r sửa lại cho ok: nhà cung cấp, hóa đơn nhập
 ->update 19/6
-+ Thêm màu vào tình trạng ở hóa đơn nhập
-+ Bỏ "sao chép" các view show
-+ Bỏ "import file" các view show trừ sản phẩm, nhà cung cấp
-
 - Thiếu: Check đồng bôj db
 

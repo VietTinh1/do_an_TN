@@ -41,17 +41,12 @@
                 <a class="btn btn-add btn-sm" href="{{route('addInvoice')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới đơn hàng</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
+             
 
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-              </div>
-
+              
               <div class="col-sm-2">
                 <a class="btn btn-excel btn-sm" href="{{ route('exportInvoice') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
               </div>
@@ -69,8 +64,9 @@
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
-                  <th>Lời nhắn</th>
                   <th>Tổng tiền</th>
+                  <th>Ngày tạo</th>
+                  <th>Lời nhắn</th>
                   <th>Chi tiết</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
@@ -85,9 +81,11 @@
                   <td>{{ $data->phone }}</td>
                   <td>{{ $data->address_customer }}</td>
                   <td>{{ $data->total }}</td>
+                  
                   <td>{{ $data->created_at }}</td>
+                  <td>{{ $data->message }}</td>
                   <td>
-                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}"  data-status="{{ $data->status }}" data-createdat="{{ $provided->created_at }}">Chi tiết</button>
+                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}"  data-status="{{ $data->status }}" data-createdat="{{ $data->created_at }}">Chi tiết</button>
                   </td>
                   <td>
                     @if($data->status =="Chờ xử lí")

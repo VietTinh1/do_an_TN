@@ -46,7 +46,7 @@
                                 <input class="form-control" type="file" name="file" required>
                             </div>
                             <div class="form-group  col-md-4">
-                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <button class="btn btn-save" type="submit" style="margin-top:11%;">Lưu lại</button>
                             </div>
                         </form>
                     </div>

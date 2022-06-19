@@ -44,13 +44,11 @@
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvidedNotYet')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới sản phẩm chưa có</a>
-                </div>
+              </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-              </div>
+
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
@@ -59,34 +57,45 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                    <th>Người thêm</th>
-                    <th>Mã nhà cung cấp</th>
-                    <th>Tổng tiền</th>
-                    <th>Ngày tạo</th>
-                    <th>Chi tiết</th>
-                    <th>Tình trạng</th>
-                    <th>Chức năng</th>
+                  <th>Người thêm</th>
+                  <th>Mã nhà cung cấp</th>
+                  <th>Tổng tiền</th>
+                  <th>Ngày tạo</th>
+                  <th>Chi tiết</th>
+                  <th>Tình trạng</th>
+                  <th>Chức năng</th>
                 </tr>
               </thead>
-               @foreach ($invoiceProvides as $invoiceProvides)
-                <tbody>
-                        <td>{{ $invoiceProvides->account_id }}</td>
-                        <td>{{ $invoiceProvides->provided_id }}</td>
-                        <td>{{ $invoiceProvides->total }}</td>
-                        <td>{{ $invoiceProvides->created_at }}</td>
-                        {{-- <td>
+              @foreach ($invoiceProvides as $invoiceProvides)
+              <tbody>
+                <td>{{ $invoiceProvides->account_id }}</td>
+                <td>{{ $invoiceProvides->provided_id }}</td>
+                <td>{{ $invoiceProvides->total }}</td>
+                <td>{{ $invoiceProvides->created_at }}</td>
+                {{-- <td>
                             <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
-                        </td> --}}
-                        <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
-                        </td>
-                        <td>{{ $invoiceProvides->status }}</td>
-                        <td>
-                            <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tbody>
-               @endforeach
+                </td> --}}
+                <td>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
+                </td>
+                <td>
+                  @if($invoiceProvides->status =="Đang xử lí")
+                  <span class="badge bg-warning"> Đang xử lí</span>
+                  @elseif($invoiceProvides->status =="Đã xử lí")
+                  <span class="badge bg-success">Đã xử lí</span>
+                  @else
+                  <span class="badge bg-danger">Đã hủy</span>
+                  @endif
+
+                </td>
+
+
+                <td>
+                  <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                  <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                </td>
+              </tbody>
+              @endforeach
             </table>
           </div>
         </div>

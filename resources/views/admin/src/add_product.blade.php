@@ -22,81 +22,11 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-  
+
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
-    <!-- chọn ảnh -->
-    <style>
-        .Choicefile {
-            display: block;
-            background: #14142B;
-            border: 1px solid #fff;
-            color: #fff;
-            width: 150px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            padding: 5px 0px;
-            border-radius: 5px;
-            font-weight: 500;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .Choicefile:hover {
-            text-decoration: none;
-            color: white;
-        }
-
-        #uploadfile,
-        .removeimg {
-            display: none;
-        }
-
-        #thumbbox {
-            position: relative;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .removeimg {
-            height: 25px;
-            position: absolute;
-            background-repeat: no-repeat;
-            top: 5px;
-            left: 5px;
-            background-size: 25px;
-            width: 25px;
-            /* border: 3px solid red; */
-            border-radius: 50%;
-
-        }
-
-        .removeimg::before {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            content: '';
-            border: 1px solid red;
-            background: red;
-            text-align: center;
-            display: block;
-            margin-top: 11px;
-            transform: rotate(45deg);
-        }
-
-        .removeimg::after {
-            /* color: #FFF; */
-            /* background-color: #DC403B; */
-            content: '';
-            background: red;
-            border: 1px solid red;
-            text-align: center;
-            display: block;
-            transform: rotate(-45deg);
-            margin-top: -2px;
-        }
-    </style>
+   
     @include('admin.menu_header')
     <main class="app-content">
         @if(Session()->has('success'))
@@ -158,20 +88,9 @@
                                 <label class="control-label">Thuế</label>
                                 <input class="form-control" type="number" name="tax" required onkeypress="return event.charCode >= 48" min="0">
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Ảnh sản phẩm</label>
-                                <div id="myfileupload">
-                                    <input type="file" id="uploadfile" name="image" onchange="readURL(this);" />
-                                </div>
-                                <div id="thumbbox">
-                                    <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                                    <a class="removeimg" href="javascript:"></a>
-                                </div>
-                                <div id="boxchoice">
-                                    <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                                    <p style="clear:both"></p>
-                                </div>
-
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Mô tả sản phẩm</label>
@@ -189,47 +108,47 @@
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript">
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
         }
-        return i;
-      }
-    }
-  </script>
+    </script>
 
 
 </body>

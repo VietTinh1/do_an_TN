@@ -41,20 +41,24 @@
                         <form class="row" method="POST" action="{{ route('postAddInvoice') }}">
                             @csrf
                             <div class="form-group  col-md-4">
+                                <label class="control-label">Mã đơn hàng</label>
+                                <input class="form-control" type="text" name="id" required>
+                            </div>
+                            <div class="form-group  col-md-4">
                                 <label class="control-label">Tên khách hàng</label>
-                                <input class="form-control" type="text" name="name" placeholder="Nhập tên khách hàng" required>
+                                <input class="form-control" type="text" name="name" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Email</label>
-                                <input class="form-control" type="email" name="email" placeholder="Nhập email" required>
+                                <input class="form-control" type="email" name="email" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số điện thoại</label>
-                                <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" placeholder="Nhập số điện thoại" required>
+                                <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Địa chỉ</label>
-                                <input class="form-control" type="text" name="address" placeholder="Nhập địa chỉ" required>
+                                <input class="form-control" type="text" name="address" required>
                             </div>
                             {{-- dropdown --}}
                             <div class="form-group  col-md-4">
@@ -66,22 +70,19 @@
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" onkeypress="return event.charCode >= 48" min="1" placeholder="Nhập số lượng" required>
+                                <label class="control-label">Tổng tiền</label>
+                                <input class="form-control" type="number" name="total" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
                                     <option value="Chờ xử lí">Chờ xử lí</option>
-                                    <option value=" Đã xử lí"> Đã xử lí</option>
+                                    <option value="Đã xử lí"> Đã xử lí</option>
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4" name="note" placeholder="Nhập ghi chú đơn hàng"></textarea>
-                            </div>
-                            <div class="form-group  col-md-4">
-
+                                <textarea class="form-control" rows="4" name="message"></textarea>
                             </div>
                             <div class="form-group  col-md-4">
                                 <button class="btn btn-save" type="submit">Lưu lại</button>
@@ -94,47 +95,47 @@
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript">
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
 
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
         }
-        return i;
-      }
-    }
-  </script>
+    </script>
 </body>
 
 </html>
