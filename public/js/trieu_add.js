@@ -72,4 +72,30 @@ $(document).ready(function() {
         modal.find('.modal-body #status').val(status);
         modal.find('.modal-body #createdat').val(createdat);
     });
+    $('#modalStaff').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var account_id = button.data('account-id')
+        var fullname = button.data('fullname')
+        var sex = button.data('sex')
+        var birthday = button.data('birthday')
+        var citizen_ID = button.data('citizenid')
+        var address = button.data('address')
+        var phone = button.data('phone')
+        var email = button.data('email')
+        var permission = button.data('permission')
+        var status = button.data('status')
+        var createdat = button.data('createdat')
+        var modal = $(this)
+        modal.find('.modal-body #account_id').val(account_id);
+        modal.find('.modal-body #fullname').val(fullname);
+        modal.find('.modal-body #sex').val(sex);
+        modal.find('.modal-body #birthday').val(birthday);
+        modal.find('.modal-body #citizen_ID').val(citizen_ID);
+        modal.find('.modal-body #address').val(address);
+        modal.find('.modal-body #phone').val(phone);
+        modal.find('.modal-body #email').val(email);
+        modal.find('.modal-body #permission').val(permission);
+        modal.find('.modal-body #status').val(status);
+        modal.find('.modal-body #created_at').val(createdat);
+    });
 });

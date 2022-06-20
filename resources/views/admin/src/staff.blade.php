@@ -17,11 +17,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
-
 </head>
-
 <body onload="time()" class="app sidebar-mini rtl">
-
   @include('admin.menu_header')
   <main class="app-content">
     @if(Session()->has('success'))
@@ -33,32 +30,24 @@
       </ul>
       <div id="clock"></div>
     </div>
-
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
           <div class="tile-body">
-
             <div class="row element-button">
               <div class="col-sm-2">
-
                 <a class="btn btn-add btn-sm" href="{{route('addStaff')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới nhân viên</a>
               </div>
-
-
-              <div class="col-sm-2">
+              {{-- <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-              </div>
-
-
-              <div class="col-sm-2">
+              </div> --}}
+              {{-- <div class="col-sm-2">
                 <a class="btn btn-excel btn-sm" href="{{ route('exportStaff') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-              </div>
-              <div class="col-sm-2">
+              </div> --}}
+              {{-- <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-              </div>
-
+              </div> --}}
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
@@ -66,46 +55,42 @@
                   <th>Mã nhân viên</th>
                   <th>Hình ảnh</th>
                   <th>Họ tên</th>
-                  <th>Giới tính</th>
                   <th>Ngày sinh</th>
-                  <th>CCCD</th>
-                  <th>Địa chỉ</th>
-                  <th>SĐT</th>
                   <th>Email</th>
                   <th>Quyền</th>
                   <th>Chi tiết</th>
                   <th>Tình trạng</th>
+                  <th>Tính năng</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($user as $user)
-                <tr>
-                  <td>{{ $user->id}}</td>
-                  {{-- <td>
-                            <img src="{{ url('storage/'.$user->image_url) }}" alt="" title="" width="100px" />
-                  </td> --}}
-                  <td>{{ $user->fullname }}</td>
-                  <td>{{ $user->sex }}</td>
-                  <td>{{ $user->birthday }}</td>
-                  <td>{{ $user->citizen_ID }}</td>
-                  <td>{{ $user->address }}</td>
-                  <td>{{ $user->phone }}</td>
-                  <td>{{ $user->email }}</td>
-                  <td>{{ $user->permission }}</td>
-                  <td>
-                    @if($user->status=="Đang hoạt động")
-                    <span class="badge bg-success">Đang hoạt động</span>
-                    @else
-                    <span class="badge bg-danger">Dừng hoạt động</span>
-                    @endif
-                  </td>
-                  <td>
-                    <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                    @if($user->status=="Đang hoạt động")
-                    <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                    @endif
-                  </td>
-                </tr>
+                    <tr>
+                        <td>{{ $user->id}}</td>
+                        <td>
+                            <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
+                        </td>
+                        <td>{{ $user->fullname }}</td>
+                        <td>{{ $user->birthday }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->permission }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary open-modal" value="{{ $user->id }}" id="edit" data-toggle="modal" data-target="#modalStaff" data-account-id="{{ $user->account_id }}" data-fullname="{{ $user->fullname }}" data-sex="{{ $user->sex }}" data-birthday="{{ $user->birthday }}" data-citizenid="{{ $user->citizen_ID }}" data-address="{{ $user->address }}" data-phone="{{ $user->phone }}" data-email="{{ $user->email }}" data-permission="{{ $user->permission }}" data-status="{{ $user->status }}" data-createdat="{{ $user->created_at }}">Chi tiết</button>
+                        </td>
+                        <td>
+                            @if($user->status=="Đang hoạt động")
+                            <span class="badge bg-success">Đang hoạt động</span>
+                            @else
+                            <span class="badge bg-danger">Dừng hoạt động</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                            @if($user->status=="Đang hoạt động")
+                            <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                            @endif
+                        </td>
+                    </tr>
                 @endforeach
               </tbody>
             </table>
@@ -114,47 +99,7 @@
       </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhân viên</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="form-group col-md-12">
-                <label class="control-label">Khách hàng</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Email</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group  col-md-12">
-                <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" required>
-              </div>
-
-              <div class="form-group col-md-12">
-                <label class="control-label">Tình Trạng</label>
-                <input class="form-control" type="text">
-              </div>
-            </div>
-            <div class="modal-footer" style="margin-right:30%;">
-              <button type="button" class="btn btn-primary">Lưu lại</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @extends('admin.src.popup.staff')
   </main>
   <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>

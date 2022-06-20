@@ -25,13 +25,16 @@ Route::group(['prefix' => '/'], function () {
     Route::get('contact', [CustomerController::class, 'contact'])->name('contact');
 });
 
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' =>'/login'],function(){
+    Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('CheckUser');
+    Route::post('/', [LoginController::class, 'postLogin'])->name('postLogin');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+Route::group(['prefix' => '/admin','middleware' => 'CheckAuth'], function () {
     Route::get('/', function () {
         return redirect()->route('login');
     });
-    Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('CheckUser');
-    Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::get('/product', [AdminController::class, 'product'])->name('product');

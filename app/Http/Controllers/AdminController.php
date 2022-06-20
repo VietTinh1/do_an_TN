@@ -274,7 +274,6 @@ class AdminController extends Controller
                 $invoiceProvidedDetail = DB::table('invoice_provided_details')->insertGetId([
                     'invoice_provided_id' => $invoiceProvided,
                     'product_id' => $request->product_id,
-                    // 'image_url' =>$request->image->hashName(),
                     'image_url' => $request->image->hashName(),
                     'amount' => $request->amount,
                     'import_price' => $request->import_price,
@@ -438,26 +437,35 @@ class AdminController extends Controller
             'status' => "Đang hoạt động",
             'created_at' => Carbon::now(),
         ]);
-        $user = UserDB::insert([
-            // add_image
-            'account_id' => $acc,
-            'fullname' => $request->fullname,
-            'image_url' => '',
-            'birthday' => $request->birthday,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'permission' => $request->permission,
-            'status' => "Đang hoạt động",
-            'created_at' => Carbon::now(),
-        ]);
-        if (!empty($user) && !empty($acc)) {
-            Session()->flash('success', 'Thêm nhân viên thành công');
-            return redirect()->route('staff');
-        } else {
-            Session()->flash('success', 'Thêm nhân viên thất bại');
-            return redirect()->route('staff');
+        if($request->hasFile('image_url')){
+            $request->validate([
+                'image_url' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+            $request->image_url->store('images', 'public');
+            $user = UserDB::insert([
+                // add_image
+                'account_id' => $acc,
+                'fullname' => $request->fullname,
+                'image_url' => $request->image_url->hashName(),
+                'sex' =>$request->sex,
+                'birthday' => $request->birthday,
+                'citizen_ID' => $request->citizen_ID,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'permission' => $request->permission,
+                'created_at' => Carbon::now(),
+            ]);
+            if (!empty($user) && !empty($acc)) {
+                Session()->flash('success', 'Thêm nhân viên thành công');
+                return redirect()->route('staff');
+            } else {
+                Session()->flash('success', 'Thêm nhân viên thất bại');
+                return redirect()->route('staff');
+            }
         }
+        Session()->flash('success', 'Kiểm tra lại hình ảnh');
+        return redirect()->route('staff');
     }
     //edit nhân viên
     public function editStaff($id)

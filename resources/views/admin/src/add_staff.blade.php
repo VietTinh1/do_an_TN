@@ -47,7 +47,7 @@
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
 
-            <form class="row" method="post" action="{{ route('postAddStaff') }}">
+            <form class="row" method="post" action="{{ route('postAddStaff') }}" enctype="multipart/form-data">
               @csrf
               <div class="form-group  col-md-4">
                 <label class="control-label">Tài khoản</label>
@@ -57,13 +57,9 @@
                 <label class="control-label">Mật khẩu</label>
                 <input class="form-control" type="text" name="password" required>
               </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Mã nhân viên</label>
-                <input class="form-control" type="number" name="id" required>
-              </div>
               <div class="form-group  col-md-4">
                 <label class="control-label">Hình ảnh</label>
-                <input class="form-control" type="file" name="image" required>
+                <input class="form-control" type="file" name="image_url" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
@@ -72,9 +68,8 @@
               <div class="form-group col-md-4">
                 <label for="exampleSelect1" class="control-label">Giới tính</label>
                 <select class="form-control" id="exampleSelect1" name="sex" required>
-                  <option value="1">Nam</option>
-                  <option value="2">Nữ</option>
-                  <option value="3">Khác</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
@@ -82,12 +77,12 @@
                 <input class="form-control" type="date" name="birthday" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" name="address" required>
+                <label class="control-label">CCCD</label>
+                <input class="form-control" type="number" name="citizen_ID" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">CCCD </label>
-                <input class="form-control" type="number" name="citizen_ID" required>
+                <label class="control-label">Địa chỉ </label>
+                <input class="form-control" type="text" name="address" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Email</label>
@@ -103,13 +98,10 @@
                   <option value="Admin">Admin</option>
                 </select>
               </div>
-
               <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
               <a class="btn btn-cancel" href="{{route('staff')}}" style="margin-left: 10px;">Hủy bỏ</a>
             </form>
-
           </div>
-
   </main>
   <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script type="text/javascript">
