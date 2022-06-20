@@ -93,7 +93,6 @@ Chờ xử lí 0
 
 - Thêm view edit hdd nhập
 - TÌnh trạng chô hóa đơn nhập
-- Bỏ tạm thời phần tạo mới sp trong ô sản phẩm
 - Thêm dữ liệu trong edit sản phẩm
 
 Đã xong: sp,ncc,hd nhap, sp nhập(trừ những cái mới ghi ở trên)

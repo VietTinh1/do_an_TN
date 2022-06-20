@@ -10,12 +10,15 @@
     <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
 </head>
@@ -40,47 +43,54 @@
                     <div class="tile-body">
                         <form class="row" method="POST" action="{{ route('postAddInvoice') }}">
                             @csrf
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Mã đơn hàng</label>
                                 <input class="form-control" type="text" name="id" required>
                             </div>
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Tên khách hàng</label>
                                 <input class="form-control" type="text" name="name" required>
                             </div>
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Email</label>
                                 <input class="form-control" type="email" name="email" required>
                             </div>
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Số điện thoại</label>
                                 <input class="form-control" type="number" name="phone" maxlength="11" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
-                            <div class="form-group  col-md-4">
+
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Địa chỉ</label>
                                 <input class="form-control" type="text" name="address" required>
                             </div>
+                            <div class="form-group  col-md-3">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" name="amount" required>
+                            </div>
                             {{-- dropdown --}}
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-6 ">
                                 <label class="control-label">Tên sản phẩm</label>
-                                <select class="form-control" id="exampleSelect1" name="nameProduct" required>
+                                <select class="form-control product-chosen" multiple name="nameProduct[]">
                                     @foreach ($product as $product)
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group  col-md-4">
+
+                            <div class="form-group  col-md-3">
                                 <label class="control-label">Tổng tiền</label>
                                 <input class="form-control" type="number" name="total" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
-                            <div class="form-group col-md-4">
+
+                            <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
                                     <option value="Chờ xử lí">Chờ xử lí</option>
                                     <option value="Đã xử lí"> Đã xử lí</option>
                                 </select>
                             </div>
-                            <div class="form-group  col-md-4">
+                            <div class="form-group  col-md-6">
                                 <label class="control-label">Ghi chú đơn hàng</label>
                                 <textarea class="form-control" rows="4" name="message"></textarea>
                             </div>
@@ -135,6 +145,10 @@
                 return i;
             }
         }
+        //multi product
+        $(".product-chosen").chosen({
+            no_results_text: "Oops, nothing found!",
+        })
     </script>
 </body>
 

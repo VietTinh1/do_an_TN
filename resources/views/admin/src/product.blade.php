@@ -37,12 +37,7 @@
                 <div class="tile">
                     <div class="tile-body">
                         <div class="row element-button">
-                            <div class="col-sm-2">
-
-                                <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="Thêm"><i class="fas fa-plus"></i>
-                                    Tạo mới sản phẩm</a>
-                            </div>
-
+                           
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
                             </div>

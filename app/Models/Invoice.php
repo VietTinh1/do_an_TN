@@ -10,4 +10,7 @@ class Invoice extends Model
     use HasFactory;
     protected $table="invoices";
     public $timestamps = true;
+    public function invoice(){
+        $this->hasMany(InvoiceDetail::class, 'invoice_id', 'id');
+    }
 }
