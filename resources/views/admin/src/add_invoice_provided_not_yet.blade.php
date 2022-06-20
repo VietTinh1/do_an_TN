@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hình ảnh</label>
-                                <input class="form-control" type="file" name="image" required>
+                                <input class="form-control" type="file" name="image">
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Mã sản phẩm</label>

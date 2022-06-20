@@ -77,10 +77,6 @@
                                 <label class="control-label">Thuế(%)</label>
                                 <input class="form-control" type="number" name="tax" onkeypress="return event.charCode >= 48" min="1" required>
                             </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Mô tả</label>
-                                <textarea class="form-control" type="text" name="describe" onkeypress="return event.charCode >= 48" min="1"></textarea>
-                            </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>

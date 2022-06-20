@@ -40,4 +40,36 @@ $(document).ready(function() {
         modal.find('.modal-body #describe').val(describe);
         modal.find('.modal-body #created_at').val(createdat);
     });
+    //
+    $('#modalProduct').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var account_id = button.data('account-id')
+        var trademark = button.data('trademark')
+        var name = button.data('name')
+        var product_type_id = button.data('product-type-id')
+        var product_code = button.data('product-code')
+        var describe = button.data('describe')
+        var time_warranty = button.data('time-warranty')
+        var amount = button.data('amount')
+        var price = button.data('price')
+        var tax = button.data('tax')
+        var so_sao = button.data('so-sao')
+        var status = button.data('status')
+        var createdat = button.data('createdat')
+        var modal = $(this)
+        modal.find('.modal-body #account_id').val(account_id);
+        modal.find('.modal-body #trademark').val(trademark);
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #product_type_id').val(product_type_id);
+        modal.find('.modal-body #product_code').val(product_code);
+        modal.find('.modal-body #describe').val(describe);
+        modal.find('.modal-body #time_warranty').val(time_warranty);
+        modal.find('.modal-body #amount').val(amount);
+        modal.find('.modal-body #price').val(price);
+        modal.find('.modal-body #tax').val(tax);
+        modal.find('.modal-body #so_sao').val(so_sao);
+        modal.find('.modal-body #describe').val(describe);
+        modal.find('.modal-body #status').val(status);
+        modal.find('.modal-body #createdat').val(createdat);
+    });
 });

@@ -60,15 +60,10 @@
                             <thead>
                                 <tr>
                                     <th>Mã sản phẩm</th>
-                                    <th>NV Thêm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
-                                    <th>Đơn vị tính</th>
                                     <th>Ảnh</th>
-                                    <th>Mô tả</th>
-                                    <th>Thời gian bảo hành</th>
-                                    <th>Khuyến mãi</th>
                                     <th>Thuế</th>
                                     <th>Đánh giá</th>
                                     <th>Chi tiết</th>
@@ -79,23 +74,16 @@
                             <tbody>
                                 @foreach ($product as $product)
                                 <tr>
-
-                                    <td>{{ $product->id }}</td>
                                     <td>{{ $product->product_code }}</td>
-                                    <td>{{ $product->product_type_id}}</td>
-                                    <td>{{ $product->provided_id}}</td>
                                     <td>{{ $product->name}}</td>
-                                    <td><img src="../img-sanpham/kara.jpg" alt="" width="100px;"></td>
-                                    {{-- image --}}
                                     <td>{{ $product->amount }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->price }} VND</td>
+                                    <td><img src="{{ url('storage/'.$product->image_url) }}" alt="" title="" width="100px" /></td>
+                                    {{-- image --}}
                                     <td>{{ $product->tax }}</td>
-                                    <td>{{ $product->sale }}</td>
-                                    <td>{{ $product->sold }}</td>
-                                    <td>{{ $product->so_sao }}</td> 
-
+                                    <td>{{ $product->so_sao }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-productcode="{{ $product->product_code }}" data-producttypeid="{{ $product->product_type_id }}" data-providedid="{{ $product->provided_id }}" data-name="{{ $product->name }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-sold="{{ $product->sold }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}">Chi tiết</button>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#modalProduct" data-account-id="{{ $product->account_id }}" data-trademark="{{ $product->trademark }}" data-name="{{ $product->name }}" data-product-type-id="{{ $product->product_type_id }}" data-product-code="{{ $product->product_code }}" data-describe="{{ $product->describe }}" data-amount="{{ $product->amount }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-so-sao="{{ $product->so_sao }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}" data-sale="{{ $product->sale }}" data-time-warranty="{{ $product->time_warranty }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")
@@ -119,74 +107,7 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết sản phẩm</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Nhân viên thêm</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->account_id)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->name)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Loại sản phẩm</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->product_type_id)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mã sản phẩm</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->product_code)) @endif" readonly>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Nhà cung cấp</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->provided_id)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->describe)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->amount)) @endif" readonly>
-                            </div>
-                            <div class="form-group  col-md-12">
-                                <label class="control-label">Giá</label>
-                                <input class="form-control" type="number" value="@if(!empty( $data->price)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Thuế</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->tax)) @endif" required>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Đã bán</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->sold)) @endif" readonly>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Đánh giá</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->so_sao)) @endif" readonly>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Tình Trạng</label>
-                                <input class="form-control" type="text" value="@if(!empty( $data->status)) @endif" readonly>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="margin-right:30%;">
-                            <button type="button" class="btn btn-primary">Lưu lại</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @extends('admin.src.popup.product')
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>

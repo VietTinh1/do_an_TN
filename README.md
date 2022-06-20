@@ -78,7 +78,8 @@ Chờ xử lí 0
 - npm i bootstrap@5.2.0-beta1
 -load images:
 + php artisan storage:link
-+ src=" {{ asset('/storage/'.$post->image) }}"
++ src=" {{ asset('/storage/'.$post->image) }}" 
++asset img: <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
 
 
 -------->fix view
@@ -88,3 +89,11 @@ Chờ xử lí 0
 ->update 19/6
 - Thiếu: Check đồng bôj db
 
+
+
+- Thêm view edit hdd nhập
+- TÌnh trạng chô hóa đơn nhập
+- Bỏ tạm thời phần tạo mới sp trong ô sản phẩm
+- Thêm dữ liệu trong edit sản phẩm
+
+Đã xong: sp,ncc,hd nhap, sp nhập(trừ những cái mới ghi ở trên)

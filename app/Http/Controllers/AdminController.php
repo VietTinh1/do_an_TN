@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
 use App\Exports\exportExcelProvided;
 use App\Exports\exportExcelUser;
 use App\Imports\ProvidedImport;
+use App\Models\Account;
+use App\Models\InvoiceProvided;
 use App\Models\InvoiceProvidedDetail;
 use GuzzleHttp\Handler\Proxy;
 use Maatwebsite\Excel\Facades\Excel;
@@ -123,7 +125,11 @@ class AdminController extends Controller
     //TRANG NHẬP SẢN PHẨM
     public function invoiceProduct()
     {
-        return view('admin.src.invoice_product');
+        $invoiceProduct= DB::table('invoice_provided_details')
+                                    ->join('products','invoice_provided_details.product_id','=','products.id')
+                                    ->get();
+        //dd($invoiceProduct);
+        return view('admin.src.invoice_product', compact('invoiceProduct'));
     }
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
@@ -266,18 +272,19 @@ class AdminController extends Controller
                     'describe'=>$describe,
                     'created_at'=>Carbon::now(),
                 ]);
-                //so luong chi tiet nhap
+                //tim chi tiet nhap
                 $temp=InvoiceProvidedDetail::find($invoiceProvidedDetail);
                 //tim san pham
-                $searchAmountProduct=Product::find($temp->id);
+                $searchAmountProduct=Product::where('id','=',$temp->product_id)->get();
                 //tong
+                dd($searchAmountProduct);
                 $sumAmountProduct=$searchAmountProduct->amount+$temp->amount;
                 $sumPrice=$temp->price+$temp->price*0.1;
                 if(!empty($invoiceProvidedDetail)){
-                    // add table product
+                    // update table product
                     $product= Product::where('id','=',$temp->product_id)->update([
                         'images' =>$temp->image_url,
-                        'amout'=>$sumAmountProduct,
+                        'amount'=>$sumAmountProduct,
                         'price'=>$sumPrice,
                         'time_warranty'=>$temp->time_warranty,
                         'tax'=>$temp->tax,
@@ -303,16 +310,16 @@ class AdminController extends Controller
     }
     public function postAddInvoiceProvidedNotYet(Request $request){
         $total=$request->amount*$request->import_price;
-        $describe='Không';
-        if(!empty($request->describe)){
-            $describe=$request->describe;
-        }
+        // $describe='Không';
+        // if(!empty($request->describe)){
+        //     $describe=$request->describe;
+        // }
         if($request->hasFile('image')){
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
             $request->image->store('images','public');
-            $invoiceProvided=DB::table('invoice_provides')->insertGetId([
+            $invoiceProvided=InvoiceProvided::insertGetId([
                 'provided_id' =>$request->id_provided,
                 'account_id' =>Auth::id(),
                 'total' =>$total,
@@ -320,48 +327,75 @@ class AdminController extends Controller
                 'created_at' =>Carbon::now(),
             ]);
             if(!empty($invoiceProvided)){
-                $invoiceProvidedDetails=DB::table('invoice_provided_details')->insertGetId([
-                    'invoice_provided_id'=>$invoiceProvided,
-                    'product_type_id'=>$request->id_product_type,
-                    'image_url' =>$request->image->hashName(),
-                    'name' =>$request->name,
-                    'trademark' =>$request->trademark,
-                    'product_code' => $request->product_code,
-                    'amount' =>$request->amount,
-                    'import_price' => $request->import_price,
-                    'time_warranty' => $request->time_warranty,
-                    'tax' =>$request->tax,
-                    'describe' =>$describe,
-                    'created_at' =>Carbon::now(),
-                ]);
+                if(empty($request->image)){
+                    $invoiceProvidedDetails=InvoiceProvidedDetail::insertGetId([
+                        'invoice_provided_id'=>$invoiceProvided,
+                        'product_type_id'=>$request->id_product_type,
+                        'name' =>$request->name,
+                        'trademark' =>$request->trademark,
+                        'product_code' => $request->product_code,
+                        'amount' =>$request->amount,
+                        'import_price' => $request->import_price,
+                        'time_warranty' => $request->time_warranty,
+                        'tax' =>$request->tax,
+                        'created_at' =>Carbon::now(),
+                    ]);
+                }
+                else{
+                    $invoiceProvidedDetails=InvoiceProvidedDetail::insertGetId([
+                        'invoice_provided_id'=>$invoiceProvided,
+                        'product_type_id'=>$request->id_product_type,
+                        'image_url' =>$request->image->hashName(),
+                        'name' =>$request->name,
+                        'trademark' =>$request->trademark,
+                        'product_code' => $request->product_code,
+                        'amount' =>$request->amount,
+                        'import_price' => $request->import_price,
+                        'time_warranty' => $request->time_warranty,
+                        'tax' =>$request->tax,
+                        'created_at' =>Carbon::now(),
+                    ]);
+                }
+
                 //tim
                 $temp=InvoiceProvidedDetail::find($invoiceProvidedDetails);
-                $price=$temp->price+$temp->price*0.1;
+
+                $sumPrice=$temp->import_price + $temp->import_price*0.1;
                 if(!empty($invoiceProvidedDetails)){
-                    $product=DB::table('products')->insert([
-                        'account_id' =>Auth::id(),
-                        'product_type_id'=>$invoiceProvidedDetails,
-                        'images' =>$temp->image_url,
-                        'name'=>$temp->name,
-                        'trademark' =>$temp->trademark,
-                        'product_code' =>$temp->product_code,
-                        'amount'=>$temp->amount,
-                        'price'=>$price,
-                        'describe'=>$temp->describe,
-                        'time_warranty' => $temp->time_warranty,
-                        'tax'=>$temp->tax,
-                        'created_at'=>Carbon::now(),
-                    ]);
-                    if(!empty($product)){
+                    //them bang sp
+                    if(!empty($temp->describe)){
+                        $product=Product::insertGetId([
+                            'account_id' =>Auth::id(),
+                            'product_type_id' =>$temp->product_type_id,
+                            'name' =>$temp->name,
+                            'images' =>$temp->image_url,
+                            'trademark' =>$temp->trademark,
+                            'product_code' =>$temp->product_code,
+                            'amount'=>$temp->amount,
+                            'price'=>$sumPrice,
+                            'describe' =>$temp->describe,
+                            'time_warranty' => $temp->time_warranty,
+                            'tax'=>$temp->tax,
+                            'created_at' =>Carbon::now(),
+                        ]);
+                    }
+                    //tim id sp=>update id sp trong cthd nhap
+                    $codeProduct=Product::find($product);
+                    $addProductIdToInvoiceProvidedDetail=InvoiceProvidedDetail::where('product_code','=',$codeProduct->product_code)->update([
+                                                                                                                                                'product_id'=>$codeProduct->id,
+                                                                                                                                                'updated_at'=>Carbon::now(),
+                                                                                                                                            ]);
+                    if(!empty($product) && !empty($addProductIdToInvoiceProvidedDetail)){
                         Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thành công');
-                        return redirect()->route('invoiceProvided');
                     }
                 }
             }
             Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thất bại');
-            return redirect()->route('invoiceProvided');
         }
-        Session()->flash('success', 'Kiểm tra lại hình ảnh');
+        else{
+            Session()->flash('success', 'Kiểm tra lại hình ảnh');
+            return redirect()->back();
+        }
         return redirect()->route('invoiceProvided');
     }
     public function editInvoiceProvided($id){
@@ -386,14 +420,14 @@ class AdminController extends Controller
     }
     public function postAddStaff(Request $request)
     {
-        $acc = DB::table('accounts')->insertGetId([
+        $acc = Account::insertGetId([
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'token' => Str::random(64),
             'status' => "Đang hoạt động",
             'created_at' => Carbon::now(),
         ]);
-        $user = DB::table('users')->insert([
+        $user = UserDB::insert([
             // add_image
             'account_id' => $acc,
             'fullname' => $request->fullname,

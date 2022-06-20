@@ -46,40 +46,39 @@
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div>
-
             </div>
-
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th>Mã sản phẩm nhập</th>
-                  <th>Hình ảnh</th>
-                  <th>Số lượng </th>
-                  <th>Giá nhập </th>
-                  <th>Mô tả </th>
+                  <th>Mã hóa đơn nhập</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Loại sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Giá</th>
+                  <th>Thuế</th>
                   <th>Chi tiết</th>
                   <th>Chức năng</th>
                 </tr>
               </thead>
-              <tbody>
-
-
-                <td>1</td>
-                <td>hình 1</td>
-                <td>20</td>
-                <td>20</td>
-                <td>hihi</td>
-
-                <td>
-                  <button type="button" class="btn btn-primary open-modal">Chi tiét</button>
-                </td>
-                <td>
-                  <a href="" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-
-                  <a href="" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-
-                </td>
-              </tbody>
+              @foreach ($invoiceProduct as $invoiceProduct)
+                <tbody>
+                    <td>{{ $invoiceProduct->invoice_provided_id }}</td>
+                    <td>{{ $invoiceProduct->product_code }}</td>
+                    <td>{{ $invoiceProduct->product_type_id }}</td>
+                    <td>{{ $invoiceProduct->name }}</td>
+                    <td>{{ $invoiceProduct->amount }}</td>
+                    <td>{{ $invoiceProduct->import_price }} VND</td>
+                    <td>{{ $invoiceProduct->tax }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="" >Chi tiết hóa đơn</button>
+                    </td>
+                    <td>
+                    <a href="" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                    <a href="" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tbody>
+              @endforeach
             </table>
           </div>
         </div>
@@ -87,50 +86,7 @@
     </div>
 
     <!-- Modal POPUP -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding: 25px 0px 25px 0px;">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết hóa đơn</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="form-group col-md-12">
-                <label class="control-label">Tên khách hàng</label>
-                <input class="form-control" type="text" value="@if(!empty($data->account_id)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Email</label>
-                <input class="form-control" type="text" value=" @if(!empty($data->email_customer)) @endif" readonly>
-              </div>
-              <div class="form-group  col-md-12">
-                <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" value="@if(!empty( $data->phone)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="@if(!empty(  $data->address_customer)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Địa chỉ </label>
-                <input class="form-control" type="text" value="@if(!empty( $data->address_customer)) @endif" readonly>
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Tin nhắn</label>
-                <input class="form-control" type="text" value="@if(!empty( $data->message)) @endif" readonly>
-              </div>
-            </div>
-            <div class="modal-footer" style="margin-right:30%;">
-              <button type="button" class="btn btn-primary">Lưu lại</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   @extends('admin.src.popup.invoice_product')
   </main>
 
   <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
@@ -138,6 +94,7 @@
   <!-- Data table plugin-->
   <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
   <script type="text/javascript">
     $('#sampleTable').DataTable();
   </script>
