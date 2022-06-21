@@ -122,15 +122,7 @@ class AdminController extends Controller
         Session()->flash('success', 'Xóa sản phẩm thành công');
         return redirect()->route('product');
     }
-    //TRANG NHẬP SẢN PHẨM
-    public function invoiceProduct()
-    {
-        $invoiceProduct = DB::table('invoice_provided_details')
-            ->join('products', 'invoice_provided_details.product_id', '=', 'products.id')
-            ->get();
-        //dd($invoiceProduct);
-        return view('admin.src.invoice_product', compact('invoiceProduct'));
-    }
+  
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {

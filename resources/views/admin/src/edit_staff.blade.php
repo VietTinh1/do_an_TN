@@ -38,11 +38,11 @@
                 @csrf
                 <div class="form-group col-md-6">
                     <label class="control-label">Họ tên</label>
-                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}}" required>
+                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}" required>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlFile1">Hình ảnh</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                <div class="form-group  col-md-6">
+                    <label class="control-label">Hình ảnh</label>
+                    <input class="form-control" type="file" name="image" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">Địa chỉ</label>
@@ -76,8 +76,8 @@
                 <BR>
                 <BR>
                 <BR>
-                <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}">Hủy bỏ</a>
+                <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}" style="margin-left: 10px;">Hủy bỏ</a>
             </form>
 
             <BR>

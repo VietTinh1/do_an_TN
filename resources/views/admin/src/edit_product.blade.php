@@ -45,9 +45,9 @@
                         <label class="control-label">Tên sản phẩm</label>
                         <input class="form-control" type="text" value="{{ $product->name }}" name="name" required>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="exampleFormControlFile1">Hình ảnh</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Hình ảnh</label>
+                        <input class="form-control" type="file" name="images" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Số lượng</label>
@@ -64,10 +64,6 @@
                     <div class="form-group  col-md-6">
                         <label class="control-label">Thuế</label>
                         <input class="form-control" type="text" value="{{ $product->tax }}" name="tax" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Đã bán</label>
-                        <input class="form-control" type="text" value="{{ $product->sold }}" name="sold" required readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
@@ -91,7 +87,8 @@
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('product')}}">Hủy bỏ</a>
+
         </form>
         <BR>
         </div>

@@ -99,7 +99,7 @@
                     <tr>
                       <td>{{ $invoice->id }}</td>
                       <td>{{ $invoice->name_customer }}</td>
-                      <td></td>
+                      <td>{{ $invoice->total }}</td>
                       <td>
                         @if ($invoice->status =="Đang xử lí")
                         <span class="badge bg-success">{{ $invoice->status }}</span>

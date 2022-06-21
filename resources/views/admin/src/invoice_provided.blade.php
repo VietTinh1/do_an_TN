@@ -75,7 +75,7 @@
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
                 </td>
                 <td>
-                    <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
+                  <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
                 </td>
                 <td>
                   @if($invoiceProvides->status =="Đang xử lí")

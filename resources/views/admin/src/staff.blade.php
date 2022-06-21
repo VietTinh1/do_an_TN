@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
+
 <body onload="time()" class="app sidebar-mini rtl">
   @include('admin.menu_header')
   <main class="app-content">
@@ -44,59 +45,59 @@
               </div> --}}
               {{-- <div class="col-sm-2">
                 <a class="btn btn-excel btn-sm" href="{{ route('exportStaff') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-              </div> --}}
-              {{-- <div class="col-sm-2">
+            </div> --}}
+            {{-- <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
               </div> --}}
-            </div>
-            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
-              <thead>
-                <tr>
-                  <th>Mã nhân viên</th>
-                  <th>Hình ảnh</th>
-                  <th>Họ tên</th>
-                  <th>Ngày sinh</th>
-                  <th>Email</th>
-                  <th>Quyền</th>
-                  <th>Chi tiết</th>
-                  <th>Tình trạng</th>
-                  <th>Tính năng</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($user as $user)
-                    <tr>
-                        <td>{{ $user->id}}</td>
-                        <td>
-                            <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
-                        </td>
-                        <td>{{ $user->fullname }}</td>
-                        <td>{{ $user->birthday }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->permission }}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary open-modal" value="{{ $user->id }}" id="edit" data-toggle="modal" data-target="#modalStaff" data-account-id="{{ $user->account_id }}" data-fullname="{{ $user->fullname }}" data-sex="{{ $user->sex }}" data-birthday="{{ $user->birthday }}" data-citizenid="{{ $user->citizen_ID }}" data-address="{{ $user->address }}" data-phone="{{ $user->phone }}" data-email="{{ $user->email }}" data-permission="{{ $user->permission }}" data-status="{{ $user->status }}" data-createdat="{{ $user->created_at }}">Chi tiết</button>
-                        </td>
-                        <td>
-                            @if($user->status=="Đang hoạt động")
-                            <span class="badge bg-success">Đang hoạt động</span>
-                            @else
-                            <span class="badge bg-danger">Dừng hoạt động</span>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                            @if($user->status=="Đang hoạt động")
-                            <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-              </tbody>
-            </table>
           </div>
+          <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
+            <thead>
+              <tr>
+                <th>Mã nhân viên</th>
+                <th>Hình ảnh</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Email</th>
+                <th>Quyền</th>
+                <th>Chi tiết</th>
+                <th>Tình trạng</th>
+                <th>Tính năng</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($user as $user)
+              <tr>
+                <td>{{ $user->id}}</td>
+                <td>
+                  <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
+                </td>
+                <td>{{ $user->fullname }}</td>
+                <td>{{ $user->birthday }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->permission }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary open-modal" value="{{ $user->id }}" id="edit" data-toggle="modal" data-target="#modalStaff" data-account-id="{{ $user->account_id }}" data-fullname="{{ $user->fullname }}" data-sex="{{ $user->sex }}" data-birthday="{{ $user->birthday }}" data-citizenid="{{ $user->citizen_ID }}" data-address="{{ $user->address }}" data-phone="{{ $user->phone }}" data-email="{{ $user->email }}" data-permission="{{ $user->permission }}" data-status="{{ $user->status }}" data-createdat="{{ $user->created_at }}">Chi tiết</button>
+                </td>
+                <td>
+                  @if($user->status=="Đang hoạt động")
+                  <span class="badge bg-success">Đang hoạt động</span>
+                  @else
+                  <span class="badge bg-danger">Dừng hoạt động</span>
+                  @endif
+                </td>
+                <td>
+                  <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                  @if($user->status=="Đang hoạt động")
+                  <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                  @endif
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
     </div>
     <!-- Modal -->
     @extends('admin.src.popup.staff')

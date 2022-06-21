@@ -96,3 +96,12 @@ Chờ xử lí 0
 - Thêm dữ liệu trong edit sản phẩm
 
 Đã xong: sp,ncc,hd nhap, sp nhập(trừ những cái mới ghi ở trên)
+
+
+//công chuyện của bé Triều
+-img
+-index,report
+-chi tiết hóa đơn
+-edit sản phẩm
+-edit,delete hóa đơn nhập
+

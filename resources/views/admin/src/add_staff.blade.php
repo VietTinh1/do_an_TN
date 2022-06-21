@@ -98,8 +98,11 @@
                   <option value="Admin">Admin</option>
                 </select>
               </div>
-              <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
-              <a class="btn btn-cancel" href="{{route('staff')}}" style="margin-left: 10px;">Hủy bỏ</a>
+              <div class="form-group  col-md-4" style="margin-top: 30px;">
+                <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>
+                <a class="btn btn-cancel" href="{{route('staff')}}" style="height: 40px;padding-left: 10px;padding-right: 10px;margin-left: 10px;">Trở lại</a>
+              </div>
+
             </form>
           </div>
   </main>

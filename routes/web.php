@@ -25,13 +25,13 @@ Route::group(['prefix' => '/'], function () {
     Route::get('contact', [CustomerController::class, 'contact'])->name('contact');
 });
 
-Route::group(['prefix' =>'/login'],function(){
+Route::group(['prefix' => '/login'], function () {
     Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('CheckUser');
     Route::post('/', [LoginController::class, 'postLogin'])->name('postLogin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::group(['prefix' => '/admin','middleware' => 'CheckAuth'], function () {
+Route::group(['prefix' => '/admin', 'middleware' => 'CheckAuth'], function () {
     Route::get('/', function () {
         return redirect()->route('login');
     });
@@ -42,7 +42,6 @@ Route::group(['prefix' => '/admin','middleware' => 'CheckAuth'], function () {
     Route::get('/staff', [AdminController::class, 'staff'])->name('staff');
     Route::get('/report', [AdminController::class, 'report'])->name('report');
     Route::get('/provided', [AdminController::class, 'provided'])->name('provided');
-    Route::get('/invoice_product', [AdminController::class, 'invoiceProduct'])->name('invoiceProduct');
     Route::get('/invoice_provided', [AdminController::class, 'invoiceProvided'])->name('invoiceProvided');
 
     Route::get('/add_provided', [AdminController::class, 'addProvided'])->name('addProvided');
@@ -69,7 +68,6 @@ Route::group(['prefix' => '/admin','middleware' => 'CheckAuth'], function () {
     Route::post('/edit_product/{id}', [AdminController::class, 'postEditProduct'])->name('postEditProduct');
     Route::get('/edit_invoice_provided/{id}', [AdminController::class, 'editInvoiceProvided'])->name('editInvoiceProvided');
     Route::post('/edit_invoice_provided/{id}', [AdminController::class, 'postEditInvoiceProvided'])->name('postEditInvoiceProvided');
-    Route::get('/edit_invoice_product', [AdminController::class, 'editInvoiceProduct'])->name('editInvoiceProduct');
 
     Route::get('/delete_invoice/{id}', [AdminController::class, 'deleteInvoice'])->name('deleteInvoice');
     Route::get('/delete_product/{id}', [AdminController::class, 'deleteProduct'])->name('deleteProduct');
@@ -86,5 +84,4 @@ Route::group(['prefix' => '/admin','middleware' => 'CheckAuth'], function () {
     //import excel
     Route::get('/importProvided', [AdminController::class, 'importProvided'])->name('importProvided');
     Route::post('/importProvided', [AdminController::class, 'postImportProvided'])->name('postImportProvided');
-
 });
