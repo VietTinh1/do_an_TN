@@ -286,7 +286,8 @@ class AdminController extends Controller
                 //tim san pham
                 $searchAmountProduct = Product::where('id', '=', $temp->product_id)->get();
                 //tong
-                dd($searchAmountProduct);
+                //dd($searchAmountProduct);
+
                 $sumAmountProduct = $searchAmountProduct->amount + $temp->amount;
                 $sumPrice = $temp->price + $temp->price * 0.1;
                 if (!empty($invoiceProvidedDetail)) {
@@ -399,8 +400,9 @@ class AdminController extends Controller
                         Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thành công');
                     }
                 }
+            }else{
+                Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thất bại');
             }
-            Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thất bại');
         } else {
             Session()->flash('success', 'Kiểm tra lại hình ảnh');
             return redirect()->back();
