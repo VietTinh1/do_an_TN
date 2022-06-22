@@ -12,27 +12,27 @@
                 <div class="container-fluid">
                     <div class="form-group col-md-12">
                         <label class="control-label">Mã nhà cung cấp</label>
-                        <input class="form-control" type="number" id="provided_id" required>
+                        <input class="form-control" type="number" id="provided_id" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Nhân viên thêm</label>
-                        <input class="form-control" type="text" id="account_id" required>
+                        <input class="form-control" type="text" id="account_id" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Tổng tiền</label>
-                        <input class="form-control" type="number" id="total" required>
+                        <input class="form-control" type="number" id="total" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Số lượng</label>
-                        <input class="form-control" type="number" id="amount" required>
+                        <input class="form-control" type="number" id="amount" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Giá nhập</label>
-                        <textarea class="form-control" type="text" id="import_price" required></textarea>
+                        <textarea class="form-control" type="text" id="import_price" required readonly></textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Tình Trạng</label>
-                        <input class="form-control" type="text" id="status" readonly>
+                        <input class="form-control" type="text" id="status" readonly readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Mô tả</label>
@@ -43,10 +43,7 @@
                         <input class="form-control" type="text" id="created_at" readonly>
                     </div>
                 </div>
-                <div class="modal-footer" style="margin-right:30%;">
-                    <button type="submit" class="btn btn-primary save-edit">Lưu lại</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                </div>
+
             </form>
         </div>
     </div>
