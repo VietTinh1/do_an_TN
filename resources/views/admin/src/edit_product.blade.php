@@ -26,7 +26,7 @@
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
         @endif
-        <form action="{{ route('postEditProduct',['id'=>$product->id]) }}" method="post">
+        <form action="{{ route('postEditProduct',['id'=>$product->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
                 <div class="row">
@@ -39,40 +39,47 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label">Mã sản phẩm</label>
-                        <input class="form-control" type="text" value="{{ $product->product_code }}" name="product_code" readonly />
+                        <input class="form-control" type="text" value="{{ $product->product_code }}" name="product_code" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Hãng sản phẩm</label>
+                        <input class="form-control" type="text" value="{{ $product->trademark }}" name="trademark" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tên sản phẩm</label>
                         <input class="form-control" type="text" value="{{ $product->name }}" name="name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
+                        <select class="form-control" id="exampleSelect1" name="product_type_id">
+                            <option value="1">Điện Thoại</option>
+                            <option value="2">Tablet</option>
+                            <option value="3">Laptop</option>
+                        </select>
                     </div>
                     <div class="form-group  col-md-6">
                         <label class="control-label">Hình ảnh</label>
                         <input class="form-control" type="file" name="images" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label">Số lượng</label>
-                        <input class="form-control" type="text" value="{{ $product->amount }}" name="amount" readonly>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Thêm số lượng</label>
-                        <input class="form-control" type="text" name="addamount" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Giá tiền</label>
-                        <input class="form-control" type="text" value="{{ $product->price }}" name="price" required>
+                        <label class="control-label">Giá tiền(VND)</label>
+                        <input class="form-control" type="number" value="{{ $product->price }}" name="price" required>
                     </div>
                     <div class="form-group  col-md-6">
-                        <label class="control-label">Thuế</label>
-                        <input class="form-control" type="text" value="{{ $product->tax }}" name="tax" required>
+                        <label class="control-label">Thuế(%)</label>
+                        <input class="form-control" type="number" value="{{ $product->tax }}" name="tax" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-                        <select class="form-control" id="exampleSelect1" name="product_type">
-                            <option value="1">Điện Thoại</option>
-                            <option value="2">Tablet</option>
-                            <option value="3">Laptop</option>
-
-                        </select>
+                        <label class="control-label">Thời gian bảo hành</label>
+                        <input class="form-control" type="number" value="{{ $product->time_warranty }}" name="time_warranty" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Khuyến mãi</label>
+                        <input class="form-control" type="number" value="{{ $product->sale }}" name="sale" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Mô tả</label>
+                        <input class="form-control" type="text" value="{{ $product->describe }}" name="describe" required>
                     </div>
                     <div class="form-group col-md-6 ">
                         <label for="exampleSelect1" class="control-label">Tình trạng</label>
@@ -93,11 +100,6 @@
         <BR>
         </div>
     </main>
-
-
-
-
-
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- Data table plugin-->

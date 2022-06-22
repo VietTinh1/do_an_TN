@@ -68,9 +68,6 @@
                 <td>{{ $invoiceProvides->provided_id }}</td>
                 <td>{{ $invoiceProvides->total }}</td>
                 <td>{{ $invoiceProvides->created_at }}</td>
-                {{-- <td>
-                            <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
-                </td> --}}
                 <td>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
                 </td>
@@ -85,13 +82,10 @@
                   @else
                   <span class="badge bg-danger">Đã hủy</span>
                   @endif
-
                 </td>
-
-
                 <td>
-                  <a href="#" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                  <a href="#" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                  <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                  <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                 </td>
               </tbody>
               @endforeach

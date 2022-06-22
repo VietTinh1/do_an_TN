@@ -52,6 +52,7 @@ $(document).ready(function() {
         var time_warranty = button.data('time-warranty')
         var amount = button.data('amount')
         var price = button.data('price')
+        var sale = button.data('sale')
         var tax = button.data('tax')
         var so_sao = button.data('so-sao')
         var status = button.data('status')
@@ -66,6 +67,7 @@ $(document).ready(function() {
         modal.find('.modal-body #time_warranty').val(time_warranty);
         modal.find('.modal-body #amount').val(amount);
         modal.find('.modal-body #price').val(price);
+        modal.find('.modal-body #sale').val(sale);
         modal.find('.modal-body #tax').val(tax);
         modal.find('.modal-body #so_sao').val(so_sao);
         modal.find('.modal-body #describe').val(describe);

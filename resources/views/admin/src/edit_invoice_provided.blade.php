@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
-
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -34,7 +33,7 @@
                     </span>
                 </div>
             </div>
-            <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post">
+            <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6">

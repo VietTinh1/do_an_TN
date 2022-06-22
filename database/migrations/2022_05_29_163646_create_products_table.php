@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->integer('amount')->default(0)->unsigned();
             $table->decimal('price')->unsigned();
-            $table->string('unit',20)->default("VNĐ");
+            $table->string('unit')->default("VNĐ");
             $table->string('describe')->default("Không");//mô tả
             $table->integer('time_warranty');//tg bao hanh
             $table->integer('sale')->default(0);//khuyen mai

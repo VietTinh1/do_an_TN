@@ -34,7 +34,7 @@
                     </span>
                 </div>
             </div>
-            <form class="row" method="post" action="{{ route('postEditStaff',['id'=>$staff->id]) }}">
+            <form class="row" method="post" action="{{ route('postEditStaff',['id'=>$staff->id]) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-md-6">
                     <label class="control-label">Họ tên</label>
@@ -58,17 +58,17 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label">SĐT</label>
-                    <input class="form-control" type="text" onkeypress="return event.charCode >= 48" min="1" name="phone" value="{{ $staff->phone }}" required>
+                    <input class="form-control" type="number" onkeypress="return event.charCode >= 48" min="1" name="phone" value="{{ $staff->phone }}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleSelect1" class="control-label">Quyền</label>
-                    <select class="form-control" id="exampleSelect1" name="permission">
+                    <select class="form-control" id="exampleSelect1" name="permission" required>
                         <option value="Admin">Admin</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleSelect1" class="control-label">Quyền</label>
-                    <select class="form-control" id="exampleSelect1" name="status">
+                    <select class="form-control" id="exampleSelect1" name="status" required>
                         <option value="Đang hoạt động">Đang hoạt động</option>
                         <option value="Dừng hoạt động">Dừng hoạt động</option>
                     </select>

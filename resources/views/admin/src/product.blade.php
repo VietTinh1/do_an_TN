@@ -69,7 +69,7 @@
                                     <td>{{ $product->name}}</td>
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ $product->price }} VND</td>
-                                    <td><img src="{{ url('storage/'.$product->image_url) }}" alt="" title="" width="100px" /></td>
+                                    <td><img src="{{ url('storage/images/'.$product->images) }}" alt="" title="" width="100px" /></td>
                                     {{-- image --}}
                                     <td>{{ $product->tax }}</td>
                                     <td>{{ $product->so_sao }}</td>

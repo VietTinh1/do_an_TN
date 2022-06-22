@@ -99,9 +99,9 @@ Chờ xử lí 0
 
 
 //công chuyện của bé Triều
--img
+-img //
 -index,report
 -chi tiết hóa đơn
--edit sản phẩm
+-edit sản phẩm //
 -edit,delete hóa đơn nhập
 

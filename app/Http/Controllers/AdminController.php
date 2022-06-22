@@ -25,6 +25,7 @@ use App\Models\InvoiceProvidedDetail;
 use GuzzleHttp\Handler\Proxy;
 use Maatwebsite\Excel\Facades\Excel;
 use Prophecy\Call\Call;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -54,8 +55,6 @@ class AdminController extends Controller
     public function product()
     {
         $product = Product::all()->sortByDesc('status');
-        // $provided=Provided::all()->where('status','=',"Đang hoạt động");
-        //$productType=ProductType::all()->where('status','=',"Đang hoạt động");
         return view('admin.src.product', compact('product'));
     }
     //add sản phẩm
@@ -94,26 +93,34 @@ class AdminController extends Controller
     }
     public function postEditProduct(Request $request, $id)
     {
-        //số lượng = sp+ số lượng
-        $name = $request->name;
-        //$image=$request->image;
-        $amount = $request->amount + $request->addamount;
-        $price = $request->price;
-        $tax = $request->tax;
-        $sold = $request->sold;
-        $productType = $request->product_type;
-        $status = $request->status;
-        $db = DB::table('products')->where('id', $id)->update([
-            'name' => $name,
-            'amount' => $amount,
-            'price' => $price,
-            'tax' => $tax,
-            'sold' => $sold,
-            'product_type_id' => $productType,
-            'status' => $status,
-            'updated_at' => Carbon::now(),
-        ]);
-        Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thành công');
+        if ($request->hasFile('images')) {
+            $request->validate([
+                'images' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+            $request->images->store('images', 'public');
+
+            $db=Product::where('id',$id)->update([
+                'name' => $request->name,
+                'trademark' => $request->trademark,
+                'product_type_id' => $request->product_type_id,
+                'images' => $request->images->hashName(),
+                'price' => $request->price,
+                'tax' => $request->tax,
+                'describe' =>$request->describe,
+                'time_warranty' => $request->time_warranty,
+                'sale' => $request->sale,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(),
+            ]);
+            if($db){
+                Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thành công');
+            }else{
+                Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thất bại');
+            }
+        }
+        else{
+            Session()->flash('success', 'Kiểm tra lại hình ảnh');
+        }
         return redirect()->route('product');
     }
     public function deleteProduct($id)
@@ -122,7 +129,7 @@ class AdminController extends Controller
         Session()->flash('success', 'Xóa sản phẩm thành công');
         return redirect()->route('product');
     }
-  
+
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
@@ -402,12 +409,23 @@ class AdminController extends Controller
     }
     public function editInvoiceProvided($id)
     {
+        $data=DB::table('invoice_provides')
+                                        ->join('invoice_provided_details','invoice_provides.id','=','invoice_provided_details.invoice_provided_id')
+                                        ->join('provideds','invoice_provides.provided_id','=','provideds.id')
+                                        ->where('invoice_provides.id','=',$id)
+                                        ->orderByDesc('invoice_provides.status')
+                                        ->get();
+       $provided= Provided::all();
+        return view('admin.src.edit_invoice_provided',compact('data','provided'));
     }
     public function postEditInvoiceProvided(Request $request, $id)
     {
     }
     public function deleteInvoiceProvided($id)
     {
+        $delete=InvoiceProvided::where('id',$id)->update(['status'=>'Đã hủy']);
+        Session()->flash('success','Xóa hóa đơn thành công');
+        return redirect()->route('invoiceProvided');
     }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
@@ -467,28 +485,37 @@ class AdminController extends Controller
     }
     public function postEditStaff(Request $request, $id)
     {
-        $user = DB::table('users')->where('id', '=', $id)->update([
-            'fullname' => $request->fullname,
-            //image
-            'address' => $request->address,
-            'birthday' => $request->birthday,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'permission' => $request->permission,
-            'status' => $request->status,
-            'updated_at' => Carbon::now(),
-        ]);
-        if (!empty($user)) {
-            Session()->flash('success', 'Thay đổi thông tin nhân viên thành công');
-            return redirect()->route('staff');
-        } else {
-            Session()->flash('success', 'Thay đổi thông tin nhân viên thất bại');
-            return redirect()->route('staff');
+        if($request->hasFile('image')){
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png'
+            ]);
+            $request->image->store('images','public');
+
+            $user = UserDB::where('id', '=', $id)->update([
+                'fullname' => $request->fullname,
+                'image_url' => $request->image->hashName(),
+                'address' => $request->address,
+                'birthday' => $request->birthday,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'permission' => $request->permission,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(),
+            ]);
+            if (!empty($user)) {
+                Session()->flash('success', 'Thay đổi thông tin nhân viên thành công');
+            } else {
+                Session()->flash('success', 'Thay đổi thông tin nhân viên thất bại');
+            }
         }
+        else{
+            Session()->flash('success', 'Kiểm tra lại hình ảnh');
+        }
+        return redirect()->route('staff');
     }
     public function deleteStaff($id)
     {
-        $staff = DB::table('users')->where('id', '=', $id)->update(['status' => "Dừng hoạt động"]);
+        $staff = UserDB::where('id', '=', $id)->update(['status' => "Dừng hoạt động"]);
         Session()->flash('success', 'Xóa nhân viên thành công');
         return redirect()->route('staff');
     }

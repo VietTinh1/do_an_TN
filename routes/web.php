@@ -33,9 +33,8 @@ Route::group(['prefix' => '/login'], function () {
 
 Route::group(['prefix' => '/admin', 'middleware' => 'CheckAuth'], function () {
     Route::get('/', function () {
-        return redirect()->route('login');
+        return route('login');
     });
-
     Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::get('/product', [AdminController::class, 'product'])->name('product');
     Route::get('/invoice', [AdminController::class, 'invoice'])->name('invoice');
@@ -84,4 +83,5 @@ Route::group(['prefix' => '/admin', 'middleware' => 'CheckAuth'], function () {
     //import excel
     Route::get('/importProvided', [AdminController::class, 'importProvided'])->name('importProvided');
     Route::post('/importProvided', [AdminController::class, 'postImportProvided'])->name('postImportProvided');
+
 });

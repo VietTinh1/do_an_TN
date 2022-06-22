@@ -22,10 +22,6 @@
                         <label class="control-label">Tên sản phẩm</label>
                         <input class="form-control" type="text"  id="name" required>
                     </div>
-                    {{-- <div class="form-group col-md-12">
-                        <label class="control-label">Tên sản phẩm</label>
-                        <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
-                    </div> --}}
                     <div class="form-group col-md-12">
                         <label class="control-label">Loại sản phẩm</label>
                         <input class="form-control" type="text"  id="product_type_id" required>
