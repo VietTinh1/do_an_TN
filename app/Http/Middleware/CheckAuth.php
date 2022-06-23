@@ -18,7 +18,7 @@ class CheckAuth
     {
         // if(Auth::check()&&Auth::user()->role==0){
         //     return $next($request);
-        // }      
+        // }
         // return view('admin.auth.login');
         if(Auth::guest()){
             return view('admin.auth.login');

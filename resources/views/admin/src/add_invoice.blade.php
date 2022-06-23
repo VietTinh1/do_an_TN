@@ -44,10 +44,6 @@
                         <form class="row" method="POST" action="{{ route('postAddInvoice') }}">
                             @csrf
                             <div class="form-group  col-md-3">
-                                <label class="control-label">Mã đơn hàng</label>
-                                <input class="form-control" type="text" name="id" required>
-                            </div>
-                            <div class="form-group  col-md-3">
                                 <label class="control-label">Tên khách hàng</label>
                                 <input class="form-control" type="text" name="name" required>
                             </div>

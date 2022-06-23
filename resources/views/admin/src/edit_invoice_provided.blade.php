@@ -29,50 +29,73 @@
             <div class="row">
                 <div class="form-group  col-md-12">
                     <span class="thong-tin-thanh-toan">
-                        <h5 style="text-align:center;">Chỉnh sửa thông tin nhà cung cấp</h5>
+                        <h5 style="text-align:center;">Chỉnh sửa hóa đơn nhập</h5>
                     </span>
                 </div>
             </div>
-            <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('postEditInvoiceProvided',['id'=>$data->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Mã số thuế</label>
-                        <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Tên nhà cung cấp</label>
-                        <input class="form-control" type="text" value="{{ $provided->name }}" name="name" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Email</label>
-                        <input class="form-control" type="email" value="{{ $provided->email }}" name="email" required>
-                    </div>
-                    <div class="form-group  col-md-6">
-                        <label class="control-label">SĐT</label>
-                        <input class="form-control" type="number" value="{{ $provided->phone }}" name="phone" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Địa chỉ</label>
-                        <input class="form-control" type="text" value="{{ $provided->address }}" name="address" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Ghi chú</label>
-                        <textarea class="form-control" type="text" name="notes">{{ $provided->notes }}</textarea>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
-                        <select class="form-control" id="exampleSelect1" name="status" required>
-                            <option value="Đang hoạt động">Đang hoạt động</option>
-                            <option value="Dừng hoạt động">Dừng hoạt động</option>
+                    <div class="form-group col-md-4">
+                        <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
+                        <select class="form-control" id="exampleSelect1" name="provided_id" required>
+                            @foreach ($provided as $provided)
+                            <option value="{{ $provided->id }}">{{ $provided->name }}</option>
+                            @endforeach
                         </select>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Tên sản phẩm</label>
+                        <input class="form-control" type="text" name="name" value="{{ $data->name }}" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Tên hãng</label>
+                        <input class="form-control" type="text" name="trademark" value="{{ $data->trademark }}" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
+                        <select class="form-control" id="exampleSelect1" name="product_type_id" required>
+                            @foreach ($productType as $productType)
+                            <option value="{{ $productType->id }}">{{ $productType->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Hình ảnh hiện tại</label>
+                        <img src="{{ url('storage/images/'.$data->image_url) }}" width="80px"/>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Hình ảnh thay đổi(không bắt buộc)</label>
+                        <input class="form-control" type="file" name="image" >
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Mã sản phẩm</label>
+                        <input class="form-control" type="text" name="product_code" value="{{ $data->product_code }}" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Số lượng</label>
+                        <input class="form-control" type="number" name="amount" value="{{ $data->amount }}" onkeypress="return event.charCode >= 48" min="1" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Giá nhập(VND)</label>
+                        <input class="form-control" type="number" name="import_price" value="{{ $data->import_price }}" onkeypress="return event.charCode >= 48" min="1" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Thời gian bảo hành</label>
+                        <input class="form-control" type="number" name="time_warranty" value="{{ $data->time_warranty }}" onkeypress="return event.charCode >= 48" min="1" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Thuế(%)</label>
+                        <input class="form-control" type="number" name="tax" value="{{ $data->tax }}" onkeypress="return event.charCode >= 48" min="1" required>
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Mô tả</label>
+                        <textarea class="form-control" type="text" name="describe"  onkeypress="return event.charCode >= 48" min="1">{{ $data->describe }}</textarea>
                     </div>
                 </div> <BR>
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('provided',compact('provided')) }}">Hủy bỏ</a>
-
             </form>
             <BR>
         </div>

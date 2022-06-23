@@ -22,8 +22,8 @@ class CreateInvoiceProvidedDetailTable extends Migration
             $table->string('name',100)->nullable();//áp dụng chưa có sp
             $table->string('trademark',100)->nullable();//tên hãng
             $table->string('product_code')->nullable();
-            $table->integer('amount');
-            $table->double('import_price');
+            $table->bigInteger('amount');
+            $table->decimal('import_price');
             $table->integer('time_warranty');//tg bao hanh
             $table->float('tax')->default(0);//thuế
             $table->string('describe')->default("Không");//mô tả

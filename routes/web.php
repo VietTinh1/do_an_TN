@@ -31,9 +31,9 @@ Route::group(['prefix' => '/login'], function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::group(['prefix' => '/admin', 'middleware' => 'CheckAuth'], function () {
+Route::group(['prefix' => '/admin'], function () {
     Route::get('/', function () {
-        return route('login');
+        return redirect()->route('login');
     });
     Route::get('/index', [AdminController::class, 'index'])->name('index');
     Route::get('/product', [AdminController::class, 'product'])->name('product');

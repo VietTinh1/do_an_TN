@@ -51,7 +51,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="exampleSelect1" class="control-label">Sản phẩm</label>
-                                <select class="form-control" id="exampleSelect1" name="id_product" required>
+                                <select class="form-control" id="exampleSelect1" name="product_id" required>
                                     @foreach ($product as $product)
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
@@ -95,7 +95,7 @@
                 </div>
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
-    
+
     <script type="text/javascript">
         //Thời Gian
         function time() {
