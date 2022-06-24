@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Danh sách hóa đơn nhập | Quản trị Admin</title>
   <meta charset="utf-8">
@@ -17,6 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
+
 <body onload="time()" class="app sidebar-mini rtl">
   @include('admin.menu_header')
   <main class="app-content">
@@ -60,33 +62,33 @@
                 </tr>
               </thead>
               @foreach ($invoiceProvides as $invoiceProvides)
-                <tbody>
-                    <td>{{ $invoiceProvides->account_id }}</td>
-                    <td>{{ $invoiceProvides->provided_id }}</td>
-                    <td>{{ $invoiceProvides->total }}</td>
-                    <td>{{ $invoiceProvides->created_at }}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
-                    </td>
-                    <td>
-                        <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                    </td>
-                    <td>
-                        @if($invoiceProvides->status =="Đang xử lí")
-                            <span class="badge bg-warning"> Đang xử lí</span>
-                        @elseif($invoiceProvides->status =="Đã xử lí")
-                            <span class="badge bg-success">Đã xử lí</span>
-                        @else
-                            <span class="badge bg-danger">Đã hủy</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                        @if(empty($invoiceProvides->status =="Đã hủy"))
-                        <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                        @endif
-                    </td>
-                </tbody>
+              <tbody>
+                <td>{{ $invoiceProvides->account_id }}</td>
+                <td>{{ $invoiceProvides->provided_id }}</td>
+                <td>{{ $invoiceProvides->total }}</td>
+                <td>{{ $invoiceProvides->created_at }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-describe="{{ $invoiceProvides->describe }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
+                </td>
+                <td>
+                  <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
+                </td>
+                <td>
+                  @if($invoiceProvides->status =="Đang xử lí")
+                  <span class="badge bg-warning"> Đang xử lí</span>
+                  @elseif($invoiceProvides->status =="Đã xử lí")
+                  <span class="badge bg-success">Đã xử lí</span>
+                  @else
+                  <span class="badge bg-danger">Đã hủy</span>
+                  @endif
+                </td>
+                <td>
+                  <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                  @if(empty($invoiceProvides->status =="Đã hủy"))
+                  <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                  @endif
+                </td>
+              </tbody>
               @endforeach
             </table>
           </div>

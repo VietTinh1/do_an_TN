@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="margin-left:35%;color:red;font-size:25px;">Chi tiết nhà cung cấp</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="margin-left:29%;color:red;font-size:25px;">Chi tiết hóa đơn nhập</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color:#ccc;">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -43,7 +43,7 @@
                         <input class="form-control" type="text" id="created_at" readonly>
                     </div>
                 </div>
-    
+
             </form>
         </div>
     </div>

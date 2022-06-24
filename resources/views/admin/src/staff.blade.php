@@ -67,7 +67,7 @@
             <tbody>
               @foreach($user as $user)
               <tr>
-                <td>{{ $user->id}}</td>
+                <td>{{ $user->account_id}}</td>
                 <td>
                   <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
                 </td>

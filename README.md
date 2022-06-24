@@ -106,3 +106,8 @@ Chờ xử lí 0
 -edit,delete hóa đơn nhập
 
 //postAddInvoiceProvided
+
+
+//bug mới kkkk
+-delete rồi edit hóa đơn nhập(tình trạng):ko đổi được tình trạng
+-chi tiết hóa đơn bán
