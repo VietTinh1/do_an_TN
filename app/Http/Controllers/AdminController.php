@@ -27,7 +27,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Prophecy\Call\Call;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ModelNotFoundException;
-
+use Illuminate\Http\Response;
 class AdminController extends Controller
 {
 
@@ -39,16 +39,19 @@ class AdminController extends Controller
     public function index()
     {
         $product = Product::count();
-        $countInvoiceOnMonth = DB::table('invoices')->where([
+        $countInvoiceOnMonth = Invoice::where([
             ['status', '=', 'Đã xử lí'],
             ['created_at', '=', Carbon::now()->month],
         ])->count();
-        $outOfProduct = DB::table('products')->where([
+        $countCustomer=Invoice::distinct()->count('name_customer');
+        $outOfProduct = Product::where([
             ['status', '=', 'Đang hoạt động'],
             ['amount', '<', '10'],
         ])->count();
-        $invoice = Invoice::orderByDesc('status')->get()->take(4);
-        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'outOfProduct', 'invoice'));
+        $invoice = Invoice::orderByDesc('status')->take(4)->get();
+        $newCustomer = Invoice::take(5)->latest()->get();
+        $chart=UserDB::all();
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth','countCustomer', 'outOfProduct', 'invoice','newCustomer','chart'));
     }
 
     //TRANG SẢN PHẨM ADMIN
@@ -669,7 +672,20 @@ class AdminController extends Controller
     //TRANG BÁO CÁO
     public function report()
     {
-        return view('admin.src.report');
+        $user = UserDB::all()->count();
+        $product= Product::all()->count();
+        $invoice = Invoice::all()->count();
+        $total = Invoice::all()->sum('total');
+        $outProduct=Product::where('amount','<',10)->count();
+        $deleteProduct=Product::where('status','Đã hủy')->count();
+        //san pham ban chay
+        //san pham da het
+        $endProduct=Product::where('amount','=',0)->latest()->get();
+        //nv moi
+        $newUser = UserDB::latest()->take(5)->get();
+        return view('admin.src.report',
+                    compact('user','product','invoice','total','outProduct','deleteProduct','endProduct','newUser')
+        );
     }
     public function exportProvided()
     {

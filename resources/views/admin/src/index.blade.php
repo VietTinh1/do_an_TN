@@ -45,7 +45,7 @@
             <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
               <div class="info">
                 <h4>Tổng khách hàng</h4>
-                <p><b>56 khách hàng</b></p>
+                <p><b>{{ $countCustomer }} khách hàng</b></p>
                 <p class="info-tong">Tổng số khách hàng được quản lý.</p>
               </div>
             </div>
@@ -128,37 +128,21 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Tên khách hàng</th>
-                      <th>Ngày sinh</th>
                       <th>Số điện thoại</th>
+                      <th>Email</th>
+                      <th>Địa chỉ</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($newCustomer as $newCustomer)
                     <tr>
-                      <td>#183</td>
-                      <td>Hột vịt muối</td>
-                      <td>21/7/1992</td>
-                      <td><span class="tag tag-success">0921387221</span></td>
-                    </tr>
-                    <tr>
-                      <td>#219</td>
-                      <td>Bánh tráng trộn</td>
-                      <td>30/4/1975</td>
-                      <td><span class="tag tag-warning">0912376352</span></td>
-                    </tr>
-                    <tr>
-                      <td>#627</td>
-                      <td>Cút rang bơ</td>
-                      <td>12/3/1999</td>
-                      <td><span class="tag tag-primary">01287326654</span></td>
-                    </tr>
-                    <tr>
-                      <td>#175</td>
-                      <td>Hủ tiếu nam vang</td>
-                      <td>4/12/20000</td>
-                      <td><span class="tag tag-danger">0912376763</span></td>
-                    </tr>
+                        <td>{{ $newUser->name_customer }}</td>
+                        <td><span class="tag tag-success">{{ $newUser->phone }}</span></td>
+                        <td>{{ $newUser->email_customer }}</td>
+                        <td>{{ $newUser->address_customer }}</td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -176,7 +160,7 @@
             <div class="tile">
               <h3 class="tile-title">Dữ liệu 6 tháng đầu vào</h3>
               <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                <canvas class="embed-responsive-item" id="lineChart"></canvas>
               </div>
             </div>
           </div>
@@ -184,17 +168,14 @@
             <div class="tile">
               <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
               <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
+                <canvas class="embed-responsive-item" id="barChart"></canvas>
               </div>
             </div>
           </div>
         </div>
-
       </div>
       <!--END right-->
     </div>
-
-
     <div class="text-center" style="font-size: 13px">
       <p><b>Bản quyển &copy; 2022 Website Bán hàng | Bởi TT-TT
         </b></p>
@@ -232,10 +213,10 @@
         }
       ]
     };
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
-    var ctxb = $("#barChartDemo").get(0).getContext("2d");
-    var barChart = new Chart(ctxb).Bar(data);
+    // var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+    // var lineChart = new Chart(ctxl).Line(data);
+    // var ctxb = $("#barChartDemo").get(0).getContext("2d");
+    // var barChart = new Chart(ctxb).Bar(data);
   </script>
   <script type="text/javascript">
     //Thời Gian
