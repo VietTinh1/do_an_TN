@@ -22,52 +22,50 @@
                         <label class="control-label">Tên sản phẩm</label>
                         <input class="form-control" type="text" id="name" required readonly>
                     </div>
-<<<<<<< HEAD
                     <div class="form-group col-md-12">
                         <label class="control-label">Loại sản phẩm</label>
-                        <input class="form-control" type="text"  id="product_type_id" required>
+                        <input class="form-control" type="text" id="product_type_id" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Mã sản phẩm</label>
-                        <input class="form-control" type="text"  id="product_code" readonly>
+                        <input class="form-control" type="text" id="product_code" readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Mô tả</label>
-                        <input class="form-control" type="text"  id="describe" required>
+                        <input class="form-control" type="text" id="describe" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Số lượng</label>
-                        <input class="form-control" type="text"  id="amount" readonly>
+                        <input class="form-control" type="text" id="amount" readonly readonly>
                     </div>
                     <div class="form-group  col-md-12">
                         <label class="control-label">Giá(VND)</label>
-                        <input class="form-control" type="number"  id="price" required>
+                        <input class="form-control" type="number" id="price" required readonly>
                     </div>
                     <div class="form-group  col-md-12">
                         <label class="control-label">Khuyến mãi</label>
-                        <input class="form-control" type="number"  id="sale" required>
+                        <input class="form-control" type="number" id="sale" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Thời gian bảo hành</label>
-                        <input class="form-control" type="number"   id="time_warranty" readonly>
+                        <input class="form-control" type="number" id="time_warranty" readonly readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Thuế</label>
-                        <input class="form-control" type="text"  id="tax" required>
+                        <input class="form-control" type="text" id="tax" required readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Đánh giá</label>
-                        <input class="form-control" type="text"  id="so_sao" readonly>
+                        <input class="form-control" type="text" id="so_sao" readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Tình Trạng</label>
-                        <input class="form-control" type="text"  id="status" readonly>
+                        <input class="form-control" type="text" id="status" readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Ngày tạo</label>
-                        <input class="form-control" type="text"  id="createdat" readonly>
+                        <input class="form-control" type="text" id="createdat" readonly>
                     </div>
-=======
                     {{-- <div class="form-group col-md-12">
                         <label class="control-label">Tên sản phẩm</label>
                         <img src="{{ url('storage/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
@@ -75,7 +73,7 @@
                 <div class="form-group col-md-12">
                     <label class="control-label">Loại sản phẩm</label>
                     <input class="form-control" type="text" id="product_type_id" required readonly>
->>>>>>> 53adea06c56a0e0efd9b86b4c16cd62c5b6418db
+
                 </div>
                 <div class="form-group col-md-12">
                     <label class="control-label">Mã sản phẩm</label>

@@ -84,7 +84,9 @@
                                     <option value="Đã xử lí">Đã xử lí</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-4">
+                            <br>
+                            <br>
+                            <div class="form-group col-md-4" style="margin-top: 3%;">
                                 <button class="btn btn-save" type="submit" style="margin-bottom: 13%;">Lưu lại</button>
                                 <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoiceProvided') }}">Hủy bỏ</a>
                             </div>

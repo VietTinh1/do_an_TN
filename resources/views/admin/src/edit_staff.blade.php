@@ -38,7 +38,7 @@
                 @csrf
                 <div class="form-group col-md-6">
                     <label class="control-label">Họ tên</label>
-                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}" required>
+                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}" required >
                 </div>
                 <div class="form-group  col-md-6">
                     <label class="control-label">Hình ảnh</label>
