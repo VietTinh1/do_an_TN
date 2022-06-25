@@ -10,11 +10,8 @@
 + src=" {{ asset('/storage/'.$post->image) }}" 
 +asset img: <img src="{{ url('storage/images/'.$invoiceProvides->image_url) }}" alt="" title="" width="100px" />
 
-
-<<<<<<< HEAD
 Tính:
 -> Chart index
-=======
 -------->fix view
 ----Ưu tiên: Xem database giải quyết input giới hạn số lượng kí tự(tới giới hạn không nhập thêm được, chứ không phải vẫn nhập rồi mất chữ sau): 
 + ưu tiên: provided(index,add,edit)
@@ -44,4 +41,3 @@ Tính:
 //bug mới kkkk
 -delete rồi edit hóa đơn nhập(tình trạng):ko đổi được tình trạng
 -chi tiết hóa đơn bán
->>>>>>> 6f62f1a9e6c45070f14b0820a188e8ed81b17bbe

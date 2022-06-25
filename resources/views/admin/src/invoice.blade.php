@@ -64,6 +64,7 @@
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
+                  <th>Số lượng</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
                   <th>Lời nhắn</th>
@@ -80,8 +81,8 @@
                   <td>{{ $data->email_customer }}</td>
                   <td>{{ $data->phone }}</td>
                   <td>{{ $data->address_customer }}</td>
-                  <td>{{ $data->total }}</td>
-
+                  <td>{{ $data->amount }}</td>
+                  <td>{{ $data->total }}</td> 
                   <td>{{ $data->created_at }}</td>
                   <td>{{ $data->message }}</td>
                   <td>

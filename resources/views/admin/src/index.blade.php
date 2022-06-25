@@ -137,11 +137,11 @@
                   <tbody>
                     @foreach ($newCustomer as $newCustomer)
                     <tr>
-                        <td>{{ $newUser->name_customer }}</td>
-                        <td><span class="tag tag-success">{{ $newUser->phone }}</span></td>
-                        <td>{{ $newUser->email_customer }}</td>
-                        <td>{{ $newUser->address_customer }}</td>
-                      </tr>
+                      <td>{{ $newCustomer->name_customer }}</td>
+                      <td><span class="tag tag-success">{{ $newCustomer->phone }}</span></td>
+                      <td>{{ $newCustomer->email_customer }}</td>
+                      <td>{{ $newCustomer->address_customer }}</td>
+                    </tr>
                     @endforeach
                   </tbody>
                 </table>

@@ -60,10 +60,7 @@
                                 <label class="control-label">Địa chỉ</label>
                                 <input class="form-control" type="text" name="address" required>
                             </div>
-                            <div class="form-group  col-md-3">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" required>
-                            </div>
+
                             {{-- dropdown --}}
                             <div class="form-group  col-md-6 ">
                                 <label class="control-label">Tên sản phẩm</label>
@@ -73,7 +70,10 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="form-group  col-md-3">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" name="amount" required>
+                            </div>
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Tổng tiền</label>
                                 <input class="form-control" type="number" name="total" onkeypress="return event.charCode >= 48" min="1" required>

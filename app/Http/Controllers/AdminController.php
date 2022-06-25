@@ -28,6 +28,7 @@ use Prophecy\Call\Call;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ModelNotFoundException;
 use Illuminate\Http\Response;
+
 class AdminController extends Controller
 {
 
@@ -43,15 +44,15 @@ class AdminController extends Controller
             ['status', '=', 'Đã xử lí'],
             ['created_at', '=', Carbon::now()->month],
         ])->count();
-        $countCustomer=Invoice::distinct()->count('name_customer');
+        $countCustomer = Invoice::distinct()->count('name_customer');
         $outOfProduct = Product::where([
             ['status', '=', 'Đang hoạt động'],
             ['amount', '<', '10'],
         ])->count();
         $invoice = Invoice::orderByDesc('status')->take(4)->get();
         $newCustomer = Invoice::take(5)->latest()->get();
-        $chart=UserDB::all();
-        return view('admin.src.index', compact('product', 'countInvoiceOnMonth','countCustomer', 'outOfProduct', 'invoice','newCustomer','chart'));
+        $chart = UserDB::all();
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'chart'));
     }
 
     //TRANG SẢN PHẨM ADMIN
@@ -103,26 +104,25 @@ class AdminController extends Controller
             ]);
             $request->images->store('images', 'public');
 
-            $db=Product::where('id',$id)->update([
+            $db = Product::where('id', $id)->update([
                 'name' => $request->name,
                 'trademark' => $request->trademark,
                 'product_type_id' => $request->product_type_id,
                 'images' => $request->images->hashName(),
                 'price' => $request->price,
                 'tax' => $request->tax,
-                'describe' =>$request->describe,
+                'describe' => $request->describe,
                 'time_warranty' => $request->time_warranty,
                 'sale' => $request->sale,
                 'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
-            if($db){
+            if ($db) {
                 Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thành công');
-            }else{
+            } else {
                 Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thất bại');
             }
-        }
-        else{
+        } else {
             Session()->flash('success', 'Kiểm tra lại hình ảnh');
         }
         return redirect()->route('product');
@@ -137,7 +137,7 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
-        $data = Invoice::all()->sortByDesc('status')->sortByDesc('created_at');
+        $data = DB::table('invoices')->join('invoice_details', 'invoices.id', '=', 'invoice_details.invoice_id')->latest('invoices.created_at')->get();
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -270,7 +270,7 @@ class AdminController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             if (!empty($invoiceProvided)) {
-                $invoiceProvidedDetail =InvoiceProvidedDetail::insertGetId([
+                $invoiceProvidedDetail = InvoiceProvidedDetail::insertGetId([
                     'invoice_provided_id' => $invoiceProvided,
                     'product_id' => $request->product_id,
                     'image_url' => $request->image->hashName(),
@@ -284,7 +284,7 @@ class AdminController extends Controller
                 //tim chi tiet nhap
                 $temp = InvoiceProvidedDetail::find($invoiceProvidedDetail);
                 //tim san pham
-                $searchAmountProduct = Product::where('id','=', $temp->product_id)->first();
+                $searchAmountProduct = Product::where('id', '=', $temp->product_id)->first();
                 //tong
                 $sumAmountProduct = $searchAmountProduct->amount + $temp->amount;
                 $sumPrice = $temp->price + $temp->price * 0.1;
@@ -398,7 +398,7 @@ class AdminController extends Controller
                         Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thành công');
                     }
                 }
-            }else{
+            } else {
                 Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thất bại');
             }
         } else {
@@ -409,99 +409,98 @@ class AdminController extends Controller
     }
     public function editInvoiceProvided($id)
     {
-        $data=DB::table('invoice_provided_details')
-                                        ->join('invoice_provides','invoice_provides.id','=','invoice_provided_details.invoice_provided_id')
-                                        ->join('products','invoice_provided_details.product_id','=','products.id')
-                                        ->first();
-        $provided= Provided::all();
-        $productType=ProductType::all();
-        return view('admin.src.edit_invoice_provided',compact('data', 'provided', 'productType'));
+        $data = DB::table('invoice_provided_details')
+            ->join('invoice_provides', 'invoice_provides.id', '=', 'invoice_provided_details.invoice_provided_id')
+            ->join('products', 'invoice_provided_details.product_id', '=', 'products.id')
+            ->first();
+        $provided = Provided::all();
+        $productType = ProductType::all();
+        return view('admin.src.edit_invoice_provided', compact('data', 'provided', 'productType'));
     }
     public function postEditInvoiceProvided(Request $request, $id)
     {
         //update table invoice provided
-        $invoiceProvided=InvoiceProvided::where('id',$id)->update(['provided_id'=>$request->provided_id,'updated_at'=>Carbon::now(),]);
-        $idInvoiceProvided=InvoiceProvided::where('id',$id)->first();
-        $chenhLechSoLuong=$request->amount-$idInvoiceProvided->amount;
-        if($request->hasFile('image')){
+        $invoiceProvided = InvoiceProvided::where('id', $id)->update(['provided_id' => $request->provided_id, 'updated_at' => Carbon::now(),]);
+        $idInvoiceProvided = InvoiceProvided::where('id', $id)->first();
+        $chenhLechSoLuong = $request->amount - $idInvoiceProvided->amount;
+        if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png'
             ]);
-            $request->image->store('images','public');
-                $invoiceProvidedDetail=InvoiceProvidedDetail::where('invoice_provided_id',$idInvoiceProvided->id)->update([
-                    'name' =>$request->name,
-                    'trademark' =>$request->trademark,
-                    'product_type_id' =>$request->product_type_id,
-                    'image_url' =>$request->image->hashName(),
-                    'product_code' =>$request->product_code,
-                    'amount' =>$request->amount,
-                    'import_price' =>$request->import_price,
-                    'time_warranty' => $request->time_warranty,
-                    'tax' => $request->tax,
-                    'describe' => $request->describe,
-                    'updated_at' => Carbon::now(),
-                ]);
-                //tim id product trong  invoice_provided_details
-                $idProduct=InvoiceProvidedDetail::where('invoice_provided_id',$idInvoiceProvided->id)->first();
-
-                $countAmount=$idProduct->amount+$chenhLechSoLuong;
-                $sumPrice=$idInvoiceProvided->import_price+$idInvoiceProvided->import_price*0.1;
-
-                $product= Product::where('id',$idInvoiceProvided->product_id)->update([
-                    'name' =>$request->name,
-                    'trademark' =>$request->trademark,
-                    'product_type_id' =>$request->product_type_id,
-                    'product_code' =>$request->product_code,
-                    'images' =>$request->image->hashName(),
-                    'amount' =>$countAmount,
-                    'price' =>$sumPrice,
-                    'time_warranty' => $request->time_warranty,
-                    'tax' => $request->tax,
-                    'describe' => $request->describe,
-                    'updated_at' => Carbon::now(),
-                ]);
-                Session()->flash('success','Sửa dữ liệu thành công');
-        }
-        else{
-            //k co hinh anh
-            $invoiceProvidedDetail=InvoiceProvidedDetail::where('invoice_provided_id',$idInvoiceProvided->id)->update([
-                'name' =>$request->name,
-                'trademark' =>$request->trademark,
-                'product_type_id' =>$request->product_type_id,
-                'product_code' =>$request->product_code,
-                'amount' =>$request->amount,
-                'import_price' =>$request->import_price,
+            $request->image->store('images', 'public');
+            $invoiceProvidedDetail = InvoiceProvidedDetail::where('invoice_provided_id', $idInvoiceProvided->id)->update([
+                'name' => $request->name,
+                'trademark' => $request->trademark,
+                'product_type_id' => $request->product_type_id,
+                'image_url' => $request->image->hashName(),
+                'product_code' => $request->product_code,
+                'amount' => $request->amount,
+                'import_price' => $request->import_price,
                 'time_warranty' => $request->time_warranty,
                 'tax' => $request->tax,
                 'describe' => $request->describe,
                 'updated_at' => Carbon::now(),
             ]);
             //tim id product trong  invoice_provided_details
-            $idProduct=InvoiceProvidedDetail::where('invoice_provided_id',$idInvoiceProvided->id)->first();
+            $idProduct = InvoiceProvidedDetail::where('invoice_provided_id', $idInvoiceProvided->id)->first();
 
-            $countAmount=$idProduct->amount+$chenhLechSoLuong;
-            $sumPrice=$idInvoiceProvided->import_price+$idInvoiceProvided->import_price*0.1;
+            $countAmount = $idProduct->amount + $chenhLechSoLuong;
+            $sumPrice = $idInvoiceProvided->import_price + $idInvoiceProvided->import_price * 0.1;
 
-            $product= Product::where('id',$idInvoiceProvided->product_id)->update([
-                'name' =>$request->name,
-                'trademark' =>$request->trademark,
-                'product_type_id' =>$request->product_type_id,
-                'product_code' =>$request->product_code,
-                'amount' =>$countAmount,
-                'price' =>$sumPrice,
+            $product = Product::where('id', $idInvoiceProvided->product_id)->update([
+                'name' => $request->name,
+                'trademark' => $request->trademark,
+                'product_type_id' => $request->product_type_id,
+                'product_code' => $request->product_code,
+                'images' => $request->image->hashName(),
+                'amount' => $countAmount,
+                'price' => $sumPrice,
                 'time_warranty' => $request->time_warranty,
                 'tax' => $request->tax,
                 'describe' => $request->describe,
                 'updated_at' => Carbon::now(),
             ]);
-            Session()->flash('success','Sửa dữ liệu thành công');
+            Session()->flash('success', 'Sửa dữ liệu thành công');
+        } else {
+            //k co hinh anh
+            $invoiceProvidedDetail = InvoiceProvidedDetail::where('invoice_provided_id', $idInvoiceProvided->id)->update([
+                'name' => $request->name,
+                'trademark' => $request->trademark,
+                'product_type_id' => $request->product_type_id,
+                'product_code' => $request->product_code,
+                'amount' => $request->amount,
+                'import_price' => $request->import_price,
+                'time_warranty' => $request->time_warranty,
+                'tax' => $request->tax,
+                'describe' => $request->describe,
+                'updated_at' => Carbon::now(),
+            ]);
+            //tim id product trong  invoice_provided_details
+            $idProduct = InvoiceProvidedDetail::where('invoice_provided_id', $idInvoiceProvided->id)->first();
+
+            $countAmount = $idProduct->amount + $chenhLechSoLuong;
+            $sumPrice = $idInvoiceProvided->import_price + $idInvoiceProvided->import_price * 0.1;
+
+            $product = Product::where('id', $idInvoiceProvided->product_id)->update([
+                'name' => $request->name,
+                'trademark' => $request->trademark,
+                'product_type_id' => $request->product_type_id,
+                'product_code' => $request->product_code,
+                'amount' => $countAmount,
+                'price' => $sumPrice,
+                'time_warranty' => $request->time_warranty,
+                'tax' => $request->tax,
+                'describe' => $request->describe,
+                'updated_at' => Carbon::now(),
+            ]);
+            Session()->flash('success', 'Sửa dữ liệu thành công');
         }
         return redirect()->route('invoiceProvided');
     }
     public function deleteInvoiceProvided($id)
     {
-        $delete=InvoiceProvided::where('id',$id)->update(['status'=>'Đã hủy']);
-        Session()->flash('success','Xóa hóa đơn thành công');
+        $delete = InvoiceProvided::where('id', $id)->update(['status' => 'Đã hủy']);
+        Session()->flash('success', 'Xóa hóa đơn thành công');
         return redirect()->route('invoiceProvided');
     }
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
@@ -524,7 +523,7 @@ class AdminController extends Controller
             'status' => "Đang hoạt động",
             'created_at' => Carbon::now(),
         ]);
-        if($request->hasFile('image_url')){
+        if ($request->hasFile('image_url')) {
             $request->validate([
                 'image_url' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
@@ -534,7 +533,7 @@ class AdminController extends Controller
                 'account_id' => $acc,
                 'fullname' => $request->fullname,
                 'image_url' => $request->image_url->hashName(),
-                'sex' =>$request->sex,
+                'sex' => $request->sex,
                 'birthday' => $request->birthday,
                 'citizen_ID' => $request->citizen_ID,
                 'address' => $request->address,
@@ -562,11 +561,11 @@ class AdminController extends Controller
     }
     public function postEditStaff(Request $request, $id)
     {
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png'
             ]);
-            $request->image->store('images','public');
+            $request->image->store('images', 'public');
 
             $user = UserDB::where('id', '=', $id)->update([
                 'fullname' => $request->fullname,
@@ -584,8 +583,7 @@ class AdminController extends Controller
             } else {
                 Session()->flash('success', 'Thay đổi thông tin nhân viên thất bại');
             }
-        }
-        else{
+        } else {
             Session()->flash('success', 'Kiểm tra lại hình ảnh');
         }
         return redirect()->route('staff');
@@ -673,18 +671,19 @@ class AdminController extends Controller
     public function report()
     {
         $user = UserDB::all()->count();
-        $product= Product::all()->count();
+        $product = Product::all()->count();
         $invoice = Invoice::all()->count();
         $total = Invoice::all()->sum('total');
-        $outProduct=Product::where('amount','<',10)->count();
-        $deleteProduct=Product::where('status','Đã hủy')->count();
+        $outProduct = Product::where('amount', '<', 10)->count();
+        $deleteProduct = Product::where('status', 'Đã hủy')->count();
         //san pham ban chay
         //san pham da het
-        $endProduct=Product::where('amount','=',0)->latest()->get();
+        $endProduct = Product::where('amount', '=', 0)->latest()->get();
         //nv moi
         $newUser = UserDB::latest()->take(5)->get();
-        return view('admin.src.report',
-                    compact('user','product','invoice','total','outProduct','deleteProduct','endProduct','newUser')
+        return view(
+            'admin.src.report',
+            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser')
         );
     }
     public function exportProvided()

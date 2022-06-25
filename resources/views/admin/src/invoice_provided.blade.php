@@ -51,7 +51,7 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
-                  <th>Người thêm</th>
+                  <th>Nhân viên thêm</th>
                   <th>Mã nhà cung cấp</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
