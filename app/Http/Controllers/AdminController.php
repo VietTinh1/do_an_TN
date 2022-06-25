@@ -51,8 +51,13 @@ class AdminController extends Controller
         ])->count();
         $invoice = Invoice::orderByDesc('status')->take(4)->get();
         $newCustomer = Invoice::take(5)->latest()->get();
-        $chart = UserDB::all();
-        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'chart'));
+        $chart = Account::all();
+        $arr = [];
+        foreach ($chart as $chart) {
+            $arr[] = $chart->id;
+        }
+
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'chart', 'arr'));
     }
 
     //TRANG SẢN PHẨM ADMIN
