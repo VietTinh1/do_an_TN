@@ -166,7 +166,7 @@
           </div>
           <div class="col-md-12">
             <div class="tile">
-              <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
+              <h3 class="tile-title">Dữ liệu nhân viên</h3>
               <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="lineChart"></canvas>
               </div>
@@ -192,17 +192,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-  <!-- test -->
+  <!-- barChart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <canvas id="barChart" width="400" height="400"></canvas>
   <script type="text/javascript">
     //setup block bar
-    const arr = <?php echo json_encode($arr); ?>;
+    const bar = <?php echo json_encode($bar); ?>;
     const data = {
       labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
       datasets: [{
         label: 'Thống kê',
-        data: arr,
+        data: bar,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -220,7 +220,7 @@
           'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
-      }]
+      }, ]
     };
     //config bar
     const config = {
@@ -237,6 +237,34 @@
     //render bar
     const myChart = new Chart(
       document.getElementById('barChart'),
+      config
+    );
+  </script>
+
+  <!-- lineChart -->
+  <canvas id="lineChart" width="400" height="400"></canvas>
+  <script type="text/javascript">
+    //setup block line
+    const line = <?php echo json_encode($line); ?>;
+    const data = {
+      labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+      datasets: [{
+        label: 'Thống kê',
+        data: line,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
+    //config line
+    const config = {
+      type: 'line',
+      data,
+
+    };
+    //render line
+    const myChart = new Chart(
+      document.getElementById('lineChart'),
       config
     );
   </script>
