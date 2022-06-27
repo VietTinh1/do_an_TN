@@ -59,7 +59,7 @@ class AdminController extends Controller
         }
 
         //lineChart
-        $lineChart = Account::all();
+        $lineChart = Provided::all();
         $line = [];
         foreach ($lineChart as $lineChart) {
             $line[] = $lineChart->id;
@@ -693,9 +693,23 @@ class AdminController extends Controller
         $endProduct = Product::where('amount', '=', 0)->latest()->get();
         //nv moi
         $newUser = UserDB::latest()->take(5)->get();
+
+        //barChart
+        $barChart = Account::all();
+        $bar = [];
+        foreach ($barChart as $barChart) {
+            $bar[] = $barChart->id;
+        }
+
+        //lineChart
+        $lineChart = Provided::all();
+        $line = [];
+        foreach ($lineChart as $lineChart) {
+            $line[] = $lineChart->id;
+        }
         return view(
             'admin.src.report',
-            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser')
+            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
         );
     }
     public function exportProvided()

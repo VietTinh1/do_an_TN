@@ -191,15 +191,15 @@
                             </thead>
                             <tbody>
                                 @foreach ($endProduct as $endProduct )
-                                    <tr>
-                                        <td>{{ $endProduct->product_code }}</td>
-                                        <td>{{ $endProduct->name }}</td>
-                                        <td><img src="{{ url('storage/images/'.$endProduct->images) }}" alt="" width="100px;"></td>
-                                        <td>{{ $endProduct->amount }}</td>
-                                        <td><span class="badge bg-danger">Hết hàng</span></td>
-                                        <td>{{ $endProduct->price }} đ</td>
-                                        <td></td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $endProduct->product_code }}</td>
+                                    <td>{{ $endProduct->name }}</td>
+                                    <td><img src="{{ url('storage/images/'.$endProduct->images) }}" alt="" width="100px;"></td>
+                                    <td>{{ $endProduct->amount }}</td>
+                                    <td><span class="badge bg-danger">Hết hàng</span></td>
+                                    <td>{{ $endProduct->price }} đ</td>
+                                    <td></td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -245,17 +245,17 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="tile">
-                    <h3 class="tile-title">DỮ LIỆU HÀNG THÁNG</h3>
+                    <h3 class="tile-title">Dữ liệu nhân viên</h3>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                        <canvas class="embed-responsive-item" id="barChart"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="tile">
-                    <h3 class="tile-title">THỐNG KÊ DOANH SỐ</h3>
+                    <h3 class="tile-title">Dữ liệu nhà cung cấp</h3>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
+                        <canvas class="embed-responsive-item" id="lineChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -266,44 +266,87 @@
         </div>
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
-    <script type="text/javascript" src="{{asset('js/plugins/chart.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- barChart -->
+
+    <canvas id="barChart" width="400" height="400"></canvas>
     <script type="text/javascript">
+        //setup block bar
+        var bar = <?php echo json_encode($bar); ?>;
         var data = {
-            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
             datasets: [{
-                    label: "Dữ liệu đầu tiên",
-                    fillColor: "rgba(255, 255, 255, 0.158)",
-                    strokeColor: "black",
-                    pointColor: "rgb(220, 64, 59)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "green",
-                    data: [20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81]
-                },
-                {
-                    label: "Dữ liệu kế tiếp",
-                    fillColor: "rgba(255, 255, 255, 0.158)",
-                    strokeColor: "rgb(220, 64, 59)",
-                    pointColor: "black",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "green",
-                    data: [48, 48, 49, 39, 86, 10, 50, 70, 60, 70, 75, 90]
-                }
-            ]
+                label: 'Thống kê',
+                data: bar,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }, ]
         };
-
-
-        var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-        var lineChart = new Chart(ctxl).Line(data);
-
-        var ctxb = $("#barChartDemo").get(0).getContext("2d");
-        var barChart = new Chart(ctxb).Bar(data);
+        //config bar
+        var config = {
+            type: 'bar',
+            data,
+            options: {
+                animation: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+        //render bar
+        var barChart = new Chart(
+            document.getElementById('barChart'),
+            config
+        );
     </script>
 
+    <!-- lineChart -->
+    <canvas id="lineChart" width="400" height="400"></canvas>
+    <script type="text/javascript">
+        //setup block line
+        var line = <?php echo json_encode($line); ?>;
+        var data = {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+            datasets: [{
+                label: 'Thống kê',
+                data: line,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        //config line
+        var config = {
+            type: 'line',
+            data,
+
+        };
+        //render line
+        var lineChart = new Chart(
+            document.getElementById('lineChart'),
+            config
+        );
+    </script>
 </body>
 
 </html>
