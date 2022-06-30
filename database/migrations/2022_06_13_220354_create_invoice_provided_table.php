@@ -17,7 +17,7 @@ class CreateInvoiceProvidedTable extends Migration
             $table->increments('id');
             $table->integer('provided_id');
             $table->integer('account_id');
-            $table->double('total');
+            $table->double('total')->nullable();
             $table->string('status')->default("Đang xử lí");// Đã xử lí // Đã hủy
             $table->timestamps();
         });

@@ -15,8 +15,8 @@ class CreatePaymentTypesTable extends Migration
     {
         Schema::create('payment_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('card_type');
-            $table->string('card_code');
+            $table->string('card_type')->nullable();
+            $table->string('card_code')->nullable();
             $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });

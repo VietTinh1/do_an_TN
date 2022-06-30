@@ -84,4 +84,25 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/importProvided', [AdminController::class, 'importProvided'])->name('importProvided');
     Route::post('/importProvided', [AdminController::class, 'postImportProvided'])->name('postImportProvided');
 
+    //Thêm loại all
+    Route::get('/update_security_type', [AdminController::class, 'updateSecurityType'])->name('updateSecurityType');
+    Route::post('/update_security_type/{id}', [AdminController::class, 'postUpdateSecurityType'])->name('postUpdateSecurityType');
+    Route::get('/update_feature_type', [AdminController::class, 'updateFeatureType'])->name('updateFeatureType');
+    Route::post('/update_feature_type/{id}', [AdminController::class, 'postUpdateFeatureType'])->name('postUpdateFeatureType');
+    Route::get('/update_record_type', [AdminController::class, 'updateRecordType'])->name('updateRecordType');
+    Route::post('/update_record_type/{id}', [AdminController::class, 'postUpdateRecordType'])->name('postUpdateRecordType');
+    Route::get('/update_video_type', [AdminController::class, 'updateVideoType'])->name('updateVideoType');
+    Route::post('/update_video_type/{id}', [AdminController::class, 'postUpdateVideoType'])->name('postUpdateVideoType');
+    Route::get('/update_music_type', [AdminController::class, 'updateMusicType'])->name('updateMusicType');
+    Route::post('/update_music_type/{id}', [AdminController::class, 'postUpdateMusicType'])->name('postUpdateMusicType');
+    Route::get('/update_camera_feature_type', [AdminController::class, 'updateCameraFeatureType'])->name('updateCameraFeatureType');
+    Route::post('/update_camera_feature_type/{id}', [AdminController::class, 'postUpdateCameraFeatureType'])->name('postUpdateCameraFeatureType');
+    Route::get('/update_wjfj_type', [AdminController::class, 'updateWjfjType'])->name('updateWjfjType');
+    Route::post('/update_wjfj_type/{id}', [AdminController::class, 'postUpdateWjfjType'])->name('postUpdateWjfjType');
+    Route::get('/update_gps_type', [AdminController::class, 'updateGpsType'])->name('updateGpsType');
+    Route::post('/update_gps_type/{id}', [AdminController::class, 'postUpdateGpsType'])->name('postUpdateGpsType');
+    Route::get('/update_bluetooth_type', [AdminController::class, 'updateBluetoothType'])->name('updateBluetoothType');
+    Route::post('/update_bluetooth_type/{id}', [AdminController::class, 'postUpdateBluetoothType'])->name('postUpdateBluetoothType');
+    Route::get('/update_film_type', [AdminController::class, 'updateFilmType'])->name('updateFilmType');
+    Route::post('/update_film_type/{id}', [AdminController::class, 'postUpdateFilmType'])->name('postUpdateFilmType');
 });

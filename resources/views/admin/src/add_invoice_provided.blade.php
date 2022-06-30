@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Tạo mới hóa đơn nhập</h3>
+                    <h3 class="tile-title">Cập nhật hóa đơn nhập</h3>
                     <div class="tile-body">
                         <form class="row" method="POST" action="{{ route('postAddInvoiceProvided') }}" enctype="multipart/form-data">
                             @csrf
@@ -56,10 +56,6 @@
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Hình ảnh</label>
-                                <input class="form-control" type="file" name="image" required>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Số lượng</label>

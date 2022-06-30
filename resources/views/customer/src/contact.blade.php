@@ -79,17 +79,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10">
-
-
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-
                             <h3 class="heading mb-4">Gửi thông tin liên lạc cho chúng tôi!</h3>
                             <p>Chúng tôi sẽ phản hồi bạn sớm nhất</p>
-
                             <p><img src="img/contact.png" alt="Image" class="img-fluid"></p>
-
-
                         </div>
                         <div class="col-md-6">
 

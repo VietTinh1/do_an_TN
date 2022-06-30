@@ -16,9 +16,9 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
-            $table->string('name_customer');
-            $table->string('email_customer');
-            $table->integer('phone_customer');
+            $table->string('name_customer')->nullable();
+            $table->string('email_customer')->nullable();
+            $table->bigInteger('phone_customer')->nullable();
             $table->string('status')->default("Đang hoạt động");
             $table->timestamps();
         });

@@ -17,10 +17,10 @@ class CreateInvoiceDetailsTable extends Migration
             $table->increments('id');
             $table->integer('invoice_id');
             $table->integer('product_id');
-            $table->integer('amount');//so luong
+            $table->integer('amount')->nullable();//so luong
             $table->float('discount')->default(0);//chiet khau
-            $table->double('price');
-            $table->integer('promotion');//khuyen mai
+            $table->decimal('price')->nullable();
+            $table->integer('promotion')->nullable();//khuyen mai
             $table->timestamps();
         });
     }

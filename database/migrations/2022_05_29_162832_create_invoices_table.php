@@ -16,12 +16,12 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id');
-            $table->string('name_customer',100);
-            $table->string('email_customer',100);
-            $table->integer('phone');
-            $table->string('address_customer',100);
+            $table->string('name_customer',100)->nullable();
+            $table->string('email_customer',100)->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->string('address_customer',100)->nullable();
             $table->string('message')->nullable();
-            $table->double('total');
+            $table->double('total')->nullable();
             $table->string('status',25)->default("Chờ xử lí");//Đang xử lí // Đã xử lí // Đã hủy
             $table->timestamps();
         });

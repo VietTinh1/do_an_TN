@@ -37,8 +37,12 @@
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
                     <form action="{{ route('postLogin') }}" method="post">
                         @csrf
+                        @if(Session()->has('success'))
+                        <div class="alert alert-success">{{session()->get('success')}}</div>
+                        @endif
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" placeholder="Tài khoản" name="username">
+                            <p class="help is-danger" style="color: red;text-align: center;background-color:rgb(36, 209, 218);margin-top:5px;">{{ $errors->first('username') }}</p>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
@@ -46,6 +50,7 @@
                         </div>
                         <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu" name="password" id="password">
+                            <p class="help is-danger">{{ $errors->first('password') }}</p>
                             <span toggle="#password" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">

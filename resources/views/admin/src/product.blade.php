@@ -43,9 +43,6 @@
                             <div class="col-sm-2">
                                 <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
                             </div>
-                            {{-- <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div> --}}
                         </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
@@ -54,7 +51,6 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
-                                    <th>Ảnh</th>
                                     <th>Thuế</th>
                                     <th>Đánh giá</th>
                                     <th>Chi tiết</th>
@@ -69,12 +65,10 @@
                                     <td>{{ $product->name}}</td>
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ $product->price }} VND</td>
-                                    <td><img src="{{ url('storage/images/'.$product->images) }}" alt="" title="" width="100px" /></td>
-                                    {{-- image --}}
                                     <td>{{ $product->tax }}</td>
                                     <td>{{ $product->so_sao }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#modalProduct" data-account-id="{{ $product->account_id }}" data-trademark="{{ $product->trademark }}" data-name="{{ $product->name }}" data-product-type-id="{{ $product->product_type_id }}" data-product-code="{{ $product->product_code }}" data-describe="{{ $product->describe }}" data-amount="{{ $product->amount }}" data-images="{{ $product->images }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-so-sao="{{ $product->so_sao }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}" data-sale="{{ $product->sale }}" data-time-warranty="{{ $product->time_warranty }}">Chi tiết</button>
+                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#modalProduct" data-account-id="{{ $product->account_id }}" data-trademark="{{ $product->trademark }}" data-name="{{ $product->name }}" data-product-type-id="{{ $product->product_type_id }}" data-product-code="{{ $product->product_code }}" data-amount="{{ $product->amount }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-so-sao="{{ $product->so_sao }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}" data-sale="{{ $product->sale }}" data-time-warranty="{{ $product->time_warranty }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")

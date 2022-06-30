@@ -17,15 +17,13 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('account_id');
             $table->integer('product_type_id');
-            $table->string('images',100);
-            $table->string('name',100);
-            $table->string('trademark',100);//tên hãng
-            $table->string('product_code');
+            $table->string('name',100)->unique()->nullable();
+            $table->string('trademark',100)->nullable();//tên hãng
+            $table->string('product_code',20)->unique()->nullable();
             $table->integer('amount')->default(0)->unsigned();
             $table->decimal('price')->unsigned();
             $table->string('unit')->default("VNĐ");
-            $table->string('describe')->default("Không");//mô tả
-            $table->integer('time_warranty');//tg bao hanh
+            $table->integer('time_warranty')->nullable();//tg bao hanh
             $table->integer('sale')->default(0);//khuyen mai
             $table->float('tax')->default(0);//thuế
             $table->integer('so_sao')->default(0);

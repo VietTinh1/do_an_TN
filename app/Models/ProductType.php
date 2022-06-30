@@ -10,4 +10,5 @@ class ProductType extends Model
     use HasFactory;
     protected $table="product_types";
     public $timestamps = true;
+    protected $fillable =['name','status','created_at','updated_at'];
 }

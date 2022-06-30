@@ -10,4 +10,5 @@ class PaymentType extends Model
     use HasFactory;
     protected $table="payment_types";
     public $timestamps = true;
+
 }

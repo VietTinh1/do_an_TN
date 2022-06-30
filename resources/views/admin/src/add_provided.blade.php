@@ -45,14 +45,6 @@
                 <div class="tile">
                     <h3 class="tile-title">Tạo mới nhà cung cấp</h3>
                     <div class="tile-body">
-                        {{-- <div class="row element-button">
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i class="fas fa-folder-plus"></i> Thêm danh mục</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-                            </div>
-                        </div> --}}
                         <form class="row" method="post" action="{{ route('addProvided') }}">
                             @csrf
                             <div class="row">

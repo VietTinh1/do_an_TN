@@ -19,7 +19,7 @@ class AccountSeeder extends Seeder
         $acc=[
             [
                 'username'=>'ThanhTrieu',
-                'password'=>Hash::make('123'),
+                'password'=>Hash::make('0123456789'),
                 'token'=>Str::random(64),
                 'created_at'=>Carbon::now(),
             ],
