@@ -77,12 +77,19 @@ class AdminController extends Controller
         ])->count();
         $invoice = Invoice::orderByDesc('status')->take(4)->get();
         $newCustomer = Invoice::take(5)->latest()->get();
-        $chart = Account::all();
-        $arr = [];
-        foreach ($chart as $chart) {
-            $arr[] = $chart->id;
+        //barChart
+        $barChart = Account::all();
+        $bar = [];
+        foreach ($barChart as $barChart) {
+            $bar[] = $barChart->id;
         }
-        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'chart', 'arr'));
+        //lineChart
+        $lineChart = Provided::all();
+        $line = [];
+        foreach ($lineChart as $lineChart) {
+            $line[] = $lineChart->id;
+        }
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'barChart', 'bar', 'lineChart', 'line'));
     }
 
     //TRANG SẢN PHẨM ADMIN
@@ -923,9 +930,23 @@ class AdminController extends Controller
         $endProduct = Product::where('amount', '=', 0)->latest()->get();
         //nv moi
         $newUser = UserDB::latest()->take(5)->get();
+
+        //barChart
+        $barChart = Account::all();
+        $bar = [];
+        foreach ($barChart as $barChart) {
+            $bar[] = $barChart->id;
+        }
+
+        //lineChart
+        $lineChart = Provided::all();
+        $line = [];
+        foreach ($lineChart as $lineChart) {
+            $line[] = $lineChart->id;
+        }
         return view(
             'admin.src.report',
-            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser')
+            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
         );
     }
     public function exportProvided()
