@@ -13,7 +13,7 @@
 
 -quy trình chạy:
 --fresh migrate
---seed acc
+--seed acc,alltype
 -- tạo nhà cung cấp
 -- hd nhập->tạo mới tất cả "Thêm loại???"-> Tạo mới sp
 

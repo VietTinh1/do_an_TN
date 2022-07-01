@@ -16,7 +16,7 @@ class CreateWjfjsTable extends Migration
         Schema::create('wjfjs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('connection_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_wjfj',100)->nullable();
             $table->timestamps();
         });
     }

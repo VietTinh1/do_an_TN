@@ -16,7 +16,7 @@ class CreateRecordsTable extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('utilitie_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_record',100)->nullable();
             $table->timestamps();
         });
     }

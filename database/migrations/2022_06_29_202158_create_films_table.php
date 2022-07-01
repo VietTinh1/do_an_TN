@@ -16,7 +16,7 @@ class CreateFilmsTable extends Migration
         Schema::create('films', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rear_camera_id');
-            $table->string('all_type_id');
+            $table->string('name_film',100)->nullable();
             $table->timestamps();
         });
     }

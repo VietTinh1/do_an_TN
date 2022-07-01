@@ -18,7 +18,7 @@ class CreateOperatingSystemCpusTable extends Migration
             $table->string('operating_system_name',50)->nullable();//he dieu hanh
             $table->string('chip_cpus',50)->nullable();//ten cpu
             $table->string('speed_cpu',50)->nullable();//toc do cpu
-            $table->string('speed_gpu',50)->nullable();//toc do gpu
+            $table->string('gpu',50)->nullable();//toc do gpu
             $table->timestamps();
         });
     }

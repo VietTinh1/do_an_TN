@@ -10,5 +10,5 @@ class RearCameraFeature extends Model
     use HasFactory;
     protected $table="rear_camera_features";
     public $timestamps = true;
-    protected $fillable =['rear_camera_id','all_type_id','created_at','updated_at'];
+    protected $fillable =['rear_camera_id','name_rear_camera_feature','created_at','updated_at'];
 }

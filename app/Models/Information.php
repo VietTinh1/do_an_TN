@@ -10,5 +10,5 @@ class Information extends Model
     use HasFactory;
     protected $table="informations";
     public $timestamps = true;
-    protected $fillable =['design','material','size_mass','created_at','updated_at',];
+    protected $fillable =['design','material','size_mass','describe','created_at','updated_at',];
 }

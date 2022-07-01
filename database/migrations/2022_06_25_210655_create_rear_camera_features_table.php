@@ -16,7 +16,7 @@ class CreateRearCameraFeaturesTable extends Migration
         Schema::create('rear_camera_features', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rear_camera_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_rear_camera_feature',100)->nullable();
             $table->timestamps();
         });
     }

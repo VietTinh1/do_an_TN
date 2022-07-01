@@ -50,6 +50,7 @@
                                     <option value="{{ $provided->id }}">{{ $provided->name }}</option>
                                     @endforeach
                                 </select>
+                                <p class="help is-danger" style="color: red;text-align: center;background-color:rgb(36, 209, 218);margin-top:5px;">{{ $errors->first('provided_id') }}</p>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên sản phẩm</label>
@@ -123,7 +124,7 @@
                                 <label class="control-label">Tính năng camera trước</label>
                                 <select class="form-control product-chosen" multiple name="name_front_camera_feature[]" required>
                                     @foreach ($cameraFeatureType1 as $cameraFeatureType1)
-                                    <option value="{{ $cameraFeatureType1->id }}">{{ $cameraFeatureType1->name_classify }}</option>
+                                    <option value="{{ $cameraFeatureType1->name_classify }}">{{ $cameraFeatureType1->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -143,7 +144,7 @@
                                 <label class="control-label">Quay phim</label>
                                 <select class="form-control product-chosen" multiple name="film[]" required>
                                     @foreach ($film as $film)
-                                    <option value="{{ $film->id }}">{{ $film->name_classify }}</option>
+                                    <option value="{{ $film->name_classify }}">{{ $film->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -155,7 +156,7 @@
                                 <label class="control-label">Tính năng camera sau</label>
                                 <select class="form-control product-chosen" multiple name="name_rear_camera_feature[]" required>
                                     @foreach ($cameraFeatureType2 as $cameraFeatureType2)
-                                    <option value="{{ $cameraFeatureType2->id }}">{{ $cameraFeatureType2->name_classify }}</option>
+                                    <option value="{{ $cameraFeatureType2->name_classify }}">{{ $cameraFeatureType2->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -173,7 +174,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tốc độ gpu</label>
-                                <input class="form-control" type="text" name="speed_gpu" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="gpu" onkeypress="return event.charCode >= 48" min="1"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ram</label>
@@ -207,7 +208,7 @@
                                 <label class="control-label">Bluetooth</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_bluetooth[]" required>
                                     @foreach ($bluetooth as $bluetooth)
-                                            <option value="{{ $bluetooth->id }}">{{ $bluetooth->name_classify }}</option>
+                                            <option value="{{ $bluetooth->name_classify }}">{{ $bluetooth->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -227,7 +228,7 @@
                                 <label class="control-label">Wjfj</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_wjfj[]" required>
                                     @foreach ($wjfj as $wjfj)
-                                            <option value="{{ $wjfj->id }}">{{ $wjfj->name_classify }}</option>
+                                            <option value="{{ $wjfj->name_classify }}">{{ $wjfj->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -235,7 +236,7 @@
                                 <label class="control-label">Định vị(Gps)</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_gps[]" required>
                                     @foreach ($gps as $gps)
-                                            <option value="{{ $gps->id }}">{{ $gps->name_classify }}</option>
+                                            <option value="{{ $gps->name_classify }}">{{ $gps->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -271,7 +272,7 @@
                                 <label class="control-label">Bảo mật nâng cao</label>
                                 <select class="form-control product-chosen" type="number" multiple name="security_advance_type[]" required>
                                     @foreach ($security as $security)
-                                            <option value="{{ $security->id }}">{{ $security->name_classify }}</option>
+                                            <option value="{{ $security->name_classify }}">{{ $security->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -279,7 +280,7 @@
                                 <label class="control-label">Tính năng đặc biệt</label>
                                 <select class="form-control product-chosen" type="number" multiple name="feature_advance[]" required>
                                     @foreach ($feature as $feature)
-                                    <option value="{{ $feature->id }}">{{ $feature->name_classify }}</option>
+                                    <option value="{{ $feature->name_classify }}">{{ $feature->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -287,7 +288,7 @@
                                 <label class="control-label">Ghi âm</label>
                                 <select class="form-control product-chosen" type="number" multiple name="record_type[]" required>
                                     @foreach ($record as $record)
-                                    <option value="{{ $record->id }}">{{ $record->name_classify }}</option>
+                                    <option value="{{ $record->name_classify }}">{{ $record->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -295,7 +296,7 @@
                                 <label class="control-label">Xem phim</label>
                                 <select class="form-control product-chosen" type="number" multiple name="video_type[]"  required>
                                     @foreach ($video as $video)
-                                    <option value="{{ $video->id }}">{{ $video->name_classify }}</option>
+                                    <option value="{{ $video->name_classify }}">{{ $video->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -303,7 +304,7 @@
                                 <label class="control-label">Nghe nhạc</label>
                                 <select class="form-control product-chosen" type="number" multiple name="music_type[]"  required>
                                     @foreach ($music as $music)
-                                    <option value="{{ $music->id }}">{{ $music->name_classify }}</option>
+                                    <option value="{{ $music->name_classify }}">{{ $music->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>

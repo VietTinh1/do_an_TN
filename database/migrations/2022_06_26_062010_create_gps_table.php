@@ -16,7 +16,7 @@ class CreateGpsTable extends Migration
         Schema::create('gps', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('connection_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_gps',100)->nullable();
             $table->timestamps();
         });
     }

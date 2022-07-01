@@ -10,5 +10,5 @@ class Record extends Model
     use HasFactory;
     protected $table="records";
     public $timestamps = true;
-    protected $fillable =['utilitie_id','all_type_id','created_at','updated_at'];
+    protected $fillable =['utilitie_id','name_record','created_at','updated_at'];
 }

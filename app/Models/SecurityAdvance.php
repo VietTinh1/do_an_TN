@@ -10,6 +10,6 @@ class SecurityAdvance extends Model
     use HasFactory;
     protected $table="security_advances";
     public $timestamps = true;
-    protected $fillable =['utilitie_id','all_type_id','created_at','updated_at'];
+    protected $fillable =['utilitie_id','name_security_advance','created_at','updated_at'];
 
 }

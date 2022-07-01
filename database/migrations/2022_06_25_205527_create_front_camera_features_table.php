@@ -16,7 +16,7 @@ class CreateFrontcameraFeaturesTable extends Migration
         Schema::create('front_camera_features', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('front_camera_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_front_camera_feature',100)->nullable();
             $table->timestamps();
         });
     }

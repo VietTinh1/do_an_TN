@@ -10,5 +10,5 @@ class Gps extends Model
     use HasFactory;
     protected $table="gps";
     public $timestamps = true;
-    protected $fillable =['connection_id','all_type_id','created_at','updated_at'];
+    protected $fillable =['connection_id','name_gps','created_at','updated_at'];
 }

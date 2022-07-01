@@ -19,6 +19,7 @@ class CreateInformationsTable extends Migration
             $table->string('material',50)->nullable();//chat lieu
             $table->string('size_mass',50)->nullable();//kich thuoc - khoi luong
             //ngay ra mat
+            $table->string('describe',200)->nullable();
             $table->timestamps();
         });
     }

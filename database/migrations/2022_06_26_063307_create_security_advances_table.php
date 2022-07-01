@@ -16,7 +16,7 @@ class CreateSecurityAdvancesTable extends Migration
         Schema::create('security_advances', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('utilitie_id')->nullable();
-            $table->integer('all_type_id')->nullable();
+            $table->string('name_security_advance',100)->nullable();
             $table->timestamps();
         });
     }
