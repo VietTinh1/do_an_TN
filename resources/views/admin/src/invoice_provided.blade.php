@@ -49,46 +49,46 @@
               </div>
             </div>
             <div class="row element-button">
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateSecurityType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại bảo mật</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại tính năng</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateRecordType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại ghi âm</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateVideoType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại xem phim</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateMusicType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại nghe nhạc</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại tính năng camera</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateWjfjType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại Wjfj</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateGpsType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại Gps</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateBluetoothType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại bluetooth</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-add btn-sm" href="{{ route('updateFilmType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                      Thêm loại quay phim</a>
-                </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateSecurityType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại bảo mật</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại tính năng</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateRecordType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại ghi âm</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateVideoType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại xem phim</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateMusicType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại nghe nhạc</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại tính năng Camera</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateWjfjType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại Wifi</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateGpsType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại GPS</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateBluetoothType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại Bluetooth</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" href="{{ route('updateFilmType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                  Thêm loại quay phim</a>
+              </div>
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>

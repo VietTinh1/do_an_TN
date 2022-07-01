@@ -48,9 +48,15 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html">Giỏ hàng - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="cart.html" data-toggle="modal" data-target="#cart">Giỏ hàng - $<span class="cart-amunt total-cart"></span><i class="fa fa-shopping-cart"></i><span class="product-count total-count"></span></a>
+
                 </div>
             </div>
+
         </div>
+        <!-- Nav -->
+
+
+
     </div>
 </div> <!-- End site branding area -->

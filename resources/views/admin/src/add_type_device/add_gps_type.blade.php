@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Thêm nhân viên | Quản trị Admin</title>
   <meta charset="utf-8">
@@ -18,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
+
 <body onload='time()' class="app sidebar-mini rtl">
   @include('admin.menu_header')
   <main class="app-content">
@@ -27,19 +29,19 @@
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh Sách Hóa Đơn Nhập</li>
-        <li class="breadcrumb-item"><a href="#">Thêm loại gps</a></li>
+        <li class="breadcrumb-item"><a href="#">Thêm loại GPS</a></li>
       </ul>
       <div id="clock"></div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
-          <h3 class="tile-title">Tạo mới loại gps</h3>
+          <h3 class="tile-title">Tạo mới loại GPS</h3>
           <div class="tile-body">
             <form class="row" method="post" action="{{ route('postUpdateGpsType',['id'=>'0']) }}">
               @csrf
               <div class="form-group  col-md-4">
-                <label class="control-label">Tên loại video</label>
+                <label class="control-label">Tên loại GPS</label>
                 <input class="form-control" type="text" name="name_classify" required>
               </div>
               <div class="form-group  col-md-4" style="margin-top: 30px;">
@@ -51,8 +53,8 @@
           <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
             <thead>
               <tr>
-                <th>Mã gps</th>
-                <th>Tên gps</th>
+                <th>Mã GPS</th>
+                <th>Tên GPS</th>
                 <th>Ngày tạo</th>
                 <th>Thay đổi</th>
               </tr>
@@ -64,16 +66,16 @@
                 <td>{{ $data->name_classify }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    <form class="row" method="post" action="{{ route('postUpdateGpsType',['id'=>$data->id]) }}">
-                        @csrf
-                        <div class="form-group  col-md-4">
-                        <label class="control-label">Tên loại gps</label>
-                        <input class="form-control" type="text" name="name_classify" required>
-                        </div>
-                        <div class="form-group  col-md-4" style="margin-top: 30px;">
-                            <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>
-                        </div>
-                    </form>
+                  <form class="row" method="post" action="{{ route('postUpdateGpsType',['id'=>$data->id]) }}">
+                    @csrf
+                    <div class="form-group  col-md-4">
+                      <label class="control-label">Tên loại GPS</label>
+                      <input class="form-control" type="text" name="name_classify" required>
+                    </div>
+                    <div class="form-group  col-md-4" style="margin-top: 30px;">
+                      <button class="btn btn-save" type="submit" style=" height: 40px;padding-left: 10px;padding-right: 10px;">Lưu lại</button>
+                    </div>
+                  </form>
                 </td>
               </tr>
               @endforeach

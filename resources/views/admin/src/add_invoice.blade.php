@@ -36,6 +36,7 @@
             </ul>
             <div id="clock"></div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -60,44 +61,82 @@
                                 <label class="control-label">Địa chỉ</label>
                                 <input class="form-control" type="text" name="address" required>
                             </div>
-
-                            {{-- dropdown --}}
-                            <div class="form-group  col-md-6 ">
-                                <label class="control-label">Tên sản phẩm</label>
-                                <select class="form-control product-chosen" multiple name="nameProduct[]">
-                                    @foreach ($product as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group  col-md-6">
+                                <label class="control-label">Ghi chú đơn hàng</label>
+                                <textarea class="form-control" rows="4" name="message"></textarea>
                             </div>
-                            <div class="form-group  col-md-3">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" required>
-                            </div>
-                            <div class="form-group  col-md-3">
-                                <label class="control-label">Tổng tiền</label>
-                                <input class="form-control" type="number" name="total" onkeypress="return event.charCode >= 48" min="1" required>
-                            </div>
-
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
                                     <option value="Chờ xử lí">Chờ xử lí</option>
                                     <option value="Đã xử lí"> Đã xử lí</option>
                                 </select>
                             </div>
-                            <div class="form-group  col-md-6">
-                                <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4" name="message"></textarea>
+                            <div class="container">
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-hover" id="tab_logic">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center"> ID </th>
+                                                    <th class="text-center"> Tên sản phẩm </th>
+                                                    <th class="text-center"> Số lượng </th>
+                                                    <th class="text-center"> Giá tiền </th>
+                                                    <th class="text-center"> Thuế </th>
+                                                    <th class="text-center"> Tổng tiền </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id='addr0'>
+                                                    <td>1</td>
+                                                    <td>
+                                                        <select name="products[]" class="form-control">
+                                                            @foreach ($product as $product)
+                                                            <option value="{{ $product->id }}">
+                                                                {{ $product->name }} (${{ number_format($product->price, 2) }})
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="number" name='amount[]' placeholder='Nhập số lượng' class="form-control amount" step="0" min="0" /></td>
+                                                    <td><input type="number" name='price[]' placeholder='Nhập giá tiền' class="form-control price" step="0.00" min="0" /></td>
+                                                    <td><input type="number" name='tax[]' placeholder='%' class="form-control tax" step="0.00" min="0" /></td>
+                                                    <td><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly /></td>
+                                                </tr>
+                                                <tr id='addr1'></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <button id="add_row" class="btn btn-default pull-left">Thêm sản phẩm</button>
+                                        <button id='delete_row' class="btn btn-default pull-right">Xóa sản phẩm</button>
+                                    </div>
+                                </div>
+                                <div class="row clearfix" style="margin-top:20px">
+                                    <div class="pull-right col-md-4">
+                                        <table class="table table-bordered table-hover" id="tab_logic_total">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center">Tổng tiền</th>
+                                                    <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="form-group  col-md-4">
                                 <button class="btn btn-save" type="submit">Lưu lại</button>
                             </div>
+                            <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoice') }}">Hủy bỏ</a>
                         </form>
-                        <a class="btn btn-cancel" style="position: absolute;bottom: 36px;left: 105px;" href="{{ route('invoice') }}">Hủy bỏ</a>
                     </div>
-
                 </div>
+            </div>
+        </div>
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
     <script type="text/javascript">
@@ -145,6 +184,54 @@
         $(".product-chosen").chosen({
             no_results_text: "Oops, nothing found!",
         })
+
+        $(document).ready(function() {
+            var i = 1;
+            $("#add_row").click(function() {
+                b = i - 1;
+                $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
+                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+                i++;
+            });
+            $("#delete_row").click(function() {
+                if (i > 1) {
+                    $("#addr" + (i - 1)).html('');
+                    i--;
+                }
+                calc();
+            });
+
+            $('#tab_logic tbody').on('keyup change', function() {
+                calc();
+            });
+            $('#tax').on('keyup change', function() {
+                calc_total();
+            });
+
+        });
+
+        function calc() {
+            $('#tab_logic tbody tr').each(function(i, element) {
+                var html = $(this).html();
+                if (html != '') {
+                    var amount = $(this).find('.amount').val();
+                    var price = $(this).find('.price').val();
+                    var tax = $(this).find('.tax').val();
+                    $(this).find('.total').val((amount * price) + (amount * price * (tax / 100)));
+
+                    calc_total();
+                }
+            });
+        }
+
+        function calc_total() {
+            total = 0;
+            $('.total').each(function() {
+                total += parseInt($(this).val());
+            });
+            $('#sub_total').val(total.toFixed(0));
+
+        }
     </script>
 </body>
 
