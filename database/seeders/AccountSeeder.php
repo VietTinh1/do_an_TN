@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+
 class AccountSeeder extends Seeder
 {
     /**
@@ -16,18 +17,18 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        $acc=[
+        $acc = [
             [
-                'username'=>'ThanhTrieu',
-                'password'=>Hash::make('0123456789'),
-                'token'=>Str::random(64),
-                'created_at'=>Carbon::now(),
+                'username' => 'ThanhTrieu',
+                'password' => Hash::make('0123456789'),
+                'token' => Str::random(64),
+                'created_at' => Carbon::now(),
             ],
             [
-                'username'=>'VietTinh',
-                'password'=>Hash::make('123'),
-                'token'=>Str::random(64),
-                'created_at'=>Carbon::now(),
+                'username' => 'VietTinh',
+                'password' => Hash::make('0123456789'),
+                'token' => Str::random(64),
+                'created_at' => Carbon::now(),
             ],
         ];
         DB::table('accounts')->insert($acc);

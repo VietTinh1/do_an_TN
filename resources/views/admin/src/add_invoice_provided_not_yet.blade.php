@@ -102,11 +102,11 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải</label>
-                                <input class="form-control" type="text" name="resolution" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="resolution"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ rộng</label>
-                                <input class="form-control" type="text" name="width" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="width"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ sáng tối đa(nits)</label>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Mặt kính cảm ứng</label>
-                                <input class="form-control" type="text" name="touch_glass" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="touch_glass"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải camera trước</label>
@@ -162,19 +162,19 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hệ điều hành</label>
-                                <input class="form-control" type="text" name="operating_system_name" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="operating_system_name"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên Cpu</label>
-                                <input class="form-control" type="text" name="chip_cpus" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="chip_cpus"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tốc độ CPU</label>
-                                <input class="form-control" type="text" name="speed_cpu" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="speed_cpu"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">GPU</label>
-                                <input class="form-control" type="text" name="speed_gpu" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="speed_gpu"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ram</label>
@@ -194,49 +194,47 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Danh bạ</label>
-                                <input class="form-control" type="text" name="phone_book" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="phone_book"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Mạng di động</label>
-                                <input class="form-control" type="text" name="mobile_network" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="mobile_network"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Sim</label>
-                                <input class="form-control" type="text" name="sim" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="sim"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Bluetooth</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_bluetooth[]" required>
                                     @foreach ($bluetooth as $bluetooth)
-<<<<<<< HEAD
-                                            <option value="{{ $bluetooth->name_classify }}">{{ $bluetooth->name_classify }}</option>
-=======
+                                    <option value="{{ $bluetooth->name_classify }}">{{ $bluetooth->name_classify }}</option>
+
                                     <option value="{{ $bluetooth->id }}">{{ $bluetooth->name_classify }}</option>
->>>>>>> 16186f58a4364f13f17445e199994c0b1e2846c0
+
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Cổng sạc</label>
-                                <input class="form-control" type="text" name="charging_port" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="charging_port"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tai nghe</label>
-                                <input class="form-control" type="text" name="head_phone" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="head_phone"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Kết nối khác</label>
-                                <input class="form-control" type="text" name="connection_orther" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="connection_orther"></input>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Wjfj</label>
+                                <label class="control-label">Wifi</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_wjfj[]" required>
                                     @foreach ($wjfj as $wjfj)
-<<<<<<< HEAD
-                                            <option value="{{ $wjfj->name_classify }}">{{ $wjfj->name_classify }}</option>
-=======
+                                    <option value="{{ $wjfj->name_classify }}">{{ $wjfj->name_classify }}</option>
+
                                     <option value="{{ $wjfj->id }}">{{ $wjfj->name_classify }}</option>
->>>>>>> 16186f58a4364f13f17445e199994c0b1e2846c0
+
                                     @endforeach
                                 </select>
                             </div>
@@ -244,29 +242,28 @@
                                 <label class="control-label">Định vị(Gps)</label>
                                 <select class="form-control product-chosen" type="text" multiple name="name_gps[]" required>
                                     @foreach ($gps as $gps)
-<<<<<<< HEAD
-                                            <option value="{{ $gps->name_classify }}">{{ $gps->name_classify }}</option>
-=======
+                                    <option value="{{ $gps->name_classify }}">{{ $gps->name_classify }}</option>
+
                                     <option value="{{ $gps->id }}">{{ $gps->name_classify }}</option>
->>>>>>> 16186f58a4364f13f17445e199994c0b1e2846c0
+
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Dung lượng pin</label>
-                                <input class="form-control" type="text" name="memory_pin" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="memory_pin"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Loại pin</label>
-                                <input class="form-control" type="text" name="pin_type" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="pin_type"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hỗ trợ sạc tối đa</label>
-                                <input class="form-control" type="text" name="support_pin_max" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="support_pin_max"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Sạc kèm theo máy</label>
-                                <input class="form-control" type="text" name="charger" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="charger"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Công nghệ pin</label>
@@ -274,7 +271,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Kháng nước, bụi</label>
-                                <input class="form-control" type="text" name="waterproof_dustproof" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="waterproof_dustproof"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Radio</label>
@@ -284,11 +281,10 @@
                                 <label class="control-label">Bảo mật nâng cao</label>
                                 <select class="form-control product-chosen" type="number" multiple name="security_advance_type[]" required>
                                     @foreach ($security as $security)
-<<<<<<< HEAD
-                                            <option value="{{ $security->name_classify }}">{{ $security->name_classify }}</option>
-=======
+                                    <option value="{{ $security->name_classify }}">{{ $security->name_classify }}</option>
+
                                     <option value="{{ $security->id }}">{{ $security->name_classify }}</option>
->>>>>>> 16186f58a4364f13f17445e199994c0b1e2846c0
+
                                     @endforeach
                                 </select>
                             </div>
