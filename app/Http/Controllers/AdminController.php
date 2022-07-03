@@ -117,24 +117,6 @@ class AdminController extends Controller
             $conf.'.'.$utiliti.'.music',
             $conf.'.screen',
             )->get();
-            $product=Product::with(
-                $conf.'.imageDetail',
-                $conf.'.frontCamera.frontCameraFeature',
-                $conf.'.rearCamera.rearCameraFeature',
-                $conf.'.rearCamera.film',
-                $conf.'.operatingSystemCpu',
-                $conf.'.memory',
-                $conf.'.information',
-                $conf.'.connection',
-                $conf.'.pin',
-                $conf.'.'.$utiliti.'.securityAdvance',
-                $conf.'.'.$utiliti.'.featureAdvance',
-                $conf.'.'.$utiliti.'.record',
-                $conf.'.'.$utiliti.'.video',
-                $conf.'.'.$utiliti.'.music',
-                $conf.'.screen',
-                )->get();
-          //  dd($product->configuration->screen);
         return view('admin.src.product', compact('product'));
     }
     //add sản phẩm
@@ -335,7 +317,6 @@ class AdminController extends Controller
     public function invoiceProvided()
     {
         $invoiceProvides=InvoiceProvided::with('user','provided','invoiceProvidedDetail')->get();
-        //dd($invoiceProvides[0]['user']->fullname);
         return view('admin.src.invoice_provided', compact('invoiceProvides'));
     }
     public function addInvoiceProvided()

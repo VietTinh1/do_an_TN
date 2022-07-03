@@ -70,6 +70,20 @@
                         <input class="form-control" type="file" name="backside" required>
                     </div>
                 @endforeach
+                @foreach ($temp->frontCamera as $frontCamera)
+                <div class="form-group  col-md-4">
+                    <label class="control-label">Độ phân giải camera trước</label>
+                    <input class="form-control" type="text" name="resolution" value="{{ $frontCamera->resolution }}" required></input>
+                    @foreach ($frontCamera->frontCameraFeature as $frontCameraFeature)
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Tính năng camera trước</label>
+                        @foreach ($frontCameraFeature as $frontCameraFeature)
+                        <label class="control-label">$frontCameraFeature->name_front_camera_feature</label>
+                        @endforeach
+                    </div>
+                    @endforeach
+                </div>
+                @endforeach
             @endforeach
 
             {{--
@@ -95,18 +109,8 @@
                 <label class="control-label">Mặt kính cảm ứng</label>
                 <input class="form-control" type="text" name="touch_glass" value="{{ $product[0]['configuration']['screen'][0]->touch_glass }}" required>
             </div>
-            <div class="form-group  col-md-4">
-                <label class="control-label">Độ phân giải camera trước</label>
-                <input class="form-control" type="text" name="resolution" value="{{ $product[0]['configuration']['front_cameras'][0]->resolution }}" onkeypress="return event.charCode >= 48" min="1"></input>
-            </div> --}}
-            {{-- <div class="form-group  col-md-4">
-                <label class="control-label">Tính năng camera trước</label>
-                <select class="form-control product-chosen" multiple name="name_front_camera_feature[]" required>
-                    @foreach ($cameraFeatureType1 as $cameraFeatureType1)
-                    <option value="{{ $cameraFeatureType1->name_classify }}">{{ $cameraFeatureType1->name_classify }}</option>
-                    @endforeach
-                </select>
-            </div>
+
+            {{--
             <div class="form-group  col-md-4">
                 <label class="control-label">Độ phân giải camera chính(sau)</label>
                 <input class="form-control" type="number" name="main_rear_camera" onkeypress="return event.charCode >= 48" min="1"></input>
