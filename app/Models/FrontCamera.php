@@ -11,4 +11,7 @@ class FrontCamera extends Model
     protected $table="front_cameras";
     public $timestamps = true;
     protected $fillable =['resolution','created_at','updated_at'];
+    public function frontCameraFeature(){
+        return $this->hasMany('App\Models\FrontCameraFeature','front_camera_id','id');
+    }
 }

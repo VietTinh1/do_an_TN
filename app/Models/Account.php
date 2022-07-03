@@ -9,5 +9,9 @@ class Account extends Model
 {
     use HasFactory;
     protected $table="accounts";
+    public $fillable=['username', 'password','token','status','created_at', 'updated_at'];
     public $timestamps = true;
+    public function user() {
+        return $this->hasOne('App\Models\UserDB','account_id','id');
+    }
 }

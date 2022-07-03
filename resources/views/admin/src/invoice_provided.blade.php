@@ -94,26 +94,26 @@
               <thead>
                 <tr>
                   <th>Nhân viên thêm</th>
-                  <th>Mã nhà cung cấp</th>
+                  <th>Tên cung cấp</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
                   <th>Chi tiết</th>
-                  <th>Xuất PDF</th>
+                  <th>Xuất hóa đơn</th>
                   <th>Tình trạng</th>
                   <th>Chức năng</th>
                 </tr>
               </thead>
               @foreach ($invoiceProvides as $invoiceProvides)
               <tbody>
-                <td>{{ $invoiceProvides->account_id }}</td>
-                <td>{{ $invoiceProvides->provided_id }}</td>
+                <td>{{ $invoiceProvides['user']->fullname }}</td>
+                <td>{{ $invoiceProvides['provided']->name }}</td>
                 <td>{{ $invoiceProvides->total }}</td>
                 <td>{{ $invoiceProvides->created_at }}</td>
                 <td>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
                 </td>
                 <td>
-                  <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
+                  <a class="btn btn-success btn-xs" type="button">Xuất</a>
                 </td>
                 <td>
                   @if($invoiceProvides->status =="Đang xử lí")

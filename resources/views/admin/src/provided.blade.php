@@ -38,19 +38,15 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-
                                 <a class="btn btn-add btn-sm" href="{{route('addProvided')}}" title="Thêm"><i class="fas fa-plus"></i>
                                     Tạo mới nhà cung cấp</a>
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)" href="{{ route('importProvided') }}"><i class="fas fa-file-upload"></i> Tải từ file</a>
                             </div>
-
                             <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
                             </div>
-
-
                             <div class="col-sm-2">
                                 <a class="btn btn-excel btn-sm" href="{{ route('exportProvided') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
                             </div>

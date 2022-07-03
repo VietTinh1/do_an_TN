@@ -12,7 +12,7 @@ class Invoice extends Model
     public $timestamps = true;
     protected $fillable =['account_id','name_customer','email_customer','phone','address_customer','message','total','status','created_at','updated_at'];
 
-    public function invoice(){
-        $this->hasMany(InvoiceDetail::class, 'invoice_id', 'id');
+    public function invoiceDetail(){
+        return $this->hasOne('App\Models\InvoiceDetail','invoice_id','id');
     }
 }

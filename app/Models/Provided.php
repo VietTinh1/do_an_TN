@@ -11,4 +11,7 @@ class Provided extends Model
     protected $table="provideds";
     public $timestamps = true;
     protected $fillable = ['tax_code','name','email','phone','address','notes','created_at'];
+    public function invoiceProvided() {
+        return $this->hasOne('App\Models\InvoiceProvided','provided_id','id');
+    }
 }

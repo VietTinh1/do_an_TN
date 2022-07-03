@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label">Ngày tạo</label>
-                        <input class="form-control" type="text" id="created_at" readonly>
+                        <input class="form-control" type="date" id="created_at" readonly>
                     </div>
                 </div>
 

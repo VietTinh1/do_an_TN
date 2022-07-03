@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('fullname',100)->nullable();
             $table->string('sex',3)->nullable();
             $table->date('birthday')->nullable();
-            $table->bigInteger('citizen_ID')->unsigned();//Căn cước công dân
+            $table->bigInteger('citizen_ID')->unique();//Căn cước công dân
             $table->string('address',100)->nullable();
             $table->integer('phone')->unsigned();
             $table->string('email',100)->unique()->nullable();

@@ -27,3 +27,22 @@ Route::get('/api',function(){
         'product'=> $product
     ]]);
 });
+Route::get('/product', function(){
+    $product=App\Models\Product::with(
+        'configuration.imageDetail',
+        'configuration.frontCamera.frontCameraFeature',
+        'configuration.rearCamera.rearCameraFeature',
+        'configuration.rearCamera.film',
+        'configuration.operatingSystemCpu',
+        'configuration.memory',
+        'configuration.information',
+        'configuration.connection',
+        'configuration.pin',
+        'configuration.utilitie.securityAdvance',
+        'configuration.utilitie.featureAdvance',
+        'configuration.utilitie.record',
+        'configuration.utilitie.video',
+        'configuration.utilitie.music',
+        )->get();
+        return response()->json($product);
+});

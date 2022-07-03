@@ -15,13 +15,13 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id');
+            $table->integer('user_id');
             $table->integer('product_type_id');
             $table->string('name',100)->unique()->nullable();
             $table->string('trademark',100)->nullable();//tên hãng
             $table->string('product_code',20)->unique()->nullable();
             $table->integer('amount')->default(0)->unsigned();
-            $table->decimal('price')->unsigned();
+            $table->decimal('price',30,3)->unsigned();
             $table->string('unit')->default("VNĐ");
             $table->integer('time_warranty')->nullable();//tg bao hanh
             $table->integer('sale')->default(0);//khuyen mai
