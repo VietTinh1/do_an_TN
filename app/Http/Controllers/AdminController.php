@@ -151,7 +151,7 @@ class AdminController extends Controller
     {
         $conf='configuration';
         $utiliti='utilitie';
-        $product=Product::find($id)->with(
+        $product=Product::with(
             $conf.'.imageDetail',
             $conf.'.frontCamera.frontCameraFeature',
             $conf.'.rearCamera.rearCameraFeature',
@@ -159,7 +159,9 @@ class AdminController extends Controller
             $conf.'.operatingSystemCpu',
             $conf.'.memory',
             $conf.'.information',
-            $conf.'.connection',
+            $conf.'.connection.wjfj',
+            $conf.'.connection.gps',
+            $conf.'.connection.bluetooth',
             $conf.'.pin',
             $conf.'.'.$utiliti.'.securityAdvance',
             $conf.'.'.$utiliti.'.featureAdvance',
@@ -167,9 +169,19 @@ class AdminController extends Controller
             $conf.'.'.$utiliti.'.video',
             $conf.'.'.$utiliti.'.music',
             $conf.'.screen',
-            )->get();
+            )->where('id', '=', $id)->get();
+           // dd($product);
+            // foreach ($product as $product){
+            //     $user=$product->configuration->frontCamera;
+            //     foreach ($user as $user){
+            //         dd($user->frontCameraFeature);
+            //         foreach ($user->frontCameraFeature as $feature){
+            //             dd($feature->name_front_camera_feature);
+            //         }
+            //     }
+            // }
         $productType = ProductType::all();
-        return view('admin.src.edit_product', compact('product', 'productType'));
+        return view('admin.src.edit_product', compact('product', 'id'));
     }
     public function postEditProduct(Request $request, $id)
     {
@@ -317,6 +329,8 @@ class AdminController extends Controller
     public function invoiceProvided()
     {
         $invoiceProvides=InvoiceProvided::with('user','provided','invoiceProvidedDetail')->get();
+
+       // dd($invoiceProvides);
         return view('admin.src.invoice_provided', compact('invoiceProvides'));
     }
     public function addInvoiceProvided()
@@ -457,7 +471,7 @@ class AdminController extends Controller
                     'screen_technology' =>$request->screen_technology,
                     'resolution' =>$request->resolution,
                     'width' =>$request->width,
-                    'maximum_brightness' =>$request->max_brightness,
+                    'maximum_brightness' =>$request->maximum_brightness,
                     'touch_glass' =>$request->touch_glass,
                     'created_at' => Carbon::now(),
                 ]);

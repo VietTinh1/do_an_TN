@@ -174,7 +174,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">GPU</label>
-                                <input class="form-control" type="text" name="speed_gpu"></input>
+                                <input class="form-control" type="text" name="gpu"></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ram</label>

@@ -103,35 +103,36 @@
                   <th>Chức năng</th>
                 </tr>
               </thead>
-              @foreach ($invoiceProvides as $invoiceProvides)
-              <tbody>
-                <td>{{ $invoiceProvides['user']->fullname }}</td>
-                <td>{{ $invoiceProvides['provided']->name }}</td>
-                <td>{{ $invoiceProvides->total }}</td>
-                <td>{{ $invoiceProvides->created_at }}</td>
-                <td>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
-                </td>
-                <td>
-                  <a class="btn btn-success btn-xs" type="button">Xuất</a>
-                </td>
-                <td>
-                  @if($invoiceProvides->status =="Đang xử lí")
-                  <span class="badge bg-warning"> Đang xử lí</span>
-                  @elseif($invoiceProvides->status =="Đã xử lí")
-                  <span class="badge bg-success">Đã xử lí</span>
-                  @else
-                  <span class="badge bg-danger">Đã hủy</span>
-                  @endif
-                </td>
-                <td>
-                  <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                  @if(empty($invoiceProvides->status =="Đã hủy"))
-                  <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                  @endif
-                </td>
-              </tbody>
-              @endforeach
+                @foreach ($invoiceProvides as $invoiceProvides)
+                    <tbody>
+                        <?php $userX=$invoiceProvides->user->fullname; ?>
+                        <td>@if(!empty($userX)) {{ $userX}} @endif</td>
+                        <td>{{ $invoiceProvides->provided->name }}</td>
+                        <td>{{ $invoiceProvides->total }}</td>
+                        <td>{{ $invoiceProvides->created_at }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-xs" type="button">Xuất</a>
+                        </td>
+                        <td>
+                            @if($invoiceProvides->status =="Đang xử lí")
+                                <span class="badge bg-warning"> Đang xử lí</span>
+                            @elseif($invoiceProvides->status =="Đã xử lí")
+                                <span class="badge bg-success">Đã xử lí</span>
+                            @else
+                                <span class="badge bg-danger">Đã hủy</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                            @if(empty($invoiceProvides->status =="Đã hủy"))
+                                <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                            @endif
+                        </td>
+                    </tbody>
+                @endforeach
             </table>
           </div>
         </div>

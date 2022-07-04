@@ -10,7 +10,7 @@ class InvoiceProvided extends Model
     use HasFactory;
     protected $table="invoice_provides";
     public $timestamps = true;
-    protected $fillable =['provided_id','account_id','total','created_at'];
+    protected $fillable =['provided_id','user_id','total','created_at'];
     public function provided() {
         return $this->hasOne('App\Models\Provided','id','provided_id');
     }
@@ -18,6 +18,6 @@ class InvoiceProvided extends Model
         return $this->hasOne('App\Models\InvoiceProvidedDetail','invoice_provided_id','id');
     }
     public function user() {
-        return $this->belongsTo('App\Models\UserDB','id','account_id');
+        return $this->belongsTo('App\Models\UserDB','user_id','id');
     }
 }

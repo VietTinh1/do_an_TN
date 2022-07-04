@@ -126,10 +126,6 @@ $(document).ready(function() {
             }
         ]
     };
-    var ctxl = $("#lineChart").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(dataChart1);
-    var ctxb = $("#barChart").get(0).getContext("2d");
-    var barChart = new Chart(ctxb).Bar(dataChart1);
 
     //multi select
     $(".product-chosen").chosen({

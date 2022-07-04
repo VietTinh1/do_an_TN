@@ -16,7 +16,7 @@ class CreateUtilitiesTable extends Migration
         Schema::create('utilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('waterproof_dustproof')->nullable();//khang nuoc,bui
-            $table->integer('radio')->nullable();
+            $table->string('radio')->nullable();
             $table->timestamps();
         });
     }
