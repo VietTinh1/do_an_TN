@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Danh sách sản phẩm | Quản trị Admin</title>
     <meta charset="utf-8">
@@ -16,6 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
 <body onload="time()" class="app sidebar-mini rtl">
@@ -24,294 +26,306 @@
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
         @endif
-        <form action="{{ route('postEditProduct',['id'=>$id]) }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @foreach ($product as $product)
-                <?php
-                $temp=$product->configuration;
-                ?>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Tên sản phẩm</label>
-                    <input class="form-control" type="text" name="name" value="{{ $product->name }}" required>
-                </div>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Tên hãng</label>
-                    <input class="form-control" type="text" name="trademark" value="{{ $product->trademark }}" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-                    <input class="form-control" type="text" name="product_type_id" value="{{ $product->product_type_id }}" readonly>
-                </div>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Số lượng</label>
-                    <input class="form-control" type="number" name="amount" value="{{ $product->amount }}" onkeypress="return event.charCode >= 48" min="1" required>
-                </div>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Giá nhập(VND)</label>
-                    <input class="form-control" type="number" name="import_price" value="{{ $product->import_price }}" onkeypress="return event.charCode >= 48" min="1" required>
-                </div>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Thời gian bảo hành(tháng)</label>
-                    <input class="form-control" type="number" name="time_warranty" value="{{ $product->time_warranty }}" onkeypress="return event.charCode >= 48" min="1" required>
-                </div>
-                <div class="form-group  col-md-4">
-                    <label class="control-label">Thuế(%)</label>
-                    <input class="form-control" type="number" name="tax" value="{{ $product->tax }}" onkeypress="return event.charCode >= 48" min="1" required>
-                </div>
-                @foreach($temp->imageDetail as $imageDetail)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Hình ảnh mặt trước</label>
-                        <input class="form-control" type="file" name="front" required>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Hình ảnh mặt sau</label>
-                        <input class="form-control" type="file" name="backside" required>
-                    </div>
-                @endforeach
-                @foreach ($temp->frontCamera as $frontCamera)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ phân giải camera trước</label>
-                        <input class="form-control" type="text" name="resolution" value="{{ $frontCamera->resolution }}" required></input>
-                        <label class="control-label">Tính năng camera trước:</label>
-                        @foreach ($frontCamera->frontCameraFeature as $frontCameraFeature)
-                        <div class="form-group  col-md-4">
-                            <text class="control-label">{{ $frontCameraFeature->name_front_camera_feature }}</text>
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="In">Thêm sản phẩm</a>
+                            </div>
                         </div>
-                        @endforeach
-                    </div>
-                @endforeach
-                @foreach ($temp->screen as $screen)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Công nghệ màn hình</label>
-                        <input class="form-control" type="text" name="screen_technology" value="{{ $screen->screen_technology }}" required>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ phân giải</label>
-                        <input class="form-control" type="text" name="resolution" value="{{ $screen->resolution }}" required>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ rộng</label>
-                        <input class="form-control" type="text" name="width" value="{{ $screen->width }}"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ sáng tối đa(nits)</label>
-                        <input class="form-control" type="number" name="maximum_brightness" value="{{ $screen->maximum_brightness }}" onkeypress="return event.charCode >= 48" min="1">
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Mặt kính cảm ứng</label>
-                        <input class="form-control" type="text" name="touch_glass" value="{{ $screen->touch_glass }}" required>
-                    </div>
-                @endforeach
-                @foreach ($temp->rearCamera as $rearCamera)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ phân giải camera chính(sau)</label>
-                        <input class="form-control" type="number" name="main_rear_camera" value="{{ $rearCamera->main_rear_camera }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ phân giải camera sau 1</label>
-                        <input class="form-control" type="number" name="main_secondary_1" value="{{ $rearCamera->main_secondary_1 }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Độ phân giải camera sau 2</label>
-                        <input class="form-control" type="number" name="main_secondary_2" value="{{ $rearCamera->main_secondary_2 }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Đèn flash</label>
-                        <input class="form-control" type="text" name="flash_light" value="{{ $rearCamera->flash_light }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tính năng camera sau</label>
-                        @foreach ($rearCamera->rearCameraFeature as $rearCameraFeature)
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">{{ $rearCameraFeature->name_rear_camera_feature }}</label>
-                        </div>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Quay phim</label>
-                        @foreach ($rearCamera->film as $film)
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">{{ $film->name_film }}</label>
-                        </div>
-                        @endforeach
-                    </div>
-                @endforeach
-                @foreach ($temp->operatingSystemCpu as $operatingSystemCpu)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Hệ điều hành</label>
-                        <input class="form-control" type="text" value="{{ $operatingSystemCpu->operating_system_name }}" name="operating_system_name"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tên Cpu</label>
-                        <input class="form-control" type="text" value="{{ $operatingSystemCpu->chip_cpus }}" name="chip_cpus"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tốc độ CPU</label>
-                        <input class="form-control" type="text" value="{{ $operatingSystemCpu->speed_cpu }}" name="speed_cpu"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">GPU</label>
-                        <input class="form-control" type="text" value="{{ $operatingSystemCpu->gpu }}" name="gpu"></input>
-                    </div>
-                @endforeach
-                @foreach ($temp->memory as $memory)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Ram</label>
-                        <input class="form-control" type="number" name="ram" value="{{ $memory->ram }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Rom</label>
-                        <input class="form-control" type="number" name="rom" value="{{ $memory->rom }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Bộ nhớ khả dụng</label>
-                        <input class="form-control" type="number" name="memory_available" value="{{ $memory->memory_available }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Thẻ nhớ</label>
-                        <input class="form-control" type="text" name="memory_stick" value="{{ $memory->memory_stick }}" onkeypress="return event.charCode >= 48" min="1"></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Danh bạ</label>
-                        <input class="form-control" type="text" name="phone_book" value="{{ $memory->phone_book }}" required></input>
-                    </div>
-                @endforeach
-                @foreach ($temp->connection as $connection)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Mạng di động</label>
-                        <input class="form-control" type="text" name="mobile_network" value="{{ $connection->mobile_network }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Sim</label>
-                        <input class="form-control" type="text" name="sim" value="{{ $connection->sim }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Bluetooth:</label>
-                        @foreach ($connection->bluetooth as $bluetooth)
-                        <label class="control-label">{{ $bluetooth->name_bluetooth }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Wjfj:</label>
-                        @foreach ($connection->wjfj as $wjfj)
-                        <label class="control-label">{{ $wjfj->name_wjfj }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Định vị(Gps):</label>
-                        @foreach ($connection->gps as $gps)
-                        <label class="control-label">{{ $gps->name_gps }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Cổng sạc</label>
-                        <input class="form-control" type="text" name="charging_port" value="{{ $connection->charging_port }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tai nghe</label>
-                        <input class="form-control" type="text" name="head_phone" value="{{ $connection->head_phone }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Kết nối khác</label>
-                        <input class="form-control" type="text" name="connection_orther" value="{{ $connection->connection_orther }}" required></input>
-                    </div>
-                @endforeach
-                @foreach ($temp->pin as $pin)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Dung lượng pin</label>
-                        <input class="form-control" type="text" name="memory_pin" value="{{ $pin->memory_pin }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Loại pin</label>
-                        <input class="form-control" type="text" name="pin_type" value="{{ $pin->pin_type }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Hỗ trợ sạc tối đa</label>
-                        <input class="form-control" type="text" name="support_pin_max" value="{{ $pin->support_pin_max }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Sạc kèm theo máy</label>
-                        <input class="form-control" type="text" name="charger" value="{{ $pin->charger }}" required ></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Công nghệ pin</label>
-                        <input class="form-control" type="text" name="technology_pin" value="{{ $pin->technology_pin }}" required></input>
-                    </div>
-                @endforeach
-                @foreach ($temp->utilitie as $utilitie)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Kháng nước, bụi</label>
-                        <input class="form-control" type="text" name="waterproof_dustproof" value="{{ $utilitie->waterproof_dustproof }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Radio</label>
-                        <input class="form-control" type="text" name="radio" value="{{ $utilitie->radio }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Bảo mật nâng cao</label>
-                        @foreach ($utilitie->securityAdvance as $securityAdvance)
-                            <label class="control-label">{{ $securityAdvance->name_security_advance }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tính năng đặc biệt</label>
-                        @foreach ($utilitie->featureAdvance as $featureAdvance)
-                            <label class="control-label">{{ $featureAdvance->name_feature_advance }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Ghi âm</label>
-                            @foreach ($utilitie->record as $record)
-                                <label class="control-label">{{ $record->name_record }}</label>
-                            @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Xem phim</label>
-                        @foreach ($utilitie->video as $video)
-                            <label class="control-label">{{ $video->name_video }}</label>
-                        @endforeach
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Nghe nhạc</label>
-                        @foreach ($utilitie->music as $music)
-                            <label class="control-label">{{ $music->name_music }}</label>
-                        @endforeach
-                    </div>
-                @endforeach
-                @foreach ($temp->information as $information)
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Thiết kế</label>
-                        <input class="form-control" type="text" name="design" value="{{ $information->design }}" required ></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Chất liệu</label>
-                        <input class="form-control" type="text" name="material" value="{{ $information->material }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Kích thước khối lượng</label>
-                        <input class="form-control" type="text" name="size_mass" value="{{ $information->size_mass }}" required></input>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Ngày ra mắt</label>
-                        <input class="form-control" type="text" name="date" value="{{ $information->created_at }}" readonly></input>
-                    </div>
-                @endforeach
-            @endforeach
-            {{--
-            <div class="form-group col-md-4">
-                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                <select class="form-control" id="exampleSelect1" name="status" required>
-                    {{-- <option value="Đang xử lí">Đang xử lí</option> --}}
-                    {{-- <option value="Đã xử lí">Đã xử lí</option>
-                </select>
-            </div> --}}
-                <BR>
-                <BR>
-                <BR>
-                <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('product')}}">Hủy bỏ</a>
+                        <form action="{{ route('postEditProduct',['id'=>$product->id]) }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tên hãng điện thoại</label>
+                                <input class="form-control" type="text" name="trademark" value="{{ $product->trademark }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" name="name_product" value="{{ $product->name_product }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Mã sản phẩm</label>
+                                <input class="form-control" type="text" name="product_code" value="{{ $product->product_code }}" required>
+                            </div>
+                            <div class="form-group  col-md-3">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" name="amount" value="{{ $product->amount }}" required onkeypress="return event.charCode >= 48" min="1">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Giá bán</label>
+                                <input class="form-control" type="number" name="price" value="{{ $product->price }}" required onkeypress="return event.charCode >= 48" min="1">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thuế</label>
+                                <input class="form-control" type="number" name="tax" value="{{ $product->tax }}" required onkeypress="return event.charCode >= 48" min="0">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thời gian bảo hành</label>
+                                <input class="form-control" type="number" name="time_warranty" value="{{ $product->time_warranty }}" required onkeypress="return event.charCode >= 48" min="0">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Khuyến mãi(%)</label>
+                                <input class="form-control" type="number" name="sale"  value="{{ $product->sale }}" required onkeypress="return event.charCode >= 48" min="0">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Công nghệ màn hình</label>
+                                <input class="form-control" type="text" name="screen_technology" value="{{ $product->screen_technology }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Độ phân giải màn hình</label>
+                                <input class="form-control" type="text" name="screen_resolution" value="{{ $product->screen_resolution }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Mặt kính cảm ứng</label>
+                                <input class="form-control" type="text" name="touch_screen_glass" value="{{ $product->touch_screen_glass }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Chiều rộng màn hình</label>
+                                <input class="form-control" type="text" name="screen_width" value="{{ $product->screen_width }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Độ sáng tối đa*(nits)</label>
+                                <input class="form-control" type="text" name="screen_maximum_brightness" value="{{ $product->screen_maximum_brightness }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Đèn</label>
+                                <input class="form-control" type="text" name="flash_light" value="{{ $product->flash_light }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hệ điều hành</label>
+                                <input class="form-control" type="text" name="operating_system" value="{{ $product->operating_system }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Chip(cpu)</label>
+                                <input class="form-control" type="text" name="CPU" value="{{ $product->CPU }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tốc độ chip(cpu)</label>
+                                <input class="form-control" type="text" name="speed_cpu" value="{{ $product->speed_cpu }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Chip đồ họa</label>
+                                <input class="form-control" type="text" name="GPU" value="{{ $product->GPU }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Ram</label>
+                                <input class="form-control" type="number" name="GPU" value="{{ $product->GPU }}" onkeypress="return event.charCode >= 48" min="0" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Rom</label>
+                                <input class="form-control" type="number" name="rom" value="{{ $product->rom }}" onkeypress="return event.charCode >= 48" min="0" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Bộ nhớ khả dụng</label>
+                                <input class="form-control" type="number" name="available_memory" value="{{ $product->available_memory }}" onkeypress="return event.charCode >= 48" min="0" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thẻ nhớ</label>
+                                <input class="form-control" type="text" name="memory_stick" value="{{ $product->memory_stick }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Mạng di động</label>
+                                <input class="form-control" type="text" name="mobile_network" value="{{ $product->mobile_network }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Sim</label>
+                                <input class="form-control" type="text" name="sim" value="{{ $product->sim }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Danh bạ</label>
+                                <input class="form-control" type="text" name="phonebook" value="{{ $product->phonebook }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Cổng sạc</label>
+                                <input class="form-control" type="text" name="charging_port" value="{{ $product->charging_port }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tai nghe</label>
+                                <input class="form-control" type="text" name="headphone" value="{{ $product->headphone }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Kết nối khác</label>
+                                <input class="form-control" type="text" name="connection_orther" value="{{ $product->connection_orther }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Dung lượng pin</label>
+                                <input class="form-control" type="text" name="battery_capacity" value="{{ $product->battery_capacity }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Loại pin</label>
+                                <input class="form-control" type="text" name="pin_type" value="{{ $product->pin_type }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hỗ trợ sạc pin tối đa</label>
+                                <input class="form-control" type="text" name="maximum_battery_charging_support" value="{{ $product->maximum_battery_charging_support }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Sạc kèm theo máy</label>
+                                <input class="form-control" type="text" name="charger_included" value="{{ $product->charger_included }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Công nghệ pin</label>
+                                <input class="form-control" type="text" name="battery_technology" value="{{ $product->battery_technology }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Kháng bụi, nước</label>
+                                <input class="form-control" type="text" name="water_and_dust_resistant" value="{{ $product->water_and_dust_resistant }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Radio</label>
+                                <input class="form-control" type="text" name="radio" value="{{ $product->radio }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thiết kế</label>
+                                <input class="form-control" type="text" name="design" value="{{ $product->design }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Chất liệu</label>
+                                <input class="form-control" type="text" name="material" value="{{ $product->material }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Kích thước, khối lượng</label>
+                                <input class="form-control" type="text" name="size_volume" value="{{ $product->size_volume }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Ngày tạo</label>
+                                <input class="form-control" type="date" name="date_created" value="{{ $product->date_created }}" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image" >
+                                @foreach ($product->ImageDetail as $image)
+                                <img src="{{ url('storage/images/'.$image->image) }}" alt="" title="" width="100px" />
+                                @endforeach
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tình trạng</label>
+                                <select class="form-control product-chosen" name="status" required>
+                                        <option value="Đang hoạt động">Đang hoạt động</option>
+                                        <option value="Chưa hoạt động">Chưa hoạt động</option>
+                                </select>
+                            </div>
+                            {{--
+<div class="form-group col-md-3">
+                                <label class="control-label">Bảo mật:
+                                    @foreach ($product->allTypeDetail as $allType)
+                                        @if ($allType->allType->classify=="Bảo mật")
+                                       {{  $allType->allType->name_classify }}
+                                        @endif
+                                    @endforeach
+                                </label>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Thay đổi bảo mật</label>
+                                <select class="form-control product-chosen" multiple name="secutity_type[]"  required>
+                                    @foreach ($secutity as $secutity)
+                                        <option value="{{ $secutity->id }}">{{ $secutity->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Bảo mật:
+                                    @foreach ($product->allTypeDetail as $allType)
+                                        @if ($allType->allType->classify=="Tính năng")
+                                       {{  $allType->allType->name_classify }}
+                                        @endif
+                                    @endforeach
+                                </label>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Thay đổi tính năng</label>
+                                <select class="form-control product-chosen" multiple name="feature_type[]" required>
+                                    @foreach ($feature as $feature)
+                                    <option value="{{ $feature->id }}">{{ $feature->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-        </form>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Ghi âm</label>
+                                <select class="form-control product-chosen" multiple name="record_type[]" required>
+                                    @foreach ($record as $record)
+                                    <option value="{{ $record->id }}">{{ $record->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Xem phim</label>
+                                <select class="form-control product-chosen" multiple name="video_type[]" required>
+                                    @foreach ($video as $video)
+                                    <option value="{{ $video->id }}">{{ $video->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Nghe nhạc</label>
+                                <select class="form-control product-chosen" multiple name="music_type[]" required>
+                                    @foreach ($music as $music)
+                                    <option value="{{ $music->id }}">{{ $music->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Wjfj</label>
+                                <select class="form-control product-chosen" multiple name="wjfj_type[]" required>
+                                    @foreach ($wjfj as $wjfj)
+                                    <option value="{{ $wjfj->id }}">{{ $wjfj->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Xem phim</label>
+                                <select class="form-control product-chosen" multiple name="film_type[]" required>
+                                    @foreach ($film as $film)
+                                    <option value="{{ $film->id }}">{{ $film->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Định vị</label>
+                                <select class="form-control product-chosen" multiple name="gps_type[]" required>
+                                    @foreach ($gps as $gps)
+                                    <option value="{{ $gps->id }}">{{ $gps->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Bluetooth</label>
+                                <select class="form-control product-chosen" multiple name="bluetooth_type[]" required>
+                                    @foreach ($bluetooth as $bluetooth)
+                                    <option value="{{ $bluetooth->id }}">{{ $bluetooth->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image" >
+                            </div> --}}
+                                <BR>
+                                <BR>
+                                <BR>
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <a class="btn btn-cancel" data-dismiss="modal" href="{{route('product')}}">Hủy bỏ</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <BR>
         </div>
     </main>

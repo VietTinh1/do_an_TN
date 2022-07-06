@@ -4,17 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
-use App\Models\Product;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
@@ -53,8 +42,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
     Route::get('/add_invoice_provided', [AdminController::class, 'addInvoiceProvided'])->name('addInvoiceProvided');
     Route::post('/add_invoice_provided', [AdminController::class, 'postAddInvoiceProvided'])->name('postAddInvoiceProvided');
-    Route::get('/add_invoice_provided_not_yet', [AdminController::class, 'addInvoiceProvidedNotYet'])->name('addInvoiceProvidedNotYet');
-    Route::post('/add_invoice_provided_not_yet', [AdminController::class, 'postAddInvoiceProvidedNotYet'])->name('postAddInvoiceProvidedNotYet');
+    // Route::get('/add_invoice_provided_not_yet', [AdminController::class, 'addInvoiceProvidedNotYet'])->name('addInvoiceProvidedNotYet');
+    // Route::post('/add_invoice_provided_not_yet', [AdminController::class, 'postAddInvoiceProvidedNotYet'])->name('postAddInvoiceProvidedNotYet');
 
 
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
@@ -105,4 +94,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/update_bluetooth_type/{id}', [AdminController::class, 'postUpdateBluetoothType'])->name('postUpdateBluetoothType');
     Route::get('/update_film_type', [AdminController::class, 'updateFilmType'])->name('updateFilmType');
     Route::post('/update_film_type/{id}', [AdminController::class, 'postUpdateFilmType'])->name('postUpdateFilmType');
+    Route::get('/update_battery_technology_type', [AdminController::class, 'updateBatteryTechnologyType'])->name('updateBatteryTechnologyType');
+    Route::post('/update_battery_technology_type/{id}', [AdminController::class, 'postUpdateBatteryTechnologyType'])->name('postUpdateBatteryTechnologyType');
 });

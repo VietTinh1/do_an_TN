@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Thêm hóa đơn | Quản trị Admin</title>
     <meta charset="utf-8">
@@ -98,27 +97,27 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Công nghệ màn hình</label>
-                                <input class="form-control" type="text" name="screen_technology"></input>
+                                <input class="form-control" type="text" name="screen_technology" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải</label>
-                                <input class="form-control" type="text" name="resolution"></input>
+                                <input class="form-control" type="text" name="resolution" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ rộng</label>
-                                <input class="form-control" type="text" name="width"></input>
+                                <input class="form-control" type="text" name="width" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ sáng tối đa(nits)</label>
-                                <input class="form-control" type="number" name="maximum_brightness" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="maximum_brightness" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Mặt kính cảm ứng</label>
-                                <input class="form-control" type="text" name="touch_glass"></input>
+                                <input class="form-control" type="text" name="touch_glass" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải camera trước</label>
-                                <input class="form-control" type="number" name="resolution" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="resolution" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tính năng camera trước</label>
@@ -130,15 +129,15 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải camera chính(sau)</label>
-                                <input class="form-control" type="number" name="main_rear_camera" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="main_rear_camera" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải camera sau 1</label>
-                                <input class="form-control" type="number" name="main_secondary_1" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="main_secondary_1" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Độ phân giải camera sau 2</label>
-                                <input class="form-control" type="number" name="main_secondary_2" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="main_secondary_2" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Quay phim</label>
@@ -150,7 +149,7 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Đèn flash</label>
-                                <input class="form-control" type="text" name="flash_light" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="flash_light" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tính năng camera sau</label>
@@ -162,47 +161,47 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hệ điều hành</label>
-                                <input class="form-control" type="text" name="operating_system_name"></input>
+                                <input class="form-control" type="text" name="operating_system_name" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tên Cpu</label>
-                                <input class="form-control" type="text" name="chip_cpus"></input>
+                                <input class="form-control" type="text" name="chip_cpus" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tốc độ CPU</label>
-                                <input class="form-control" type="text" name="speed_cpu"></input>
+                                <input class="form-control" type="text" name="speed_cpu" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">GPU</label>
-                                <input class="form-control" type="text" name="gpu"></input>
+                                <input class="form-control" type="text" name="gpu" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ram</label>
-                                <input class="form-control" type="number" name="ram" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="ram" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Rom</label>
-                                <input class="form-control" type="number" name="rom" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="rom" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Bộ nhớ khả dụng</label>
-                                <input class="form-control" type="number" name="memory_available" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="number" name="memory_available" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Thẻ nhớ</label>
-                                <input class="form-control" type="text" name="memory_stick" onkeypress="return event.charCode >= 48" min="1"></input>
+                                <input class="form-control" type="text" name="memory_stick" onkeypress="return event.charCode >= 48" min="1" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Danh bạ</label>
-                                <input class="form-control" type="text" name="phone_book"></input>
+                                <input class="form-control" type="text" name="phone_book" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Mạng di động</label>
-                                <input class="form-control" type="text" name="mobile_network"></input>
+                                <input class="form-control" type="text" name="mobile_network" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Sim</label>
-                                <input class="form-control" type="text" name="sim"></input>
+                                <input class="form-control" type="text" name="sim" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Bluetooth</label>
@@ -217,15 +216,15 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Cổng sạc</label>
-                                <input class="form-control" type="text" name="charging_port"></input>
+                                <input class="form-control" type="text" name="charging_port" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Tai nghe</label>
-                                <input class="form-control" type="text" name="head_phone"></input>
+                                <input class="form-control" type="text" name="head_phone" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Kết nối khác</label>
-                                <input class="form-control" type="text" name="connection_orther"></input>
+                                <input class="form-control" type="text" name="connection_orther" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Wifi</label>
@@ -251,27 +250,27 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Dung lượng pin</label>
-                                <input class="form-control" type="text" name="memory_pin"></input>
+                                <input class="form-control" type="text" name="memory_pin" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Loại pin</label>
-                                <input class="form-control" type="text" name="pin_type"></input>
+                                <input class="form-control" type="text" name="pin_type" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Hỗ trợ sạc tối đa</label>
-                                <input class="form-control" type="text" name="support_pin_max"></input>
+                                <input class="form-control" type="text" name="support_pin_max" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Sạc kèm theo máy</label>
-                                <input class="form-control" type="text" name="charger"></input>
+                                <input class="form-control" type="text" name="charger" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Công nghệ pin</label>
-                                <input class="form-control" type="text" name="technology_pin"></input>
+                                <input class="form-control" type="text" name="technology_pin" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Kháng nước, bụi</label>
-                                <input class="form-control" type="text" name="waterproof_dustproof"></input>
+                                <input class="form-control" type="text" name="waterproof_dustproof" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Radio</label>
@@ -322,15 +321,15 @@
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Thiết kế</label>
-                                <input class="form-control" type="text" name="design"></input>
+                                <input class="form-control" type="text" name="design" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Chất liệu</label>
-                                <input class="form-control" type="text" name="material"></input>
+                                <input class="form-control" type="text" name="material" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Kích thước khối lượng</label>
-                                <input class="form-control" type="text" name="size_mass"></input>
+                                <input class="form-control" type="text" name="size_mass" required></input>
                             </div>
                             <div class="form-group  col-md-4">
                                 <label class="control-label">Ngày ra mắt</label>

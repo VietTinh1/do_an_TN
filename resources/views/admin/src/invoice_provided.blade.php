@@ -38,63 +38,24 @@
             <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvided')}}" title="Thêm"><i class="fas fa-plus"></i>
-                  Cập nhật sản phẩm</a>
+                  Thêm hóa đơn nhập</a>
               </div>
-              <div class="col-sm-2">
+              {{-- <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" href="{{route('addInvoiceProvidedNotYet')}}" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới sản phẩm chưa có</a>
-              </div>
+              </div> --}}
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
               </div>
             </div>
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateSecurityType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại bảo mật</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại tính năng</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateRecordType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại ghi âm</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateVideoType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại xem phim</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateMusicType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại nghe nhạc</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại tính năng Camera</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateWjfjType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại Wifi</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateGpsType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại GPS</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateBluetoothType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại Bluetooth</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{ route('updateFilmType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                  Thêm loại quay phim</a>
-              </div>
-            </div>
+
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
                   <th>Nhân viên thêm</th>
-                  <th>Tên cung cấp</th>
+                  <th>Nhà cung cấp</th>
+                  <th>Số lượng</th>
+                  <th>Giá nhập</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
                   <th>Chi tiết</th>
@@ -105,9 +66,14 @@
               </thead>
                 @foreach ($invoiceProvides as $invoiceProvides)
                     <tbody>
-                        <?php $userX=$invoiceProvides->user->fullname; ?>
+                        <?php
+                            $userX=$invoiceProvides->user->fullname;
+                            $amount='';
+                            ?>
                         <td>@if(!empty($userX)) {{ $userX}} @endif</td>
                         <td>{{ $invoiceProvides->provided->name }}</td>
+                        <td>@if(!empty($invoiceProvides->invoiceProvidedDetail->amount)) {{ $invoiceProvides->invoiceProvidedDetail->amount}} @endif</td>
+                        <td>@if(!empty($invoiceProvides->invoiceProvidedDetail->import_price)) {{ $invoiceProvides->invoiceProvidedDetail->import_price}} VNĐ @endif</td>
                         <td>{{ $invoiceProvides->total }}</td>
                         <td>{{ $invoiceProvides->created_at }}</td>
                         <td>

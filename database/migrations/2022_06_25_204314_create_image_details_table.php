@@ -15,8 +15,9 @@ class CreateImageDetailsTable extends Migration
     {
         Schema::create('image_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('front',100)->nullable();//mat truoc
-            $table->string('backside',100)->nullable();//mat sau
+            $table->integer('product_id')->nullable();
+            $table->string('image',100)->nullable();
+            $table->string('status')->default("Đã tạo");
             $table->timestamps();
         });
     }

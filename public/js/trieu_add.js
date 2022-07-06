@@ -129,6 +129,53 @@ $(document).ready(function() {
 
     //multi select
     $(".product-chosen").chosen({
-        no_results_text: "Oops, nothing found!",
+        no_results_text: "Không tìm thấy dữ liệu!",
     })
+    var i = 1;
+    $("#add_row").click(function() {
+        b = i - 1;
+        $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
+        $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+        i++;
+    });
+    $("#delete_row").click(function() {
+        if (i > 1) {
+            $("#addr" + (i - 1)).html('');
+            i--;
+        }
+        calc();
+    });
+
+    $('#tab_logic tbody').on('keyup change', function() {
+        calc();
+    });
+    $('#tax').on('keyup change', function() {
+        calc_total();
+    });
+
+
+    function calc() {
+        $('#tab_logic tbody tr').each(function(i, element) {
+            var html = $(this).html();
+            if (html != '') {
+                var amount = $(this).find('.amount').val();
+                var price = $(this).find('.price').val();
+                var tax = $(this).find('.tax').val();
+                $(this).find('.total').val((amount * price) + (amount * price * (tax / 100)));
+
+                calc_total();
+            }
+        });
+    }
+
+    function calc_total() {
+        total = 0;
+        $('.total').each(function() {
+            total += parseInt($(this).val());
+        });
+        $('#sub_total').val(total.toFixed(0));
+
+    }
+    //time
+
 });

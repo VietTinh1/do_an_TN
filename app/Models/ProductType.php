@@ -11,4 +11,7 @@ class ProductType extends Model
     protected $table="product_types";
     public $timestamps = true;
     protected $fillable =['name','status','created_at','updated_at'];
+    public function product() {
+        return $this->hasOne('App\Models\Product','product_type_id','id');
+    }
 }

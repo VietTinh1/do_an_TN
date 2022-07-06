@@ -18,7 +18,7 @@ class CreateInvoiceProvidedTable extends Migration
             $table->integer('provided_id');
             $table->integer('user_id');
             $table->decimal('total',30,3)->nullable();
-            $table->string('status')->default("Đang xử lí");// Đã xử lí // Đã hủy
+            $table->string('status')->default("Đã xử lí");// Đã xử lí // Đã hủy
             $table->timestamps();
         });
     }

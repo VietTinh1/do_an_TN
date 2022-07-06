@@ -36,37 +36,19 @@
             <form action="{{ route('postEditInvoiceProvided',['id'=>$data->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Nhà cung cấp</label>
+                        <label class="form-control">@if (!empty($data->invoiceProvided->provided->name))
+                            {{ $data->invoiceProvided->provided->name }}
+                        @endif</label>
+                    </div>
                     <div class="form-group col-md-4">
-                        <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
+                        <label for="exampleSelect1" class="control-label">Thay đổi nhà cung cấp</label>
                         <select class="form-control" id="exampleSelect1" name="provided_id" required>
                             @foreach ($provided as $provided)
                             <option value="{{ $provided->id }}">{{ $provided->name }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tên sản phẩm</label>
-                        <input class="form-control" type="text" name="name" value="{{ $data->name }}" required>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Tên hãng</label>
-                        <input class="form-control" type="text" name="trademark" value="{{ $data->trademark }}" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-                        <select class="form-control" id="exampleSelect1" name="product_type_id" required>
-                            @foreach ($productType as $productType)
-                            <option value="{{ $productType->id }}">{{ $productType->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Hình ảnh thay đổi(không bắt buộc)</label>
-                        <input class="form-control" type="file" name="image" >
-                    </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Mã sản phẩm</label>
-                        <input class="form-control" type="text" name="product_code" value="{{ $data->product_code }}" required>
                     </div>
                     <div class="form-group  col-md-4">
                         <label class="control-label">Số lượng</label>
@@ -77,12 +59,15 @@
                         <input class="form-control" type="number" name="import_price" value="{{ $data->import_price }}" onkeypress="return event.charCode >= 48" min="1" required>
                     </div>
                     <div class="form-group  col-md-4">
-                        <label class="control-label">Thời gian bảo hành</label>
-                        <input class="form-control" type="number" name="time_warranty" value="{{ $data->time_warranty }}" onkeypress="return event.charCode >= 48" min="1" required>
-                    </div>
-                    <div class="form-group  col-md-4">
                         <label class="control-label">Thuế(%)</label>
                         <input class="form-control" type="number" name="tax" value="{{ $data->tax }}" onkeypress="return event.charCode >= 48" min="1" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleSelect1" class="control-label">Tình trạng</label>
+                        <select class="form-control" id="exampleSelect1" name="status" required>
+                            {{-- <option value="Đang xử lí">Đang xử lí</option> --}}
+                            <option value="Đã xử lí">Đã xử lí</option>
+                        </select>
                     </div>
                 </div> <BR>
                 <BR>

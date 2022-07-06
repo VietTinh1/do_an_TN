@@ -43,16 +43,66 @@
                             <div class="col-sm-2">
                                 <a class="btn btn-excel btn-sm" href="{{ route('exportProduct') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
                             </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-add btn-sm" href="{{ route('addProduct') }}" title="In">Thêm sản phẩm</a>
+                            </div>
                         </div>
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateSecurityType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại bảo mật</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại tính năng</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateRecordType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại ghi âm</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateVideoType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại xem phim</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateMusicType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại nghe nhạc</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại tính năng Camera</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateWjfjType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại Wifi</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateGpsType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại GPS</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateBluetoothType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại Bluetooth</a>
+                            </div>
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="{{ route('updateFilmType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại quay phim</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-add btn-sm" href="{{ route('updateBatteryTechnologyType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                  Thêm loại công nghệ pin</a>
+                              </div>
+                          </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
+                                    <th>Người tạo</th>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Loại sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
                                     <th>Thuế</th>
-                                    <th>Đánh giá</th>
                                     <th>Chi tiết</th>
                                     <th>Tình trạng</th>
                                     <th>Chức năng</th>
@@ -61,14 +111,15 @@
                             <tbody>
                                 @foreach ($product as $product)
                                 <tr>
+                                    <td>{{ $product->user->fullname }}</td>
                                     <td>{{ $product->product_code }}</td>
-                                    <td>{{ $product->name}}</td>
+                                    <td>{{ $product->name_product}}</td>
+                                    <td>{{ $product->productType->name }}</td>
                                     <td>{{ $product->amount }}</td>
                                     <td>{{ $product->price }} VND</td>
                                     <td>{{ $product->tax }}</td>
-                                    <td>{{ $product->so_sao }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#modalProduct" data-account-id="{{ $product->account_id }}" data-trademark="{{ $product->trademark }}" data-name="{{ $product->name }}" data-product-type-id="{{ $product->product_type_id }}" data-product-code="{{ $product->product_code }}" data-amount="{{ $product->amount }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-so-sao="{{ $product->so_sao }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}" data-sale="{{ $product->sale }}" data-time-warranty="{{ $product->time_warranty }}">Chi tiết</button>
+                                       <button type="button" class="btn btn-primary open-modal" value="{{ $product->id }}" id="edit" data-toggle="modal" data-target="#modalProduct" data-account-id="{{ $product->account_id }}" data-trademark="{{ $product->trademark }}" data-name="{{ $product->name }}" data-product-type-id="{{ $product->product_type_id }}" data-product-code="{{ $product->product_code }}" data-amount="{{ $product->amount }}" data-amount="{{ $product->amount }}" data-price="{{ $product->price }}" data-tax="{{ $product->tax }}" data-so-sao="{{ $product->so_sao }}" data-sosao="{{ $product->so_sao }}" data-status="{{ $product->status }}" data-createdat="{{ $product->created_at }}" data-sale="{{ $product->sale }}" data-time-warranty="{{ $product->time_warranty }}">Chi tiết</button>
                                     </td>
                                     <td>
                                         @if($product->status=="Đang hoạt động")

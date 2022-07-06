@@ -42,4 +42,10 @@ class AllType extends Model
     public function scopeBluetooth($query) {
         return $query->where('classify','bluetooth');
     }
+    public function allTypeDetail() {
+        return $this->hasOne('App\Models\AllTypeDetail','all_type_id','id');
+    }
+    public function scopeBatteryTechnology($query) {
+        return $query->where('classify','Công nghệ pin');
+    }
 }

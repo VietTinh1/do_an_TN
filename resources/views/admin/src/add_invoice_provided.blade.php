@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Thêm hóa đơn | Quản trị Admin</title>
+    <title>Thêm hóa đơn nhập | Quản trị Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,12 +10,16 @@
     <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    //thêm multi product
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
 </head>
@@ -29,56 +33,64 @@
         @endif
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item">Danh sách đơn hàng</li>
-                <li class="breadcrumb-item"><a href="#">Thêm đơn hàng</a></li>
+                <li class="breadcrumb-item">Danh sách hóa đơn nhập</li>
+                <li class="breadcrumb-item"><a href="#">Thêm hóa đơn nhập</a></li>
             </ul>
             <div id="clock"></div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Cập nhật hóa đơn nhập</h3>
+                    <h3 class="tile-title">Thêm hóa đơn nhập</h3>
                     <div class="tile-body">
-                        <form class="row" method="POST" action="{{ route('postAddInvoiceProvided') }}" enctype="multipart/form-data">
+                        <form class="row" method="POST" action="{{ route('postAddInvoiceProvided') }}">
                             @csrf
-                            <div class="form-group col-md-4">
-                                <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-                                <select class="form-control" id="exampleSelect1" name="id_provided" required>
-                                    @foreach ($provided as $provided)
-                                    <option value="{{ $provided->id }}">{{ $provided->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleSelect1" class="control-label">Sản phẩm</label>
-                                <select class="form-control" id="exampleSelect1" name="product_id" required>
-                                    @foreach ($product as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" name="amount" onkeypress="return event.charCode >= 48" min="1" required>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Giá nhập(VND)</label>
-                                <input class="form-control" type="number" name="import_price" onkeypress="return event.charCode >= 48" min="1" required>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Thời gian bảo hành</label>
-                                <input class="form-control" type="number" name="time_warranty" onkeypress="return event.charCode >= 48" min="1" required>
-                            </div>
-                            <div class="form-group  col-md-4">
-                                <label class="control-label">Thuế(%)</label>
-                                <input class="form-control" type="number" name="tax" onkeypress="return event.charCode >= 48" min="1" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1" name="status" required>
-                                    {{-- <option value="Đang xử lí">Đang xử lí</option> --}}
-                                    <option value="Đã xử lí">Đã xử lí</option>
-                                </select>
+                            <div class="container" style="max-width:1219px;">
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-hover" id="tab_logic" >
+                                            <thead>
+                                                <tr>
+                                                    <td style="text-align: center">1</td>
+                                                    <th class="text-center"> Nhà cung cấp </th>
+                                                    <th class="text-center"> Sản phẩm </th>
+                                                    <th class="text-center"> Số lượng </th>
+                                                    <th class="text-center"> Giá nhập(VND) </th>
+                                                    <th class="text-center"> Thuế(%) </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id='addr0'>
+                                                    <td style="text-align: center">1</td>
+                                                    <td>
+                                                        <select class="form-control" id="exampleSelect1" name="id_provided[]" required>
+                                                            @foreach ($provided as $provided)
+                                                            <option value="{{ $provided->id }}">{{ $provided->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" id="exampleSelect1" name="product_id[]" required>
+                                                            @foreach ($product as $product)
+                                                            <option value="{{ $product->id }}">{{ $product->name_product }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="number" name='amount[]' placeholder='Nhập số lượng' class="form-control amount" onkeypress="return event.charCode >= 48" min="1" step="0" min="0" required></td>
+                                                    <td><input type="number" name='import_price[]' placeholder='Nhập giá tiền' class="form-control price" onkeypress="return event.charCode >= 48" min="1" step="0.00" min="0" required></td>
+                                                    <td><input type="number" name='tax[]' placeholder='%' class="form-control tax" step="0.00" min="0" required></td>
+                                                </tr>
+                                                <tr id='addr1'></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-12">
+                                        <button id="add_row" type="button" class="btn btn-primary pull-left">Thêm sản phẩm</button>
+                                        <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button>
+                                    </div>
+                                </div>
                             </div>
                             <br>
                             <br>
@@ -95,6 +107,53 @@
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>
 
     <script type="text/javascript">
+    $(document).ready(function() {
+            var i = 1;
+            $("#add_row").click(function() {
+                b = i - 1;
+                $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
+                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+                i++;
+            });
+            $("#delete_row").click(function() {
+                if (i > 1) {
+                    $("#addr" + (i - 1)).html('');
+                    i--;
+                }
+                calc();
+            });
+
+            $('#tab_logic tbody').on('keyup change', function() {
+                calc();
+            });
+            $('#tax').on('keyup change', function() {
+                calc_total();
+            });
+
+        });
+
+        function calc() {
+            $('#tab_logic tbody tr').each(function(i, element) {
+                var html = $(this).html();
+                if (html != '') {
+                    var amount = $(this).find('.amount').val();
+                    var price = $(this).find('.price').val();
+                    var tax = $(this).find('.tax').val();
+                    $(this).find('.total').val((amount * price) + (amount * price * (tax / 100)));
+
+                    calc_total();
+                }
+            });
+        }
+
+        function calc_total() {
+            total = 0;
+            $('.total').each(function() {
+                total += parseInt($(this).val());
+            });
+            $('#sub_total').val(total.toFixed(0));
+
+        }
         //Thời Gian
         function time() {
             var today = new Date();

@@ -64,7 +64,6 @@
                   <th>Email</th>
                   <th>Số điện thoại</th>
                   <th>Địa chỉ</th>
-                  <th>Số lượng</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
                   <th>Lời nhắn</th>
@@ -75,37 +74,36 @@
               </thead>
               <tbody>
                 @foreach ($data as $data)
-                <tr>
-                  <td>{{ $data->id }}</td>
-                  <td>{{ $data->name_customer }}</td>
-                  <td>{{ $data->email_customer }}</td>
-                  <td>{{ $data->phone }}</td>
-                  <td>{{ $data->address_customer }}</td>
-                  <td>{{ $data->amount }}</td>
-                  <td>{{ $data->total }}</td> 
-                  <td>{{ $data->created_at }}</td>
-                  <td>{{ $data->message }}</td>
-                  <td>
-                    <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}" data-status="{{ $data->status }}" data-createdat="{{ $data->created_at }}">Chi tiết</button>
-                  </td>
-                  <td>
-                    @if($data->status =="Chờ xử lí")
-                    <span class="badge bg-success">Chờ xử lí</span>
-                    @elseif($data->status =="Đang xử lí")
-                    <span class="badge bg-success"> Đang xử lí</span>
-                    @elseif($data->status =="Đã xử lí")
-                    <span class="badge bg-success">Đã xử lí</span>
-                    @else
-                    <span class="badge bg-danger">Đã hủy</span>
-                    @endif
-                  </td>
-                  <td>
-                    <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
-                    @if($data->status !="Đã hủy")
-                    <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                    @endif
-                  </td>
-                </tr>
+                    <tr>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->name_customer }}</td>
+                        <td>{{ $data->email_customer }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>{{ $data->address_customer }}</td>
+                        <td>{{ $data->total }}</td>
+                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->message }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary open-modal" value="{{ $data->id }}" id="edit" data-toggle="modal" data-target="#exampleModal" data-namecustomer="{{ $data->name_customer }}" data-emailcustomer="{{ $data->email_customer }}" data-phone="{{ $data->phone }}" data-addresscustomer="{{ $data->address_customer }}" data-total="{{ $data->total }}" data-status="{{ $data->status }}" data-createdat="{{ $data->created_at }}">Chi tiết</button>
+                        </td>
+                        <td>
+                            @if($data->status =="Chờ xử lí")
+                            <span class="badge bg-success">Chờ xử lí</span>
+                            @elseif($data->status =="Đang xử lí")
+                            <span class="badge bg-success"> Đang xử lí</span>
+                            @elseif($data->status =="Đã xử lí")
+                            <span class="badge bg-success">Đã xử lí</span>
+                            @else
+                            <span class="badge bg-danger">Đã hủy</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
+                            @if($data->status !="Đã hủy")
+                            <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                            @endif
+                        </td>
+                    </tr>
                 @endforeach
               </tbody>
             </table>

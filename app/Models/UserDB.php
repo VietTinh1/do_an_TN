@@ -18,9 +18,9 @@ class UserDB extends Model
         return $this->hasOne('App\Models\InvoiceProvided','account_id','id');
     }
     public function invoice() {
-        return $this->hasOne('App\Models\Invoice','account_id','id');
+        return $this->hasMany('App\Models\Invoice','account_id','id');
     }
     public function product() {
-        return $this->hasOne('App\Models\Product','account_id','id');
+        return $this->hasMany('App\Models\Product','account_id','id');
     }
 }

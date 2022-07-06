@@ -18,6 +18,6 @@ class InvoiceProvided extends Model
         return $this->hasOne('App\Models\InvoiceProvidedDetail','invoice_provided_id','id');
     }
     public function user() {
-        return $this->belongsTo('App\Models\UserDB','user_id','id');
+        return $this->hasOne('App\Models\UserDB','id','user_id');
     }
 }

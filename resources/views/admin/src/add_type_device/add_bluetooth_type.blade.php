@@ -27,7 +27,7 @@
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh Sách Hóa Đơn Nhập</li>
-        <li class="breadcrumb-item"><a href="#">Thêm loạibluetooth</a></li>
+        <li class="breadcrumb-item"><a href="#">Thêm loại bluetooth</a></li>
       </ul>
       <div id="clock"></div>
     </div>

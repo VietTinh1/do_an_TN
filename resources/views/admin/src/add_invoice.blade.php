@@ -17,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    //thêm multi product
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
@@ -46,11 +47,11 @@
                             @csrf
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Tên khách hàng</label>
-                                <input class="form-control" type="text" name="name" required>
+                                <input class="form-control" type="text" name="name_customer" required>
                             </div>
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Email</label>
-                                <input class="form-control" type="email" name="email" required>
+                                <input class="form-control" type="email" name="email_customer" required>
                             </div>
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Số điện thoại</label>
@@ -59,11 +60,11 @@
 
                             <div class="form-group  col-md-3">
                                 <label class="control-label">Địa chỉ</label>
-                                <input class="form-control" type="text" name="address" required>
+                                <input class="form-control" type="text" name="address_customer" required>
                             </div>
                             <div class="form-group  col-md-6">
                                 <label class="control-label">Ghi chú đơn hàng</label>
-                                <textarea class="form-control" rows="4" name="message"></textarea>
+                                <textarea class="form-control" rows="4" name="message" required></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
@@ -72,36 +73,39 @@
                                     <option value="Đã xử lí"> Đã xử lí</option>
                                 </select>
                             </div>
-                            <div class="container">
+                            <div class="container" style="max-width:1219px;">
                                 <div class="row clearfix">
                                     <div class="col-md-12">
-                                        <table class="table table-bordered table-hover" id="tab_logic">
+                                        <table class="table table-bordered table-hover" id="tab_logic" >
                                             <thead>
                                                 <tr>
                                                     <th class="text-center"> ID </th>
                                                     <th class="text-center"> Tên sản phẩm </th>
                                                     <th class="text-center"> Số lượng </th>
-                                                    <th class="text-center"> Giá tiền </th>
+                                                    {{-- <th class="text-center"> Giá tiền </th>
                                                     <th class="text-center"> Thuế </th>
-                                                    <th class="text-center"> Tổng tiền </th>
+                                                    <th class="text-center"> Tổng tiền </th> --}}
+                                                    {{-- <th class="text-center"> Thêm sản phẩm </th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr id='addr0'>
-                                                    <td>1</td>
+                                                    <td style="text-align: center">1</td>
                                                     <td>
-                                                        <select name="products[]" class="form-control">
+                                                        <select name="products[]" class="form-control" >
                                                             @foreach ($product as $product)
                                                             <option value="{{ $product->id }}">
-                                                                {{ $product->name }} (${{ number_format($product->price, 2) }})
+                                                                {{ $product->name_product }}
+                                                                {{--  (${{ number_format($product->price, 2) }}) --}}
                                                             </option>
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td><input type="number" name='amount[]' placeholder='Nhập số lượng' class="form-control amount" step="0" min="0" /></td>
-                                                    <td><input type="number" name='price[]' placeholder='Nhập giá tiền' class="form-control price" step="0.00" min="0" /></td>
+                                                    <td><input type="number" name='amount[]' placeholder='Nhập số lượng' class="form-control amount" step="0" min="0" required></td>
+                                                    {{-- <td><input type="number" name='price[]' placeholder='Nhập giá tiền' class="form-control price" step="0.00" min="0" /></td>
                                                     <td><input type="number" name='tax[]' placeholder='%' class="form-control tax" step="0.00" min="0" /></td>
-                                                    <td><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly /></td>
+                                                    <td><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly /></td> --}}
+                                                    {{-- <td><button id="add_row" type="button" class="btn btn-primary">+</button></td> --}}
                                                 </tr>
                                                 <tr id='addr1'></tr>
                                             </tbody>
@@ -110,11 +114,11 @@
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-md-12">
-                                        <button id="add_row" class="btn btn-default pull-left">Thêm sản phẩm</button>
-                                        <button id='delete_row' class="btn btn-default pull-right">Xóa sản phẩm</button>
+                                        <button id="add_row" type="button" class="btn btn-primary pull-left">Thêm sản phẩm</button>
+                                        <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button>
                                     </div>
                                 </div>
-                                <div class="row clearfix" style="margin-top:20px">
+                                {{-- <div class="row clearfix" style="margin-top:20px">
                                     <div class="pull-right col-md-4">
                                         <table class="table table-bordered table-hover" id="tab_logic_total">
                                             <tbody>
@@ -125,7 +129,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                             <div class="form-group  col-md-4">
@@ -180,58 +184,8 @@
                 return i;
             }
         }
-        //multi product
-        $(".product-chosen").chosen({
-            no_results_text: "Oops, nothing found!",
-        })
 
-        $(document).ready(function() {
-            var i = 1;
-            $("#add_row").click(function() {
-                b = i - 1;
-                $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
-                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
-                i++;
-            });
-            $("#delete_row").click(function() {
-                if (i > 1) {
-                    $("#addr" + (i - 1)).html('');
-                    i--;
-                }
-                calc();
-            });
 
-            $('#tab_logic tbody').on('keyup change', function() {
-                calc();
-            });
-            $('#tax').on('keyup change', function() {
-                calc_total();
-            });
-
-        });
-
-        function calc() {
-            $('#tab_logic tbody tr').each(function(i, element) {
-                var html = $(this).html();
-                if (html != '') {
-                    var amount = $(this).find('.amount').val();
-                    var price = $(this).find('.price').val();
-                    var tax = $(this).find('.tax').val();
-                    $(this).find('.total').val((amount * price) + (amount * price * (tax / 100)));
-
-                    calc_total();
-                }
-            });
-        }
-
-        function calc_total() {
-            total = 0;
-            $('.total').each(function() {
-                total += parseInt($(this).val());
-            });
-            $('#sub_total').val(total.toFixed(0));
-
-        }
     </script>
 </body>
 
