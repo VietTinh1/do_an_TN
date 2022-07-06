@@ -64,8 +64,8 @@
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle'></i>
                     <div class="info">
-                        <h4>Bị cấm(Chưa xử lí)</h4>
-                        <p><b>4 nhân viên</b></p>
+                        <h4>Nghỉ việc</h4>
+                        <p><b>{{ $userReport }} nhân viên</b></p>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div>
-                        <h3 class="tile-title">SẢN PHẨM BÁN CHẠY(chưa code)</h3>
+                        <h3 class="tile-title">SẢN PHẨM BÁN CHẠY</h3>
                     </div>
                     <div class="tile-body">
                         <table class="table table-hover table-bordered" id="sampleTable">
@@ -116,25 +116,26 @@
                                 <tr>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
                                     <th>Giá tiền</th>
-                                    <th>Danh mục</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>71309005</td>
-                                    <td>Bàn ăn gỗ Theresa</td>
-                                    <td>5.600.000 đ</td>
-                                    <td>Bàn ăn</td>
-                                </tr>
-
+                                @foreach ($sellingProduct as $sellingProduct)
+                                    <tr>
+                                        <td>{{ $sellingProduct->product_code }}</td>
+                                        <td>{{ $sellingProduct->name_product }}</td>
+                                        <td>{{ $sellingProduct->amount }}</td>
+                                        <td>{{ $sellingProduct->price }} VND</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="tile">
                     <div>
@@ -169,7 +170,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -182,23 +183,19 @@
                                 <tr>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Ảnh</th>
                                     <th>Số lượng</th>
                                     <th>Tình trạng</th>
                                     <th>Giá tiền</th>
-                                    <th>Danh mục</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($endProduct as $endProduct )
                                 <tr>
                                     <td>{{ $endProduct->product_code }}</td>
-                                    <td>{{ $endProduct->name }}</td>
-                                    <td><img src="{{ url('storage/images/'.$endProduct->images) }}" alt="" width="100px;"></td>
+                                    <td>{{ $endProduct->name_product }}</td>
                                     <td>{{ $endProduct->amount }}</td>
                                     <td><span class="badge bg-danger">Hết hàng</span></td>
-                                    <td>{{ $endProduct->price }} đ</td>
-                                    <td></td>
+                                    <td>{{ $endProduct->price }} VND</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -323,7 +320,6 @@
     <!-- lineChart -->
     <canvas id="lineChart" width="400" height="400"></canvas>
     <script type="text/javascript">
-        //setup block line
         var line = <?php echo json_encode($line); ?>;
         var data = {
             labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
@@ -335,13 +331,11 @@
                 tension: 0.1
             }]
         };
-        //config line
         var config = {
             type: 'line',
             data,
 
         };
-        //render line
         var lineChart = new Chart(
             document.getElementById('lineChart'),
             config

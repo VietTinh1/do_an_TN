@@ -92,7 +92,12 @@
                                 <a class="btn btn-add btn-sm" href="{{ route('updateBatteryTechnologyType') }}" title="Thêm"><i class="fas fa-plus"></i>
                                   Thêm loại công nghệ pin</a>
                               </div>
+                              <div class="col-sm-2">
+                                <a class="btn btn-add btn-sm" href="{{ route('updateProductType') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                  Thêm loại sản phẩm</a>
+                              </div>
                           </div>
+                      </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>

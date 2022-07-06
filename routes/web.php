@@ -96,4 +96,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/update_film_type/{id}', [AdminController::class, 'postUpdateFilmType'])->name('postUpdateFilmType');
     Route::get('/update_battery_technology_type', [AdminController::class, 'updateBatteryTechnologyType'])->name('updateBatteryTechnologyType');
     Route::post('/update_battery_technology_type/{id}', [AdminController::class, 'postUpdateBatteryTechnologyType'])->name('postUpdateBatteryTechnologyType');
+    Route::get('/update_product_type', [AdminController::class, 'updateProductType'])->name('updateProductType');
+    Route::post('/update_product_type/{id}', [AdminController::class, 'postUpdateProductType'])->name('postUpdateProductType');
 });

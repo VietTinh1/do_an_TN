@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>Trang chủ | Quản trị Admin</title>
   <meta charset="utf-8">
@@ -18,7 +17,6 @@
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 </head>
-
 <body onload="time()" class="app sidebar-mini rtl">
   <!-- Navbar-->
   @include('admin.menu_header')

@@ -83,13 +83,13 @@ class AdminController extends Controller
         $invoice = Invoice::orderByDesc('status')->take(4)->get();
         $newCustomer = Invoice::take(5)->latest()->get();
         //barChart
-        $barChart = Account::all();
+        $barChart = Product::all();
         $bar = [];
         foreach ($barChart as $barChart) {
             $bar[] = $barChart->id;
         }
         //lineChart
-        $lineChart = Provided::all();
+        $lineChart = Product::all();
         $line = [];
         foreach ($lineChart as $lineChart) {
             $line[] = $lineChart->id;
@@ -1053,19 +1053,23 @@ class AdminController extends Controller
     public function report()
     {
         $user = UserDB::all()->count();
+        //Nghi viec
+        $userReport=UserDB::all()->where('status', '=', 'Dừng hoạt động')->count();
         $product = Product::all()->count();
         $invoice = Invoice::all()->count();
         $total = Invoice::all()->sum('total');
         $outProduct = Product::where('amount', '<', 10)->count();
         $deleteProduct = Product::where('status', 'Đã hủy')->count();
         //san pham ban chay
+        $sellingProduct = Product::latest()->take(5)->get();
         //san pham da het
         $endProduct = Product::where('amount', '=', 0)->latest()->get();
+
         //nv moi
         $newUser = UserDB::latest()->take(5)->get();
 
         //barChart
-        $barChart = Account::all();
+        $barChart = Product::all();
         $bar = [];
         foreach ($barChart as $barChart) {
             $bar[] = $barChart->id;
@@ -1077,9 +1081,7 @@ class AdminController extends Controller
         foreach ($lineChart as $lineChart) {
             $line[] = $lineChart->id;
         }
-        return view(
-            'admin.src.report',
-            compact('user', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
+        return view('admin.src.report', compact('user','userReport', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct','sellingProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
         );
     }
     public function exportProvided()
@@ -1313,5 +1315,22 @@ class AdminController extends Controller
             Session()->flash('success', 'Thêm, cập nhật loại công nghệ pin thất bại');
         }
         return redirect()->route('updateBatteryTechnologyType');
+    }
+    public function updateProductType(){
+        $data=ProductType::all();
+        return view('admin.src.add_type_device.add_product_type',compact('data'));
+    }
+    public function postUpdateProductType(Request $request,$id){
+        $addData=ProductType::updateOrCreate(
+            ['id'=>$id],
+            ['name'=>$request->name,]
+        );
+        if($addData){
+            Session()->flash('success', 'Thêm, cập nhật loại sản phẩm thành công');
+        }
+        else{
+            Session()->flash('success', 'Thêm, cập nhật loại sản phẩm thất bại');
+        }
+        return redirect()->route('updateProductType');
     }
 }

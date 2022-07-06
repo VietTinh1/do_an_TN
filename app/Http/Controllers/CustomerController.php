@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -9,7 +11,8 @@ class CustomerController extends Controller
     //TRANG CHỦ CUS
     public function index()
     {
-        return view("customer.src.index");
+        $data=Product::with('imageDetail')->get();
+        return view("customer.src.index",compact("data"));
     }
 
     //TRANG CART CUS
