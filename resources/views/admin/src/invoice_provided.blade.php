@@ -54,8 +54,6 @@
                 <tr>
                   <th>Nhân viên thêm</th>
                   <th>Nhà cung cấp</th>
-                  <th>Số lượng</th>
-                  <th>Giá nhập</th>
                   <th>Tổng tiền</th>
                   <th>Ngày tạo</th>
                   <th>Chi tiết</th>
@@ -72,8 +70,6 @@
                             ?>
                         <td>@if(!empty($userX)) {{ $userX}} @endif</td>
                         <td>{{ $invoiceProvides->provided->name }}</td>
-                        <td>@if(!empty($invoiceProvides->invoiceProvidedDetail->amount)) {{ $invoiceProvides->invoiceProvidedDetail->amount}} @endif</td>
-                        <td>@if(!empty($invoiceProvides->invoiceProvidedDetail->import_price)) {{ $invoiceProvides->invoiceProvidedDetail->import_price}} VNĐ @endif</td>
                         <td>{{ $invoiceProvides->total }}</td>
                         <td>{{ $invoiceProvides->created_at }}</td>
                         <td>

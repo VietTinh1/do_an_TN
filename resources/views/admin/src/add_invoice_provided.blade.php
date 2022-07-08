@@ -48,11 +48,20 @@
                             <div class="container" style="max-width:1219px;">
                                 <div class="row clearfix">
                                     <div class="col-md-12">
+                                        <div>
+                                            <td>
+                                                <label class="text-center"><b>Chọn nhà cung cấp </b></label>
+                                                <select class="form-control" id="exampleSelect1" name="id_provided" required>
+                                                    @foreach ($provided as $provided)
+                                                    <option value="{{ $provided->id }}">{{ $provided->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </div><br>
                                         <table class="table table-bordered table-hover" id="tab_logic" >
                                             <thead>
                                                 <tr>
                                                     <td style="text-align: center">1</td>
-                                                    <th class="text-center"> Nhà cung cấp </th>
                                                     <th class="text-center"> Sản phẩm </th>
                                                     <th class="text-center"> Số lượng </th>
                                                     <th class="text-center"> Giá nhập(VND) </th>
@@ -62,13 +71,6 @@
                                             <tbody>
                                                 <tr id='addr0'>
                                                     <td style="text-align: center">1</td>
-                                                    <td>
-                                                        <select class="form-control" id="exampleSelect1" name="id_provided[]" required>
-                                                            @foreach ($provided as $provided)
-                                                            <option value="{{ $provided->id }}">{{ $provided->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
                                                     <td>
                                                         <select class="form-control" id="exampleSelect1" name="product_id[]" required>
                                                             @foreach ($product as $product)

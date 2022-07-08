@@ -14,4 +14,13 @@ class ProductType extends Model
     public function product() {
         return $this->hasOne('App\Models\Product','product_type_id','id');
     }
+    public function scopePhone($query){
+        return $query->where('name','=','Điện Thoại');
+    }
+    public function scopeTablet($query){
+        return $query->where('name','=','Tablet');
+    }
+    public function scopeLaptop($query){
+        return $query->where('name','=','Laptop');
+    }
 }

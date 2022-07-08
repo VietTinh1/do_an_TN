@@ -19,4 +19,7 @@
 
 _type trong model=>bang rieng
 
-------Nghiên cứu join r làm tiếp sp,invoice
+------them moi
+--add_invoice_provided
+
+thieu edit hdn,hd xuat

@@ -1,45 +1,17 @@
 @extends('customer.layout')
 @section('content')
-<div class="mainmenu-area">
-    <div class="container">
-        <div class="row">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{asset('')}}">Trang chủ</a></li>
-                    <li><a href="{{asset('shop')}}">Cửa hàng</a></li>
-                    <li><a href="{{asset('single_product')}}">Chi tiết sản phẩm</a></li>
-                    <li><a href="{{asset('cart')}}">Giỏ hàng</a></li>
-                    <li><a href="{{asset('checkout')}}">Thanh toán</a></li>
-                    <li class="active"><a href="{{asset('contact')}}">Liên hệ</a></li>
-                    <li><a href="#">Category</a></li>
-                    <li><a href="#">Others</a></li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> <!-- End mainmenu area -->
 <div class="product-big-title-area">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="product-bit-title text-center">
-                    <h2>Liên hệ</h2>
+                    <h2><b>Liên hệ</b></h2>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div><br>
 <div class="content">
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -81,9 +53,9 @@
                         </form>
 
                         <div id="form-message-warning mt-4"></div>
-                        <div id="form-message-success">
+                        {{-- <div id="form-message-success">
                             Your message was sent, thank you!
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

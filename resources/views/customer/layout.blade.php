@@ -18,6 +18,8 @@
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <link href="{{asset('css/customer/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Font Awesome -->
@@ -25,10 +27,10 @@
     <!-- Custom CSS -->
     <link href="{{asset('css/customer/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('css/customer/owl.carousel.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{asset('css/customer/reponsive.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('css/customer/responsive.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
-<div class="header-area">
+{{-- <div class="header-area">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -63,33 +65,56 @@
             </div>
         </div>
     </div>
-</div> <!-- End header area -->
+</div> <!-- End header area --> --}}
 
 <div class="site-branding-area">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div class="logo">
-                    <h1><a href="./"><img src="/images/logo_title.png" style="position: relative;right: 15%;width: 50%;"></a></h1>
+                    <h1 style="margin: 0px;"><a href="{{ route('indexCustomer') }}"><img src="/images/logo_title.png" style="position: relative;right: 15%;width: 50%;"></a></h1>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html" data-toggle="modal" data-target="#cart">Giỏ hàng - $<span class="cart-amunt total-cart"></span><i class="fa fa-shopping-cart"></i><span class="product-count total-count"></span></a>
+                    <a href="cart.html" data-toggle="modal" data-target="#cart">Giỏ hàng - <span class="cart-amunt total-cart"></span> VNĐ<i class="fa fa-shopping-cart"></i><span class="product-count total-count"></span></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="display:block;">
+                    @if($active=='Trang chủ')<li class="active">@else <li> @endif<a href="{{route('indexCustomer')}}">Trang chủ</a></li>
+                    @if($active=='Điện Thoại')<li class="active">@else <li> @endif<a href="{{route('phoneCustomer')}}">Điện Thoại</a></li>
+                    @if($active=='Tablet')<li class="active">@else <li> @endif<a href="{{route('tabletCustomer')}}">Tablet</a></li>
+                    @if($active=='Laptop')<li class="active">@else <li> @endif<a href="{{route('laptopCustomer')}}">Laptop</a></li>
+                    @if($active=='Liên hệ')<li class="active">@else <li> @endif<a href="{{route('contactCustomer')}}">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- End mainmenu area -->
 @yield('content')
-<div class="footer-top-area">
+<div class="footer-top-area"  style="height:250px;">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6">
-                <div class="footer-about-us">
+                <div class="footer-about-us" >
                     <h2><span>TT-Shop</span></h2>
-                    <p>Chúng tôi cam kết phục vụ khách hàng với chất lượng tốt nhất và chân thành cảm ơn quí khách đã ủng hộ sản phẩm chúng tôi </p>
+                    <p>Chúng tôi cam kết phục vụ khách hàng với chất lượng tốt nhất và chân thành cảm ơn quý khách đã ủng hộ sản phẩm chúng tôi </p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -99,7 +124,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
+            {{-- <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">User Navigation </h2>
                     <ul>
@@ -136,17 +161,17 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div> <!-- End footer top area -->
 
 <div class="footer-bottom-area">
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>Bản quyển &copy; 2022 Website Bán hàng | Bởi TT-TT</p>
+                    <p>Bản quyền &copy; 2022 Website Bán hàng | Bởi TT-TT</p>
 
                 </div>
             </div>
@@ -164,6 +189,8 @@
     </div>
 </div> <!-- End footer bottom area -->
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <!-- Latest jQuery form server -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
 

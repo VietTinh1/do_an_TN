@@ -14,6 +14,9 @@ class Product extends Model
     public function invoiceDetail() {
         return $this->hasOne('App\Models\InvoiceDetail','product_id','id');
     }
+    public function invoiceProvidedDetail() {
+        return $this->hasMany('App\Models\InvoiceProvidedDetail','product_id','id');
+    }
     public function comment() {
         return $this->hasOne('App\Models\Comment','product_id','id');
     }

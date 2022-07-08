@@ -6,12 +6,15 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 
 Route::group(['prefix' => '/'], function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('index');
-    Route::get('cart', [CustomerController::class, 'cart'])->name('cart');
-    Route::get('checkout', [CustomerController::class, 'checkout'])->name('checkout');
-    Route::get('shop', [CustomerController::class, 'shop'])->name('shop');
-    Route::get('single_product', [CustomerController::class, 'single_product'])->name('single_product');
-    Route::get('contact', [CustomerController::class, 'contact'])->name('contact');
+    Route::get('/', [CustomerController::class, 'index'])->name('indexCustomer');
+    Route::get('phone', [CustomerController::class, 'phone'])->name('phoneCustomer');
+    Route::get('tablet', [CustomerController::class, 'tablet'])->name('tabletCustomer');
+    Route::get('laptop', [CustomerController::class, 'laptop'])->name('laptopCustomer');
+    Route::get('cart', [CustomerController::class, 'cart'])->name('cartCustomer');
+    Route::get('checkout', [CustomerController::class, 'checkout'])->name('checkoutCustomer');
+    Route::get('shop', [CustomerController::class, 'shop'])->name('shopCustomer');
+    Route::get('product_detail/{id}', [CustomerController::class, 'productDetail'])->name('productDetailCustomer');
+    Route::get('contact', [CustomerController::class, 'contact'])->name('contactCustomer');
 });
 
 Route::group(['prefix' => '/login'], function () {

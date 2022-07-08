@@ -477,7 +477,7 @@ class AdminController extends Controller
     //TRANG NHẬP HÓA ĐƠN
     public function invoiceProvided()
     {
-        $invoiceProvides=InvoiceProvided::with('user','provided','invoiceProvidedDetail')->get();
+        $invoiceProvides=InvoiceProvided::with('user','provided')->get();
         return view('admin.src.invoice_provided', compact('invoiceProvides'));
     }
     public function addInvoiceProvided()
@@ -491,26 +491,36 @@ class AdminController extends Controller
         DB::beginTransaction();
         try{
             $sumTotal=0;
-            $dataInvoiceProvided=$this->multiArrayTotwodimensionArray(array($request->product_id,$request->id_provided,$request->amount,$request->import_price,$request->tax));
+            $dataInvoiceProvided=$this->multiArrayTotwodimensionArray(array($request->product_id,$request->amount,$request->import_price,$request->tax));
             //tong tien
-            $arr=array($request->amount,$request->import_price,$request->tax);
-            foreach($arr as $key=>$product1){
-                $sumTotal+=($product1[0]*$product1[1])+($product1[0]*$product1[1])*($product1[2]/100);
+            $a=[];$b=[];$c=[];
+            $input=$request->all();
+            foreach($input['amount'] as $amount){
+                $a[]=$amount;
+            }
+            foreach($input['import_price'] as $import_price){
+                $b[]=$import_price;
+            }
+            foreach($input['tax'] as $tax){
+                $c[]=$tax;
+            }
+            for($i=0,$a,$b,$c;!empty($a[$i]);$i++){
+                $sumTotal += ( ($a[$i]*$b[$i]) + ($a[$i]*$b[$i]*($c[$i]/100)) );
             }
 
+            $invoiceProvided = InvoiceProvided::insertGetId([
+                'provided_id' => $request->id_provided,
+                'user_id' => Auth::id(),
+                'total' => $sumTotal,
+                'created_at' => Carbon::now(),
+            ]);
             foreach ($dataInvoiceProvided as $key=>$dataInvoiceProvided){
-                $invoiceProvided = InvoiceProvided::insertGetId([
-                    'provided_id' => $dataInvoiceProvided[1],
-                    'user_id' => Auth::id(),
-                    'total' => $sumTotal,
-                    'created_at' => Carbon::now(),
-                ]);
                 $invoiceProvidedDetail = InvoiceProvidedDetail::insertGetId([
                     'invoice_provided_id' => $invoiceProvided,
                     'product_id' => $dataInvoiceProvided[0],
-                    'amount' => $dataInvoiceProvided[2],
-                    'import_price' => $dataInvoiceProvided[3],
-                    'tax' => $dataInvoiceProvided[4],
+                    'amount' => $dataInvoiceProvided[1],
+                    'import_price' => $dataInvoiceProvided[2],
+                    'tax' => $dataInvoiceProvided[3],
                     'created_at' => Carbon::now(),
                 ]);
                 //tim chi tiet nhap
@@ -805,72 +815,66 @@ class AdminController extends Controller
     // }
     public function editInvoiceProvided($id)
     {
-        $data=InvoiceProvided::with('invoiceProvidedDetail')->first();
+        $data=InvoiceProvided::with('provided','invoiceProvidedDetail.product')->where('id', '=', $id)->first();
         $provided = Provided::all();
-        dd($data);
-        return view('admin.src.edit_invoice_provided', compact('data', 'provided'));
+        $product = Product::all();
+        return view('admin.src.edit_invoice_provided', compact('data', 'provided','product'));
     }
     public function postEditInvoiceProvided(Request $request, $id)
     {
         DB::beginTransaction();
         try {
-            $total = ($request->amount+$request->import_price)+($request->amount+$request->import_price)*$request->tax;
-
-            $data=InvoiceProvidedDetail::find($id);
-            $chenhLechSoLuong = $request->amount - $data->amount;
-            if($chenhLechSoLuong > 0){
-                $invoiceProvidedDetail = InvoiceProvidedDetail::where('invoice_provided_id', $id)->update([
-                    'amount' => $request->amount,
-                    'import_price' => $request->import_price,
-                    'tax' => $request->tax,
-                    'updated_at' => Carbon::now(),
+            $dataInvoiceProvided=$this->multiArrayTotwodimensionArray(array($request->product_id,$request->amount,$request->import_price,$request->tax));
+            $sumTotal=0;
+            //tong tien
+            $a=[];$b=[];$c=[];
+            $input=$request->all();
+            foreach($input['amount'] as $amount){
+                $a[]=$amount;
+            }
+            foreach($input['import_price'] as $import_price){
+                $b[]=$import_price;
+            }
+            foreach($input['tax'] as $tax){
+                $c[]=$tax;
+            }
+            for($i=0,$a,$b,$c;!empty($a[$i]);$i++){
+                $sumTotal += ( ($a[$i]*$b[$i]) + ($a[$i]*$b[$i]*($c[$i]/100)) );
+            }
+            $updateInvoideProvided=InvoiceProvided::where('id',$id)->update([
+                'total'=>$sumTotal,
+                'updated_at' => Carbon::now(),
+            ]);
+            $deleteInvoiceProvidedDetails=InvoiceProvidedDetail::where('invoice_provided_id',$id)->delete();
+            foreach ($dataInvoiceProvided as $key=>$dataInvoiceProvided){
+                $invoiceProvidedDetail = InvoiceProvidedDetail::insertGetId([
+                    'invoice_provided_id' => $id,
+                    'product_id' => $dataInvoiceProvided[0],
+                    'amount' => $dataInvoiceProvided[1],
+                    'import_price' => $dataInvoiceProvided[2],
+                    'tax' => $dataInvoiceProvided[3],
+                    'created_at' => Carbon::now(),
                 ]);
-                //update table invoice provided
-                $invoiceProvided = InvoiceProvided::where('id', $id)->update([
-                    'provided_id' => $request->provided_id,
-                    'total' =>$total,
-                    'status' =>$request->status,
-                    'updated_at' => Carbon::now(),
-                ]);
-                $amountProduct=Product::find($data->product_id);
-                $countAmountProduct=$amountProduct->amount-$chenhLechSoLuong;
-
-                if($countAmountProduct>0){
-                    $product = Product::where('id', $data->product_id)->update([
-                        'amount'=>$countAmountProduct,
+                //tim chi tiet nhap
+                $temp = InvoiceProvidedDetail::find($invoiceProvidedDetail);
+                //tim san pham
+                $searchAmountProduct = Product::where('id', '=', $temp->product_id)->first();
+                //tong
+                $sumAmountProduct = $searchAmountProduct->amount + $temp->amount;
+                $sumPrice = $temp->price + $temp->price * 0.1;
+                    // update table product
+                    $product = Product::where('id', '=', $temp->product_id)->update([
+                        'amount' => $sumAmountProduct,
+                        'price' => $sumPrice,
+                        'time_warranty' => $temp->time_warranty,
+                        'tax' => $temp->tax,
                         'updated_at' => Carbon::now(),
                     ]);
-                }
+            }
                 Session()->flash('success', 'Sửa dữ liệu thành công');
                 DB::commit();
                 return redirect()->route('invoiceProvided');
-            }
-            else{
-                $invoiceProvidedDetail = InvoiceProvidedDetail::where('invoice_provided_id', $id)->update([
-                    'amount' => $request->amount,
-                    'import_price' => $request->import_price,
-                    'tax' => $request->tax,
-                    'updated_at' => Carbon::now(),
-                ]);
-                //update table invoice provided
-                $invoiceProvided = InvoiceProvided::where('id', $id)->update([
-                    'provided_id' => $request->provided_id,
-                    'total' =>$total,
-                    'status' =>$request->status,
-                    'updated_at' => Carbon::now(),
-                ]);
-                $amountProduct=Product::find($data->product_id);
-                $countAmountProduct=$amountProduct->amount+$chenhLechSoLuong;
-                if($countAmountProduct>0){
-                    $product = Product::where('id', $data->product_id)->update([
-                        'amount'=>$countAmountProduct,
-                        'updated_at' => Carbon::now(),
-                    ]);
-                }
-                Session()->flash('success', 'Sửa dữ liệu thành công');
-                DB::commit();
-                return redirect()->route('invoiceProvided');
-            }
+
         }catch(Exception $e) {
             DB::rollBack();
             throw $e;

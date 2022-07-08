@@ -3,45 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductType;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    //TRANG CHỦ CUS
     public function index()
     {
+        $active='Trang chủ';
         $data=Product::with('imageDetail')->get();
-        return view("customer.src.index",compact("data"));
+        //Category::whereHas('posts', function ($q) { $q->published(); })->get();
+        //Category::has('postsPublished')
+        $newProduct=Product::with('imageDetail')->orderByDesc('created_at')->take(5)->get();
+        $phone=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->orderByDesc('amount')->take(5)->get();
+        $tablet=Product::with('imageDetail')->whereHas('productType',function($q){return $q->tablet();})->orderByDesc('amount')->take(5)->get();
+        $laptop=Product::with('imageDetail')->whereHas('productType',function($q){return $q->laptop();})->orderByDesc('amount')->take(5)->get();
+        return view("customer.src.index",compact('active','data','newProduct','phone','tablet','laptop'));
     }
-
-    //TRANG CART CUS
+    public function phone() {
+        $active='Điện Thoại';
+        $phone=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->orderByDesc('amount')->get();
+        return view("customer.src.phone",compact('active','phone'));
+    }
+    public function tablet() {
+        $active='Tablet';
+        $tablet=Product::with('imageDetail')->whereHas('productType',function($q){return $q->tablet();})->orderByDesc('amount')->get();
+        return view("customer.src.tablet",compact('active','tablet'));
+    }
+    public function laptop(){
+        $active='Laptop';
+        $laptop=Product::with('imageDetail')->whereHas('productType',function($q){return $q->laptop();})->orderByDesc('amount')->get();
+        return view("customer.src.laptop",compact('active','laptop'));
+    }
     public function cart()
     {
         return view('customer.src.cart');
     }
-
-    //TRANG SHOP CUS
     public function shop()
     {
         return view('customer.src.shop');
     }
-
-    //TRANG THANH TOÁN CUS
     public function checkout()
     {
         return view('customer.src.checkout');
     }
-
-    //TRANG CHI TIÊT SẢN PHẢM CUS
-    public function single_product()
+    public function productDetail($id)
     {
-        return view('customer.src.single_product');
+        return view('customer.src.product_details');
     }
-
-    //TRANG LIÊN HỆ
     public function contact()
     {
-        return view('customer.src.contact');
+        $active='Liên hệ';
+        return view('customer.src.contact',compact('active'));
     }
 }
