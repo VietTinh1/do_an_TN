@@ -19,7 +19,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <link href="{{asset('css/customer/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Font Awesome -->
@@ -30,42 +30,7 @@
     <link href="{{asset('css/customer/responsive.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 </head>
-{{-- <div class="header-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="user-menu">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> Danh sách yêu thích</a></li>
-                        <li><a href="cart.html"><i class="fa fa-user"></i>Giỏ hàng</a></li>
-                        <li><a href="checkout.html"><i class="fa fa-user"></i>Thanh toán</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i>Đăng nhập</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="header-right">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Tiền tệ :</span><span class="value">USD </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">VNĐ</a></li>
-                                <li><a href="#">USA</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Ngôn ngữ :</span><span class="value">English </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Tiếng Anh</a></li>
-                                <li><a href="#">Tiếng Việt</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End header area --> --}}
+
 
 <div class="site-branding-area">
     <div class="container">
@@ -96,23 +61,28 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="display:block;">
-                    @if($active=='Trang chủ')<li class="active">@else <li> @endif<a href="{{route('indexCustomer')}}">Trang chủ</a></li>
-                    @if($active=='Điện Thoại')<li class="active">@else <li> @endif<a href="{{route('phoneCustomer')}}">Điện Thoại</a></li>
-                    @if($active=='Tablet')<li class="active">@else <li> @endif<a href="{{route('tabletCustomer')}}">Tablet</a></li>
-                    @if($active=='Laptop')<li class="active">@else <li> @endif<a href="{{route('laptopCustomer')}}">Laptop</a></li>
-                    @if($active=='Liên hệ')<li class="active">@else <li> @endif<a href="{{route('contactCustomer')}}">Liên hệ</a></li>
+                    @if($active=='Trang chủ')<li class="active">@else
+                    <li> @endif<a href="{{route('indexCustomer')}}">Trang chủ</a></li>
+                    @if($active=='Điện Thoại')<li class="active">@else
+                    <li> @endif<a href="{{route('phoneCustomer')}}">Điện Thoại</a></li>
+                    @if($active=='Tablet')<li class="active">@else
+                    <li> @endif<a href="{{route('tabletCustomer')}}">Máy tính bảng</a></li>
+                    @if($active=='Laptop')<li class="active">@else
+                    <li> @endif<a href="{{route('laptopCustomer')}}">Laptop</a></li>
+                    @if($active=='Liên hệ')<li class="active">@else
+                    <li> @endif<a href="{{route('contactCustomer')}}">Liên hệ</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div> <!-- End mainmenu area -->
 @yield('content')
-<div class="footer-top-area"  style="height:250px;">
+<div class="footer-top-area" style="height:250px;">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-about-us" >
+            <div class="col-md-4 col-sm-6">
+                <div class="footer-about-us">
                     <h2><span>TT-Shop</span></h2>
                     <p>Chúng tôi cam kết phục vụ khách hàng với chất lượng tốt nhất và chân thành cảm ơn quý khách đã ủng hộ sản phẩm chúng tôi </p>
                     <div class="footer-social">
@@ -124,50 +94,37 @@
                 </div>
             </div>
 
-            {{-- <div class="col-md-3 col-sm-6">
+
+
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">User Navigation </h2>
+                    <h2 class="footer-wid-title">Chúng tôi có</h2>
                     <ul>
-                        <li><a href="#">My account</a></li>
-                        <li><a href="#">Order history</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Vendor contact</a></li>
-                        <li><a href="#">Front page</a></li>
+                        <li><a href="{{route('phoneCustomer')}}">Điện thoại</a></li>
+                        <li><a href="{{route('tabletCustomer')}}">Máy tính bảng</a></li>
+                        <li><a href="{{route('laptopCustomer')}}">Laptop</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-menu">
-                    <h2 class="footer-wid-title">Categories</h2>
-                    <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-newsletter">
-                    <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                    <h2 class="footer-wid-title">Để lại email</h2>
+                    <p>Chúng tôi sẽ liên hệ với bạn</p>
                     <div class="newsletter-form">
                         <form action="#">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
+                            <input type="email" placeholder="Nhập email">
+                            <input type="submit" value="Gửi">
                         </form>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div> <!-- End footer top area -->
 
 <div class="footer-bottom-area">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
@@ -188,6 +145,7 @@
         </div>
     </div>
 </div> <!-- End footer bottom area -->
+
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>

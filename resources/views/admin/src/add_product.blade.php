@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Thêm sản phẩm | Quản trị Admin</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Main CSS-->
-        <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
-        <!-- Custom Theme files -->
-        <script src="{{asset('js/jquery.min.js')}}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
-    </head>
+<head>
+    <title>Thêm sản phẩm | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <!-- Custom Theme files -->
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
+
+</head>
+
 <body onload="time()" class="app sidebar-mini rtl">
     @include('admin.menu_header')
     <main class="app-content">
@@ -53,13 +55,13 @@
                             <div class="form-group col-md-3 ">
                                 <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
                                 <select class="form-control" id="exampleSelect1" name="product_type_id" required>
-                                   @foreach ($productType as $productType)
-                                   <option value="{{ $productType->id }}">{{ $productType->name }}</option>
-                                   @endforeach
+                                    @foreach ($productType as $productType)
+                                    <option value="{{ $productType->id }}">{{ $productType->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Tên hãng điện thoại</label>
+                                <label class="control-label">Tên hãng</label>
                                 <input class="form-control" type="text" name="trademark" required>
                             </div>
                             <div class="form-group col-md-3">
@@ -107,7 +109,7 @@
                                 <input class="form-control" type="text" name="screen_maximum_brightness" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Đèn</label>
+                                <label class="control-label"> Đèn flash</label>
                                 <input class="form-control" type="text" name="flash_light" required>
                             </div>
                             <div class="form-group col-md-3">
@@ -214,9 +216,9 @@
                             <div class="form-group col-md-3 ">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
-                                   <option value="Đang hoạt động">Đang hoạt động</option>
-                                   {{-- <option value="{{ $productType->id }}">Dừng hoạt động</option> --}}
-                                   <option value="Chưa hoạt động">Chưa hoạt động</option>
+                                    <option value="Đang hoạt động">Đang hoạt động</option>
+                                    {{-- <option value="{{ $productType->id }}">Dừng hoạt động</option> --}}
+                                    <option value="Chưa hoạt động">Chưa hoạt động</option>
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
@@ -293,7 +295,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hình ảnh</label>
-                                <input class="form-control" type="file" name="image" >
+                                <input class="form-control" type="file" name="image">
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
@@ -344,6 +346,3 @@
                 return i;
             }
         }
-    </>
-</body>
-</html>

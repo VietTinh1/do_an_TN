@@ -23,3 +23,7 @@ _type trong model=>bang rieng
 --add_invoice_provided
 
 thieu edit hdn,hd xuat
+
+--Lỗi thêm sản phẩm thứ 6 bị lỗi
+--Tablet ko hiển thị bên index với trang index
+--
