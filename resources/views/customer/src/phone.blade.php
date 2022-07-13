@@ -10,33 +10,35 @@
             </h1>
         </div> --}}
         <br>
-        <div class="content" style="margin: 10px 0px 10px 0px;">
+        <div class="single-product-area">
+            <div class="zigzag-bottom"></div>
             <div class="container">
                 <div class="row">
                     @foreach($phone as $phone)
-                        <div class="col-xs-12 col-sm-4" style="padding: 5px 5px;border-radius:15px;">
-                            <div class="card" style="padding: 15px;">
-                                <a class="img-card" href="{{ route('productDetailCustomer',['id'=>$phone->id]) }}">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
                                 @foreach ($phone->imageDetail as $imageDetail)
-                                    <img src="{{ url('storage/images/'.$imageDetail->image) }}"/>
+                                <img src="{{ url('storage/images/'.$imageDetail->image) }}" alt="">
                                 @endforeach
-                                </a>
-                                <div class="card-content">
-                                    <h4 class="card-title">
-                                        <a href="{{ route('productDetailCustomer',['id'=>$phone->id]) }}"> {{ $phone->name_product }}
-                                    </a>
-                                    </h4>
-                                    <p class="">
-                                        {{ $phone->price }} VND
-                                    </p>
-                                </div>
+                            </div>
+                            <h2> <a href="{{ route('productDetailCustomer',['id'=>$phone->id]) }}"> {{ $phone->name_product }}
+                                </a></h2>
+                            <div class="product-carousel-price">
+                                {{ $phone->price }} VND
+                            </div>
+
+                            <div class="product-option-shop">
+                                <a class="add_to_cart_button" data-name="{{ $phone->name_product }}" data-price="{{$phone->price}}">Thêm vào giỏ hàng</a>
                             </div>
                         </div>
+                    </div>
                     @endforeach
+
                 </div>
             </div>
         </div>
-    </div>
+
 </section>
 
 

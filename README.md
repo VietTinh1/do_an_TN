@@ -24,4 +24,11 @@ _type trong model=>bang rieng
 --add_invoice_provided
 
 thieu edit hdn,hd xuat
+<<<<<<< HEAD
 post add hd ban,
+=======
+
+--Lỗi thêm sản phẩm thứ 6 bị lỗi
+--Tablet ko hiển thị bên index với trang index
+--
+>>>>>>> 62ba03640dbf861505911b8ddb540fb3866a628e
