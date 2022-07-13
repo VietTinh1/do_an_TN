@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    //thêm multi product
+    {{-- thêm multi product --}}
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
@@ -33,7 +33,7 @@
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách đơn hàng</li>
-                <li class="breadcrumb-item"><a href="#">Thêm đơn hàng</a></li>
+                <li class="breadcrumb-item"><a href="#">Thêm hóa đơn</a></li>
             </ul>
             <div id="clock"></div>
         </div>

@@ -294,6 +294,9 @@
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hình ảnh</label>
                                 <input class="form-control" type="file" name="image" >
+                                @if ($errors->has('image'))
+                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                            @endif
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>

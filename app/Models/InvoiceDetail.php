@@ -12,6 +12,9 @@ class InvoiceDetail extends Model
     public $timestamps = true;
     protected $fillable =['invoice_id','product_id','amount','discount','price','promotion','created_at','updated_at'];
     public function invoice() {
-        $this->belongsTo('App\Models\Invoice','id','invoice_id');
+        return  $this->belongsTo('App\Models\Invoice','id','invoice_id');
+    }
+    public function product() {
+        return  $this->hasOne('App\Models\Product','id','product_id');
     }
 }

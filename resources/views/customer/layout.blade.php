@@ -123,7 +123,29 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-4 col-sm-6">
+                <div class="footer-menu">
+                    <h2 class="footer-wid-title">Categories</h2>
+                    <ul>
+                        <li><a href="{{ route('phoneCustomer') }}">Điện thoại</a></li>
+                        <li><a href="{{ route('tabletCustomer') }}">Máy Tính Bảng</a></li>
+                        <li><a href="{{ route('laptopCustomer') }}">Laptop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="footer-newsletter">
+                    <h2 class="footer-wid-title">Để lại email</h2>
+                    <p>Chúng tôi sẽ liên hệ với bạn</p>
+                    <div class="newsletter-form">
+                        <form action="#" method="post">
+                            @csrf
+                            <input type="email" placeholder="Nhập email" style="border-radius: 10px;">
+                            <input type="submit" value="Gửi" style="border-radius: 10px;">
+                        </form>
+                    </div>
+                </div>
+            </div>
             {{-- <div class="col-md-3 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">User Navigation </h2>
@@ -137,31 +159,9 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-menu">
-                    <h2 class="footer-wid-title">Categories</h2>
-                    <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-newsletter">
-                    <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                    <div class="newsletter-form">
-                        <form action="#">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div> --}}
+
+            --}}
         </div>
     </div>
 </div> <!-- End footer top area -->

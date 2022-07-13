@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link href="{{asset('css/admin/main.css')}}" rel="stylesheet" type="text/css" media="all" />
-
-
     <!-- Custom Theme files -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -18,6 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    {{-- thêm multi product --}}
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
 
 </head>
@@ -40,7 +41,7 @@
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">Khách hàng</label>
+                        <label class="control-label">Tên khách hàng</label>
                         <input class="form-control" type="text" value="{{ $invoice->name_customer }}" name="name_customer" required>
                     </div>
                     <div class="form-group col-md-6">
@@ -48,28 +49,76 @@
                         <input class="form-control" type="email" value="{{ $invoice->email_customer }}" name="email_customer" required>
                     </div>
                     <div class="form-group  col-md-6">
-                        <label class="control-label">SĐT</label>
+                        <label class="control-label">Số điện thoại</label>
                         <input class="form-control" type="number" value="{{ $invoice->phone }}" name="phone" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Địa chỉ</label>
                         <input class="form-control" type="text" value="{{ $invoice->address_customer }}" name="address_customer" required>
                     </div>
+                    <div class="form-group  col-md-4">
+                        <label class="control-label">Thay đổi ghi chú đơn hàng</label>
+                        <textarea class="form-control" rows="4" name="message">{{ $invoice->message }}</textarea>
+                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tình trạng</label>
-                        <input class="form-control" type="text" value="@if($invoice->status ==" Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
+                        <input class="form-control" type="text" value="@if($invoice->status =="Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
                         <select class="form-control" id="exampleSelect1" name="status" required>
-                            <option value="Chờ xử lí">Chờ xử lí</option>
-                            <option value="Đang xử lí"> Đang xử lí</option>
-                            <option value="Đã xử lí">Đã xử lí</option>
+                            <option value="{{ $invoice->status }}">{{ $invoice->status }}</option>
+                            @foreach ($status as $status)
+                                @if($invoice->status!=$status)
+                                    <option value="{{ $status }}">{{ $status }}</option>
+                                @endif
+                            @endforeach
+
                         </select>
                     </div>
-                    <div class="form-group  col-md-4">
-                        <label class="control-label">Thay đổi ghi chú đơn hàng</label>
-                        <textarea class="form-control" rows="4" name="message"></textarea>
+                </div>
+
+                <?php $i=0; ?>
+                <div class="container" style="max-width:1219px;">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover" id="tab_logic" >
+                                <thead>
+                                    <tr>
+                                        <th class="text-center"> Mã sản phẩm</th>
+                                        <th class="text-center"> Tên sản phẩm </th>
+                                        <th class="text-center"> Số lượng </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($invoice->invoiceDetail as $invoiceDetail)
+                                        <tr>
+                                            <td style="text-align: center">
+                                                @if (!empty($invoiceDetail->product->product_code))
+                                                 {{ $invoiceDetail->product->product_code }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="products[]" class="form-control" >
+                                                    <option value="{{ $invoiceDetail->id }}">
+                                                        @if (!@empty($invoiceDetail->product->name_product))
+                                                            {{ $invoiceDetail->product->name_product }}
+                                                        @endif
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td><input type="number" name='amount[]' placeholder='Nhập số lượng' value="{{ $invoiceDetail->amount }}" class="form-control amount" step="0" min="0" required></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            {{-- <button id="add_row_edit" type="button" class="btn btn-primary pull-left">Thêm sản phẩm</button>
+                            <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button> --}}
+                        </div>
                     </div>
                 </div>
                 <BR>
@@ -88,6 +137,7 @@
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">
+
         $('#sampleTable').DataTable();
         //Thời Gian
         function time() {

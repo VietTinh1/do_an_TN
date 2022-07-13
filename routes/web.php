@@ -48,7 +48,6 @@ Route::group(['prefix' => '/admin'], function () {
     // Route::get('/add_invoice_provided_not_yet', [AdminController::class, 'addInvoiceProvidedNotYet'])->name('addInvoiceProvidedNotYet');
     // Route::post('/add_invoice_provided_not_yet', [AdminController::class, 'postAddInvoiceProvidedNotYet'])->name('postAddInvoiceProvidedNotYet');
 
-
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
     Route::post('/edit_staff/{id}', [AdminController::class, 'postEditStaff'])->name('postEditStaff');
     Route::get('/edit_provided/{id}', [AdminController::class, 'editProvided'])->name('editProvided');
@@ -102,3 +101,4 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/update_product_type', [AdminController::class, 'updateProductType'])->name('updateProductType');
     Route::post('/update_product_type/{id}', [AdminController::class, 'postUpdateProductType'])->name('postUpdateProductType');
 });
+Route::get('/demo', [AdminController::class, 'demo'])->name('demo');

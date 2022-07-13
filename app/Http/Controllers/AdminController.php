@@ -96,7 +96,36 @@ class AdminController extends Controller
         }
         return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'barChart', 'bar', 'lineChart', 'line'));
     }
+    public function demo() {
+        $product = Product::count();
+        $countInvoiceOnMonth = Invoice::where([
+            ['status', '=', 'Đã xử lí'],
+            ['created_at', '=', Carbon::now()->month],
+        ])->count();
+        $countCustomer = Invoice::distinct()->count('name_customer');
+        $outOfProduct = Product::where(function($query){
+            return $query->where('status', '=', 'Đang hoạt động')->where('amount', '<', '10');
+        }
+        )->count();
+        $invoice = Invoice::orderByDesc('status')->take(4)->get();
+        $newCustomer = Invoice::take(5)->latest()->get();
+        //barChart
+        $barChart = Product::all();
+        $bar = [];
+        foreach ($barChart as $barChart) {
+            $bar[] = $barChart->id;
+        }
+        //lineChart
+        $lineChart = Product::all();
+        $line = [];
+        foreach ($lineChart as $lineChart) {
+            $line[] = $lineChart->id;
+        }
+        $view='admin.src.index';
+        $pdf = PDF::loadView($view, compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'barChart', 'bar', 'lineChart', 'line'))->setOptions(['defaultFont' => 'Times New Roman'])->setPaper('a4', 'landscape');
 
+        return $pdf->download('demo.pdf');
+    }
     //TRANG SẢN PHẨM ADMIN
     // Đang hoạt động/Hết hàng/Đã hủy
     public function product()
@@ -370,7 +399,6 @@ class AdminController extends Controller
     public function invoice()
     {
         $data=Invoice::with('user','invoiceDetail')->latest()->get();
-        // $data = DB::table('invoices')->join('invoice_details', 'invoices.id', '=', 'invoice_details.invoice_id')->latest()->get();
         return view('admin.src.invoice', compact('data'));
     }
     //add hóa đơn
@@ -387,33 +415,47 @@ class AdminController extends Controller
             $sumTotal=0;
             // chuyển thành chuỗi 2 chiều
             $dataInvoiceDetail=$this->multiArrayTotwodimensionArray(array($request->products,$request->amount));
-            //TỔng tiền hóa đơn
-            $arr=array($request->products);
-            foreach($arr[0] as $key=>$product1){
-                $product= Product::find($product1);
-                $sumTotal+=($product->amount*$product->price)+($product->amount*$product->price)*($product->tax/100);
+            //Tổng tiền hóa đơn
+            $p=0;$a=0;
+            for($p,$a;!empty($request->products[$p]);$p++,$a++){
+                $product= Product::findOrFail($request->products[$p]);
+                $sumTotal+=($request->amount[$a]*$product->price)+($request->amount[$a]*$product->price)*($product->tax/100);
             }
-             $data = Invoice::insertGetId([
+            $data = Invoice::insertGetId([
                 'user_id' => Auth::id(),
-                 'name_customer' => $request->name_customer,
-                 'email_customer' => $request->email_customer,
-                 'phone' => $request->phone,
-                 'address_customer' => $request->address_customer,
+                'name_customer' => $request->name_customer,
+                'email_customer' => $request->email_customer,
+                'phone' => $request->phone,
+                'address_customer' => $request->address_customer,
                 'total' => $sumTotal,
-                 'message' => $request->message,
-                 'status' => $request->status,
-                 'created_at' => Carbon::now(),
+                'message' => $request->message,
+                'status' => $request->status,
+                'created_at' => Carbon::now(),
             ]);
+            //tong so luong amount
+            $arrAmount=count($request->amount);
+            $count=0;
             foreach ($dataInvoiceDetail as $key=>$dataInvoiceDetail) {
+                if($count==$arrAmount){break;}
                 $product=Product::find($dataInvoiceDetail[0]);
-                $addInvoiceDetail=InvoiceDetail::insert([
-                    'invoice_id' =>'1',
+                if(($product->amount - $request->amount[$count])<0){
+                    DB::rollBack();
+                    return redirect()->back();
+                }
+                $addInvoiceDetail=InvoiceDetail::insertGetId([
+                    'invoice_id' => $data,
                     'product_id' => $product->id,
-                    'amount' => $product->amount,
+                    'amount' => $request->amount[$count],
                     'price' => $product->price,
                     'discount' => '0',
                     'promotion' => '0',
                     'created_at' => Carbon::now(),
+                ]);
+                //tong amount con lai
+                $sumAmountProduct=$product->amount - $request->amount[$count];
+                $updateProduct=Product::where('id',$product->id)->update([
+                    'amount'=>$sumAmountProduct,
+                    'updated_at'=>Carbon::now(),
                 ]);
             }
             Session()->flash('success', 'Thêm hóa đơn thành công');
@@ -427,50 +469,69 @@ class AdminController extends Controller
     //edit hóa đơn
     public function editInvoice($id)
     {
-        $invoice = Invoice::with('invoiceDetail')->where('id', $id)->first();
-        dd($invoice);
-        return view('admin.src.edit_invoice', compact('invoice'));
+        $invoice = Invoice::with('invoiceDetail.product')->where('id', $id)->first();
+        $status=array('Chờ xử lí','Đang xử lí','Đã xử lí','Đã hủy');
+        return view('admin.src.edit_invoice', compact('invoice','status'));
     }
     public function postEditInvoice(Request $request, $id)
     {
-        $name_customer = '';
-        $email_customer = '';
-        $phone = '';
-        $address_customer = '';
-        $message = '';
-        if (!empty($request->name_customer)) {
-            $name_customer = $request->name_customer;
+        DB::beginTransaction();
+        try {
+            $dataInvoiceDetail=$this->multiArrayTotwodimensionArray(array($request->products,$request->amount));
+            $message = 'Không';
+            if (!empty($request->message)) {
+                $message = $request->message;
+            }
+            //id invoice details
+            $p=0;$a=0;
+            $sumTotal=0;
+            for($p,$a;!empty($request->products[$p]);$p++,$a++) {
+                $invoiceDetail=InvoiceDetail::find($request->products[$p]);
+                $countAmount=$invoiceDetail->amount - $request->amount[$p];
+                $updateInvoideDetail=InvoiceDetail::where('id',$request->products[$p])->update([
+                    'amount' => $request->amount[$p],
+                    'updated_at' =>Carbon::now(),
+                ]);
+                if($countAmount>0 || $countAmount<0){
+                    //tim sp, cong sp them
+                    $invoiceDetail=InvoiceDetail::find($request->products[$p]);
+                    $product= Product::find($invoiceDetail->product_id);
+                    //amount con lai
+                    $amount=$product->amount-$countAmount;
+                    $updateProduct=Product::where('id',$invoiceDetail->product_id)->update([
+                        'amount' =>$amount,
+                        'updated_at' =>Carbon::now(),
+                    ]);
+                }
+            }
+            //tong tien
+            for($p=0,$a=0;!empty($request->products[$p]);$p++,$a++){
+                $invoiceDetail=InvoiceDetail::find($request->products[$p]);
+                $product=Product::find($invoiceDetail->product_id);
+                $sumTotal+=($request->amount[$a]*$product->price)+($request->amount[$a]*$product->price)*($product->tax/100);
+            }
+            $updateInvoice = Invoice::where('id', $id)->update([
+                'name_customer' => $request->name_customer,
+                'email_customer' => $request->email_customer,
+                'phone' => $request->phone,
+                'address_customer' => $request->address_customer,
+                'message' => $message,
+                'total' => $sumTotal,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(),
+            ]);
+            DB::commit();
+            Session()->flash('success', 'Thay đổi dữ liệu đơn hàng thành công');
+            return redirect()->route('invoice');
+        }catch(Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
-        if (!empty($request->email_customer)) {
-            $email_customer = $request->email_customer;
-        }
-        if (!empty($request->phone)) {
-            $phone = $request->phone;
-        }
-        if (!empty($request->address_customer)) {
-            $address_customer = $request->address_customer;
-        }
-        if (!empty($request->message)) {
-            $message = $request->message;
-        }
-        if (isset($request->status)) {
-            $status = $request->status;
-        }
-        $update = DB::table('invoices')->where('id', $id)->update([
-            'name_customer' => $name_customer,
-            'email_customer' => $email_customer,
-            'phone' => $phone,
-            'address_customer' => $address_customer,
-            'message' => $message,
-            'status' => $status,
-            'updated_at' => Carbon::now(),
-        ]);
-        Session()->flash('success', 'Thay đổi dữ liệu đơn hàng thành công');
-        return redirect()->route('invoice');
+
     }
     public function deleteInvoice($id)
     {
-        $delete = DB::table('invoices')->where('id', '=', $id)->update(['status' => 'Đã hủy']);
+        $delete = DB::table('invoices')->where('id', '=', $id)->update(['status' => 'Đã hủy','updated_at'=>Carbon::now(),]);
         Session()->flash('success', 'Xóa hóa đơn thành công');
         return redirect()->route('invoice');
     }
@@ -514,6 +575,7 @@ class AdminController extends Controller
                 'total' => $sumTotal,
                 'created_at' => Carbon::now(),
             ]);
+
             foreach ($dataInvoiceProvided as $key=>$dataInvoiceProvided){
                 $invoiceProvidedDetail = InvoiceProvidedDetail::insertGetId([
                     'invoice_provided_id' => $invoiceProvided,
@@ -529,7 +591,7 @@ class AdminController extends Controller
                 $searchAmountProduct = Product::where('id', '=', $temp->product_id)->first();
                 //tong
                 $sumAmountProduct = $searchAmountProduct->amount + $temp->amount;
-                $sumPrice = $temp->price + $temp->price * 0.1;
+                $sumPrice = $temp->import_price + $temp->import_price * 0.1;
                     // update table product
                     $product = Product::where('id', '=', $temp->product_id)->update([
                         'amount' => $sumAmountProduct,
@@ -845,7 +907,19 @@ class AdminController extends Controller
                 'total'=>$sumTotal,
                 'updated_at' => Carbon::now(),
             ]);
+            //cap nhat lai so luong sp
+            $invoiceProvidedDetail=InvoiceProvidedDetail::where('invoice_provided_id',$id)->get();
+            foreach ($invoiceProvidedDetail as $invoiceProvidedDetail) {
+                $product=Product::find($invoiceProvidedDetail->product_id);
+                $sumAmount=$invoiceProvidedDetail->amount + $product->amount;
+                $product = Product::where('id',$invoiceProvidedDetail->product_id)->update([
+                    'amount' => $sumAmount,
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+            //xoa chi tiet hd nhap
             $deleteInvoiceProvidedDetails=InvoiceProvidedDetail::where('invoice_provided_id',$id)->delete();
+            //them lai ct hd nhap
             foreach ($dataInvoiceProvided as $key=>$dataInvoiceProvided){
                 $invoiceProvidedDetail = InvoiceProvidedDetail::insertGetId([
                     'invoice_provided_id' => $id,
@@ -871,10 +945,9 @@ class AdminController extends Controller
                         'updated_at' => Carbon::now(),
                     ]);
             }
-                Session()->flash('success', 'Sửa dữ liệu thành công');
+            Session()->flash('success', 'Sửa dữ liệu thành công');
                 DB::commit();
                 return redirect()->route('invoiceProvided');
-
         }catch(Exception $e) {
             DB::rollBack();
             throw $e;
@@ -1337,4 +1410,5 @@ class AdminController extends Controller
         }
         return redirect()->route('updateProductType');
     }
+
 }

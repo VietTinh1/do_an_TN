@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductType;
+use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class CustomerController extends Controller
     {
         return view('customer.src.cart');
     }
+
     public function shop()
     {
         return view('customer.src.shop');

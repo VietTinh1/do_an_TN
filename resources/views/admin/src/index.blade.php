@@ -119,7 +119,7 @@
           </div>
           <!-- / col-12 -->
           <!-- col-12 -->
-          <div class="col-md-12">
+          <div class="col-md-12" style="padding: 5px 5px 5px 5px;">
             <div class="tile">
               <h3 class="tile-title">Khách hàng mới</h3>
               <div>

@@ -36,36 +36,47 @@
                     </span>
                 </div>
             </div>
-
                 <div class="form-group  col-md-4">
                     <label class="control-label">Nhà cung cấp</label>
                     <label class="form-control">@if (!empty($data->provided->name))
                         {{ $data->provided->name }}
                     @endif</label>
                 </div><br>
+                <div style="padding-left: 15px;"><label for="#"><b style="font-size: 20px;">Hóa đơn hiện tại</b></label></div>
                 <div class="row col-lg-12">
                     @foreach ($data->invoiceProvidedDetail as $data)
-                    <br><br><br>
-                        <div class="form-group  col-md-4">
+                        <br><br><br>
+                        <div class="form-group  col-md-3">
                             <label class="control-label">Sản phẩm</label>
                             <label class="form-control" >{{ $data->product->name_product }}</label>
                         </div>
-                        <div class="form-group  col-md-4">
+                        <div class="form-group  col-md-3">
                             <label class="control-label">Số lượng</label>
                             <label class="form-control" >{{ $data->amount }}</label>
                         </div>
-                        <div class="form-group  col-md-4">
+                        <div class="form-group  col-md-3">
                             <label class="control-label">Giá nhập(VND)</label>
                             <label class="form-control" >{{ $data->import_price }}</label>
                         </div>
-                        <div class="form-group  col-md-4">
+                        <div class="form-group  col-md-3">
                             <label class="control-label">Thuế(%)</label>
                             <label class="form-control" >{{ $data->tax }}</label>
                         </div>
                     @endforeach
-                    <div><label for="#">Thay đổi hóa đơn</label></div>
+                </div>
+                <div style="padding-left: 15px;"><label for="#"><b style="font-size: 20px;">Thay đổi hóa đơn</b></label></div>
                 <form action="{{ route('postEditInvoiceProvided',['id'=>$data->id]) }}" method="post" enctype="multipart/form-data" style="width: 100%;">
                     @csrf
+                    <div class="container" style="max-width:1219px;">
+                        <td>
+                            <label class="text-center"><b>Chọn nhà cung cấp </b></label>
+                            <select class="form-control" id="exampleSelect1" name="id_provided" required>
+                                @foreach ($provided as $provided)
+                                <option value="{{ $provided->id }}">{{ $provided->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                    </div><br>
                     <div class="container" style="max-width:1219px;">
                         <div class="row clearfix">
                             <div class="col-md-12">
