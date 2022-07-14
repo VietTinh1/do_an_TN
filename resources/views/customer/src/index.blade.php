@@ -1,8 +1,8 @@
 @extends('customer.layout')
 @section('content')
-@if(Session::get('shoppingCart')!=null)
-      <div><h1>true</h1></div>
-@endif
+@if(Session()->has('success'))
+    <div class="alert alert-success">{{session()->get('success')}}</div>
+    @endif
 <div class="slider-area">
     <!-- Slider -->
     <div class="block-slider block-slider4">

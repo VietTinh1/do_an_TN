@@ -43,6 +43,7 @@ use App\Models\InvoiceDetail;
 use App\Models\Memory;
 use App\Models\Music;
 use App\Models\OperatingSystemCpu;
+use App\Models\PaymentType;
 use App\Models\Pin;
 use App\Models\RearCamera;
 use App\Models\RearCameraFeature;
@@ -1410,5 +1411,42 @@ class AdminController extends Controller
         }
         return redirect()->route('updateProductType');
     }
-
+    public function updatePayment(){
+        $data=PaymentType::all();
+        return view('admin.src.add_type_device.add_payment',compact('data'));
+    }
+    public function postUpdatePayment(Request $request,$id){
+        DB::beginTransaction();
+        try{
+            if(empty($request->card_code)){
+                $addData=PaymentType::updateOrCreate(
+                    ['id'=>$id],
+                    ['card_type'=>$request->card_type,]
+                );
+            }
+            else{
+                $addData=PaymentType::updateOrCreate(
+                    ['id'=>$id],
+                    ['card_type'=>$request->card_type,'card_code'=>$request->card_code]
+                );
+            }
+            DB::commit();
+            Session()->flash('success', 'Thêm, cập nhật phương thức thanh toán thành công');
+            return redirect()->route('updatePayment');
+        }catch(Exception $e){
+            DB::rollBack();
+            Session()->flash('success', 'Thêm, cập nhật phương thức thanh toán thất bại');
+            return redirect()->route('updatePayment');
+        }
+    }
+    public function deletePayment($id){
+        try{
+            $data=PaymentType::where('id',$id)->delete();
+            Session()->flash('success', 'Xóa phương thức thanh toán thành công');
+            return redirect()->route('updatePayment');
+        }catch(Exception $e){
+            Session()->flash('success', 'Xóa phương thức thanh toán thất bại');
+            return redirect()->route('updatePayment');
+        }
+    }
 }

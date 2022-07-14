@@ -15,6 +15,9 @@ Route::group(['prefix' => '/'], function () {
     Route::get('shop', [CustomerController::class, 'shop'])->name('shopCustomer');
     Route::get('product_detail/{id}', [CustomerController::class, 'productDetail'])->name('productDetailCustomer');
     Route::get('contact', [CustomerController::class, 'contact'])->name('contactCustomer');
+
+    Route::get('/payment', [CustomerController::class, 'payment'])->name('paymentCustomer');
+    Route::post('/payment', [CustomerController::class, 'postPayment'])->name('postPaymentCustomer');
 });
 
 Route::group(['prefix' => '/login'], function () {
@@ -64,7 +67,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_provided/{id}', [AdminController::class, 'deleteProvided'])->name('deleteProvided');
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
     Route::get('/delete_invoice_provided/{id}', [AdminController::class, 'deleteInvoiceProvided'])->name('deleteInvoiceProvided');
-
+    Route::get('/delete_payment/{id}', [AdminController::class, 'deletePayment'])->name('deletePayment');
     //export excel
     Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided');
     Route::get('/exportInvoice', [AdminController::class, 'exportInvoice'])->name('exportInvoice');
@@ -100,6 +103,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/update_battery_technology_type/{id}', [AdminController::class, 'postUpdateBatteryTechnologyType'])->name('postUpdateBatteryTechnologyType');
     Route::get('/update_product_type', [AdminController::class, 'updateProductType'])->name('updateProductType');
     Route::post('/update_product_type/{id}', [AdminController::class, 'postUpdateProductType'])->name('postUpdateProductType');
+    Route::get('/update_payment', [AdminController::class, 'updatePayment'])->name('updatePayment');
+    Route::post('/update_payment/{id}', [AdminController::class, 'postUpdatePayment'])->name('postUpdatePayment');
 });
 Route::get('/demo', [AdminController::class, 'demo'])->name('demo');
-Route::get('/demoCus', [CustomerController::class, 'demo'])->name('demoCus');

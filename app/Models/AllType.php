@@ -48,4 +48,5 @@ class AllType extends Model
     public function scopeBatteryTechnology($query) {
         return $query->where('classify','Công nghệ pin');
     }
+
 }
