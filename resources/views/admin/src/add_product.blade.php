@@ -295,14 +295,12 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hình ảnh</label>
-<<<<<<< HEAD
+
                                 <input class="form-control" type="file" name="image" >
                                 @if ($errors->has('image'))
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
-                            @endif
-=======
-                                <input class="form-control" type="file" name="image">
->>>>>>> 62ba03640dbf861505911b8ddb540fb3866a628e
+                                @endif
+
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>

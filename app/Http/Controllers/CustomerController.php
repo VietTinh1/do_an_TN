@@ -52,7 +52,8 @@ class CustomerController extends Controller
     }
     public function productDetail($id)
     {
-        return view('customer.src.product_details');
+        $active='Điện Thoại';
+        return view('customer.src.product_details',compact('active'));
     }
     public function contact()
     {

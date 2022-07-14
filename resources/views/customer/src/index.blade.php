@@ -9,13 +9,13 @@
             <div class="block-slider block-slider4">
                 <li>
                     @foreach ($newProduct->imageDetail as $imageDetail)
-                    <img src="{{ url('storage/images/'.$imageDetail->image) }}" alt="Slide" style="width:auto;max-height:400px;margin-left:150px;">
+                    <img src="{{ url('storage/images/'.$imageDetail->image) }}" alt="Slide" style="width:auto;max-height:400px;">
                     @endforeach
 
-                    <div class="caption-group">
-                        <h2 class="caption title">
+                    <div class="caption-group" style="right:3%;">
+                        <h4 class="caption title">
                             {{$newProduct->name_product }}
-                        </h2>
+                        </h4>
                         <h4 class="caption subtitle"> {{$newProduct->sim }}</h4>
                         <a class="caption button-radius" href="{{ route('productDetailCustomer',['id'=>$newProduct->id]) }}"><span class="icon"></span>Xem Ngay</a>
                     </div>
@@ -85,7 +85,6 @@
                                 </div>
                             </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
@@ -172,7 +171,7 @@
             </div>
             <div class="col-md-4">
                 <div class="single-product-widget">
-                    <h2 class="product-wid-title" style="font-size: 22px;">Máy tính bán chạy</h2>
+                    <h2 class="product-wid-title" style="font-size: 22px;">Tablet bán chạy</h2>
                     <a href="{{ route('tabletCustomer') }}" class="wid-view-more">Xem tất cả</a>
                     @foreach ($tablet as $tablet)
                     <a href="{{ route('productDetailCustomer',['id'=>$tablet->id]) }}">
@@ -198,7 +197,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="single-product-widget">
                 <h2 class="product-wid-title" style="font-size: 22px;">Laptop bán chạy</h2>
                 <a href="{{ route('laptopCustomer') }}" class="wid-view-more">Xem tất cả</a>
@@ -219,12 +218,12 @@
                 </div>
                 <div class="product-wid-price">
                     <ins>{{ $laptop->price }} VND</ins>
-                    {{-- <del>$425.00</del> --}}
+                    {{-- <del>$425.00</del>
                 </div>
             </div>
             </a>
             @endforeach
-        </div>
+        </div> --}}
     </div>
     </div>
     </div>
