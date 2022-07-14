@@ -119,6 +119,34 @@
         </div>
     </div>
 </div> <!-- End footer top area -->
+ <!-- Modal -->
+ <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('demoCus') }}" method="POST">
+                    @csrf
+                    <table class="show-cart table">
+
+                    </table>
+                    <div>Tổng tiền: <span class="total-cart"></span>&nbsp;VND</div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                {{-- <form action="{{ route('demoCus') }}" method="post" >@csrf <input type="text" name="demo" value="{{ $_SESSION['shoppingCart'] }}"> </form> --}}
+                <a type="button" class="btn btn-primary" href="{{ route('demoCus') }}">Thanh Toán Ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="footer-bottom-area">
     <div class="container">
@@ -330,10 +358,10 @@
                 output += "<tr>" +
                     "<td>" + cartArray[i].name + "</td>" +
                     "<td>(" + cartArray[i].price + ")</td>" +
-                    "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name=" + cartArray[i].name + ">-</button>" +
+                    "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "''>-</button>" +
                     "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>" +
-                    "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name + ">+</button></div></td>" +
-                    "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>" +
+                    "<button class='plus-item btn btn-primary input-group-addon' data-name='" + cartArray[i].name + "'>+</button></div></td>" +
+                    "<td><button class='delete-item btn btn-danger' data-name='" + cartArray[i].name + "'>X</button></td>" +
                     " = " +
                     "<td>" + cartArray[i].total + "</td>" +
                     "</tr>";

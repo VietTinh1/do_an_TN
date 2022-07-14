@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-name="{{ $phone->name_product }}" data-price="{{$phone->price}}">Thêm vào giỏ hàng</a>
+                                <a class="add_to_cart_button add-to-cart-link" data-name="{{ $phone->name_product }}" data-price="{{$phone->price}}">Thêm vào giỏ hàng</a>
                             </div>
                         </div>
                     </div>

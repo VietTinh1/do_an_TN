@@ -7,6 +7,7 @@ use App\Models\ProductType;
 use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
+use Session;
 
 class CustomerController extends Controller
 {
@@ -41,7 +42,6 @@ class CustomerController extends Controller
     {
         return view('customer.src.cart');
     }
-
     public function shop()
     {
         return view('customer.src.shop');
@@ -59,5 +59,10 @@ class CustomerController extends Controller
     {
         $active='Liên hệ';
         return view('customer.src.contact',compact('active'));
+    }
+    public function demo(Request $request){
+        dd($request);
+        $value = Session::key('shoppingCart');
+        dd($value);
     }
 }

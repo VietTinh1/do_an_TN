@@ -102,3 +102,4 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/update_product_type/{id}', [AdminController::class, 'postUpdateProductType'])->name('postUpdateProductType');
 });
 Route::get('/demo', [AdminController::class, 'demo'])->name('demo');
+Route::get('/demoCus', [CustomerController::class, 'demo'])->name('demoCus');

@@ -1,7 +1,9 @@
 @extends('customer.layout')
 @section('content')
-
-<<div class="slider-area">
+@if(Session::get('shoppingCart')!=null)
+      <div><h1>true</h1></div>
+@endif
+<div class="slider-area">
     <!-- Slider -->
     <div class="block-slider block-slider4">
         <ul class="" id="bxslider-home4">
@@ -73,8 +75,9 @@
                                     @foreach ($data->imageDetail as $image)
                                     <img class="card-img-top" src="{{ url('storage/images/'.$image->image) }}" alt="Card image cap" style="height:255px;">
                                     @endforeach
+
                                     <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link btn btn-primary" data-name="{{ $data->name_product }}" data-price="{{$data->price}}"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
+                                        <a href="#" class="add-to-cart-link btn btn-primary" data-name="{{$data->name_product}}" data-price="{{$data->price }}"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                         <a href="{{ route('productDetailCustomer',['id'=>$data->id]) }}" class="view-details-link"><i class="fa fa-link"></i> Xem chi tiết</a>
                                     </div>
                                 </div>
@@ -91,29 +94,6 @@
             </div>
         </div>
     </div> <!-- End main content area -->
-    <!-- Modal -->
-    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="show-cart table">
-
-                    </table>
-                    <div>Tổng tiền: <span class="total-cart"></span>&nbsp;VND</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Thanh Toán Ngay</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="brands-area">
         <div class="zigzag-bottom"></div>
