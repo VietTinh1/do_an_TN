@@ -67,8 +67,8 @@
                     <li> @endif<a href="{{route('phoneCustomer')}}">Điện Thoại</a></li>
                     @if($active=='Tablet')<li class="active">@else
                     <li> @endif<a href="{{route('tabletCustomer')}}">Máy tính bảng</a></li>
-                    @if($active=='Laptop')<li class="active">@else
-                    <li> @endif<a href="{{route('laptopCustomer')}}">Laptop</a></li>
+                    {{-- @if($active=='Laptop')<li class="active">@else
+                    <li> @endif<a href="{{route('laptopCustomer')}}">Laptop</a></li> --}}
                     @if($active=='Liên hệ')<li class="active">@else
                     <li> @endif<a href="{{route('contactCustomer')}}">Liên hệ</a></li>
                 </ul>

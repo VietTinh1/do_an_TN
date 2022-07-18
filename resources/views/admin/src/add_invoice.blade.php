@@ -118,19 +118,6 @@
                                         <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button>
                                     </div>
                                 </div>
-                                {{-- <div class="row clearfix" style="margin-top:20px">
-                                    <div class="pull-right col-md-4">
-                                        <table class="table table-bordered table-hover" id="tab_logic_total">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="text-center">Tổng tiền</th>
-                                                    <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> --}}
-
                             </div>
                             <div class="form-group  col-md-4">
                                 <button class="btn btn-save" type="submit">Lưu lại</button>

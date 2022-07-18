@@ -42,23 +42,13 @@
                   Tạo mới đơn hàng</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" href="{{route('updatePayment')}}" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="{{route('updatePayment')}}" title="Thêm phương thức thanh toán"><i class="fas fa-plus"></i>
                   Thêm phương thức thanh toán</a>
               </div>
-
               <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
+                <a class="btn btn-excel btn-sm" href="{{ route('exportInvoice') }}" title="Xuất Excel"><i class="fas fa-file-excel"></i>Xuất Excel</a>
               </div>
-
-              <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="{{ route('exportInvoice') }}" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-              </div>
-
             </div>
-
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
               <thead>
                 <tr>
@@ -93,7 +83,7 @@
                             @if($data->status =="Chờ xử lí")
                             <span class="badge bg-success">Chờ xử lí</span>
                             @elseif($data->status =="Đang xử lí")
-                            <span class="badge bg-success"> Đang xử lí</span>
+                            <span class="badge bg-success">Đang xử lí</span>
                             @elseif($data->status =="Đã xử lí")
                             <span class="badge bg-success">Đã xử lí</span>
                             @else
@@ -101,9 +91,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
-                            @if($data->status !="Đã hủy")
-                            <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                            @if ($data->status !="Đã xử lí" && $data->status !="Đã hủy")
+                                <a href="{{ route('editInvoice',['id'=>$data->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class=" fas fa-edit"></i></a>
+                                <a href="{{ route('deleteInvoice',['id'=>$data->id]) }}" class=" btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                             @endif
                         </td>
                     </tr>

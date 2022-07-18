@@ -16,8 +16,9 @@ class CreateImageDetailsTable extends Migration
         Schema::create('image_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->nullable();
+            $table->string('image_main',100)->nullable();
             $table->string('image',100)->nullable();
-            $table->string('status')->default("Đã tạo");
+            $table->string('slider',100)->nullable();
             $table->timestamps();
         });
     }

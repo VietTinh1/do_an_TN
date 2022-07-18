@@ -74,7 +74,7 @@ class AdminController extends Controller
         $product = Product::count();
         $countInvoiceOnMonth = Invoice::where([
             ['status', '=', 'Đã xử lí'],
-            ['created_at', '=', Carbon::now()->month],
+            ['created_at', '=', Carbon::now('Asia/Ho_Chi_Minh')->month],
         ])->count();
         $countCustomer = Invoice::distinct()->count('name_customer');
         $outOfProduct = Product::where([
@@ -101,7 +101,7 @@ class AdminController extends Controller
         $product = Product::count();
         $countInvoiceOnMonth = Invoice::where([
             ['status', '=', 'Đã xử lí'],
-            ['created_at', '=', Carbon::now()->month],
+            ['created_at', '=', Carbon::now('Asia/Ho_Chi_Minh')->month],
         ])->count();
         $countCustomer = Invoice::distinct()->count('name_customer');
         $outOfProduct = Product::where(function($query){
@@ -198,7 +198,7 @@ class AdminController extends Controller
             'size_volume' => $request->size_volume,
             'date_created' => $request->date_created,
             'status' => $request->status,
-            'created_at' => Carbon::now(),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ]);
         $security = !empty($input['secutity_type']) ? $input['secutity_type'] : [];
         $feature = !empty($input['feature_type']) ? $input['feature_type'] : [];
@@ -214,76 +214,96 @@ class AdminController extends Controller
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$security,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($feature as $feature) {
             $feature=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$feature,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($record as $record) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$record,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($video as $video) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$video,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($music as $music) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$music,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($wjfj as $wjfj) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$wjfj,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($film as $film) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$film,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($gps as $gps) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$gps,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
         foreach ($bluetooth as $bluetooth) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
                 'all_type_id' =>$bluetooth,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
-            if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png'
-            ]);
-            $request->image->store('images', 'public');
-            $image=ImageDetail::insert([
-                'product_id' => $productId,
-                'image' =>$request->image->hashName(),
-                'created_at' => Carbon::now(),
-            ]);
+        if ($request->hasFile('image_main')) {
+             $request->validate([
+                 'image_main' => 'mimes:jpeg,png,jpg,gif,svg',
+             ]);
+                    $request->image_main->store('images', 'public');
+                    $img=ImageDetail::insert([
+                        'product_id' => $productId,
+                        'image_main' =>$request->image_main->hashName(),
+                        'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
             }
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                    $image->store('images', 'public');
+                    $img=ImageDetail::insert([
+                        'product_id' => $productId,
+                        'image' =>$image->hashName(),
+                        'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
+            }
+        }
+        if ($request->hasFile('slider')) {
+            foreach ($request->file('slider') as $slider) {
+                    $slider->store('images', 'public');
+                    $img=ImageDetail::insert([
+                        'product_id' => $productId,
+                        'slider' =>$slider->hashName(),
+                        'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
+            }
+        }
         DB::commit();
         Session()->flash('success', 'Thêm sản phẩm thành công');
         return redirect()->route('product');
@@ -291,8 +311,7 @@ class AdminController extends Controller
        catch(Exception $e){
         DB::rollBack();
         throw $e;
-        // Session()->flash('success', 'Thêm sản phẩm thất bại');
-        // return redirect()->back();
+        Session()->flash('success', 'Thêm sản phẩm thất bại');
        }
 
     }
@@ -317,71 +336,59 @@ class AdminController extends Controller
     {
         DB::beginTransaction();
         try{
-            $update=Product::where('id',$id)->update([
-            'name_product' => $request->name_product,
-            'trademark' => $request->trademark,
-            'product_code'=>$request->product_code,
-            'amount' => $request->amount,
-            'price' => $request->price,
-            'tax' => $request->tax,
-            'time_warranty' => $request->time_warranty,
-            'sale' => $request->sale,
-            'screen_technology'=>$request->screen_technology,
-            'screen_resolution' =>$request->screen_resolution,
-            'screen_width' =>$request->screen_width,
-            'screen_maximum_brightness' =>$request->screen_maximum_brightness,
-            'touch_screen_glass' =>$request->touch_screen_glass,
-            'flash_light'=>$request->flash_light,
-            'operating_system'=>$request->operating_system,
-            'CPU' => $request->CPU,
-            'speed_cpu' => $request->speed_cpu,
-            'GPU' => $request->GPU,
-            'ram' => $request->ram,
-            'rom' => $request->rom,
-            'available_memory' => $request->available_memory,
-            'memory_stick' => $request->memory_stick,
-            'mobile_network' => $request->mobile_network,
-            'sim' => $request->sim,
-            'phonebook' => $request->phonebook,
-            'charging_port' => $request->charging_port,
-            'headphone' => $request->headphone,
-            'connection_orther' => $request->connection_orther,
-            'battery_capacity'=>$request->battery_capacity,
-            'pin_type' => $request->pin_type,
-            'maximum_battery_charging_support' => $request->maximum_battery_charging_support,
-            'charger_included' => $request->charger_included,
-            'battery_technology' => $request->battery_technology,
-            'water_and_dust_resistant' => $request->water_and_dust_resistant,
-            'radio' => $request->radio,
-            'design' => $request->design,
-            'material' => $request->material,
-            'size_volume' => $request->size_volume,
-            'date_created' => $request->date_created,
-            'status' => $request->status,
-            'updated_at' => Carbon::now(),
-            ]);
-            if ($request->hasFile('image')) {
-                $request->validate([
-                    'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-                ]);
-                $request->image->store('images', 'public');
-                $imageMove=Product::with('imageDetail')->first();
-                foreach ($imageMove->imageDetail as $image) {
-                    $temp=ImageDetail::where('id',$id)->update(['status' =>'Đã xóa',]);
-                }
-                $addImage=ImageDetail::insert([
-                    'product_id' =>$id,
-                    'image' =>$request->image->hashName(),
-                    'created_at' =>Carbon::now(),
-                ]);
-                if ($addImage) {
-                    Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thành công');
-                } else {
-                    Session()->flash('success', 'Thay đổi dữ liệu sản phẩm thất bại');
-                }
-            } else {
-                Session()->flash('success', 'Kiểm tra lại hình ảnh');
+            // $update=Product::where('id',$id)->update([
+            // 'name_product' => $request->name_product,
+            // 'trademark' => $request->trademark,
+            // 'product_code'=>$request->product_code,
+            // 'amount' => $request->amount,
+            // 'price' => $request->price,
+            // 'tax' => $request->tax,
+            // 'time_warranty' => $request->time_warranty,
+            // 'sale' => $request->sale,
+            // 'screen_technology'=>$request->screen_technology,
+            // 'screen_resolution' =>$request->screen_resolution,
+            // 'screen_width' =>$request->screen_width,
+            // 'screen_maximum_brightness' =>$request->screen_maximum_brightness,
+            // 'touch_screen_glass' =>$request->touch_screen_glass,
+            // 'flash_light'=>$request->flash_light,
+            // 'operating_system'=>$request->operating_system,
+            // 'CPU' => $request->CPU,
+            // 'speed_cpu' => $request->speed_cpu,
+            // 'GPU' => $request->GPU,
+            // 'ram' => $request->ram,
+            // 'rom' => $request->rom,
+            // 'available_memory' => $request->available_memory,
+            // 'memory_stick' => $request->memory_stick,
+            // 'mobile_network' => $request->mobile_network,
+            // 'sim' => $request->sim,
+            // 'phonebook' => $request->phonebook,
+            // 'charging_port' => $request->charging_port,
+            // 'headphone' => $request->headphone,
+            // 'connection_orther' => $request->connection_orther,
+            // 'battery_capacity'=>$request->battery_capacity,
+            // 'pin_type' => $request->pin_type,
+            // 'maximum_battery_charging_support' => $request->maximum_battery_charging_support,
+            // 'charger_included' => $request->charger_included,
+            // 'battery_technology' => $request->battery_technology,
+            // 'water_and_dust_resistant' => $request->water_and_dust_resistant,
+            // 'radio' => $request->radio,
+            // 'design' => $request->design,
+            // 'material' => $request->material,
+            // 'size_volume' => $request->size_volume,
+            // 'date_created' => $request->date_created,
+            // 'status' => $request->status,
+            // 'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            // ]);
+            dd($request);
+            foreach ($request->file() as $image) {
+                    $image->store('images', 'public');
+                    $checkImage=ImageDetail::find($image);
+                    $img=ImageDetail::where('id',$image)->update([
+                        'image' =>$image->hashName(),
+                        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
             }
+            die("ds");
             DB::commit();
             return redirect()->route('product');
 
@@ -431,7 +438,7 @@ class AdminController extends Controller
                 'total' => $sumTotal,
                 'message' => $request->message,
                 'status' => $request->status,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
             //tong so luong amount
             $arrAmount=count($request->amount);
@@ -450,13 +457,13 @@ class AdminController extends Controller
                     'price' => $product->price,
                     'discount' => '0',
                     'promotion' => '0',
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
                 //tong amount con lai
                 $sumAmountProduct=$product->amount - $request->amount[$count];
                 $updateProduct=Product::where('id',$product->id)->update([
                     'amount'=>$sumAmountProduct,
-                    'updated_at'=>Carbon::now(),
+                    'updated_at'=>Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
             }
             Session()->flash('success', 'Thêm hóa đơn thành công');
@@ -471,28 +478,31 @@ class AdminController extends Controller
     public function editInvoice($id)
     {
         $invoice = Invoice::with('invoiceDetail.product')->where('id', $id)->first();
-        $status=array('Chờ xử lí','Đang xử lí','Đã xử lí','Đã hủy');
-        return view('admin.src.edit_invoice', compact('invoice','status'));
+        $product = Product::all()->where('status', '=', "Đang hoạt động");
+        $status=array('Chờ xử lí','Đang xử lí','Đã xử lí');
+        return view('admin.src.edit_invoice', compact('invoice','status','product'));
     }
     public function postEditInvoice(Request $request, $id)
     {
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $dataInvoiceDetail=$this->multiArrayTotwodimensionArray(array($request->products,$request->amount));
+            $dataInvoiceDetailAdd=$this->multiArrayTotwodimensionArray(array($request->productAdd,$request->amountAdd));
             $message = 'Không';
             if (!empty($request->message)) {
                 $message = $request->message;
             }
             //id invoice details
-            $p=0;$a=0;
+            $p=0;
             $sumTotal=0;
-            for($p,$a;!empty($request->products[$p]);$p++,$a++) {
+            for($p;!empty($request->products[$p]);$p++) {
                 $invoiceDetail=InvoiceDetail::find($request->products[$p]);
                 $countAmount=$invoiceDetail->amount - $request->amount[$p];
                 $updateInvoideDetail=InvoiceDetail::where('id',$request->products[$p])->update([
                     'amount' => $request->amount[$p],
-                    'updated_at' =>Carbon::now(),
+                    'updated_at' =>Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
+                //them hoac giam so luong san pham
                 if($countAmount>0 || $countAmount<0){
                     //tim sp, cong sp them
                     $invoiceDetail=InvoiceDetail::find($request->products[$p]);
@@ -501,7 +511,28 @@ class AdminController extends Controller
                     $amount=$product->amount-$countAmount;
                     $updateProduct=Product::where('id',$invoiceDetail->product_id)->update([
                         'amount' =>$amount,
-                        'updated_at' =>Carbon::now(),
+                        'updated_at' =>Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
+                }
+            }
+            //thêm chi tiet hoa don
+            $p=0;
+            for($p;!empty($request->productAdd[$p]);$p++) {
+                if(!empty($request->amountAdd[$p])){
+                    $invoiceDetail=InvoiceDetail::find($request->productAdd[$p]);
+                    $product= Product::find($invoiceDetail->product_id);
+                    $insertInvoideDetail=InvoiceDetail::where('id',$request->productAdd[$p])->insertGetId([
+                        'invoice_id' =>$id,
+                        'product_id' =>$invoiceDetail->product_id,
+                        'amount' => $request->amountAdd[$p],
+                        'price'=>$product->price,
+                        'created_at' =>Carbon::now('Asia/Ho_Chi_Minh'),
+                    ]);
+                    //giam so luong san pham
+                    $amount=$product->amount-$request->amountAdd[$p];
+                    $updateProduct=Product::where('id',$product->id)->update([
+                        'amount' =>$amount,
+                        'updated_at' =>Carbon::now('Asia/Ho_Chi_Minh'),
                     ]);
                 }
             }
@@ -519,7 +550,7 @@ class AdminController extends Controller
                 'message' => $message,
                 'total' => $sumTotal,
                 'status' => $request->status,
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
             DB::commit();
             Session()->flash('success', 'Thay đổi dữ liệu đơn hàng thành công');
@@ -532,7 +563,7 @@ class AdminController extends Controller
     }
     public function deleteInvoice($id)
     {
-        $delete = DB::table('invoices')->where('id', '=', $id)->update(['status' => 'Đã hủy','updated_at'=>Carbon::now(),]);
+        $delete = DB::table('invoices')->where('id', '=', $id)->update(['status' => 'Đã hủy','updated_at'=>Carbon::now('Asia/Ho_Chi_Minh'),]);
         Session()->flash('success', 'Xóa hóa đơn thành công');
         return redirect()->route('invoice');
     }
@@ -574,7 +605,7 @@ class AdminController extends Controller
                 'provided_id' => $request->id_provided,
                 'user_id' => Auth::id(),
                 'total' => $sumTotal,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
 
             foreach ($dataInvoiceProvided as $key=>$dataInvoiceProvided){
@@ -584,7 +615,7 @@ class AdminController extends Controller
                     'amount' => $dataInvoiceProvided[1],
                     'import_price' => $dataInvoiceProvided[2],
                     'tax' => $dataInvoiceProvided[3],
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
                 //tim chi tiet nhap
                 $temp = InvoiceProvidedDetail::find($invoiceProvidedDetail);
@@ -599,7 +630,7 @@ class AdminController extends Controller
                         'price' => $sumPrice,
                         'time_warranty' => $temp->time_warranty,
                         'tax' => $temp->tax,
-                        'updated_at' => Carbon::now(),
+                        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     ]);
             }
             DB::commit();
@@ -630,252 +661,6 @@ class AdminController extends Controller
         return view('admin.src.add_invoice_provided_not_yet',
              compact('provided', 'productType','security','cameraFeatureType1','cameraFeatureType2','film','record','video','music','wjfj','gps','feature','bluetooth'));
     }
-    // public function postAddInvoiceProvidedNotYet(AdminRequest $request)
-    // {
-    //     return DB::transaction(function() use($request){
-    //         $input = $request->all();
-    //         tong tien hs nhap
-    //         $total = $request->amount * $request->import_price;
-    //         if ($request->hasFile('front') && $request->hasFile('backside')) {
-    //             $request->validate([
-    //                 'front' => 'mimes:jpeg,bmp,png',
-    //                 'backside' => 'mimes:jpeg,bmp,png',
-    //             ]);
-    //             $request->front->store('images', 'public');
-    //             $request->backside->store('images', 'public');
-    //             $invoiceProvided = InvoiceProvided::insertGetId([
-    //                 'provided_id' => $request->provided_id,
-    //                 'user_id' => Auth::id(),
-    //                 'total' => $total,
-    //                 'status' => $request->status,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             $invoiceProvidedDetails = InvoiceProvidedDetail::insertGetId([
-    //                 'invoice_provided_id' => $invoiceProvided,
-    //                 'product_type_id' => $request->product_type_id,
-    //                 'image_url_front' => $request->front->hashName(),
-    //                 'image_url_backside' => $request->backside->hashName(),
-    //                 'name' => $request->name,
-    //                 'trademark' => $request->trademark,
-    //                 'product_code' => $request->product_code,
-    //                 'amount' => $request->amount,
-    //                 'import_price' => $request->import_price,
-    //                 'time_warranty' => $request->time_warranty,
-    //                 'tax' => $request->tax,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             //tim ct hd nhap
-    //             $temp = InvoiceProvidedDetail::find($invoiceProvidedDetails);
-    //             //gia san pham= gia nhap+gia nhap * 0.1
-    //             $sumPrice = $temp->import_price + $temp->import_price * 0.1;
-    //             //them bang sp
-    //             $product = Product::insertGetId([
-    //                 'user_id' => Auth::id(),
-    //                 'product_type_id' => $temp->product_type_id,
-    //                 'name' =>$temp->name,
-    //                 'trademark' => $temp->trademark,
-    //                 'product_code' => $temp->product_code,
-    //                 'amount' => $temp->amount,
-    //                 'price' => $sumPrice,
-    //                 'time_warranty' => $temp->time_warranty,
-    //                 'tax' => $temp->tax,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             //tim id sp=>update id sp trong cthd nhap
-    //             $productCode = Product::find($product);
-    //             //them id vao sp
-    //             $addProductIdToInvoiceProvidedDetail = InvoiceProvidedDetail::where('product_code', '=', $productCode->product_code)->update([
-    //                 'product_id' => $productCode->id,
-    //                 'updated_at' => Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $imageDetail=ImageDetail::insertGetId([
-    //                 'front' =>$request->front->hashName(),
-    //                 'backside' =>$request->backside->hashName(),
-    //                 'created_at' =>Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $screen=Screen::insertGetId([
-    //                 'screen_technology' =>$request->screen_technology,
-    //                 'resolution' =>$request->resolution,
-    //                 'width' =>$request->width,
-    //                 'maximum_brightness' =>$request->maximum_brightness,
-    //                 'touch_glass' =>$request->touch_glass,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $frontCamera=FrontCamera::insertGetId([
-    //                 'resolution' =>$request->resolution,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             $frontCameraDetail=!empty($input['name_front_camera_feature']) ? $input['name_front_camera_feature'] : [];
-    //             foreach($frontCameraDetail as $frontCameraDetail) {
-    //                 $data=FrontcameraFeature::insert([
-    //                     'front_camera_id' =>$frontCamera,
-    //                     'name_front_camera_feature' =>$frontCameraDetail,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             //id trong setting
-    //             $rearCamera=RearCamera::insertGetId([
-    //                 'main_rear_camera' =>$request->main_rear_camera,
-    //                 'main_secondary_1' =>$request->main_secondary_1,
-    //                 'main_secondary_2' =>$request->main_secondary_2,
-    //                 'flash_light' =>$request->flash_light,
-    //                 'created_at' =>Carbon::now(),
-    //             ]);
-    //             $rearCameraDetail=!empty($input['name_rear_camera_feature'])?$input['name_rear_camera_feature']:[];
-    //             $film=!empty($input['film'])?$input['film']:[];
-    //             foreach($rearCameraDetail as $rearCameraDetail) {
-    //                 $data=RearCameraFeature::insertGetId([
-    //                     'rear_camera_id' =>$rearCamera,
-    //                     'name_rear_camera_feature' =>$rearCameraDetail,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($film as $film) {
-    //                 $data=film::insertGetId([
-    //                     'rear_camera_id' =>$rearCamera,
-    //                     'name_film' =>$film,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             //id trong setting
-    //             $operatingSystemCpu=OperatingSystemCpu::insertGetId([
-    //                 'operating_system_name' =>$request->operating_system_name,
-    //                 'chip_cpus' =>$request->chip_cpus,
-    //                 'speed_cpu' =>$request->speed_cpu,
-    //                 'gpu' =>$request->gpu,
-    //                 'created_at' =>Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $memory=Memory::insertGetId([
-    //                 'ram' =>$request->ram,
-    //                 'rom' =>$request->rom,
-    //                 'memory_available' =>$request->memory_available,
-    //                 'memory_stick' => $request->memory_stick,
-    //                 'phone_book' =>$request->phone_book,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $connect=ModelsConnection::insertGetId([
-    //                 'mobile_network' =>$request->mobile_network,
-    //                 'sim' => $request->sim,
-    //                 'charging_port' =>$request->charging_port,
-    //                 'head_phone' =>$request->head_phone,
-    //                 'connection_orther' =>$request->connection_orther,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             $bluetooth=!empty($input['name_bluetooth'])?$input['name_bluetooth']:[];
-    //             $wjfj=!empty($input['name_wjfj'])?$input['name_wjfj']:[];
-    //             $gps=!empty($input['name_gps'])?$input['name_gps']:[];
-    //             foreach($bluetooth as $bluetooth) {
-    //                 $data=bluetooth::insertGetId([
-    //                     'connection_id' =>$connect,
-    //                     'name_bluetooth' =>$bluetooth,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($wjfj as $wjfj) {
-    //                 $data=Wjfj::insertGetId([
-    //                     'connection_id' =>$connect,
-    //                     'name_wjfj' =>$wjfj,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($gps as $gps) {
-    //                 $data=Gps::insertGetId([
-    //                     'connection_id' =>$connect,
-    //                     'name_gps' =>$gps,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             //id trong setting
-    //             $pin=Pin::insertGetId([
-    //                 'memory_pin' =>$request->memory_pin,
-    //                 'pin_type' => $request->pin_type,
-    //                 'support_pin_max' =>$request->support_pin_max,
-    //                 'charger' => $request->charger,
-    //                 'technology_pin' => $request->technology_pin,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             //id trong setting
-    //             $utiliti=Utilitie::insertGetId([
-    //                 'waterproof_dustproof' =>$request->waterproof_dustproof,
-    //                 'radio' => $request->radio,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             $securityAdvanceType=!empty($input['security_advance_type'])?$input['security_advance_type']:[];
-    //             $featureAdvance=!empty($input['feature_advance'])?$input['feature_advance']:[];
-    //             $recordType=!empty($input['record_type'])?$input['record_type']:[];
-    //             $videoType=!empty($input['video_type'])?$input['video_type']:[];
-    //             $musicType=!empty($input['music_type'])?$input['music_type']:[];
-    //             foreach($securityAdvanceType as $securityAdvanceType) {
-    //                 $data=SecurityAdvance::insertGetId([
-    //                     'utilitie_id' =>$utiliti,
-    //                     'name_security_advance' =>$securityAdvanceType,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($featureAdvance as $featureAdvance) {
-    //                 $data=FeatureAdvance::insertGetId([
-    //                     'utilitie_id' =>$utiliti,
-    //                     'name_feature_advance' =>$featureAdvance,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($recordType as $recordType) {
-    //                 $data=Record::insertGetId([
-    //                     'utilitie_id' =>$utiliti,
-    //                     'name_record' =>$recordType,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($videoType as $videoType) {
-    //                 $data=Video::insertGetId([
-    //                     'utilitie_id' =>$utiliti,
-    //                     'name_video' =>$videoType,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             foreach($musicType as $musicType) {
-    //                 $data=Music::insertGetId([
-    //                     'utilitie_id' =>$utiliti,
-    //                     'name_music' =>$musicType,
-    //                     'created_at' =>Carbon::now(),
-    //                 ]);
-    //             }
-    //             //id trong setting
-    //             $information=Information::insertGetId([
-    //                 'design' =>$request->design,
-    //                 'material' =>$request->design,
-    //                 'size_mass' =>$request->design,
-    //                 //ngay ra mat
-    //                 'describe' =>'123',
-    //                 'created_at' =>Carbon::now(),
-    //             ]);
-    //             $configuration=Configuration::insertGetId([
-    //                 'product_id' =>$product,
-    //                 'image_detail_id' =>$imageDetail,
-    //                 'screen_id' =>$screen,
-    //                 'front_id' =>$frontCamera,
-    //                 'rear_camera_id' =>$rearCamera,
-    //                 'operating_system_cpu_id' =>$operatingSystemCpu,
-    //                 'memory_id' =>$memory,
-    //                 'connection_id' =>$connect,
-    //                 'pin_id' =>$pin,
-    //                 'utilities_id' =>$utiliti,
-    //                 'information_id' =>$information,
-    //                 'created_at' =>Carbon::now(),
-    //             ]);
-    //             Session()->flash('success', 'Thêm hóa đơn nhà cung cấp thành công');
-    //             return redirect()->route('invoiceProvided');
-    //         } else {
-    //             Session()->flash('success', 'Kiểm tra lại hình ảnh');
-    //             return redirect()->back();
-    //         }
-    //         }) ;
-    // }
     public function editInvoiceProvided($id)
     {
         $data=InvoiceProvided::with('provided','invoiceProvidedDetail.product')->where('id', '=', $id)->first();
@@ -906,7 +691,7 @@ class AdminController extends Controller
             }
             $updateInvoideProvided=InvoiceProvided::where('id',$id)->update([
                 'total'=>$sumTotal,
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
             //cap nhat lai so luong sp
             $invoiceProvidedDetail=InvoiceProvidedDetail::where('invoice_provided_id',$id)->get();
@@ -915,7 +700,7 @@ class AdminController extends Controller
                 $sumAmount=$invoiceProvidedDetail->amount + $product->amount;
                 $product = Product::where('id',$invoiceProvidedDetail->product_id)->update([
                     'amount' => $sumAmount,
-                    'updated_at' => Carbon::now(),
+                    'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
             }
             //xoa chi tiet hd nhap
@@ -928,7 +713,7 @@ class AdminController extends Controller
                     'amount' => $dataInvoiceProvided[1],
                     'import_price' => $dataInvoiceProvided[2],
                     'tax' => $dataInvoiceProvided[3],
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
                 //tim chi tiet nhap
                 $temp = InvoiceProvidedDetail::find($invoiceProvidedDetail);
@@ -943,7 +728,7 @@ class AdminController extends Controller
                         'price' => $sumPrice,
                         'time_warranty' => $temp->time_warranty,
                         'tax' => $temp->tax,
-                        'updated_at' => Carbon::now(),
+                        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     ]);
             }
             Session()->flash('success', 'Sửa dữ liệu thành công');
@@ -980,7 +765,7 @@ class AdminController extends Controller
                     'password' => Hash::make($request->password),
                     'token' => Str::random(64),
                     'status' => "Đang hoạt động",
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                 ]);
                 if ($request->hasFile('image_url')) {
                     $request->validate([
@@ -998,7 +783,7 @@ class AdminController extends Controller
                         'phone' => $request->phone,
                         'email' => $request->email,
                         'permission' => $request->permission,
-                        'created_at' => Carbon::now(),
+                        'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
                     ]);
                     if (!empty($user) && !empty($acc)) {
                         Session()->flash('success', 'Thêm nhân viên thành công');
@@ -1036,7 +821,7 @@ class AdminController extends Controller
                 'phone' => $request->phone,
                 'permission' => $request->permission,
                 'status' => $request->status,
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
             if (!empty($user)) {
                 Session()->flash('success', 'Thay đổi thông tin nhân viên thành công');
@@ -1093,7 +878,7 @@ class AdminController extends Controller
             'phone' => $request->phone,
             'address' => $request->address,
             'notes' => $note,
-            'created_at' => Carbon::now(),
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ]);
         Session()->flash('success', 'Thêm nhà cung cấp thành công');
         return redirect()->route('provided');
@@ -1113,7 +898,7 @@ class AdminController extends Controller
             'address' => $request->address,
             'status' => $request->status,
             'notes' => $request->notes,
-            'updated_at' => Carbon::now(),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ]);
         Session()->flash('success', 'Thay đổi dữ liệu nhà cung cấp thành công');
         return redirect()->route('provided');
@@ -1122,7 +907,7 @@ class AdminController extends Controller
     {
         $db = DB::table('provideds')->where('id', '=', $id)->update([
             'status' => ' Dừng hoạt động',
-            'updated_at' => Carbon::now(),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ]);
         Session()->flash('success', 'Xóa dữ liệu thành công');
         return redirect()->route('provided');

@@ -21,7 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->bigInteger('phone')->nullable();
             $table->string('address_customer',100)->nullable();
             $table->string('message')->nullable();
-            $table->double('total')->nullable();
+            $table->decimal('total',30)->nullable();
             $table->string('status',25)->default("Chờ xử lí");//Đang xử lí // Đã xử lí // Đã hủy
             $table->timestamps();
         });

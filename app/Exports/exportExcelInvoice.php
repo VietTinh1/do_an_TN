@@ -10,8 +10,18 @@ class exportExcelInvoice implements FromCollection
     /**
     * @return \Illuminate\Support\Collection
     */
+    public function headings(): array
+        {
+            $headings = [
+                ['a'],
+                ['b'],
+                ['c']
+            ];
+
+            return $headings;
+        }
     public function collection()
     {
-        return Invoice::all();
+        return Invoice::with('invoiceDetail')->get();
     }
 }

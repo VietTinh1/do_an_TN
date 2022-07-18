@@ -48,8 +48,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/add_staff', [AdminController::class, 'postAddStaff'])->name('postAddStaff');
     Route::get('/add_invoice_provided', [AdminController::class, 'addInvoiceProvided'])->name('addInvoiceProvided');
     Route::post('/add_invoice_provided', [AdminController::class, 'postAddInvoiceProvided'])->name('postAddInvoiceProvided');
-    // Route::get('/add_invoice_provided_not_yet', [AdminController::class, 'addInvoiceProvidedNotYet'])->name('addInvoiceProvidedNotYet');
-    // Route::post('/add_invoice_provided_not_yet', [AdminController::class, 'postAddInvoiceProvidedNotYet'])->name('postAddInvoiceProvidedNotYet');
 
     Route::get('/edit_staff/{id}', [AdminController::class, 'editStaff'])->name('editStaff');
     Route::post('/edit_staff/{id}', [AdminController::class, 'postEditStaff'])->name('postEditStaff');

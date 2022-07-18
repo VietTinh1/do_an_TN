@@ -77,11 +77,11 @@
                                 <input class="form-control" type="number" name="price" required onkeypress="return event.charCode >= 48" min="1">
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Thuế</label>
+                                <label class="control-label">Thuế(%)</label>
                                 <input class="form-control" type="number" name="tax" required onkeypress="return event.charCode >= 48" min="0">
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Thời gian bảo hành</label>
+                                <label class="control-label">Thời gian bảo hành(tháng)</label>
                                 <input class="form-control" type="number" name="time_warranty" required onkeypress="return event.charCode >= 48" min="0">
                             </div>
                             <div class="form-group col-md-3">
@@ -184,7 +184,6 @@
                                 <label class="control-label">Sạc kèm theo máy</label>
                                 <input class="form-control" type="text" name="charger_included" required>
                             </div>
-                            {{-- // --}}
                             <div class="form-group col-md-3">
                                 <label class="control-label">Công nghệ pin</label>
                                 <input class="form-control" type="text" name="battery_technology" required>
@@ -217,7 +216,6 @@
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1" name="status" required>
                                     <option value="Đang hoạt động">Đang hoạt động</option>
-                                    {{-- <option value="{{ $productType->id }}">Dừng hoạt động</option> --}}
                                     <option value="Chưa hoạt động">Chưa hoạt động</option>
                                 </select>
                             </div>
@@ -295,12 +293,24 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hình ảnh</label>
-
-                                <input class="form-control" type="file" name="image" >
+                                <input class="form-control" type="file" name="image_main" required>
+                                @if ($errors->has('image_main'))
+                                <span class="text-danger">{{ $errors->first('image_main') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image[]" multiple>
                                 @if ($errors->has('image'))
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                                 @endif
-
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Slider</label>
+                                <input class="form-control" type="file" name="slider[]" multiple>
+                                @if ($errors->has('slider'))
+                                <span class="text-danger">{{ $errors->first('slider') }}</span>
+                                @endif
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>

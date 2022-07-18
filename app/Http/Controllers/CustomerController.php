@@ -60,7 +60,12 @@ class CustomerController extends Controller
     public function productDetail($id)
     {
         $active='Điện Thoại';
-        return view('customer.src.product_details',compact('active'));
+        $product=Product::with('imageDetail')->where('id',$id)->first();
+        $product1=Product::with('imageDetail')->where('id',$id)->first();
+        $product2=Product::with('imageDetail')->where('id',$id)->first();
+        $phone=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->orderByDesc('amount')->take(5)->get();
+        $tablet=Product::with('imageDetail')->whereHas('productType',function($q){return $q->tablet();})->orderByDesc('amount')->take(5)->get();
+        return view('customer.src.product_details',compact('active','product','product1','product2','phone','tablet'));
     }
     public function contact()
     {

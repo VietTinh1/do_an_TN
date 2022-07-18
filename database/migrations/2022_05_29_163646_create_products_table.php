@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name_product',100)->unique()->nullable();
             $table->string('trademark',100)->nullable();//tên hãng
             $table->string('product_code',20)->unique()->nullable();
-            $table->integer('amount')->default(0)->unsigned();
-            $table->decimal('price',30,3)->unsigned();
+            $table->bigInteger('amount')->default(0)->unsigned();
+            $table->decimal('price',30)->unsigned();
             $table->float('tax')->default(0);//thuế
             $table->string('unit')->default("VNĐ");
             $table->integer('time_warranty')->nullable();//tg bao hanh

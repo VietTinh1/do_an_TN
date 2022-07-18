@@ -62,7 +62,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Tình trạng</label>
-                        <input class="form-control" type="text" value="@if($invoice->status =="Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @elseif($invoice->status =="Đã xử lí")Đã xử lí @else Đã hủy @endif" readonly="readonly">
+                        <input class="form-control" type="text" value="@if($invoice->status =="Chờ xử lí") Chờ xử lí @elseif($invoice->status =="Đang xử lí") Đang xử lí @else Đã xử lí @endif" readonly="readonly">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
@@ -82,7 +82,7 @@
                 <div class="container" style="max-width:1219px;">
                     <div class="row clearfix">
                         <div class="col-md-12">
-                            <table class="table table-bordered table-hover" id="tab_logic" >
+                            <table class="table table-bordered table-hover" id="tab_logicX" >
                                 <thead>
                                     <tr>
                                         <th class="text-center"> Mã sản phẩm</th>
@@ -114,17 +114,58 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row clearfix">
-                        <div class="col-md-12">
-                            {{-- <button id="add_row_edit" type="button" class="btn btn-primary pull-left">Thêm sản phẩm</button>
-                            <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button> --}}
-                        </div>
-                    </div>
                 </div>
+                @if ($invoice->status=="Chờ xử lí")
+                            <div>
+                                <input type="button" id="product_add" value="Thêm sản phẩm"></input>
+                            </div>
+                            <div id="showProductAdd" style="display:none;max-width:1219px;">
+                                <div style="text-align: center;width:100%;font-size:23px;"><label for="#" ><b>Thêm sản phẩm</b></label></div>
+                                <div class="container" style="max-width:1219px;" >
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered table-hover" id="tab_logic" >
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center"> ID </th>
+                                                        <th class="text-center"> Tên sản phẩm </th>
+                                                        <th class="text-center"> Số lượng </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id='addr0'>
+                                                        <td style="text-align: center">1</td>
+                                                        <td>
+                                                            <select name="productAdd[]" class="form-control" >
+                                                                @foreach ($product as $product)
+                                                                <option value="{{ $product->id }}">
+                                                                    {{ $product->name_product }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="number" name='amountAdd[]' placeholder='Nhập số lượng' class="form-control amount" step="0" min="0"></td>
+                                                    </tr>
+                                                    <tr id='addr1'></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <button id="add_row" type="button" class="btn btn-primary pull-left">Thêm sản phẩm</button>
+                                            <button id="delete_row" type="button" class="btn btn-primary pull-right">Xóa sản phẩm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                 <BR>
                 <BR>
                 <BR>
-                <button class="btn btn-save" type="submit">Lưu lại</button>
+                @if ($invoice->status !="Đã xử lí")
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                @endif
                 <a class="btn btn-cancel" data-dismiss="modal" href="{{route('deleteInvoice',['id'=>$invoice->id])}}">Hủy đơn hàng</a>
                 <a class="btn btn-cancel" data-dismiss="modal" href="{{route('invoice')}}">Trở về</a>
                 <BR>
@@ -137,7 +178,16 @@
     <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
     <script type="text/javascript">
-
+        $(document).ready(function() {
+            $('#product_add').on('click', function(e) {
+                if(document.getElementById("showProductAdd").style.display = 'none'){
+                    document.getElementById("showProductAdd").style.display = 'block';
+                }
+                else{
+                    document.getElementById("showProductAdd").style.display = 'none';
+                }
+            });
+        });
         $('#sampleTable').DataTable();
         //Thời Gian
         function time() {

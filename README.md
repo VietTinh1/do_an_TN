@@ -18,17 +18,5 @@
 -- tạo nhà cung cấp
 -- hd nhập->tạo mới tất cả "Thêm loại???"-> Tạo mới sp
 
-_type trong model=>bang rieng
 
-------them moi
---add_invoice_provided
-
-thieu edit hdn,hd xuat
-<<<<<<< HEAD
-post add hd ban,
-=======
-
---Lỗi thêm sản phẩm thứ 6 bị lỗi
---Tablet ko hiển thị bên index với trang index
---
->>>>>>> 62ba03640dbf861505911b8ddb540fb3866a628e
+->chỉnh thêm edit hd nhập, xuất
