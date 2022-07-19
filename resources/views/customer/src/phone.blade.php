@@ -19,7 +19,7 @@
                         <div class="single-shop-product">
                             <div class="product-upper">
                                 @foreach ($phone->imageDetail as $imageDetail)
-                                <img src="{{ url('storage/images/'.$imageDetail->image) }}" alt="">@break
+                                <img src="{{ url('storage/images/'.$imageDetail->image_main) }}" alt="">@break
                                 @endforeach
                             </div>
                             <h2> <a href="{{ route('productDetailCustomer',['id'=>$phone->id]) }}"> {{ $phone->name_product }}

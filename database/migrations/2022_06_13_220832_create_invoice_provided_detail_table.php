@@ -18,7 +18,7 @@ class CreateInvoiceProvidedDetailTable extends Migration
             $table->integer('invoice_provided_id');
             $table->integer('product_id')->nullable();//áp dụng sp có sẵn
             $table->bigInteger('amount')->nullable();
-            $table->decimal('import_price',30)->nullable();
+            $table->decimal('import_price',30,3)->nullable();
             $table->float('tax')->default(0);//thuế
             $table->timestamps();
         });

@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    //thêm multi product
+    {{-- thêm multi product --}}
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <link rel="icon" href="/images/logo_title.png" type="image/x-icon">
@@ -43,40 +43,48 @@
                     @endif</label>
                 </div><br>
                 <div style="padding-left: 15px;"><label for="#"><b style="font-size: 20px;">Hóa đơn hiện tại</b></label></div>
-                <div class="row col-lg-12">
-                    @foreach ($data->invoiceProvidedDetail as $data)
-                        <br><br><br>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Sản phẩm</label>
-                            <label class="form-control" >{{ $data->product->name_product }}</label>
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Số lượng</label>
-                            <label class="form-control" >{{ $data->amount }}</label>
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Giá nhập(VND)</label>
-                            <label class="form-control" >{{ $data->import_price }}</label>
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Thuế(%)</label>
-                            <label class="form-control" >{{ $data->tax }}</label>
-                        </div>
-                    @endforeach
-                </div>
-                <div style="padding-left: 15px;"><label for="#"><b style="font-size: 20px;">Thay đổi hóa đơn</b></label></div>
                 <form action="{{ route('postEditInvoiceProvided',['id'=>$data->id]) }}" method="post" enctype="multipart/form-data" style="width: 100%;">
                     @csrf
                     <div class="container" style="max-width:1219px;">
-                        <td>
-                            <label class="text-center"><b>Chọn nhà cung cấp </b></label>
-                            <select class="form-control" id="exampleSelect1" name="id_provided" required>
-                                @foreach ($provided as $provided)
-                                <option value="{{ $provided->id }}">{{ $provided->name }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                    </div><br>
+                        <div class="row clearfix">
+                            <div class="row col-md-12">
+                                <table class="table table-bordered table-hover" id="tab_logicX" >
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center"> Mã sản phẩm</th>
+                                            <th class="text-center"> Tên sản phẩm</th>
+                                            <th class="text-center"> Số lượng </th>
+                                            <th class="text-center"> Giá nhập(VND) </th>
+                                            <th class="text-center"> Thuế(%) </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($data->invoiceProvidedDetail as $data)
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="product_id[]" value="{{ $data->product->id }}" class="form-control amount" step="0" min="0"  readonly>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <input type="text" name="name_product[]" value="{{ $data->product->name_product }}" class="form-control amount" step="0" min="0"  readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="amount[]" value="{{ $data->amount }}" placeholder="Nhập số lượng" class="form-control amount" step="0" min="0" required>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="import_price[]" value="{{ $data->import_price }}" placeholder="Nhập giá" class="form-control amount" step="0" min="0" required>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name="tax[]" value="{{ $data->tax }}" placeholder="Nhập thuế(%)" class="form-control amount" step="0" min="0" required>
+                                                </td>
+                                                {{-- <td><input type="number" name='amount[]' placeholder='Nhập số lượng' value="{{ $invoiceDetail->amount }}" class="form-control amount" step="0" min="0" required></td> --}}
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 15px;"><label for="#"><b style="font-size: 20px;">Thêm sản phẩm trong hóa đơn</b></label></div>
                     <div class="container" style="max-width:1219px;">
                         <div class="row clearfix">
                             <div class="col-md-12">
@@ -94,15 +102,15 @@
                                         <tr id='addr0'>
                                             <td style="text-align: center">1</td>
                                             <td>
-                                                <select class="form-control" id="exampleSelect1" name="product_id[]" required>
+                                                <select class="form-control" id="exampleSelect1" name="product_id_add[]" required>
                                                     @foreach ($product as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name_product }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input type="number" name='amount[]' placeholder='Nhập số lượng' class="form-control amount" onkeypress="return event.charCode >= 48" min="1" step="0" min="0" required></td>
-                                            <td><input type="number" name='import_price[]' placeholder='Nhập giá tiền' class="form-control price" onkeypress="return event.charCode >= 48" min="1" step="0.00" min="0" required></td>
-                                            <td><input type="number" name='tax[]' placeholder='%' class="form-control tax" step="0.00" min="0" required></td>
+                                            <td><input type="number" name='amountAdd[]' placeholder='Nhập số lượng' class="form-control amount" onkeypress="return event.charCode >= 48" min="1" step="0" min="0" required></td>
+                                            <td><input type="number" name='import_priceAdd[]' placeholder='Nhập giá tiền' class="form-control price" onkeypress="return event.charCode >= 48" min="1" step="0.00" min="0" required></td>
+                                            <td><input type="number" name='taxAdd[]' placeholder='%' class="form-control tax" step="0.00" min="0" required></td>
                                         </tr>
                                         <tr id='addr1'></tr>
                                     </tbody>
@@ -117,7 +125,8 @@
                         </div>
                     </div>
 
-                </div> <BR>
+                </div>
+                 <BR>
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="submit">Lưu lại</button>

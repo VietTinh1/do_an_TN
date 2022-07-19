@@ -292,7 +292,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Hình ảnh</label>
+                                <label class="control-label">Hình ảnh chính</label>
                                 <input class="form-control" type="file" name="image_main" required>
                                 @if ($errors->has('image_main'))
                                 <span class="text-danger">{{ $errors->first('image_main') }}</span>

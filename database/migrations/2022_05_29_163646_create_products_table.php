@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('trademark',100)->nullable();//tên hãng
             $table->string('product_code',20)->unique()->nullable();
             $table->bigInteger('amount')->default(0)->unsigned();
-            $table->decimal('price',30)->unsigned();
+            $table->decimal('price',30,3)->unsigned();
             $table->float('tax')->default(0);//thuế
             $table->string('unit')->default("VNĐ");
             $table->integer('time_warranty')->nullable();//tg bao hanh

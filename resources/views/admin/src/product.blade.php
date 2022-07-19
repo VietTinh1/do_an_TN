@@ -107,7 +107,7 @@
                                     <th>Loại sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá tiền</th>
-                                    <th>Thuế</th>
+                                    <th>Thuế(%)</th>
                                     <th>Chi tiết</th>
                                     <th>Tình trạng</th>
                                     <th>Chức năng</th>

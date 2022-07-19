@@ -71,9 +71,9 @@
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->name_customer }}</td>
                         <td>{{ $data->email_customer }}</td>
-                        <td>{{ $data->phone }}</td>
+                        <td>0{{ $data->phone }}</td>
                         <td>{{ $data->address_customer }}</td>
-                        <td>{{ $data->total }}</td>
+                        <td>{{ $data->total }} VND</td>
                         <td>{{ $data->created_at }}</td>
                         <td>{{ $data->message }}</td>
                         <td>

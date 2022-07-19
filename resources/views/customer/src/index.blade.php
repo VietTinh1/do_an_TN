@@ -13,11 +13,8 @@
                         @foreach ($newProduct->imageDetail as $imageDetail)
                             <img src="{{ url('storage/images/'.$imageDetail->image_main) }}" alt="Slide" style="width:auto;max-height:400px;">@break;
                         @endforeach
-
                         <div class="caption-group" style="right:3%;">
-                            <h4 class="caption title">
-                                {{$newProduct->name_product }}
-                            </h4>
+                            <h4 class="caption title">{{$newProduct->name_product }}</h4>
                             <h4 class="caption subtitle"> {{$newProduct->sim }}</h4>
                             <a class="caption button-radius" href="{{ route('productDetailCustomer',['id'=>$newProduct->id]) }}"><span class="icon"></span>Xem Ngay</a>
                         </div>
@@ -181,33 +178,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-md-4">
-            <div class="single-product-widget">
-                <h2 class="product-wid-title" style="font-size: 22px;">Laptop bán chạy</h2>
-                <a href="{{ route('laptopCustomer') }}" class="wid-view-more">Xem tất cả</a>
-                @foreach ($laptop as $laptop)
-                <a href="{{ route('productDetailCustomer',['id'=>$laptop->id]) }}">
-                    <div class="single-wid-product">
-                        @foreach ($laptop->imageDetail as $image)
-                        <img src="{{ url('storage/images/'.$image->image) }}" alt="" class="product-thumb">
-                </a>
-                @endforeach
-                <h2><a href="{{ route('productDetailCustomer',['id'=>$laptop->id]) }}">{{ $laptop->name_product }}</a></h2>
-                <div class="product-wid-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <div class="product-wid-price">
-                    <ins>{{ $laptop->price }} VND</ins>
-                    {{-- <del>$425.00</del>
-                </div>
-            </div>
-            </a>
-            @endforeach
-        </div> --}}
     </div>
     </div>
     </div>

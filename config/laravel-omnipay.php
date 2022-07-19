@@ -76,8 +76,8 @@ return [
         'VNPay' => [
             'driver' => 'VNPay',
             'options' => [
-                'vnpTmnCode' => '',
-                'vnpHashSecret' => '',
+                'vnpTmnCode' => 'MESA2QSE',
+                'vnpHashSecret' => 'GLLPUZTHAQOHAJJSKWTRBOEYQBKXTVKW',
                 'testMode' => false,
             ],
         ],
