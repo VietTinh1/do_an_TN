@@ -76,7 +76,12 @@
         </div>
     </div>
 </div> <!-- End mainmenu area -->
+
+@if(Session()->has('success'))
+    <div class="alert alert-success" style="text-align: center;font-weight: bold;">{{session()->get('success')}}</div>
+@endif
 @yield('content')
+
 <div class="footer-top-area" style="height:250px;">
     <div class="zigzag-bottom"></div>
     <div class="container">
@@ -133,14 +138,10 @@
                 <form action="{{ route('paymentCustomer') }}" method="get">
                     @csrf
                     <table class="show-cart table">
-
                     </table>
                     <div>Tổng tiền: <span class="total-cart" name="total"></span>&nbsp;VND</div>
                     <button type="submit">Thanh Toán Ngay</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -355,11 +356,11 @@
             var output = "";
             for (var i in cartArray) {
                 output += "<tr>" +
-                    "<td><input type='text' name='namephone"+[i]+"' value='" + cartArray[i].name + "' readonly></td>" +
+                    "<td><input type='text' name='namephone"+[i]+"' value='" + cartArray[i].name + "' style='border:none;' readonly></td>" +
                     "<td name='price"+[i]+"'>(" + cartArray[i].price + ")</td>" +
-                    "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "'>-</button>" +
-                    "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "' name='amount"+[i]+"'>" +
-                    "<button class='plus-item btn btn-primary input-group-addon' data-name='" + cartArray[i].name + "'>+</button></div></td>" +
+                    "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "''>-</button>" +
+                    "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "' name='amount"+[i]+"'> " +
+                    "<button class='plus-item btn btn-primary input-group-addon' data-name='" + cartArray[i].name + "' >+</button></div></td>" +
                     "<td><button class='delete-item btn btn-danger' data-name='" + cartArray[i].name + "'>X</button></td>" +
                     " = " +
                     "<td><input type='text' name='sumtotal"+[i]+"' value='" + cartArray[i].total + "' name='sumtotal"+[i]+"' readonly></td>" +

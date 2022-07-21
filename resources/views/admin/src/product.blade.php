@@ -69,9 +69,13 @@
                                 Thêm loại nghe nhạc</a>
                             </div>
                             <div class="col-sm-2">
-                              <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureType') }}" title="Thêm"><i class="fas fa-plus"></i>
-                                Thêm loại tính năng Camera</a>
+                              <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureTypeFront') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm loại tính năng Camera trước</a>
                             </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-add btn-sm" href="{{ route('updateCameraFeatureTypeRear') }}" title="Thêm"><i class="fas fa-plus"></i>
+                                  Thêm loại tính năng Camera sau</a>
+                              </div>
                             <div class="col-sm-2">
                               <a class="btn btn-add btn-sm" href="{{ route('updateWjfjType') }}" title="Thêm"><i class="fas fa-plus"></i>
                                 Thêm loại Wifi</a>
@@ -134,9 +138,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:5px;"><i class="fas fa-edit"></i></a>
-                                        @if($product->status !="Dừng hoạt động")
-                                        <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                                        @if($product->status =="Dừng hoạt động")
+                                            <a href="{{ route('activeProduct',['id'=>$product->id]) }}" class="btn btn-success" style="font-size:10px;">Mở lại</i></a>
+                                        @else
+                                            <a href="{{ route('editProduct',['id'=>$product->id]) }}" class="btn btn-warning" style="font-size:5px;"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('deleteProduct',['id'=>$product->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>

@@ -12,7 +12,12 @@
  <!-- Sidebar menu-->
  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
  <aside class="app-sidebar">
-     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/logo.jpg" width="50px" alt="User Image">
+     <div class="app-sidebar__user">
+        @if(empty($user->image_url))
+            <img class="app-sidebar__user-avatar" src="/images/logo.jpg" width="50px" alt="User Image">
+        @else
+            <img class="app-sidebar__user-avatar" src="{{ url('storage/images/'.$user->image_url) }}" width="50px" alt="User Image">
+        @endif
          <div>
              <p class="app-sidebar__user-name"><b>{{auth()->user()->username}}</b></p>
              <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>

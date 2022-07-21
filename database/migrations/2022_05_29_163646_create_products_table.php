@@ -31,6 +31,8 @@ class CreateProductsTable extends Migration
             $table->string('screen_width',150)->nullable();//chieu rong man hinh
             $table->string('screen_maximum_brightness',150)->nullable();//do sang toi da man hinh
             $table->string('touch_screen_glass',150)->nullable();//mat kinh cam ung man hinh
+            $table->string('front_screen_resolution',150)->nullable();
+            $table->string('rear_screen_resolution',150)->nullable();
             $table->string('flash_light',150)->nullable();//đèn
             $table->string('operating_system',150)->nullable();//he dieu hanh
             $table->string('CPU',150)->nullable();//chip cpu

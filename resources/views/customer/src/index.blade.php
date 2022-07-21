@@ -1,8 +1,5 @@
 @extends('customer.layout')
 @section('content')
-@if(Session()->has('success'))
-    <div class="alert alert-success" style="text-align: center;">{{session()->get('success')}}</div>
-@endif
 <div class="slider-area">
     <!-- Slider -->
     <div class="block-slider block-slider4">
@@ -25,7 +22,7 @@
     </div>
     </div>
 
-    <div class="promo-area">
+    {{-- <div class="promo-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -55,7 +52,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End promo area -->
+    </div> <!-- End promo area --> --}}
 
 
     <div class="maincontent-area">
@@ -158,7 +155,7 @@
                     <a href="{{ route('productDetailCustomer',['id'=>$tablet->id]) }}">
                         <div class="single-wid-product">
                             @foreach ($tablet->imageDetail as $image)
-                            <img src="{{ url('storage/images/'.$image->image) }}" alt="" class="product-thumb">@break;
+                            <img src="{{ url('storage/images/'.$image->image_main) }}" alt="" class="product-thumb">@break;
                             @endforeach
                     </a>
                     <h2><a href="{{ route('productDetailCustomer',['id'=>$tablet->id]) }}">{{ $tablet->name_product }}</a></h2>

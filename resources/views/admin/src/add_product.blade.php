@@ -101,6 +101,14 @@
                                 <input class="form-control" type="text" name="touch_screen_glass" required>
                             </div>
                             <div class="form-group col-md-3">
+                                <label class="control-label">Độ phân giải camera trước</label>
+                                <input class="form-control" type="text" name="front_screen_resolution" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Độ phân giải camera sau</label>
+                                <input class="form-control" type="text" name="rear_screen_resolution" required>
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label class="control-label">Chiều rộng màn hình</label>
                                 <input class="form-control" type="text" name="screen_width" required>
                             </div>
@@ -109,7 +117,7 @@
                                 <input class="form-control" type="text" name="screen_maximum_brightness" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label"> Đèn flash</label>
+                                <label class="control-label">Đèn flash</label>
                                 <input class="form-control" type="text" name="flash_light" required>
                             </div>
                             <div class="form-group col-md-3">
@@ -117,15 +125,15 @@
                                 <input class="form-control" type="text" name="operating_system" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Chip(cpu)</label>
+                                <label class="control-label">Chip(CPU)</label>
                                 <input class="form-control" type="text" name="CPU" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Tốc độ chip(cpu)</label>
+                                <label class="control-label">Tốc độ chip(CPU)</label>
                                 <input class="form-control" type="text" name="speed_cpu" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Chip đồ họa</label>
+                                <label class="control-label">Chip đồ họa(GPU)</label>
                                 <input class="form-control" type="text" name="GPU" required>
                             </div>
                             <div class="form-group col-md-3">
@@ -228,7 +236,7 @@
                                 </select>
                             </div>
                             <div class="form-group  col-md-4">
-                                <label class="control-label">Tính năng</label>
+                                <label class="control-label">Tính năng đặc biệt</label>
                                 <select class="form-control product-chosen" multiple name="feature_type[]" required>
                                     @foreach ($feature as $feature)
                                     <option value="{{ $feature->id }}">{{ $feature->name_classify }}</option>
@@ -256,6 +264,22 @@
                                 <select class="form-control product-chosen" multiple name="music_type[]" required>
                                     @foreach ($music as $music)
                                     <option value="{{ $music->id }}">{{ $music->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tính năng camera trước</label>
+                                <select class="form-control product-chosen" multiple name="cameraFeatureFront[]" required>
+                                    @foreach ($cameraFeatureFront as $cameraFeatureFront)
+                                    <option value="{{ $cameraFeatureFront->id }}">{{ $cameraFeatureFront->name_classify }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group  col-md-4">
+                                <label class="control-label">Tính năng camera sau</label>
+                                <select class="form-control product-chosen" multiple name="cameraFeatureRear[]" required>
+                                    @foreach ($cameraFeatureRear as $cameraFeatureRear)
+                                    <option value="{{ $cameraFeatureRear->id }}">{{ $cameraFeatureRear->name_classify }}</option>
                                     @endforeach
                                 </select>
                             </div>

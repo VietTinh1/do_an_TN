@@ -19,7 +19,8 @@ class CreateCommentsTable extends Migration
             $table->string('name_customer')->nullable();
             $table->string('email_customer')->nullable();
             $table->bigInteger('phone_customer')->nullable();
-            $table->string('status')->default("Đang hoạt động");
+            $table->string('message_customer')->nullable();
+            $table->string('status')->default("Đang hoạt động");//Đã hủy
             $table->timestamps();
         });
     }

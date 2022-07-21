@@ -64,11 +64,7 @@
               </thead>
                 @foreach ($invoiceProvides as $invoiceProvides)
                     <tbody>
-                        <?php
-                            $userX=$invoiceProvides->user->fullname;
-                            $amount='';
-                            ?>
-                        <td>@if(!empty($userX)) {{ $userX}} @endif</td>
+                        <td>@if(!empty($invoiceProvides->user->fullname)) {{ $invoiceProvides->user->fullname}} @endif</td>
                         <td>{{ $invoiceProvides->provided->name }}</td>
                         <td>{{ $invoiceProvides->total }} VND</td>
                         <td>{{ $invoiceProvides->created_at }}</td>
@@ -76,7 +72,9 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInvoiceProvided" value="{{ $invoiceProvides->id }}" data-provided-id="{{ $invoiceProvides->provided_id }}" data-account-id="{{ $invoiceProvides->account_id }}" data-total="{{ $invoiceProvides->total}}" data-amount="{{ $invoiceProvides->amount }}" data-import-price="{{ $invoiceProvides->import_price }}" data-created-at="{{ $invoiceProvides->created_at }}" data-status="{{ $invoiceProvides->status }}">Chi tiết hóa đơn</button>
                         </td>
                         <td>
-                            <a class="btn btn-success btn-xs" type="button">Xuất</a>
+                            @if(empty($invoiceProvides->status =="Đã hủy"))
+                                <a class="btn btn-success btn-xs" type="button">Xuất</a>
+                            @endif
                         </td>
                         <td>
                             @if($invoiceProvides->status =="Đang xử lí")
@@ -88,9 +86,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
                             @if(empty($invoiceProvides->status =="Đã hủy"))
-                                <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('editInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('deleteInvoiceProvided',['id'=>$invoiceProvides->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                             @endif
                         </td>
                     </tbody>

@@ -27,8 +27,11 @@ class AllType extends Model
     public function scopeMusic($query) {
         return $query->where('classify','Nghe nhạc');
     }
-    public function scopeCameraFeature($query) {
-        return $query->where('classify','Tính năng camera');
+    public function scopeCameraFeatureFront($query) {
+        return $query->where('classify','Tính năng camera trước');
+    }
+    public function scopeCameraFeatureRear($query) {
+        return $query->where('classify','Tính năng camera sau');
     }
     public function scopeWjfj($query) {
         return $query->where('classify','Wjfj');

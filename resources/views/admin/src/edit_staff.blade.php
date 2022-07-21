@@ -26,61 +26,65 @@
         @if(Session()->has('success'))
         <div class="alert alert-success">{{session()->get('success')}}</div>
         @endif
-        <div class="modal-body">
-            <div class="row">
-                <div class="form-group  col-md-12">
-                    <span class="thong-tin-thanh-toan">
-                        <h5 style="text-align:center;">Chỉnh sửa thông tin nhân viên cơ bản</h5>
-                    </span>
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+              <li class="breadcrumb-item active"><a href="#"><b>Chỉnh sửa nhân viên</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Chỉnh sửa nhân viên</h3>
+                    <div class="tile-body">
+                        <form class="row" method="post" action="{{ route('postEditStaff',['id'=>$staff->id]) }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Họ tên</label>
+                                <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}" required >
+                            </div>
+                            <div class="form-group  col-md-6">
+                                <label class="control-label">Hình ảnh</label>
+                                <input class="form-control" type="file" name="image" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Địa chỉ</label>
+                                <input class="form-control" type="text" name="address" value="{{ $staff->address }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Ngày sinh</label>
+                                <input class="form-control" type="date" name="birthday" value="{{ $staff->birthday }}" required>
+                            </div>
+                            <div class="form-group  col-md-6">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" type="email" name="email" value="{{ $staff->email }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">SĐT</label>
+                                <input class="form-control" type="number" onkeypress="return event.charCode >= 48" min="1" name="phone" value="{{ $staff->phone }}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1" class="control-label">Quyền</label>
+                                <select class="form-control" id="exampleSelect1" name="permission" required>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="exampleSelect1" class="control-label">Quyền</label>
+                                <select class="form-control" id="exampleSelect1" name="status" required>
+                                    <option value="Đang hoạt động">Đang hoạt động</option>
+                                    <option value="Dừng hoạt động">Dừng hoạt động</option>
+                                </select>
+                            </div>
+                            <BR>
+                            <BR>
+                            <BR>
+                            <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
+                            <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}" style="margin-left: 10px;">Hủy bỏ</a>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <form class="row" method="post" action="{{ route('postEditStaff',['id'=>$staff->id]) }}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group col-md-6">
-                    <label class="control-label">Họ tên</label>
-                    <input class="form-control" type="text" name="fullname" value="{{ $staff->fullname }}" required >
-                </div>
-                <div class="form-group  col-md-6">
-                    <label class="control-label">Hình ảnh</label>
-                    <input class="form-control" type="file" name="image" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Địa chỉ</label>
-                    <input class="form-control" type="text" name="address" value="{{ $staff->address }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Ngày sinh</label>
-                    <input class="form-control" type="date" name="birthday" value="{{ $staff->birthday }}" required>
-                </div>
-                <div class="form-group  col-md-6">
-                    <label class="control-label">Email</label>
-                    <input class="form-control" type="email" name="email" value="{{ $staff->email }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">SĐT</label>
-                    <input class="form-control" type="number" onkeypress="return event.charCode >= 48" min="1" name="phone" value="{{ $staff->phone }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleSelect1" class="control-label">Quyền</label>
-                    <select class="form-control" id="exampleSelect1" name="permission" required>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleSelect1" class="control-label">Quyền</label>
-                    <select class="form-control" id="exampleSelect1" name="status" required>
-                        <option value="Đang hoạt động">Đang hoạt động</option>
-                        <option value="Dừng hoạt động">Dừng hoạt động</option>
-                    </select>
-                </div>
-                <BR>
-                <BR>
-                <BR>
-                <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu lại</button>
-                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('staff') }}" style="margin-left: 10px;">Hủy bỏ</a>
-            </form>
-
-            <BR>
         </div>
     </main>
     <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>

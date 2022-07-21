@@ -7,17 +7,17 @@ use App\Http\Controllers\LoginController;
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [CustomerController::class, 'index'])->name('indexCustomer');
-    Route::get('phone', [CustomerController::class, 'phone'])->name('phoneCustomer');
-    Route::get('tablet', [CustomerController::class, 'tablet'])->name('tabletCustomer');
-    Route::get('laptop', [CustomerController::class, 'laptop'])->name('laptopCustomer');
-    Route::get('cart', [CustomerController::class, 'cart'])->name('cartCustomer');
-    Route::get('checkout', [CustomerController::class, 'checkout'])->name('checkoutCustomer');
-    Route::get('shop', [CustomerController::class, 'shop'])->name('shopCustomer');
-    Route::get('product_detail/{id}', [CustomerController::class, 'productDetail'])->name('productDetailCustomer');
-    Route::get('contact', [CustomerController::class, 'contact'])->name('contactCustomer');
-
+    Route::get('/phone', [CustomerController::class, 'phone'])->name('phoneCustomer');
+    Route::get('/tablet', [CustomerController::class, 'tablet'])->name('tabletCustomer');
+    Route::get('/laptop', [CustomerController::class, 'laptop'])->name('laptopCustomer');
+    Route::get('/cart', [CustomerController::class, 'cart'])->name('cartCustomer');
+    Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkoutCustomer');
+    Route::get('/shop', [CustomerController::class, 'shop'])->name('shopCustomer');
+    Route::get('/product_detail/{id}', [CustomerController::class, 'productDetail'])->name('productDetailCustomer');
+    Route::get('/contact', [CustomerController::class, 'contact'])->name('contactCustomer');
     Route::get('/payment', [CustomerController::class, 'payment'])->name('paymentCustomer');
     Route::post('/payment', [CustomerController::class, 'postPayment'])->name('postPaymentCustomer');
+    Route::post('/comment/{id}', [CustomerController::class, 'postCommentCustomer'])->name('postCommentCustomer');
 });
 
 Route::group(['prefix' => '/login'], function () {
@@ -66,6 +66,9 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/delete_staff/{id}', [AdminController::class, 'deleteStaff'])->name('deleteStaff');
     Route::get('/delete_invoice_provided/{id}', [AdminController::class, 'deleteInvoiceProvided'])->name('deleteInvoiceProvided');
     Route::get('/delete_payment/{id}', [AdminController::class, 'deletePayment'])->name('deletePayment');
+    //active
+    Route::get('/active/{id}', [AdminController::class, 'activeProduct'])->name('activeProduct');
+    Route::get('/active/{id}', [AdminController::class, 'activeProvided'])->name('activeProvided');
     //export excel
     Route::get('/exportProvided', [AdminController::class, 'exportProvided'])->name('exportProvided');
     Route::get('/exportInvoice', [AdminController::class, 'exportInvoice'])->name('exportInvoice');
@@ -87,8 +90,10 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/update_video_type/{id}', [AdminController::class, 'postUpdateVideoType'])->name('postUpdateVideoType');
     Route::get('/update_music_type', [AdminController::class, 'updateMusicType'])->name('updateMusicType');
     Route::post('/update_music_type/{id}', [AdminController::class, 'postUpdateMusicType'])->name('postUpdateMusicType');
-    Route::get('/update_camera_feature_type', [AdminController::class, 'updateCameraFeatureType'])->name('updateCameraFeatureType');
-    Route::post('/update_camera_feature_type/{id}', [AdminController::class, 'postUpdateCameraFeatureType'])->name('postUpdateCameraFeatureType');
+    Route::get('/update_camera_feature_type_front', [AdminController::class, 'updateCameraFeatureTypeFront'])->name('updateCameraFeatureTypeFront');
+    Route::post('/update_camera_feature_type_front/{id}', [AdminController::class, 'postUpdateCameraFeatureTypeFront'])->name('postUpdateCameraFeatureTypeFront');
+    Route::get('/update_camera_feature_type_rear', [AdminController::class, 'updateCameraFeatureTypeRear'])->name('updateCameraFeatureTypeRear');
+    Route::post('/update_camera_feature_type_rear/{id}', [AdminController::class, 'postUpdateCameraFeatureTypeRear'])->name('postUpdateCameraFeatureTypeRear');
     Route::get('/update_wjfj_type', [AdminController::class, 'updateWjfjType'])->name('updateWjfjType');
     Route::post('/update_wjfj_type/{id}', [AdminController::class, 'postUpdateWjfjType'])->name('postUpdateWjfjType');
     Route::get('/update_gps_type', [AdminController::class, 'updateGpsType'])->name('updateGpsType');

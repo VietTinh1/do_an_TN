@@ -26,56 +26,61 @@
             @if(Session()->has('success'))
             <div class="alert alert-success">{{session()->get('success')}}</div>
             @endif
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group  col-md-12">
-                        <span class="thong-tin-thanh-toan">
-                            <h5 style="text-align:center;">Chỉnh sửa thông tin nhà cung cấp</h5>
-                        </span>
+            <div class="app-title">
+                <ul class="app-breadcrumb breadcrumb side">
+                  <li class="breadcrumb-item active"><a href="#"><b>Chỉnh sửa thông tin nhà cung cấp</b></a></li>
+                </ul>
+                <div id="clock"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                        <h3 class="tile-title">Chỉnh sửa thông tin nhà cung cấp</h3>
+                        <div class="tile-body">
+                            <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Mã số thuế</label>
+                                        <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Tên nhà cung cấp</label>
+                                        <input class="form-control" type="text" value="{{ $provided->name }}" name="name" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" type="email" value="{{ $provided->email }}" name="email" required>
+                                    </div>
+                                    <div class="form-group  col-md-6">
+                                        <label class="control-label">SĐT</label>
+                                        <input class="form-control" type="number" value="{{ $provided->phone }}" name="phone" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Địa chỉ</label>
+                                        <input class="form-control" type="text" value="{{ $provided->address }}" name="address" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Ghi chú</label>
+                                        <textarea class="form-control" type="text" name="notes">{{ $provided->notes }}</textarea>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
+                                        <select class="form-control" id="exampleSelect1" name="status" required>
+                                            <option value="Đang hoạt động">Đang hoạt động</option>
+                                            <option value="Dừng hoạt động">Dừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div> <BR>
+                                <BR>
+                                <BR>
+                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('provided',compact('provided')) }}">Hủy bỏ</a>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <form action="{{ route('postEditProvided',['id'=>$provided->id]) }}" method="post">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Mã số thuế</label>
-                            <input class="form-control" type="number" value="{{ $provided->tax_code }}" name="tax_code" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Tên nhà cung cấp</label>
-                            <input class="form-control" type="text" value="{{ $provided->name }}" name="name" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Email</label>
-                            <input class="form-control" type="email" value="{{ $provided->email }}" name="email" required>
-                        </div>
-                        <div class="form-group  col-md-6">
-                            <label class="control-label">SĐT</label>
-                            <input class="form-control" type="number" value="{{ $provided->phone }}" name="phone" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Địa chỉ</label>
-                            <input class="form-control" type="text" value="{{ $provided->address }}" name="address" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Ghi chú</label>
-                            <textarea class="form-control" type="text" name="notes">{{ $provided->notes }}</textarea>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleSelect1" class="control-label">Thay đổi tình trạng</label>
-                            <select class="form-control" id="exampleSelect1" name="status" required>
-                                <option value="Đang hoạt động">Đang hoạt động</option>
-                                <option value="Dừng hoạt động">Dừng hoạt động</option>
-                            </select>
-                        </div>
-                    </div> <BR>
-                    <BR>
-                    <BR>
-                    <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="{{ route('provided',compact('provided')) }}">Hủy bỏ</a>
-
-                </form>
-                <BR>
             </div>
         </main>
         <script type="text/javascript" src="{{ URL::asset('js/trieu_add.js') }}"></script>

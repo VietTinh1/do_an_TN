@@ -81,7 +81,7 @@ class AdminController extends Controller
             ['status', '=', 'Đang hoạt động'],
             ['amount', '<', '10'],
         ])->count();
-        $invoice = Invoice::orderByDesc('status')->take(4)->get();
+        $invoice = Invoice::orderBy('status','asc')->where('status','!=','Đã hủy')->take(5)->get();
         $newCustomer = Invoice::take(5)->latest()->get();
         //barChart
         $barChart = Product::all();
@@ -95,7 +95,8 @@ class AdminController extends Controller
         foreach ($lineChart as $lineChart) {
             $line[] = $lineChart->id;
         }
-        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'barChart', 'bar', 'lineChart', 'line'));
+        $user=UserDB::where('account_id',Auth::id())->first();
+        return view('admin.src.index', compact('product', 'countInvoiceOnMonth', 'countCustomer', 'outOfProduct', 'invoice', 'newCustomer', 'barChart', 'bar', 'lineChart', 'line','user'));
     }
     public function demo() {
         $product = Product::count();
@@ -131,8 +132,9 @@ class AdminController extends Controller
     // Đang hoạt động/Hết hàng/Đã hủy
     public function product()
     {
+        $user=UserDB::where('account_id',Auth::id())->first();
         $product=Product::with('user','productType','allTypeDetail.allType','ImageDetail')->get();
-        return view('admin.src.product', compact('product'));
+        return view('admin.src.product', compact('user','product'));
     }
     //add sản phẩm
     public function addProduct()
@@ -142,21 +144,23 @@ class AdminController extends Controller
         $record=AllType::record()->get();
         $video=AllType::video()->get();
         $music=AllType::music()->get();
-        $cameraFeature=AllType::cameraFeature()->get();
+        $cameraFeatureFront=AllType::cameraFeatureFront()->get();
+        $cameraFeatureRear=AllType::cameraFeatureRear()->get();
         $wjfj=AllType::wjfj()->get();
         $film=AllType::film()->get();
         $gps=AllType::gps()->get();
         $bluetooth=AllType::bluetooth()->get();
         $productType=ProductType::all();
-        return view('admin.src.add_product', compact('secutity','feature','record','video','music','cameraFeature','wjfj','film','gps','bluetooth','productType'));
+        return view('admin.src.add_product', compact('secutity','feature','record','video','music','cameraFeatureFront','cameraFeatureRear','wjfj','film','gps','bluetooth','productType'));
     }
     public function postAddProduct(Request $request)
     {
        DB::beginTransaction();
        $input=$request->all();
        try{
+        $user=UserDB::where('account_id',Auth::id())->first();
         $productId = Product::insertGetId([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'name_product' => $request->name_product,
             'product_type_id' => $request->product_type_id,
             'trademark' => $request->trademark,
@@ -171,6 +175,8 @@ class AdminController extends Controller
             'screen_width' =>$request->screen_width,
             'screen_maximum_brightness' =>$request->screen_maximum_brightness,
             'touch_screen_glass' =>$request->touch_screen_glass,
+            'front_screen_resolution' => $request->front_screen_resolution,
+            'rear_screen_resolution' => $request->rear_screen_resolution,
             'flash_light'=>$request->flash_light,
             'operating_system'=>$request->operating_system,
             'CPU' => $request->CPU,
@@ -210,6 +216,8 @@ class AdminController extends Controller
         $gps = !empty($input['gps_type']) ? $input['gps_type'] : [];
         $bluetooth = !empty($input['bluetooth_type']) ? $input['bluetooth_type'] : [];
         $image = !empty($input['image']) ? $input['image'] : [];
+        $cameraFeatureFront = !empty($input['cameraFeatureFront']) ? $input['cameraFeatureFront'] : [];
+        $cameraFeatureRear = !empty($input['cameraFeatureRear']) ? $input['cameraFeatureRear'] : [];
         foreach ($security as $security) {
             $securityType=AllTypeDetail::insert([
                 'product_id' => $productId,
@@ -273,6 +281,20 @@ class AdminController extends Controller
                 'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
         }
+        foreach ($cameraFeatureFront as $cameraFeatureFront) {
+            $data=AllTypeDetail::insert([
+                'product_id' => $productId,
+                'all_type_id' =>$cameraFeatureFront,
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
+        }
+        foreach ($cameraFeatureRear as $cameraFeatureRear) {
+            $data=AllTypeDetail::insert([
+                'product_id' => $productId,
+                'all_type_id' =>$cameraFeatureRear,
+                'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
+        }
         if ($request->hasFile('image_main')) {
              $request->validate([
                  'image_main' => 'mimes:jpeg,png,jpg,gif,svg',
@@ -324,76 +346,72 @@ class AdminController extends Controller
         $record=AllType::record()->get();
         $video=AllType::video()->get();
         $music=AllType::music()->get();
-        $cameraFeature=AllType::cameraFeature()->get();
+        $cameraFeatureFront=AllType::cameraFeatureFront()->get();
+        $cameraFeatureRear=AllType::cameraFeatureRear()->get();
         $wjfj=AllType::wjfj()->get();
         $film=AllType::film()->get();
         $gps=AllType::gps()->get();
         $bluetooth=AllType::bluetooth()->get();
         $productType=ProductType::all();
-        return view('admin.src.edit_product', compact('product','secutity','feature','record','video','music','cameraFeature','wjfj','film','gps','bluetooth','productType'));
+        return view('admin.src.edit_product', compact('product','secutity','feature','record','video','music','cameraFeatureFront','cameraFeatureRear','wjfj','film','gps','bluetooth','productType'));
     }
     public function postEditProduct(Request $request, $id)
     {
         DB::beginTransaction();
         try{
-            // $update=Product::where('id',$id)->update([
-            // 'name_product' => $request->name_product,
-            // 'trademark' => $request->trademark,
-            // 'product_code'=>$request->product_code,
-            // 'amount' => $request->amount,
-            // 'price' => $request->price,
-            // 'tax' => $request->tax,
-            // 'time_warranty' => $request->time_warranty,
-            // 'sale' => $request->sale,
-            // 'screen_technology'=>$request->screen_technology,
-            // 'screen_resolution' =>$request->screen_resolution,
-            // 'screen_width' =>$request->screen_width,
-            // 'screen_maximum_brightness' =>$request->screen_maximum_brightness,
-            // 'touch_screen_glass' =>$request->touch_screen_glass,
-            // 'flash_light'=>$request->flash_light,
-            // 'operating_system'=>$request->operating_system,
-            // 'CPU' => $request->CPU,
-            // 'speed_cpu' => $request->speed_cpu,
-            // 'GPU' => $request->GPU,
-            // 'ram' => $request->ram,
-            // 'rom' => $request->rom,
-            // 'available_memory' => $request->available_memory,
-            // 'memory_stick' => $request->memory_stick,
-            // 'mobile_network' => $request->mobile_network,
-            // 'sim' => $request->sim,
-            // 'phonebook' => $request->phonebook,
-            // 'charging_port' => $request->charging_port,
-            // 'headphone' => $request->headphone,
-            // 'connection_orther' => $request->connection_orther,
-            // 'battery_capacity'=>$request->battery_capacity,
-            // 'pin_type' => $request->pin_type,
-            // 'maximum_battery_charging_support' => $request->maximum_battery_charging_support,
-            // 'charger_included' => $request->charger_included,
-            // 'battery_technology' => $request->battery_technology,
-            // 'water_and_dust_resistant' => $request->water_and_dust_resistant,
-            // 'radio' => $request->radio,
-            // 'design' => $request->design,
-            // 'material' => $request->material,
-            // 'size_volume' => $request->size_volume,
-            // 'date_created' => $request->date_created,
-            // 'status' => $request->status,
-            // 'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-            // ]);
-            dd($request);
-            foreach ($request->file() as $image) {
-                    $image->store('images', 'public');
-                    $checkImage=ImageDetail::find($image);
-                    $img=ImageDetail::where('id',$image)->update([
-                        'image' =>$image->hashName(),
-                        'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
-                    ]);
-            }
-            die("ds");
+            $update=Product::where('id',$id)->update([
+            'name_product' => $request->name_product,
+            'trademark' => $request->trademark,
+            'product_code'=>$request->product_code,
+            'amount' => $request->amount,
+            'price' => $request->price,
+            'tax' => $request->tax,
+            'time_warranty' => $request->time_warranty,
+            'sale' => $request->sale,
+            'screen_technology'=>$request->screen_technology,
+            'screen_resolution' =>$request->screen_resolution,
+            'screen_width' =>$request->screen_width,
+            'screen_maximum_brightness' =>$request->screen_maximum_brightness,
+            'touch_screen_glass' =>$request->touch_screen_glass,
+            'flash_light'=>$request->flash_light,
+            'operating_system'=>$request->operating_system,
+            // 'front_screen_resolution' => $request->front_screen_resolution,
+            // 'rear_screen_resolution' => $request->rear_screen_resolution,
+            'CPU' => $request->CPU,
+            'speed_cpu' => $request->speed_cpu,
+            'GPU' => $request->GPU,
+            'ram' => $request->ram,
+            'rom' => $request->rom,
+            'available_memory' => $request->available_memory,
+            'memory_stick' => $request->memory_stick,
+            'mobile_network' => $request->mobile_network,
+            'sim' => $request->sim,
+            'phonebook' => $request->phonebook,
+            'charging_port' => $request->charging_port,
+            'headphone' => $request->headphone,
+            'connection_orther' => $request->connection_orther,
+            'battery_capacity'=>$request->battery_capacity,
+            'pin_type' => $request->pin_type,
+            'maximum_battery_charging_support' => $request->maximum_battery_charging_support,
+            'charger_included' => $request->charger_included,
+            'battery_technology' => $request->battery_technology,
+            'water_and_dust_resistant' => $request->water_and_dust_resistant,
+            'radio' => $request->radio,
+            'design' => $request->design,
+            'material' => $request->material,
+            'size_volume' => $request->size_volume,
+            'date_created' => $request->date_created,
+            'status' => $request->status,
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
             DB::commit();
+            Session()->flash('success', 'Sửa sản phẩm thành công');
             return redirect()->route('product');
 
         }catch(Exception $e){
             DB::rollBack();
+            Session()->flash('success', 'Sửa sản phẩm thất bại');
+            return redirect()->route('product');
         }
     }
     public function deleteProduct($id)
@@ -406,8 +424,9 @@ class AdminController extends Controller
     //TRANG HÓA ĐƠN ADMIN
     public function invoice()
     {
+        $user=UserDB::where('account_id',Auth::id())->first();
         $data=Invoice::with('user','invoiceDetail')->get();
-        return view('admin.src.invoice', compact('data'));
+        return view('admin.src.invoice', compact('user','data'));
     }
     //add hóa đơn
     public function addInvoice()
@@ -429,8 +448,10 @@ class AdminController extends Controller
                 $product= Product::findOrFail($request->products[$p]);
                 $sumTotal+=($request->amount[$a]*$product->price)+($request->amount[$a]*$product->price)*($product->tax/100);
             }
+            //tim user
+            $user=UserDB::where('account_id',Auth::id())->first();
             $data = Invoice::insertGetId([
-                'user_id' => Auth::id(),
+                'user_id' => $user->id,
                 'name_customer' => $request->name_customer,
                 'email_customer' => $request->email_customer,
                 'phone' => $request->phone,
@@ -586,8 +607,9 @@ class AdminController extends Controller
     //TRANG NHẬP HÓA ĐƠN
     public function invoiceProvided()
     {
+        $user=UserDB::where('account_id',Auth::id())->first();
         $invoiceProvides=InvoiceProvided::with('user','provided')->get();
-        return view('admin.src.invoice_provided', compact('invoiceProvides'));
+        return view('admin.src.invoice_provided', compact('user','invoiceProvides'));
     }
     public function addInvoiceProvided()
     {
@@ -616,10 +638,12 @@ class AdminController extends Controller
             for($i=0,$a,$b,$c;!empty($a[$i]);$i++){
                 $sumTotal += ( ($a[$i]*$b[$i]) + ($a[$i]*$b[$i]*($c[$i]/100)) );
             }
+            //tim id user
+            $user=UserDB::where('account_id',Auth::id())->first();
 
             $invoiceProvided = InvoiceProvided::insertGetId([
                 'provided_id' => $request->id_provided,
-                'user_id' => Auth::id(),
+                'user_id' => $user->id,
                 'total' => $sumTotal,
                 'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
             ]);
@@ -791,8 +815,9 @@ class AdminController extends Controller
     //TRANG QUẢN LÍ NHÂN VIÊN ADMIN
     public function staff()
     {
-        $user = UserDB::all()->sortByDesc('status');
-        return view('admin.src.staff', compact('user'));
+        $user=UserDB::where('account_id',Auth::id())->first();
+        $user1 = UserDB::all()->sortByDesc('status');
+        return view('admin.src.staff', compact('user','user1'));
     }
     //add nhân viên
     public function addStaff()
@@ -900,8 +925,9 @@ class AdminController extends Controller
     //TRANG NHÀ CUNG CẤP
     public function provided()
     {
+        $user=UserDB::where('account_id',Auth::id())->first();
         $provided = Provided::orderByDesc('status')->get();
-        return view('admin.src.provided', compact('provided'));
+        return view('admin.src.provided', compact('user','provided'));
     }
     public function addProvided()
     {
@@ -957,16 +983,17 @@ class AdminController extends Controller
     //TRANG BÁO CÁO
     public function report()
     {
-        $user = UserDB::all()->count();
+        $user=UserDB::where('account_id',Auth::id())->first();
+        $user1 = UserDB::all()->count();
         //Nghi viec
         $userReport=UserDB::all()->where('status', '=', 'Dừng hoạt động')->count();
         $product = Product::all()->count();
         $invoice = Invoice::all()->count();
-        $total = Invoice::all()->sum('total');
+        $total = Invoice::whereMonth('created_at',Carbon::now()->month)->sum('total');
         $outProduct = Product::where('amount', '<', 10)->count();
         $deleteProduct = Product::where('status', 'Đã hủy')->count();
         //san pham ban chay
-        $sellingProduct = Product::latest()->take(5)->get();
+        $sellingProduct = Product::orderByDesc('amount')->take(5)->get();
         //san pham da het
         $endProduct = Product::where('amount', '=', 0)->latest()->get();
 
@@ -986,7 +1013,7 @@ class AdminController extends Controller
         foreach ($lineChart as $lineChart) {
             $line[] = $lineChart->id;
         }
-        return view('admin.src.report', compact('user','userReport', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct','sellingProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
+        return view('admin.src.report', compact('user','user1','userReport', 'product', 'invoice', 'total', 'outProduct', 'deleteProduct','sellingProduct', 'endProduct', 'newUser', 'barChart', 'bar', 'lineChart', 'line')
         );
     }
     public function exportProvided()
@@ -1112,23 +1139,41 @@ class AdminController extends Controller
         }
         return redirect()->route('updateMusicType');
     }
-    public function updateCameraFeatureType(){
-        $data=AllType::cameraFeature()->get();
-        return view('admin.src.add_type_device.add_camera_feature_type',compact('data'));
+    public function updateCameraFeatureTypeFront(){
+        $data=AllType::cameraFeatureFront()->get();
+        return view('admin.src.add_type_device.add_camera_feature_type_front',compact('data'));
     }
-    public function postUpdateCameraFeatureType(Request $request,$id){
-        $classify='Tính năng camera';
+    public function postUpdateCameraFeatureTypeFront(Request $request,$id){
+        $classify='Tính năng camera trước';
         $addData=AllType::updateOrCreate(
             ['id'=>$id],
             ['classify'=>$classify,'name_classify'=>$request->name_classify]
         );
         if($addData){
-            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera thành công');
+            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera trước thành công');
         }
         else{
-            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera thất bại');
+            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera trước thất bại');
         }
-        return redirect()->route('updateCameraFeatureType');
+        return redirect()->route('updateCameraFeatureTypeFront');
+    }
+    public function updateCameraFeatureTypeRear(){
+        $data=AllType::cameraFeatureRear()->get();
+        return view('admin.src.add_type_device.add_camera_feature_type_rear',compact('data'));
+    }
+    public function postUpdateCameraFeatureTypeRear(Request $request,$id){
+        $classify='Tính năng camera sau';
+        $addData=AllType::updateOrCreate(
+            ['id'=>$id],
+            ['classify'=>$classify,'name_classify'=>$request->name_classify]
+        );
+        if($addData){
+            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera sau thành công');
+        }
+        else{
+            Session()->flash('success', 'Thêm, cập nhật loại tính năng camera sau thất bại');
+        }
+        return redirect()->route('updateCameraFeatureTypeRear');
     }
 
     public function updateWjfjType(){
@@ -1274,6 +1319,38 @@ class AdminController extends Controller
         }catch(Exception $e){
             Session()->flash('success', 'Xóa phương thức thanh toán thất bại');
             return redirect()->route('updatePayment');
+        }
+    }
+    public function activeProduct($id){
+        try{
+            DB::beginTransaction();
+            $data=Product::where('id',$id)->update([
+                'status'=>'Đang hoạt động',
+                'updated_at'=>Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
+            DB::commit();
+            Session()->flash('success', 'Mở lại sản phẩm thành công');
+            return redirect()->route('product');
+        }catch(Exception $e){
+            DB::rollBack();
+            Session()->flash('success', 'Mở lại sản phẩm thất bại');
+            return redirect()->route('product');
+        }
+    }
+    public function activeProvided($id){
+        try{
+            DB::beginTransaction();
+            $data=Provided::where('id',$id)->update([
+                'status'=>'Đang hoạt động',
+                'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
+            DB::commit();
+            Session()->flash('success', 'Mở lại nhà cung cấp thành công');
+            return redirect()->route('provided');
+        }catch(Exception $e){
+            DB::rollBack();
+            Session()->flash('success', 'Mở lại nhà cung cấp thất bại');
+            return redirect()->route('provided');
         }
     }
 }

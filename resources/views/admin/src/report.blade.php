@@ -41,7 +41,7 @@
                 <div class="widget-small primary coloured-icon"><i class='icon  bx bxs-user fa-3x'></i>
                     <div class="info">
                         <h4>Tổng Nhân viên</h4>
-                        <p><b>{{ $user }} nhân viên</b></p>
+                        <p><b>{{ $user1 }} nhân viên</b></p>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge'></i>
                     <div class="info">
                         <h4>Nhân viên mới</h4>
-                        <p><b>{{ $user }} nhân viên</b></p>
+                        <p><b>{{ $user1 }} nhân viên</b></p>
                     </div>
                 </div>
             </div>

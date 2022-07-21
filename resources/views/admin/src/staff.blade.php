@@ -65,33 +65,33 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($user as $user)
-              <tr>
-                <td>{{ $user->account_id}}</td>
-                <td>
-                  <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
-                </td>
-                <td>{{ $user->fullname }}</td>
-                <td>{{ $user->birthday }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->permission }}</td>
-                <td>
-                  <button type="button" class="btn btn-primary open-modal" value="{{ $user->id }}" id="edit" data-toggle="modal" data-target="#modalStaff" data-account-id="{{ $user->account_id }}" data-fullname="{{ $user->fullname }}" data-sex="{{ $user->sex }}" data-birthday="{{ $user->birthday }}" data-citizenid="{{ $user->citizen_ID }}" data-address="{{ $user->address }}" data-phone="{{ $user->phone }}" data-email="{{ $user->email }}" data-permission="{{ $user->permission }}" data-status="{{ $user->status }}" data-createdat="{{ $user->created_at }}">Chi tiết</button>
-                </td>
-                <td>
-                  @if($user->status=="Đang hoạt động")
-                  <span class="badge bg-success">Đang hoạt động</span>
-                  @else
-                  <span class="badge bg-danger">Dừng hoạt động</span>
-                  @endif
-                </td>
-                <td>
-                  <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                  @if($user->status=="Đang hoạt động")
-                  <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
-                  @endif
-                </td>
-              </tr>
+              @foreach($user1 as $user)
+                <tr>
+                    <td>{{ $user->account_id}}</td>
+                    <td>
+                    <img src="{{ url('storage/images/'.$user->image_url) }}" alt="" title="" width="80px" />
+                    </td>
+                    <td>{{ $user->fullname }}</td>
+                    <td>{{ $user->birthday }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->permission }}</td>
+                    <td>
+                    <button type="button" class="btn btn-primary open-modal" value="{{ $user->id }}" id="edit" data-toggle="modal" data-target="#modalStaff" data-account-id="{{ $user->account_id }}" data-fullname="{{ $user->fullname }}" data-sex="{{ $user->sex }}" data-birthday="{{ $user->birthday }}" data-citizenid="{{ $user->citizen_ID }}" data-address="{{ $user->address }}" data-phone="{{ $user->phone }}" data-email="{{ $user->email }}" data-permission="{{ $user->permission }}" data-status="{{ $user->status }}" data-createdat="{{ $user->created_at }}">Chi tiết</button>
+                    </td>
+                    <td>
+                    @if($user->status=="Đang hoạt động")
+                    <span class="badge bg-success">Đang hoạt động</span>
+                    @else
+                    <span class="badge bg-danger">Dừng hoạt động</span>
+                    @endif
+                    </td>
+                    <td>
+                    <a href="{{ route('editStaff',['id'=>$user->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
+                    @if($user->status=="Đang hoạt động")
+                    <a href="{{ route('deleteStaff',['id'=>$user->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
+                    @endif
+                    </td>
+                </tr>
               @endforeach
             </tbody>
           </table>

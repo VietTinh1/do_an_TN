@@ -103,6 +103,14 @@
                                     <input class="form-control" type="text" name="screen_maximum_brightness" value="{{ $product->screen_maximum_brightness }}" required>
                                 </div>
                                 <div class="form-group col-md-3">
+                                    <label class="control-label">Độ phân giải camera trước</label>
+                                    <input class="form-control" type="text" name="front_screen_resolution" value="{{ $product->front_screen_resolution }}" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Độ phân giải camera sau</label>
+                                    <input class="form-control" type="text" name="rear_screen_resolution" value="{{ $product->rear_screen_resolution }}" required>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label class="control-label">Đèn</label>
                                     <input class="form-control" type="text" name="flash_light" value="{{ $product->flash_light }}" required>
                                 </div>
@@ -124,7 +132,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Ram</label>
-                                    <input class="form-control" type="number" name="GPU" value="{{ $product->GPU }}" onkeypress="return event.charCode >= 48" min="0" required>
+                                    <input class="form-control" type="number" name="ram" value="{{ $product->ram }}" onkeypress="return event.charCode >= 48" min="0" required>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Rom</label>

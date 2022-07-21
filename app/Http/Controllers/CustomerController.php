@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Payment;
@@ -21,10 +22,10 @@ class CustomerController extends Controller
     public function index()
     {
         $active='Trang chủ';
-        $data=Product::with('imageDetail')->get();
+        $data=Product::with('imageDetail')->latest()->take(5)->get();
         //Category::whereHas('posts', function ($q) { $q->published(); })->get();
         //Category::has('postsPublished')
-        $newProduct=Product::with('imageDetail')->orderByDesc('created_at')->take(5)->get();
+        $newProduct=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->latest()->take(5)->get();
         $phone=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->orderByDesc('amount')->take(5)->get();
         $tablet=Product::with('imageDetail')->whereHas('productType',function($q){return $q->tablet();})->orderByDesc('amount')->take(5)->get();
         $laptop=Product::with('imageDetail')->whereHas('productType',function($q){return $q->laptop();})->orderByDesc('amount')->take(5)->get();
@@ -61,11 +62,12 @@ class CustomerController extends Controller
     {
         $active='Điện Thoại';
         $product=Product::with('imageDetail')->where('id',$id)->first();
+        $data=Product::with('imageDetail','allTypeDetail.allType')->where('id',$id)->first();
         $product1=Product::with('imageDetail')->where('id',$id)->first();
         $product2=Product::with('imageDetail')->where('id',$id)->first();
         $phone=Product::with('imageDetail')->whereHas('productType',function($q){return $q->phone();})->orderByDesc('amount')->take(5)->get();
         $tablet=Product::with('imageDetail')->whereHas('productType',function($q){return $q->tablet();})->orderByDesc('amount')->take(5)->get();
-        return view('customer.src.product_details',compact('active','product','product1','product2','phone','tablet'));
+        return view('customer.src.product_details',compact('data','id','active','product','product1','product2','phone','tablet'));
     }
     public function contact()
     {
@@ -146,5 +148,23 @@ class CustomerController extends Controller
         DB::rollBack();
         throw $e;
        }
+    }
+    public function postCommentCustomer(Request $request,$id){
+        try{
+            $data=Comment::insert([
+                'product_id' =>$id,
+                'name_customer' => $request->name_customer,
+                'email_customer' => $request->email_customer,
+                'phone_customer' => $request->phone_customer,
+                'message_customer' => $request->message_customer,
+                'created_at'=>Carbon::now('Asia/Ho_Chi_Minh'),
+            ]);
+            Session()->flash('success', 'Gửi bình luận thành công');
+            return redirect()->back();
+        }catch(Exception $e){
+            DB::rollBack();
+            Session()->flash('success', 'Gửi bình luận thất bại');
+            return redirect()->back();
+        }
     }
 }

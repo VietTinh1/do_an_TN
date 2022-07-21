@@ -86,8 +86,10 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if($provided->status!="Đang hoạt động")
+                                        <a href="{{ route('activeProvided',['id'=>$provided->id]) }}" class="btn btn-success" style="font-size:10px;">Mở lại</i></a>
+                                        @else
                                         <a href="{{ route('editProvided',['id'=>$provided->id]) }}" class="btn btn-warning" style="font-size:7px;"><i class="fas fa-edit"></i></a>
-                                        @if($provided->status=="Đang hoạt động")
                                         <a href="{{ route('deleteProvided',['id'=>$provided->id]) }}" class="btn btn-danger" style="font-size:7px;"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>

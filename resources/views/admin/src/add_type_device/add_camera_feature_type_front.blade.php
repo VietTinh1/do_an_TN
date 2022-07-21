@@ -36,7 +36,7 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới loại tính năng camera</h3>
           <div class="tile-body">
-            <form class="row" method="post" action="{{ route('postUpdateCameraFeatureType',['id'=>'0']) }}">
+            <form class="row" method="post" action="{{ route('postUpdateCameraFeatureTypeFront',['id'=>'0']) }}">
               @csrf
               <div class="form-group  col-md-4">
                 <label class="control-label">Tên loại tính năng camera</label>
@@ -64,7 +64,7 @@
                 <td>{{ $data->name_classify }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    <form class="row" method="post" action="{{ route('postUpdateCameraFeatureType',['id'=>$data->id]) }}">
+                    <form class="row" method="post" action="{{ route('postUpdateCameraFeatureTypeFront',['id'=>$data->id]) }}">
                         @csrf
                         <div class="form-group  col-md-4">
                         <label class="control-label">Tên loại tính năng</label>
